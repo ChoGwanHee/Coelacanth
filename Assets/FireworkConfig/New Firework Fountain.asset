@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c45b23c7eaf93146ac353f72d75e71c, type: 3}
+  m_Name: New Firework Fountain
+  m_EditorClassIdentifier: 
+  fwName: "\uBD84\uC218 \uD3ED\uC8FD"
+  fwType: 2
+  atType: 2
+  damage: 10
+  capacity: 3
+  hitForce: 9.5
+  lifetime: 10
+  coolDown: 0.5
+  uiSprite: {fileID: 21300000, guid: dda16c23d4c401844be25a2c917d850a, type: 3}
+  startSound: 
+  hitRadius: 2.13
+  fountain_ref: {fileID: 1978563458120296, guid: 127bfdf1b50d1f44794a971b2f0d5198,
+    type: 2}
