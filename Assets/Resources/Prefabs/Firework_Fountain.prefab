@@ -523,7 +523,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 700863776
+  randomSeed: -414210948
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3929,7 +3929,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1931566537
+  randomSeed: 265970801
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -6712,7 +6712,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 0.26896554, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 0.10344829, b: 0, a: 1}
+        key0: {r: 1, g: 0.51724136, b: 0, a: 1}
         key1: {r: 1, g: 0, b: 0, a: 1}
         key2: {r: 0.35294116, g: 0.08633815, b: 0.007785474, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
@@ -7298,7 +7298,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1530273113
+  randomSeed: 878297118
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -10659,7 +10659,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 857219005
+  randomSeed: 1232290891
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -17450,7 +17450,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1883421111
+  randomSeed: 1525269273
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -17540,7 +17540,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0, b: 0, a: 1}
+      maxColor: {r: 0.25, g: 0.0051724166, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -20811,7 +20811,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1349551602
+  randomSeed: 996849292
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -31299,7 +31299,7 @@ ParticleSystemRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1af204bbda8495c40899e8da9b2ab3c0, type: 2}
+  - {fileID: 2100000, guid: 42bc46fc022af47dc8e0896dc58f47c6, type: 2}
   - {fileID: 2100000, guid: 1af204bbda8495c40899e8da9b2ab3c0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0

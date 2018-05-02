@@ -1,16 +1,17 @@
 fileFormatVersion: 2
-guid: 4bdb6be97c2b0eb43b6472801493fc08
-timeCreated: 1525096623
+guid: 49b6640fdf47be44686bf2e7a4d03a0a
+timeCreated: 1525119315
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: 'Material #89'
+    2100000: 'Material #104'
     2300000: //RootNode
     3300000: //RootNode
     4300000: Object003
+    9500000: //RootNode
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -49,7 +50,7 @@ ModelImporter:
     importCameras: 1
     importLights: 1
     swapUVChannels: 0
-    generateSecondaryUV: 1
+    generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0
@@ -85,7 +86,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

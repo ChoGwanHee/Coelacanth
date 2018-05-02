@@ -47,7 +47,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
 
         CreatePlayer();
 
-        FMODUnity.RuntimeManager.PlayOneShot(BGM);
+        //FMODUnity.RuntimeManager.PlayOneShot(BGM);
     }
 
     public override void OnPhotonPlayerConnected(PhotonPlayer player)
