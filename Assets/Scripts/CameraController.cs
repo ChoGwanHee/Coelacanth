@@ -2,8 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum CameraMode
+{
+    AllView,
+    PersonalView
+}
+
 public class CameraController : Photon.PunBehaviour {
-    
+
+    public Transform target;
+    public CameraMode mode;
     public float smoothMoveTime = 1.0f;
     public float smoothZoomTime = 0.8f;
     public float baseAddOffset = 6.0f;
@@ -15,8 +23,8 @@ public class CameraController : Photon.PunBehaviour {
     public float maxZoomDistance = 80.0f;
 
     // Pivot
-    private Vector3 positionVelocity;
-    private Vector3 centerPosition = Vector3.zero;
+    private Vector3 moveVelocity;
+    private Vector3 targetPosition = Vector3.zero;
     private Vector3 minPos = Vector3.zero;
     private Vector3 maxPos = Vector3.zero;
     private float displayedPlayerCount = 0;
@@ -35,7 +43,7 @@ public class CameraController : Photon.PunBehaviour {
 
     void Start () {
         camT = Camera.main.transform;
-        centerPosition.y = transform.position.y;
+        targetPosition.y = transform.position.y;
         originPosition = transform.position;
     }
 	
@@ -43,9 +51,18 @@ public class CameraController : Photon.PunBehaviour {
 
         if (playerList.Count <= 0) return;
 
-        CalculateMinMax();
-        CalculateCenter2();
-        AutoZoom();
+        switch (mode)
+        {
+            case CameraMode.AllView:
+                CalculateMinMax();
+                CalculateCenter2();
+                AutoZoom();
+                break;
+            case CameraMode.PersonalView:
+                FollowTarget();
+                break;
+        }
+
         SmoothMovement();
     }
 
@@ -92,8 +109,8 @@ public class CameraController : Photon.PunBehaviour {
     // 전체적인 위치만 판단
     void CalculateCenter()
     {
-        centerPosition.x = (minPos.x + maxPos.x) / 2;
-        centerPosition.z = (minPos.z + maxPos.z) / 2;
+        targetPosition.x = (minPos.x + maxPos.x) / 2;
+        targetPosition.z = (minPos.z + maxPos.z) / 2;
     }
 
     // 사람 몰려있는 곳에 좀 더 집중 됨
@@ -113,19 +130,27 @@ public class CameraController : Photon.PunBehaviour {
 
 
         if(displayedPlayerCount > 0)
-            centerPosition = sumPos / (displayedPlayerCount+1);
+            targetPosition = sumPos / (displayedPlayerCount+1);
         else
         {
-            centerPosition = originPosition;
+            targetPosition = originPosition;
         }
 
+    }
+
+    // 타겟 따라 다니기
+    void FollowTarget()
+    {
+        if (target == null) return;
+
+        targetPosition = target.position;
     }
 
     // 부드러운 움직임
     void SmoothMovement()
     {
         // Pivot 이동
-        transform.position = Vector3.SmoothDamp(transform.position, centerPosition, ref positionVelocity, smoothMoveTime);
+        transform.position = Vector3.SmoothDamp(transform.position, this.targetPosition, ref moveVelocity, smoothMoveTime);
 
         // 카메라 이동(줌 인,아웃)
         //camT.localPosition = Vector3.SmoothDamp(camT.localPosition, offsetPosition, ref offsetVelocity, smoothMoveTime);
@@ -164,5 +189,10 @@ public class CameraController : Photon.PunBehaviour {
 
         targetZoomDistance *= -1;
         //offsetPosition = offsetDirection * (bigger + zoomAddOffset);
+    }
+
+    public void SetTarget(Transform newTarget)
+    {
+        target = newTarget;
     }
 }

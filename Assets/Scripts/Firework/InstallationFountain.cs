@@ -14,7 +14,7 @@ public class InstallationFountain : BaseInstallation {
     public string duringSound;
 
     private bool enable = false;
-    private float enableTime = 1.0f;
+    public float enableTime = 1.2f;
 
     private float tickTime;
     private float tickElapsedTime = 0;

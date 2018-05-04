@@ -6,9 +6,9 @@ using UnityEngine;
 [CreateAssetMenu (menuName ="Firework/Roman")]
 public class FireworkRoman : Firework
 {
-    public float hitRadius;
-    public float projectileSpeed;
-    public GameObject projectile_ref;
+    public float hitRadius;                     // 투사체가 터졌을 때 영향을 받는 범위
+    public float projectileSpeed;               // 투사체 속도
+    public GameObject projectile_ref;           // 투사체 레퍼런스
 
 
     public override void Execute(FireworkExecuter executer)
