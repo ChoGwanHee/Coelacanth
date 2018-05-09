@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 114121278400765238}
-  - {fileID: 114595961737233206}
+  - {fileID: 114923058620691512}
   EditorEvents:
   - {fileID: 114751291159599200}
   - {fileID: 114858520376667026}
@@ -29,9 +29,9 @@ MonoBehaviour:
   - {fileID: 114105769698654356}
   - {fileID: 114556625539906632}
   - {fileID: 114903639779738710}
-  MasterBankRef: {fileID: 114595961737233206}
+  MasterBankRef: {fileID: 114923058620691512}
   StringsBankRef: {fileID: 114121278400765238}
-  stringsBankWriteTime: 636606244840000000
+  stringsBankWriteTime: 636614912314168191
   cacheVersion: 2
 --- !u!114 &114047760533745252
 MonoBehaviour:
@@ -109,7 +109,7 @@ MonoBehaviour:
   Path: event:/SFX/Weapon/Shoot/SFX_AutoShot
   guid: d862847e42821448bada2aeb3cff667e
   Banks:
-  - {fileID: 114595961737233206}
+  - {fileID: 114923058620691512}
   IsStream: 1
   Is3D: 1
   IsOneShot: 1
@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: HeyParty_FMOD\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636606244840000000
+  lastModified: 636614912314168191
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -204,7 +204,7 @@ MonoBehaviour:
   Path: event:/SFX/Weapon/Shoot/SFX_RomanShot
   guid: 4c44019ca5764a44a256cad79029799b
   Banks:
-  - {fileID: 114595961737233206}
+  - {fileID: 114923058620691512}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -226,7 +226,7 @@ MonoBehaviour:
   Path: event:/SFX/Weapon/Hit/SFX_RocketHit
   guid: ba700973782d414f945819d99162cc01
   Banks:
-  - {fileID: 114595961737233206}
+  - {fileID: 114923058620691512}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -314,7 +314,7 @@ MonoBehaviour:
   Path: event:/SFX/Item/WeaponBox/SFX_Normalbox
   guid: af113f0989ef2145a5adf3ffa29676fb
   Banks:
-  - {fileID: 114595961737233206}
+  - {fileID: 114923058620691512}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -358,7 +358,7 @@ MonoBehaviour:
   Path: event:/SFX/Item/WeaponBox/SFX_Boombox
   guid: 593677cdedcd8e41b1effa99f40881ab
   Banks:
-  - {fileID: 114595961737233206}
+  - {fileID: 114923058620691512}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -570,7 +570,7 @@ MonoBehaviour:
   Path: event:/SFX/Character/Sound/SFX_Hit
   guid: e6189a3e05743e478d24f63a25fed2b4
   Banks:
-  - {fileID: 114595961737233206}
+  - {fileID: 114923058620691512}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -668,7 +668,7 @@ MonoBehaviour:
   Path: event:/BGM/InGame/BGM_InGame
   guid: 36b19ecae1f7934fa897e1042b4cb35d
   Banks:
-  - {fileID: 114595961737233206}
+  - {fileID: 114923058620691512}
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
@@ -734,7 +734,7 @@ MonoBehaviour:
   Path: event:/SFX/Character/Sound/SFX_Revive
   guid: 47624a11d338e84ea6186ea6c43989cd
   Banks:
-  - {fileID: 114595961737233206}
+  - {fileID: 114923058620691512}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -860,7 +860,7 @@ MonoBehaviour:
   Path: event:/SFX/UI/InGameUI/SFX_LifeDown
   guid: 4e4ea36b11541047909c207392733825
   Banks:
-  - {fileID: 114595961737233206}
+  - {fileID: 114923058620691512}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -926,7 +926,7 @@ MonoBehaviour:
   Path: event:/SFX/Character/Sound/SFX_Foot
   guid: 5e2e0db6c3deb64e99eebe70ca440bee
   Banks:
-  - {fileID: 114595961737233206}
+  - {fileID: 114923058620691512}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -948,7 +948,7 @@ MonoBehaviour:
   Path: event:/Ambient/Fireworks/AMT_BackBoom
   guid: 099110ec0cac61489a585eee8be0db6a
   Banks:
-  - {fileID: 114595961737233206}
+  - {fileID: 114923058620691512}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
@@ -970,7 +970,7 @@ MonoBehaviour:
   Path: event:/SFX/Character/Sound/SFX_Stun
   guid: 4af97909ff00a64d99979c76783f1d4a
   Banks:
-  - {fileID: 114595961737233206}
+  - {fileID: 114923058620691512}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1117,7 +1117,7 @@ MonoBehaviour:
   Path: event:/SFX/Weapon/Hit/SFX_RomanHit
   guid: 29dfaea71789944582685c4a6b4df7f7
   Banks:
-  - {fileID: 114595961737233206}
+  - {fileID: 114923058620691512}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1249,14 +1249,14 @@ MonoBehaviour:
   Path: event:/SFX/Weapon/Shoot/SFX_RocketShot
   guid: f60f15176cea16448857c15eddcf3741
   Banks:
-  - {fileID: 114595961737233206}
+  - {fileID: 114923058620691512}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 974
+  Length: 706
 --- !u!114 &114911790992938774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1301,3 +1301,22 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 264
+--- !u!114 &114923058620691512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: C:\Users\ccrc\Documents\Project Files\Coelacanth\HeyParty_FMOD\Build\Desktop\Master
+    Bank.bank
+  lastModified: 636614912314158185
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 1700736
+  Exists: 1
