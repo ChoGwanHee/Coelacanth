@@ -28,7 +28,7 @@ public class ProjectileButterfly : BaseProjectile
     private void Rotate()
     {
         Vector3 direction = (target.position - transform.position).normalized;
-        Quaternion targetRotation = Quaternion.
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotateAngle * Time.deltaTime);
+        //Quaternion targetRotation = Quaternion.
+        //transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotateAngle * Time.deltaTime);
     }
 }
