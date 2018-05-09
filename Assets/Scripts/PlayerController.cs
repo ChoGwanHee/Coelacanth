@@ -231,7 +231,7 @@ public class PlayerController : Photon.PunBehaviour {
     }
 
     // 스턴 회복
-    public void StunRecovery()
+    private void StunRecovery()
     {
         isStun = false;
         //stat.HPReset();
@@ -240,7 +240,7 @@ public class PlayerController : Photon.PunBehaviour {
     }
 
     // 리스폰
-    public void Respawn()
+    private void Respawn()
     {
         stat.HPReset();
         GameManagerPhoton._instance.RespawnPlayer(transform);
