@@ -8,6 +8,7 @@ Temp/
 Obj/
 UnityGenerated/
 Library/
+.vs/
 
 # ===================================== #
  
@@ -16,7 +17,7 @@ Library/
 # ===================================== #
  
 ExportedObj/
- 
+
 *.svd
 *.userprefs
 *.csproj
