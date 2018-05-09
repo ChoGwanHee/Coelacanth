@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 468977deaf7191b40b89625d2ddda536, type: 3}
+  m_Name: New Firework Butterfly
+  m_EditorClassIdentifier: 
+  fwName: "\uB098\uBE44 \uD3ED\uC8FD"
+  fwType: 4
+  atType: 1
+  damage: 20
+  capacity: 100
+  hitForce: 1
+  lifetime: 10
+  coolDown: 0
+  uiSprite: {fileID: 21300000, guid: bfb6a1bc73bc99c4ebae70fc1afd01f4, type: 3}
+  startSound: 
+  hitRadius: 1
+  projectileSpeed: 12
+  chainFireTime: 0.1
+  chainAmount: 5
+  fireAngle: 50
+  projectile_ref: {fileID: 1585435493380932, guid: 1fb67864f008a2743b68a40c8be3211b,
+    type: 2}
