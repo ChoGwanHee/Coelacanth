@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour {
 
     public UIStatus userStatus;
     public UIStatusOther[] otherStatus;
+    public UIButterflyCharging chargingUI;
 
     public Sprite[] illusts;
 

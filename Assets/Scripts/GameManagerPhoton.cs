@@ -1,25 +1,43 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
+/// <summary>
+/// 포톤을 사용한 게임 매니저 클래스
+/// </summary>
 public class GameManagerPhoton : Photon.PunBehaviour
 {
-
+    /// <summary>
+    /// 싱글턴 인스턴스
+    /// </summary>
     public static GameManagerPhoton _instance;
 
-    public Transform[] playerGenPos = null;
+    /// <summary>
+    /// 글로벌 판정 간격
+    /// </summary>
     public float gameTick = 0.1f;
+    
+    /// <summary>
+    /// 플레이어가 생성되는 위치 배열
+    /// </summary>
+    public Transform[] playerGenPos = null;
 
+    /// <summary>
+    /// 커서 이미지
+    /// </summary>
     public Texture2D cursorTex;
 
     public CameraController cameraController;
-
     public ItemManager itemManager;
 
     [FMODUnity.EventRef]
     public string BGM;
 
+    /// <summary>
+    /// 현재 존재하는 플레이어의 리스트
+    /// </summary>
+    [HideInInspector]
+    public List<PlayerStat> playerList = new List<PlayerStat>();
 
 
     void Awake()
@@ -53,7 +71,6 @@ public class GameManagerPhoton : Photon.PunBehaviour
     public override void OnPhotonPlayerConnected(PhotonPlayer player)
     {
         Debug.Log("플레이어 접속:" + player.NickName);
-
         
     }
 
@@ -80,7 +97,9 @@ public class GameManagerPhoton : Photon.PunBehaviour
         Debug.Log("플레이어 퇴장:" + PhotonNetwork.player.NickName);
     }
 
-    // 플레이어 생성
+    /// <summary>
+    /// 플레이어를 생성합니다.
+    /// </summary>
     public void CreatePlayer()
     {
         Hashtable customProperties = PhotonNetwork.player.CustomProperties;
@@ -92,10 +111,10 @@ public class GameManagerPhoton : Photon.PunBehaviour
         switch (playerIndex)
         {
             case 0:
-                prefabName = "Dahong_0424";
+                prefabName = "Dahong_0521";
                 break;
             case 1:
-                prefabName = "Chorok_0426";
+                prefabName = "MingMing_0516";
                 break;
             case 2:
                 prefabName = "Blue_0426";
@@ -114,10 +133,12 @@ public class GameManagerPhoton : Photon.PunBehaviour
 
         // 자기 UI 초기화
         UIManager._instance.UIInitialize(playerIndex);
-
     }
 
-
+    /// <summary>
+    /// 플레이어를 리스폰 위치로 이동 시킵니다.
+    /// </summary>
+    /// <param name="playerTF">이동시킬 플레이어</param>
     public void RespawnPlayer(Transform playerTF)
     {
         Hashtable playerProperties = PhotonNetwork.player.CustomProperties;
@@ -126,7 +147,5 @@ public class GameManagerPhoton : Photon.PunBehaviour
 
         playerTF.position = pos;
     }
-    
-    
 
 }

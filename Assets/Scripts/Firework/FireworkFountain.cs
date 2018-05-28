@@ -1,11 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// 분수 폭죽 클래스
+/// </summary>
 [CreateAssetMenu(menuName = "Firework/Fountain")]
-public class FireworkFountain : Firework {
-
-    public float hitRadius;
+public class FireworkFountain : Firework
+{
+    /// <summary>
+    /// 분수 레퍼런스
+    /// </summary>
     public GameObject fountain_ref;
 
 
@@ -30,5 +33,7 @@ public class FireworkFountain : Firework {
         fountain.damage = damage;
         fountain.hitForce = hitForce;
         fountain.hitRadius = hitRadius;
+
+        executer.DecreaseAmmo();
     }
 }

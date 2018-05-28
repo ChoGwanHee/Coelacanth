@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// 주먹 공격 클래스
+/// </summary>
 [CreateAssetMenu(menuName = "Firework/Fist")]
 public class FireworkFist : Firework
 {
-    public float hitRadius;
-
 
     public override void Execute(FireworkExecuter executer)
     {
+        // 자기자신이 공격에 맞지 않게 콜라이더 잠시 꺼줌
         Collider self = executer.GetComponent<Collider>();
         self.enabled = false;
 
@@ -28,6 +27,9 @@ public class FireworkFist : Firework
                 PhotonNetwork.Instantiate("Prefabs/Effect_base_Hit_fx", efxPos, Quaternion.identity, 0);
             }
         }
+
+        FMODUnity.RuntimeManager.PlayOneShot(startSound);
+
         self.enabled = true;
     }
 }

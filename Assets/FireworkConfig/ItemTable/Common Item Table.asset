@@ -15,8 +15,10 @@ MonoBehaviour:
   - item: {fileID: 11400000, guid: 3786f765ddb2946419e4f7c5f880d562, type: 2}
     chance: 0
   - item: {fileID: 11400000, guid: 883a9de1f18bd774e884c785ff4aa552, type: 2}
-    chance: 0.4
+    chance: 0.25
   - item: {fileID: 11400000, guid: 19b73b0e0e6d235419b1e908701b39e8, type: 2}
-    chance: 0.3
+    chance: 0.25
   - item: {fileID: 11400000, guid: d011cdcd1a1a1724b8223642914f1b34, type: 2}
-    chance: 0.3
+    chance: 0.25
+  - item: {fileID: 11400000, guid: 024670bbf04d3c346887462395ef319c, type: 2}
+    chance: 0.25

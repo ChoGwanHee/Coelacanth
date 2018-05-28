@@ -1,14 +1,20 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-[CreateAssetMenu (menuName ="Firework/Roman")]
+/// <summary>
+/// 로망 폭죽 클래스
+/// </summary>
+[CreateAssetMenu(menuName = "Firework/Roman")]
 public class FireworkRoman : Firework
 {
-    public float hitRadius;                     // 투사체가 터졌을 때 영향을 받는 범위
-    public float projectileSpeed;               // 투사체 속도
-    public GameObject projectile_ref;           // 투사체 레퍼런스
+    /// <summary>
+    /// 투사체 속력
+    /// </summary>
+    public float projectileSpeed;
+
+    /// <summary>
+    /// 투사체 레퍼런스
+    /// </summary>
+    public GameObject projectile_ref;
 
 
     public override void Execute(FireworkExecuter executer)
@@ -21,6 +27,7 @@ public class FireworkRoman : Firework
         bullet.lifetime = lifetime;
         bullet.SetSpeed(projectileSpeed);
 
+        executer.DecreaseAmmo();
         executer.photonView.RPC("PlayStartSound", PhotonTargets.All, null);
     }
 }

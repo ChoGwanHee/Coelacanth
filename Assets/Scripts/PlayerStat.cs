@@ -1,24 +1,54 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
+/// <summary>
+/// 플레이어의 상태를 관리하는 클래스
+/// </summary>
 public class PlayerStat : Photon.PunBehaviour
 {
-
+    /// <summary>
+    /// 플레이어의 고유 인덱스
+    /// </summary>
     public int playerIndex;
-    public bool onStage = true;     // 스테이지 상에서 살아있음, 번지 X
-    public bool alive = true;       // 라이프가 1이상
-    public string nickname;         // 닉네임
-    public int maxHP = 100;         // 최대 HP
-    public int curHP;               // 현재 HP
-    public int life = 3;            // 남은 라이프
 
+    /// <summary>
+    /// 플레이어가 스테이지 상에서 살아있는지 여부
+    /// </summary>
+    public bool onStage = true;
+
+    /// <summary>
+    /// 플레이어의 생명이 1이상이면 True 아니면 false.
+    /// </summary>
+    public bool alive = true;
+
+    /// <summary>
+    /// 플레이어의 닉네임
+    /// </summary>
+    public string nickname;
+
+    /// <summary>
+    /// 최대 체력
+    /// </summary>
+    public int maxHP = 100;
+
+    /// <summary>
+    /// 현재 체력
+    /// </summary>
+    public int curHP;
+
+    /// <summary>
+    /// 남은 생명
+    /// </summary>
+    public int life = 6;
+
+    /// <summary>
+    /// 플레이어가 맵 밖으로 떨어질 때 재생되는 사운드
+    /// </summary>
     [FMODUnity.EventRef]
-    public string lossSound;
-    
+    public string fallingSound;
 
     private PlayerController pc;
+
 
     private void Awake()
     {
@@ -28,15 +58,33 @@ public class PlayerStat : Photon.PunBehaviour
 
     private void Start()
     {
+        GameManagerPhoton._instance.playerList.Add(this);
+
         if (GetComponent<PlayerDummy>()) return;
 
         Hashtable playerProperties = photonView.owner.CustomProperties;
         playerIndex = (int)playerProperties["PlayerIndex"];
 
         if (!photonView.isMine)
+        {
             UIManager._instance.ActiveOtherStatus(playerIndex);
+        }
+        else
+        {
+            UIManager._instance.chargingUI.target = transform;
+        }
+            
     }
 
+    private void OnDestroy()
+    {
+        GameManagerPhoton._instance.playerList.Remove(this);
+    }
+
+    /// <summary>
+    /// 플레이어에게 피해를 줍니다.
+    /// </summary>
+    /// <param name="dmg">피해량</param>
     [PunRPC]
     public void Damage(int dmg)
     {
@@ -54,14 +102,17 @@ public class PlayerStat : Photon.PunBehaviour
         }
     }
 
+    /// <summary>
+    /// 플레이어의 생명 하나를 잃게 합니다.
+    /// </summary>
     public void LifeLoss()
     {
         life--;
-        FMODUnity.RuntimeManager.PlayOneShot(lossSound);
+        FMODUnity.RuntimeManager.PlayOneShot(fallingSound);
 
-        if(life <= 0)
+        if (life <= 0)
         {
-            // 라이프 다 없어짐
+            // 생명 다 없어짐
             alive = false;
             Debug.Log(gameObject.GetPhotonView().owner + " 사망");
         }
@@ -76,11 +127,18 @@ public class PlayerStat : Photon.PunBehaviour
         }
     }
 
+    /// <summary>
+    /// 체력을 재설정합니다.
+    /// </summary>
     public void HPReset()
     {
         curHP = maxHP;
     }
 
+    /// <summary>
+    /// 다른 플레이어의 현재 생명을 UI에 반영합니다.
+    /// </summary>
+    /// <param name="num">남은 생명</param>
     [PunRPC]
     public void SetOtherHeartUI(int num)
     {

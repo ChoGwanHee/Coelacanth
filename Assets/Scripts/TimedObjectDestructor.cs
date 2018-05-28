@@ -10,7 +10,6 @@ namespace UnityStandardAssets.Utility
         [SerializeField] private bool m_PhotonView = false;
 
 
-
         private void Awake()
         {
             Invoke("DestroyNow", m_TimeOut);

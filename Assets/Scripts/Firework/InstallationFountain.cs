@@ -1,38 +1,73 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class InstallationFountain : BaseInstallation {
-
+/// <summary>
+/// 분수 폭죽 설치물 클래스
+/// </summary>
+public class InstallationFountain : BaseInstallation
+{
+    /// <summary>
+    /// 공격력
+    /// </summary>
     [HideInInspector]
     public int damage;
+
+    /// <summary>
+    /// 넉백력
+    /// </summary>
     [HideInInspector]
     public float hitForce;
+
+    /// <summary>
+    /// 공격 반경
+    /// </summary>
     [HideInInspector]
     public float hitRadius;
+
+    /// <summary>
+    /// 활성화 여부
+    /// </summary>
+    private bool enable = false;
+
+    /// <summary>
+    /// 활성화까지 걸리는 시간
+    /// </summary>
+    public float enableTime = 1.2f;
+
+    /// <summary>
+    /// 판정 간격
+    /// </summary>
+    private float tickTime;
+
+    /// <summary>
+    /// 마지막 판정 후 지난 시간
+    /// </summary>
+    private float tickElapsedTime = 0;
+
+    /// <summary>
+    /// 날아가는 도중 재생되는 사운드
+    /// </summary>
     [FMODUnity.EventRef]
     public string duringSound;
 
-    private bool enable = false;
-    public float enableTime = 1.2f;
-
-    private float tickTime;
-    private float tickElapsedTime = 0;
-
     private ParticleSystem particle;
+
+    private LayerMask dynamicObjMask;
+
 
     private void Start()
     {
+        // 게임매니저에서 글로벌 틱 시간을 가져옴
         tickTime = GameManagerPhoton._instance.gameTick;
         particle = GetComponentInChildren<ParticleSystem>();
+        dynamicObjMask = LayerMask.GetMask("DynamicObject");
     }
 
     protected override void Update()
     {
         base.Update();
 
-        
-        if(enable && gameObject.GetPhotonView().isMine)
+
+        if (enable && photonView.isMine)
         {
             if (tickElapsedTime >= tickTime)
             {
@@ -46,7 +81,7 @@ public class InstallationFountain : BaseInstallation {
         }
         else
         {
-            if(elapsedTime >= enableTime)
+            if (elapsedTime >= enableTime)
             {
                 enable = true;
                 elapsedTime = 0;
@@ -56,9 +91,12 @@ public class InstallationFountain : BaseInstallation {
         }
     }
 
+    /// <summary>
+    /// 일정 반경 안의 물체를 밀어내고 피해를 줍니다.
+    /// </summary>
     private void Sprinkle()
     {
-        Collider[] effectedObjects = Physics.OverlapSphere(transform.position, hitRadius, LayerMask.GetMask("DynamicObject"));
+        Collider[] effectedObjects = Physics.OverlapSphere(transform.position, hitRadius, dynamicObjMask);
 
         for (int i = 0; i < effectedObjects.Length; i++)
         {
@@ -75,6 +113,5 @@ public class InstallationFountain : BaseInstallation {
                 PhotonNetwork.Instantiate("Prefabs/Effect_base_Hit_fx", efxPos, Quaternion.identity, 0);
             }
         }
-
     }
 }

@@ -8,7 +8,8 @@ public class Lobby : Photon.PunBehaviour {
 
     private void Start()
     {
-        PhotonNetwork.ConnectUsingSettings("0.3.7");
+        // 게임 버전
+        PhotonNetwork.ConnectUsingSettings("0.4.1");
     }
 
     public void OnPhotonRandomJoinFailed()
@@ -19,12 +20,15 @@ public class Lobby : Photon.PunBehaviour {
         roomOptions.IsVisible = true;
         roomOptions.IsOpen = true;
         roomOptions.MaxPlayers = 4;
-        roomOptions.CustomRoomProperties = new ExitGames.Client.Photon.Hashtable() { { "PlayerEnter0", false }, { "PlayerEnter1", false }, { "PlayerEnter2", false }, { "PlayerEnter3", false } };
+        roomOptions.CustomRoomProperties = new Hashtable() { { "PlayerEnter0", false }, { "PlayerEnter1", false }, { "PlayerEnter2", false }, { "PlayerEnter3", false } };
         PhotonNetwork.CreateRoom(null, roomOptions, null);
     }
 
     public override void OnJoinedLobby()
     {
+        // 닉네임 설정
+        PhotonNetwork.playerName = "TestPlayer " + Random.Range(0, 20000);
+
         PhotonNetwork.JoinRandomRoom();
     }
 
@@ -40,9 +44,6 @@ public class Lobby : Photon.PunBehaviour {
     {
         base.OnJoinedRoom();
         PhotonNetwork.isMessageQueueRunning = false;
-
-        // 닉네임
-        PhotonNetwork.playerName = "TestPlayer " + Random.Range(0, 20000);
 
         // 플레이어 커스텀 프로퍼티 조정
         Hashtable roomProperties = PhotonNetwork.room.CustomProperties;

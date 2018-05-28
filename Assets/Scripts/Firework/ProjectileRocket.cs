@@ -1,13 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class ProjectileRocket : BaseProjectile {
-
+/// <summary>
+/// 로켓 폭죽 투사체 클래스
+/// </summary>
+public class ProjectileRocket : BaseProjectile
+{
     protected override void Update()
     {
         if (!photonView.isMine) return;
 
+        // 수명이 다 되면 투사체 제거
         lifetime -= Time.deltaTime;
         if (lifetime <= 0)
         {
@@ -18,12 +20,14 @@ public class ProjectileRocket : BaseProjectile {
     private void OnTriggerEnter(Collider other)
     {
         if (!photonView.isMine) return;
-
         if (other.CompareTag("Item")) return;
 
         Explosion();
     }
 
+    /// <summary>
+    /// 폭발하여 일정 반경 안의 물체를 밀어내고 피해를 줍니다.
+    /// </summary>
     private void Explosion()
     {
         Collider[] effectedObjects = Physics.OverlapSphere(transform.position, hitRadius, dynamicObjMask);
@@ -42,7 +46,7 @@ public class ProjectileRocket : BaseProjectile {
             }
         }
 
-        FMODUnity.RuntimeManager.PlayOneShot(endSound);
+        photonView.RPC("PlayEndSound", PhotonTargets.All, null);
 
         PhotonNetwork.Instantiate("Prefabs/Rocket_boom_Hit_fx", transform.position, transform.rotation, 0);
         PhotonNetwork.Destroy(gameObject);

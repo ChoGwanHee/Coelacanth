@@ -100,7 +100,7 @@ public class ItemManager : MonoBehaviour {
 
                 retry1 = Physics.BoxCast(regenPos, new Vector3(0.9f, 1.0f, 0.9f), Vector3.down, out hit1, Quaternion.identity, 6.1f, LayerMask.GetMask("Ground"), QueryTriggerInteraction.Ignore);
 
-                if(++count > 1000)
+                if(++count > 10000)
                 {
                     Debug.Log("비정상적인 연산입니다. 아이템 생성을 비활성화 합니다.");
                     active = false;
@@ -109,7 +109,7 @@ public class ItemManager : MonoBehaviour {
             }
             while (!retry1);
 
-            retry2 = Physics.BoxCast(regenPos, new Vector3(0.9f, 1.0f, 0.9f), Vector3.down, out hit2, Quaternion.identity, 6.1f, LayerMask.GetMask("DynamicObject", "StaticObject"), QueryTriggerInteraction.Ignore);
+            retry2 = Physics.BoxCast(regenPos, new Vector3(0.9f, 1.0f, 0.9f), Vector3.down, out hit2, Quaternion.identity, 6.1f, LayerMask.GetMask("DynamicObject", "StaticObject", "Item"));
 
         } while (retry2);
 

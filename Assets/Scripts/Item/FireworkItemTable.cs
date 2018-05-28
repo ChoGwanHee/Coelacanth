@@ -17,6 +17,10 @@ public class FireworkItemTable : ScriptableObject {
     [SerializeField]
     public Item[] itemList;
 
+    /// <summary>
+    /// 아이템 목록의 확률에 따라 무작위로 아이템을 골라 인덱스를 반환합니다.
+    /// </summary>
+    /// <returns>아이템 인덱스</returns>
     public int RandomChoose()
     {
         if (itemList == null || itemList.Length <= 0) {

@@ -2,13 +2,13 @@
 <objects serializationModel="Studio.01.10.00">
     <object class="Event" id="{3e9a18e6-7405-473e-8d24-f63a25fed2b4}">
         <property name="name">
-            <value>SFX_Hit</value>
+            <value>SFX_PunchHit</value>
         </property>
         <property name="outputFormat">
             <value>1</value>
         </property>
         <relationship name="folder">
-            <destination>{9f023711-ee26-4fae-8147-5109e4fd5862}</destination>
+            <destination>{1beb9023-9d44-42df-8b3c-65d39aac6fef}</destination>
         </relationship>
         <relationship name="mixer">
             <destination>{ad7ea57d-32de-4c14-8823-66b74f08f269}</destination>
@@ -96,7 +96,7 @@
             <value>0.32730158730158732</value>
         </property>
         <property name="volume">
-            <value>-8</value>
+            <value>-5</value>
         </property>
         <property name="pitch">
             <value>6.5</value>
@@ -112,6 +112,9 @@
         </relationship>
     </object>
     <object class="EventMixerGroup" id="{08a96849-824d-44f0-9359-1c0e4a8fd64e}">
+        <property name="volume">
+            <value>3.5</value>
+        </property>
         <property name="name">
             <value>Audio 1</value>
         </property>
@@ -153,7 +156,7 @@
             <value>volume</value>
         </property>
         <property name="amount">
-            <value>6.5</value>
+            <value>3.5</value>
         </property>
     </object>
     <object class="SingleSound" id="{ea3e6477-447b-4764-9931-edbaacbbba01}">

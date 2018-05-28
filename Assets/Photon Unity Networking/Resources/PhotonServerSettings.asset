@@ -59,4 +59,8 @@ MonoBehaviour:
   - ChangeAmmoUI
   - SetHeartUI
   - SetOtherHeartUI
+  - Break
+  - RespawnObject
+  - StartWaterBlast
+  - PlayEndSound
   DisableAutoOpenWizard: 1

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// 지금 사용 안함
 public class DragController : MonoBehaviour {
 
     public float maxPower = 20f;

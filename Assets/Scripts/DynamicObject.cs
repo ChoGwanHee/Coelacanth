@@ -1,7 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// 맵 안에서 물리 영향을 받아 자유롭게 움직이는 오브젝트 클래스
+/// </summary>
 public class DynamicObject : Photon.PunBehaviour
 {
 
@@ -44,6 +45,10 @@ public class DynamicObject : Photon.PunBehaviour
         }
     }
 
+    /// <summary>
+    /// 오브젝트에 특정 방향으로 힘을 줍니다.
+    /// </summary>
+    /// <param name="force">힘</param>
     [PunRPC]
     public void Pushed(Vector3 force)
     {

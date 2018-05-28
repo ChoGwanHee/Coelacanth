@@ -1,13 +1,19 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// 로켓 폭죽 클래스
+/// </summary>
 [CreateAssetMenu(menuName = "Firework/Rocket")]
-public class FireworkRocket : Firework {
-
-    public float hitRadius;
+public class FireworkRocket : Firework
+{
+    /// <summary>
+    /// 투사체 속력
+    /// </summary>
     public float projectileSpeed;
+
+    /// <summary>
+    /// 투사체 레퍼런스
+    /// </summary>
     public GameObject projectile_ref;
 
 
@@ -21,6 +27,7 @@ public class FireworkRocket : Firework {
         bullet.lifetime = lifetime;
         bullet.SetSpeed(projectileSpeed);
 
+        executer.DecreaseAmmo();
         executer.photonView.RPC("PlayStartSound", PhotonTargets.All, null);
     }
 }

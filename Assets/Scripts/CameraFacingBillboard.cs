@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// 카메라를 항상 정면으로 바라보게 해주는 스크립트입니다.
+/// </summary>
 public class CameraFacingBillboard : MonoBehaviour
 {
     public Camera m_Camera;
@@ -19,7 +22,5 @@ public class CameraFacingBillboard : MonoBehaviour
         //transform.LookAt(direction);
 
         transform.LookAt(m_Camera.transform.position);
-
-        
     }
 }

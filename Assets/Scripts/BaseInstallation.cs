@@ -1,12 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-
-public abstract class BaseInstallation : MonoBehaviour {
-
+/// <summary>
+/// 기본 설치물 클래스
+/// </summary>
+public abstract class BaseInstallation : Photon.PunBehaviour
+{
+    /// <summary>
+    /// 최대 수명
+    /// </summary>
     [HideInInspector]
     public float lifetime;
+
+    /// <summary>
+    /// 경과 시간
+    /// </summary>
     protected float elapsedTime = 0;
 
     protected virtual void Update()
@@ -15,7 +22,7 @@ public abstract class BaseInstallation : MonoBehaviour {
 
         if(elapsedTime >= lifetime)
         {
-            if(gameObject.GetPhotonView().isMine)
+            if(photonView.isMine)
                 PhotonNetwork.Destroy(gameObject);
         }
     }
