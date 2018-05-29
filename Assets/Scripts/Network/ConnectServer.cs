@@ -33,8 +33,7 @@ public class ConnectServer : ServerManager
         Instance.TCP.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.SendTimeout, 3000);
         Instance.TCP.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveTimeout, 3000);
         Instance.TCP.Connect(new IPEndPoint(serverIP, serverPort));
-        Console.WriteLine("Server Connect To Client (" + serverIP + ":" + serverPort + ")");
-        LobbyManager.Lobby.PhotonLobby.SetActive(true);
+        Console.WriteLine("Server Connect To Client (" + serverIP + ":" + serverPort + ")");        
     }
 
     IEnumerator PacketProc()
