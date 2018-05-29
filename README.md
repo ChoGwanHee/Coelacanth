@@ -28,13 +28,8 @@ ChungKang College of Cultural Industries CapstoneDesign Project Coelacanth Team 
 * 16학번 서효진
 * 16학번 김애리
 * 13학번 최혁준
-* 16학번 계수현
-
-### Background Modeler
-* 15학번 임소연
 
 ### Effect
-* 12학번 정태인
 * 16학번 김희경
 
 ### 3D Graphics
