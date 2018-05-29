@@ -12,17 +12,14 @@ public class CameraController : Photon.PunBehaviour {
 
     public Transform target;
     public CameraMode mode;
-    public float smoothMoveTime = 1.0f;
-    public float smoothZoomTime = 0.8f;
-    public float baseAddOffset = 6.0f;
-    [Range(0.5f, 2)]
-    public float zoomXFactor = 0.85f;
-    [Range(0.5f, 2)]
-    public float zoomZFactor = 1.0f;
-    public float minZoomDistance = 10.0f;
-    public float maxZoomDistance = 80.0f;
 
-    // Pivot
+
+    // Move
+    public float smoothMoveTime = 0.7f;
+    public float fastSmoothMoveTime = 0.2f;
+    public float fastMoveDistance = 5.0f;
+    public float baseAddOffset = 6.0f;
+
     private Vector3 moveVelocity;
     private Vector3 targetPosition = Vector3.zero;
     private Vector3 minPos = Vector3.zero;
@@ -30,13 +27,25 @@ public class CameraController : Photon.PunBehaviour {
     private float displayedPlayerCount = 0;
     private Vector3 originPosition;
 
-    // Zoom 관련
+
+    // Zoom
+    public float smoothZoomTime = 0.9f;
+    [Range(0.5f, 2)]
+    public float zoomXFactor = 1.4f;
+    [Range(0.5f, 2)]
+    public float zoomZFactor = 1.5f;
+    public float minZoomDistance = 20.0f;
+    public float maxZoomDistance = 30.0f;
+
     private float targetZoomDistance;
     private float distanceVelocity;
+    private float originZoomDistance;
 
 
     private List<GameObject> playerList = new List<GameObject>();
     private Transform camT;
+
+    private PlayerStat targetStat;
 
     private Vector3 defaultMinMax = new Vector3(50f, 0f, 50f);
     
@@ -45,24 +54,23 @@ public class CameraController : Photon.PunBehaviour {
         camT = Camera.main.transform;
         targetPosition.y = transform.position.y;
         originPosition = transform.position;
+        originZoomDistance = camT.localPosition.z;
     }
 	
 	void FixedUpdate () {
-
-        if (playerList.Count <= 0) return;
 
         switch (mode)
         {
             case CameraMode.AllView:
                 CalculateMinMax();
                 CalculateCenter2();
-                AutoZoom();
                 break;
             case CameraMode.PersonalView:
+                SingleCalculateMinMax();
                 FollowTarget();
                 break;
         }
-
+        AutoZoom();
         SmoothMovement();
     }
 
@@ -106,6 +114,32 @@ public class CameraController : Photon.PunBehaviour {
 
     }
 
+    // 최소, 최대 위치 계산
+    void SingleCalculateMinMax()
+    {
+        if (target != null && targetStat != null && targetStat.onStage)
+        {
+            minPos = originPosition;
+            maxPos = originPosition;
+
+            if (originPosition.x > target.position.x)
+                minPos.x = target.position.x;
+            if (originPosition.z > target.position.z)
+                minPos.z = target.position.z;
+
+            if (originPosition.x < target.position.x)
+                maxPos.x = target.position.x;
+            if (originPosition.z < target.position.z)
+                maxPos.z = target.position.z;
+        }
+        else
+        {
+            minPos = Vector3.zero;
+            maxPos = Vector3.zero;
+        }
+
+    }
+
     // 전체적인 위치만 판단
     void CalculateCenter()
     {
@@ -141,58 +175,72 @@ public class CameraController : Photon.PunBehaviour {
     // 타겟 따라 다니기
     void FollowTarget()
     {
-        if (target == null) return;
-
-        targetPosition = target.position;
+        if (target != null && targetStat != null && targetStat.onStage)
+        {
+            targetPosition = Vector3.Lerp(originPosition, target.position, 0.35f);
+        }
+        else
+        {
+            targetPosition = originPosition;
+        }
     }
 
     // 부드러운 움직임
     void SmoothMovement()
     {
         // Pivot 이동
-        transform.position = Vector3.SmoothDamp(transform.position, this.targetPosition, ref moveVelocity, smoothMoveTime);
+        float subDistance = (targetPosition - transform.position).magnitude;
+        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref moveVelocity,
+            (subDistance < fastMoveDistance) ? smoothMoveTime : fastSmoothMoveTime);
 
         // 카메라 이동(줌 인,아웃)
         //camT.localPosition = Vector3.SmoothDamp(camT.localPosition, offsetPosition, ref offsetVelocity, smoothMoveTime);
         float distance = Mathf.SmoothDamp(camT.localPosition.z, targetZoomDistance, ref distanceVelocity, smoothZoomTime);
-        Vector3 targetPosition = camT.localPosition;
-        targetPosition.z = distance;
-        camT.localPosition = targetPosition;
+        Vector3 targetZoomPosition = camT.localPosition;
+        targetZoomPosition.z = distance;
+        camT.localPosition = targetZoomPosition;
     }
 
     // 줌 길이 계산
     void AutoZoom()
     {
-        float subX = maxPos.x - minPos.x;
-        float subZ = maxPos.z - minPos.z;
-        float bigger;
-
-        if (subX > subZ)
+        if (target != null && targetStat != null && targetStat.onStage)
         {
-            bigger = subX * zoomXFactor;
+            float subX = maxPos.x - minPos.x;
+            float subZ = maxPos.z - minPos.z;
+            float bigger;
+
+            if (subX > subZ)
+            {
+                bigger = subX * zoomXFactor;
+            }
+            else
+            {
+                bigger = subZ * zoomZFactor;
+            }
+
+            targetZoomDistance = bigger + baseAddOffset;
+
+            if (targetZoomDistance < minZoomDistance)
+            {
+                targetZoomDistance = minZoomDistance;
+            }
+            else if (targetZoomDistance > maxZoomDistance)
+            {
+                targetZoomDistance = maxZoomDistance;
+            }
+
+            targetZoomDistance *= -1;
         }
         else
         {
-            bigger = subZ * zoomZFactor;
+            targetZoomDistance = originZoomDistance;
         }
-
-        targetZoomDistance = bigger + baseAddOffset;
-
-        if( targetZoomDistance < minZoomDistance)
-        {
-            targetZoomDistance = minZoomDistance;
-        }
-        else if(targetZoomDistance > maxZoomDistance)
-        {
-            targetZoomDistance = maxZoomDistance;
-        }
-
-        targetZoomDistance *= -1;
-        //offsetPosition = offsetDirection * (bigger + zoomAddOffset);
     }
 
     public void SetTarget(Transform newTarget)
     {
         target = newTarget;
+        targetStat = target.GetComponent<PlayerStat>();
     }
 }

@@ -132,7 +132,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
         Debug.Log("플레이어 생성");
 
         // 자기 UI 초기화
-        UIManager._instance.UIInitialize(playerIndex);
+        //UIManager._instance.UIInitialize(playerIndex);
     }
 
     /// <summary>

@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemManager : MonoBehaviour {
+[RequireComponent(typeof(PhotonView))]
+public class ItemManager : Photon.PunBehaviour {
 
     public FireworkItemTable[] fireworkItemTables;
     public BaseItem[] itemBoxPool;
@@ -11,6 +13,7 @@ public class ItemManager : MonoBehaviour {
     private bool regenTimerEnable = true;
     private float elapsedTime = 0f;
     public int maxBoxCount = 4;
+    [SerializeField]
     public int curBoxCount = 0;
 
     public Transform[] itemRegenPos;
@@ -53,6 +56,22 @@ public class ItemManager : MonoBehaviour {
             {
                 regenTimerEnable = true;
             }
+        }
+    }
+
+    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        Debug.Log("On photon serialize view");
+
+        if(stream.isWriting)
+        {
+            Debug.Log("Writing...");
+            stream.SendNext(curBoxCount);
+        }
+        else
+        {
+            Debug.Log("Reading...");
+            this.curBoxCount = (int)stream.ReceiveNext();
         }
     }
 
@@ -172,4 +191,17 @@ public class ItemManager : MonoBehaviour {
         return result;
     }
 
+    /*void IPunObservable.OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        Debug.Log("직렬화중");
+
+        if (stream.isWriting)
+        {
+            stream.SendNext(curBoxCount);
+        }
+        else
+        {
+            Debug.Log(stream.ReceiveNext());
+        }
+    }*/
 }

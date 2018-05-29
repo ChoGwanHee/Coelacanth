@@ -154,7 +154,6 @@ public class PlayerController : Photon.PunBehaviour
 
             CheckFall();
             ApplyAnimatorParams();
-            //MoveSound();
         }
         
     }
@@ -168,7 +167,6 @@ public class PlayerController : Photon.PunBehaviour
             {
                 GetInput();
                 StateUpdate();
-                ApplyAnimatorParams();
             }
         }
         
@@ -348,6 +346,7 @@ public class PlayerController : Photon.PunBehaviour
         stat.HPReset();
         GameManagerPhoton._instance.RespawnPlayer(transform);
         stat.onStage = true;
+        isControlable = true;
         rb.WakeUp();
         rb.useGravity = true;
         ChangeState(PlayerAniState.Idle);

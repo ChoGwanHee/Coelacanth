@@ -44,13 +44,14 @@ public class WaterCannonScript : Photon.PunBehaviour {
         PlaySound(0);
         yield return new WaitForSeconds(3.4f);
 
-        ps.Play();
+        
         float distance = 0;
         Vector3 checkPos = Vector3.zero;
         Collider[] effectedObjects;
         float elapsedTime = 0;
 
         PlaySound(1);
+        ps.Play();
 
         while (distance < maxDistance)
         {

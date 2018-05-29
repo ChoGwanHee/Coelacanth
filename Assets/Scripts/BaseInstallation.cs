@@ -22,7 +22,7 @@ public abstract class BaseInstallation : Photon.PunBehaviour
 
         if(elapsedTime >= lifetime)
         {
-            if(photonView.isMine)
+            if (photonView.isMine)
                 PhotonNetwork.Destroy(gameObject);
         }
     }

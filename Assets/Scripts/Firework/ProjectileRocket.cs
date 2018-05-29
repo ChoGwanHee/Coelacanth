@@ -30,6 +30,8 @@ public class ProjectileRocket : BaseProjectile
     /// </summary>
     private void Explosion()
     {
+        GetComponent<Collider>().enabled = false;
+
         Collider[] effectedObjects = Physics.OverlapSphere(transform.position, hitRadius, dynamicObjMask);
 
         for (int i = 0; i < effectedObjects.Length; i++)

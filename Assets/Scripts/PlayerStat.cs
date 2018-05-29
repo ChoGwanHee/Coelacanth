@@ -72,6 +72,7 @@ public class PlayerStat : Photon.PunBehaviour
         else
         {
             UIManager._instance.chargingUI.target = transform;
+            GameManagerPhoton._instance.cameraController.SetTarget(transform);
         }
             
     }

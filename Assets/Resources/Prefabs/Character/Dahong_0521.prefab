@@ -4774,7 +4774,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c958f2d1786f8c14790b8925361d3817, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Root: {fileID: 4682691213136210}
+  m_Root: {fileID: 4132000395248010}
   m_UpdateRate: 60
   m_UpdateMode: 0
   m_Damping: 0.3
@@ -4791,13 +4791,25 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  m_Stiffness: 0.2
+  m_Stiffness: 0.9
   m_StiffnessDistrib:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: -0.9
+      outSlope: -0.9
+      tangentMode: 34
+    - serializedVersion: 2
+      time: 1
+      value: 0.1
+      inSlope: -0.9
+      outSlope: -0.9
+      tangentMode: 34
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   m_Inert: 0
   m_InertDistrib:
     serializedVersion: 2
@@ -4811,12 +4823,6 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 0.1
       value: 1
       inSlope: 0
       outSlope: 0
@@ -5189,7 +5195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c958f2d1786f8c14790b8925361d3817, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Root: {fileID: 4905867947343970}
+  m_Root: {fileID: 4314769142999990}
   m_UpdateRate: 60
   m_UpdateMode: 0
   m_Damping: 0.3
@@ -5206,13 +5212,25 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  m_Stiffness: 0.2
+  m_Stiffness: 0.9
   m_StiffnessDistrib:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: -0.9
+      outSlope: -0.9
+      tangentMode: 34
+    - serializedVersion: 2
+      time: 1
+      value: 0.1
+      inSlope: -0.9
+      outSlope: -0.9
+      tangentMode: 34
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   m_Inert: 0
   m_InertDistrib:
     serializedVersion: 2
@@ -5226,12 +5244,6 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 0.1
       value: 1
       inSlope: 0
       outSlope: 0

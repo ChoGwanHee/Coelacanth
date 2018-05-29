@@ -31,7 +31,7 @@ public class InstallationFountain : BaseInstallation
     /// <summary>
     /// 활성화까지 걸리는 시간
     /// </summary>
-    public float enableTime = 1.2f;
+    public float enableTime = 2.0f;
 
     /// <summary>
     /// 판정 간격
@@ -50,7 +50,6 @@ public class InstallationFountain : BaseInstallation
     public string duringSound;
 
     private ParticleSystem particle;
-
     private LayerMask dynamicObjMask;
 
 
@@ -66,17 +65,19 @@ public class InstallationFountain : BaseInstallation
     {
         base.Update();
 
-
-        if (enable && photonView.isMine)
+        if (enable)
         {
-            if (tickElapsedTime >= tickTime)
+            if(photonView.isMine)
             {
-                Sprinkle();
-                tickElapsedTime = 0;
-            }
-            else
-            {
-                tickElapsedTime += Time.deltaTime;
+                if (tickElapsedTime >= tickTime)
+                {
+                    Sprinkle();
+                    tickElapsedTime = 0;
+                }
+                else
+                {
+                    tickElapsedTime += Time.deltaTime;
+                }
             }
         }
         else

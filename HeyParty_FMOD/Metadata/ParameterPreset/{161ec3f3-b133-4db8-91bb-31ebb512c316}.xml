@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="ParameterPreset" id="{161ec3f3-b133-4db8-91bb-31ebb512c316}">
+        <property name="name">
+            <value>StepOnOff</value>
+        </property>
+        <relationship name="folder">
+            <destination>{dc992851-d7f6-4dde-8297-d614c2739147}</destination>
+        </relationship>
+        <relationship name="parameter">
+            <destination>{d2fc5ca0-9234-41dc-8ff0-3c078b15cb19}</destination>
+        </relationship>
+    </object>
+    <object class="GameParameter" id="{d2fc5ca0-9234-41dc-8ff0-3c078b15cb19}">
+        <property name="initialValue">
+            <value>0</value>
+        </property>
+    </object>
+</objects>

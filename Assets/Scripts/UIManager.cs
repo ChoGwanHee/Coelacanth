@@ -95,7 +95,7 @@ public class UIManager : MonoBehaviour {
         }
 
         otherStatus[otherUserIndex].SetHeart(6);
-        otherStatus[otherUserIndex].backgroundImg.color = bgColor;
+        //otherStatus[otherUserIndex].backgroundImg.color = bgColor;
         otherStatus[otherUserIndex].illust.sprite = illusts[playerIndex];
         otherStatus[otherUserIndex].gameObject.SetActive(true);
     }

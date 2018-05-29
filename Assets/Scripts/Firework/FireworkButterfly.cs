@@ -94,6 +94,8 @@ public class FireworkButterfly : Firework
     /// <returns></returns>
     private IEnumerator ChainFire(FireworkExecuter executer, int chargingAmount)
     {
+        yield return new WaitForSeconds(0.15f);
+
         for(int i=0; i< chargingAmount; i++)
         {
             ProjectileButterfly bullet = PhotonNetwork.Instantiate("Prefabs/" + projectile_ref.name, executer.firePoint.position, executer.transform.rotation, 0).GetComponent<ProjectileButterfly>();

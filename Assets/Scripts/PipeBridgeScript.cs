@@ -28,6 +28,8 @@ public class PipeBridgeScript : Photon.PunBehaviour
     [FMODUnity.EventRef]
     public string breakSound;
 
+    public GameObject[] smokeObjs;
+
     private Animator animator;
 
 
@@ -82,6 +84,26 @@ public class PipeBridgeScript : Photon.PunBehaviour
         photonView.RPC("Break", PhotonTargets.All, false);
     }
 
+    public void AnimEvent(string eventName)
+    {
+        switch (eventName)
+        {
+            case "Activate Smoke":
+                    for (int i = 0; i < smokeObjs.Length; i++)
+                    {
+                        smokeObjs[i].GetComponent<ParticleSystem>().Play(true);
+                    }
+                break;
+            case "Deactivate Smoke":
+                    for (int i = 0; i < smokeObjs.Length; i++)
+                    {
+                        smokeObjs[i].GetComponent<ParticleSystem>().Stop(true);
+                    }
+                break;
+        }
+        
+    }
+
     public void PlaySound(int soundNum)
     {
         switch (soundNum)
@@ -95,4 +117,6 @@ public class PipeBridgeScript : Photon.PunBehaviour
         }
 
     }
+
+    
 }
