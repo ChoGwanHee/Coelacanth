@@ -7,7 +7,7 @@ using Random = System.Random;
 
 public class RoomManager
 {
-    public readonly static int RoomMaxCount = 2;
+    readonly static int RoomMaxCount = 2;
     
     private string _roomid;
     public string RoomId
@@ -32,7 +32,9 @@ public class RoomManager
 
     public RoomManager()
     {
-        Debug.Log("최대 개설 가능한 룸 : " + RoomMaxCount);
+        RoomId = null;
+        MaxPlayer = 0;
+        Ready = false;
         RoomInitialize();
     }
     
@@ -42,8 +44,8 @@ public class RoomManager
     {
         // PK값 생성
         Random _random = new Random();
-        RoomId = PrivateCharKey(_random, 10);
-        Debug.Log(RoomId);
+        RoomId = PrivateCharKey(_random, 20);
+        Debug.Log("HashValue : " + RoomId);
     }
 
     // 룸의 정보를 구분할 수 있는 PK 값 생성하는 함수
@@ -56,10 +58,8 @@ public class RoomManager
     private string PrivateCharKey(Random _random, int _length, string _pool)
     {
         StringBuilder sb = new StringBuilder();
-        while (_length <= 0)
-        {
+        for (int i = 0; i < _length; i++)
             sb.Append(_pool[(int) (_random.NextDouble() * _pool.Length)]);
-        }
         return sb.ToString();
     }
 }

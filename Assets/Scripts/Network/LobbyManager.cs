@@ -4,16 +4,13 @@ using System.IO;
 
 public class LobbyManager : InstanceValue
 {
-    private static LobbyManager _lobby;
-    public static LobbyManager Lobby
-    {
-        get { return _lobby; }
-        set { _lobby = value; }
-    }
     public GameObject PhotonLobby;
+
+    private RoomManager _room;
 
     void Start()
     {
         PhotonLobby.SetActive(false);
+        _room = new RoomManager();
     }
 }
