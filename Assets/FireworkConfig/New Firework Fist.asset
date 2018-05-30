@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b4e02ba0944e2141adf9f0d0f23bdc6, type: 3}
+  m_Name: New Firework Fist
+  m_EditorClassIdentifier: 
+  fwName: "\uC8FC\uBA39"
+  fwType: 0
+  atType: 0
+  damage: 15
+  capacity: -1
+  hitForce: 7
+  hitRadius: 0.6
+  lifetime: 0
+  coolDown: 1
+  uiSprite: {fileID: 21300000, guid: 0502ef232c0972148bbaab3b3b49c17c, type: 3}
+  startSound: event:/SFX/Weapon/Shoot/SFX_Punch

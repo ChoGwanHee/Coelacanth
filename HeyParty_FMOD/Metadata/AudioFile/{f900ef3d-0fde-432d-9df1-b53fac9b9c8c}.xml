@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{f900ef3d-0fde-432d-9df1-b53fac9b9c8c}">
+        <property name="assetPath">
+            <value>GUNFIRE.WAV</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>22</value>
+        </property>
+        <property name="channelCount">
+            <value>1</value>
+        </property>
+        <property name="length">
+            <value>1.8877727272727274</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{00c47356-6e7c-4b58-839f-6cd51f0dba88}</destination>
+        </relationship>
+    </object>
+</objects>
