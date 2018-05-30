@@ -89,4 +89,18 @@ public class InstanceValue : MonoBehaviour
 		get { return _nickname; }
 		set { _nickname = value; }
 	}
+
+	private int _min;
+	public int Min
+	{
+		get { return _min; }
+		set { _min = value; }
+	}
+    
+	private int _max;
+	public int Max
+	{
+		get { return _max; }
+		set { _max = value; }
+	}
 }
