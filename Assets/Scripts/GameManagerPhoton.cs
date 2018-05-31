@@ -117,7 +117,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
                 prefabName = "MingMing_0516";
                 break;
             case 2:
-                prefabName = "Blue_0426";
+                prefabName = "ShoSho_0530";
                 break;
             case 3:
                 prefabName = "Juhwang_0426";

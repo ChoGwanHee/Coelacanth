@@ -9,7 +9,7 @@ public class Lobby : Photon.PunBehaviour {
     private void Start()
     {
         // 게임 버전
-        PhotonNetwork.ConnectUsingSettings("0.5.0");
+        PhotonNetwork.ConnectUsingSettings("0.5.1");
     }
 
     public void OnPhotonRandomJoinFailed()
@@ -72,10 +72,6 @@ public class Lobby : Photon.PunBehaviour {
     {
         // 게임씬을 완벽하게 로딩 후 씬을 변경한다
         AsyncOperation oper = SceneManager.LoadSceneAsync("twinvilla");
-        {
-            // 로비 개설되면, 룸 넘기기 위해 사용
-            // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        }
         //AsyncOperation oper = SceneManager.LoadSceneAsync("boomboomparty");
         yield return oper; // 로딩이 완료될때까지 대기 한다
     }

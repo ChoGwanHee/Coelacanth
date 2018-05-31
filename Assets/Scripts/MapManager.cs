@@ -39,6 +39,7 @@ public class MapManager : Photon.PunBehaviour {
         }
     }
 
+
     private IEnumerator LoopMapFacilities()
     {
         while (true)

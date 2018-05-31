@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{fd1b3c9e-9806-432d-a060-e8b426b34569}">
+        <property name="assetPath">
+            <value>song113.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>0.59126984126984128</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{00c47356-6e7c-4b58-839f-6cd51f0dba88}</destination>
+        </relationship>
+    </object>
+</objects>
