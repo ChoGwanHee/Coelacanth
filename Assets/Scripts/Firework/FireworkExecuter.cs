@@ -17,7 +17,6 @@ public class FireworkExecuter : Photon.PunBehaviour {
     public bool charging = false;           // 충전 중인지 여부
 
     private PlayerController pc;
-    private PlayerStat stat;
 
 
     private void Awake()
@@ -28,7 +27,6 @@ public class FireworkExecuter : Photon.PunBehaviour {
     private void Start()
     {
         pc = GetComponent<PlayerController>();
-        stat = GetComponent<PlayerStat>();
     }
 
     private void Update()

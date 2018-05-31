@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,38 +7,17 @@ using UnityEngine.UI;
 public class UIStatus : MonoBehaviour {
 
     //public Image illust;
-    public Image ringImg;
-    public Image[] hearts;
+    //public Image ringImg;
     public Image weapon;
     public Transform countDisplay;
     public Sprite[] numbers;
 
     private bool infinity = true;
 
-
+    [Obsolete()]
     public void SetColor(Color color)
     {
-        ringImg.color = color;
-    }
-
-    /*public void SetImage(Sprite newSprite)
-    {
-        illust.sprite = newSprite;
-    }*/
-
-    public void SetHeart(int heartLeft)
-    {
-        for(int i=0;i<hearts.Length;i++)
-        {
-            if(i <= heartLeft-1)
-            {
-                hearts[i].enabled = true;
-            }
-            else
-            {
-                hearts[i].enabled = false;
-            }
-        }
+        //ringImg.color = color;
     }
 
     public void SetWeaponImg(Sprite newSprite)

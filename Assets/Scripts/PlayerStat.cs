@@ -65,11 +65,7 @@ public class PlayerStat : Photon.PunBehaviour
         Hashtable playerProperties = photonView.owner.CustomProperties;
         playerIndex = (int)playerProperties["PlayerIndex"];
 
-        if (!photonView.isMine)
-        {
-            UIManager._instance.ActiveOtherStatus(playerIndex);
-        }
-        else
+        if (photonView.isMine)
         {
             UIManager._instance.chargingUI.target = transform;
             GameManagerPhoton._instance.cameraController.SetTarget(transform);
@@ -117,15 +113,6 @@ public class PlayerStat : Photon.PunBehaviour
             alive = false;
             Debug.Log(gameObject.GetPhotonView().owner + " 사망");
         }
-
-        if (!photonView.isMine)
-        {
-            SetOtherHeartUI(life);
-        }
-        else
-        {
-            UIManager._instance.userStatus.SetHeart(life);
-        }
     }
 
     /// <summary>
@@ -134,15 +121,5 @@ public class PlayerStat : Photon.PunBehaviour
     public void HPReset()
     {
         curHP = maxHP;
-    }
-
-    /// <summary>
-    /// 다른 플레이어의 현재 생명을 UI에 반영합니다.
-    /// </summary>
-    /// <param name="num">남은 생명</param>
-    [PunRPC]
-    public void SetOtherHeartUI(int num)
-    {
-        UIManager._instance.otherStatus[UIManager._instance.otherUserIndexLink[playerIndex]].SetHeart(num);
     }
 }

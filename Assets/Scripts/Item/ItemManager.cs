@@ -61,16 +61,12 @@ public class ItemManager : Photon.PunBehaviour {
 
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        Debug.Log("On photon serialize view");
-
         if(stream.isWriting)
         {
-            Debug.Log("Writing...");
             stream.SendNext(curBoxCount);
         }
         else
         {
-            Debug.Log("Reading...");
             this.curBoxCount = (int)stream.ReceiveNext();
         }
     }

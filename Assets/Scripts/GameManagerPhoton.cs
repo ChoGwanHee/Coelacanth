@@ -85,9 +85,6 @@ public class GameManagerPhoton : Photon.PunBehaviour
             PhotonNetwork.room.SetCustomProperties(roomProperties);
         }
 
-        // 나간 유저 UI 빼기
-        UIManager._instance.DeActiveOtherStatus((int)playerProperties["PlayerIndex"]);
-
         cameraController.FindPlayers();
         Debug.Log("플레이어 접속 종료:" + otherPlayer.NickName);
     }

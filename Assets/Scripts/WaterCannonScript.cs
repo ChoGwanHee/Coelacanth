@@ -16,10 +16,7 @@ public class WaterCannonScript : Photon.PunBehaviour {
     [FMODUnity.EventRef]
     public string waterFireSound;
 
-    private float initialTime = 0.3f;
     private float maxDistance = 19f;
-
-    private bool splashing = false;
 
     private ParticleSystem ps;
     private Animator animator;
@@ -73,7 +70,6 @@ public class WaterCannonScript : Photon.PunBehaviour {
             yield return null;
         }
 
-        splashing = true;
         elapsedTime = 0;
         animator.SetBool("Blasting", false);
 
