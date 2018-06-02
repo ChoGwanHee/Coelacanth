@@ -8,7 +8,14 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Firework/Party")]
 public class FireworkParty : Firework {
 
+    /// <summary>
+    /// 공격 범위의 각도
+    /// </summary>
     public float hitAngle;
+
+    /// <summary>
+    /// 몇 단계로 나눠 계산하는지
+    /// </summary>
     public int step;
 
     public override void Execute(FireworkExecuter executer)
@@ -75,7 +82,7 @@ public class FireworkParty : Firework {
 
         PhotonNetwork.Instantiate("Prefabs/party_firework_boom_fx", firePos, executer.transform.rotation, 0);
 
-        //FMODUnity.RuntimeManager.PlayOneShot(startSound);
+        FMODUnity.RuntimeManager.PlayOneShot(startSound);
 
         self.enabled = true;
 

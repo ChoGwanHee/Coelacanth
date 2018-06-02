@@ -4,8 +4,9 @@ using UnityEngine;
 
 public enum CameraMode
 {
-    AllView,
-    PersonalView
+    TotalView,
+    PersonalView,
+    FrontView
 }
 
 public class CameraController : Photon.PunBehaviour {
@@ -42,7 +43,6 @@ public class CameraController : Photon.PunBehaviour {
     private float originZoomDistance;
 
 
-    private List<GameObject> playerList = new List<GameObject>();
     private Transform camT;
 
     private PlayerStat targetStat;
@@ -61,7 +61,7 @@ public class CameraController : Photon.PunBehaviour {
 
         switch (mode)
         {
-            case CameraMode.AllView:
+            case CameraMode.TotalView:
                 CalculateMinMax();
                 CalculateCenter2();
                 break;
@@ -74,12 +74,6 @@ public class CameraController : Photon.PunBehaviour {
         SmoothMovement();
     }
 
-    public void FindPlayers()
-    {
-        playerList.Clear();
-        playerList.AddRange(GameObject.FindGameObjectsWithTag("Player"));
-    }
-
     // 최소, 최대 위치 계산
     void CalculateMinMax()
     {
@@ -87,11 +81,12 @@ public class CameraController : Photon.PunBehaviour {
         maxPos = defaultMinMax * -1;
 
         displayedPlayerCount = 0;
+        List<PlayerStat> playerList = GameManagerPhoton._instance.playerList;
 
         for (int i = 0; i < playerList.Count; i++)
         {
             if (!playerList[i].gameObject.activeSelf) continue;
-            if (!playerList[i].GetComponent<PlayerStat>().onStage) continue;
+            if (!playerList[i].onStage) continue;
 
             displayedPlayerCount++;
 
@@ -152,10 +147,12 @@ public class CameraController : Photon.PunBehaviour {
     {
         Vector3 sumPos = Vector3.zero;
 
-        for(int i=0; i<playerList.Count; i++)
+        List<PlayerStat> playerList = GameManagerPhoton._instance.playerList;
+
+        for (int i=0; i<playerList.Count; i++)
         {
             if (!playerList[i].gameObject.activeSelf) continue;
-            if (!playerList[i].GetComponent<PlayerStat>().onStage) continue;
+            if (!playerList[i].onStage) continue;
 
             sumPos += playerList[i].transform.position;
         }

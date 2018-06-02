@@ -17,7 +17,7 @@ public class PlayerStat : Photon.PunBehaviour
     public bool onStage = true;
 
     /// <summary>
-    /// 플레이어의 생명이 1이상이면 True 아니면 false.
+    /// 플레이어가 게임에 참여하고 있는지 여부
     /// </summary>
     public bool alive = true;
 
@@ -41,12 +41,7 @@ public class PlayerStat : Photon.PunBehaviour
     /// </summary>
     public int life = 6;
 
-    /// <summary>
-    /// 플레이어가 맵 밖으로 떨어질 때 재생되는 사운드
-    /// </summary>
-    [FMODUnity.EventRef]
-    public string fallingSound;
-
+    
     private PlayerController pc;
 
 
@@ -70,7 +65,6 @@ public class PlayerStat : Photon.PunBehaviour
             UIManager._instance.chargingUI.target = transform;
             GameManagerPhoton._instance.cameraController.SetTarget(transform);
         }
-            
     }
 
     private void OnDestroy()
@@ -85,33 +79,17 @@ public class PlayerStat : Photon.PunBehaviour
     [PunRPC]
     public void Damage(int dmg)
     {
-        if (!onStage) return;
+        if (!onStage || pc.isStun) return;
 
         if (curHP - dmg <= 0)
         {
             curHP = 0;
             if (pc != null)
-                pc.Stun();
+                pc.ChangeState(PlayerAniState.Stun);
         }
         else
         {
             curHP -= dmg;
-        }
-    }
-
-    /// <summary>
-    /// 플레이어의 생명 하나를 잃게 합니다.
-    /// </summary>
-    public void LifeLoss()
-    {
-        life--;
-        FMODUnity.RuntimeManager.PlayOneShot(fallingSound);
-
-        if (life <= 0)
-        {
-            // 생명 다 없어짐
-            alive = false;
-            Debug.Log(gameObject.GetPhotonView().owner + " 사망");
         }
     }
 

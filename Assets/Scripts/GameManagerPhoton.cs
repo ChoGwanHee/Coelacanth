@@ -27,7 +27,9 @@ public class GameManagerPhoton : Photon.PunBehaviour
     /// </summary>
     public Texture2D cursorTex;
 
+    [HideInInspector]
     public CameraController cameraController;
+    [HideInInspector]
     public ItemManager itemManager;
 
     [FMODUnity.EventRef]
@@ -62,8 +64,9 @@ public class GameManagerPhoton : Photon.PunBehaviour
 
         PhotonNetwork.isMessageQueueRunning = true;
 
-
-        CreatePlayer();
+        Hashtable customProperties = PhotonNetwork.player.CustomProperties;
+        int playerIndex = (int)customProperties["PlayerIndex"];
+        CreatePlayer(playerIndex, playerGenPos[playerIndex].position);
 
         //FMODUnity.RuntimeManager.PlayOneShot(BGM);
     }
@@ -85,7 +88,6 @@ public class GameManagerPhoton : Photon.PunBehaviour
             PhotonNetwork.room.SetCustomProperties(roomProperties);
         }
 
-        cameraController.FindPlayers();
         Debug.Log("플레이어 접속 종료:" + otherPlayer.NickName);
     }
 
@@ -97,15 +99,11 @@ public class GameManagerPhoton : Photon.PunBehaviour
     /// <summary>
     /// 플레이어를 생성합니다.
     /// </summary>
-    public void CreatePlayer()
+    public void CreatePlayer(int characterIndex, Vector3 spawnPosition, bool isRandom = false)
     {
-        Hashtable customProperties = PhotonNetwork.player.CustomProperties;
-        int playerIndex = (int)customProperties["PlayerIndex"];
-
-        Vector3 pos = playerGenPos[playerIndex].position;
         string prefabName;
 
-        switch (playerIndex)
+        switch (characterIndex)
         {
             case 0:
                 prefabName = "Dahong_0521";
@@ -124,12 +122,8 @@ public class GameManagerPhoton : Photon.PunBehaviour
                 break;
         }
 
-        PhotonNetwork.Instantiate("Prefabs/Character/"+prefabName, pos, Quaternion.identity, 0);
-
+        PhotonNetwork.Instantiate("Prefabs/Character/"+prefabName, spawnPosition, Quaternion.identity, 0);
         Debug.Log("플레이어 생성");
-
-        // 자기 UI 초기화
-        //UIManager._instance.UIInitialize(playerIndex);
     }
 
     /// <summary>

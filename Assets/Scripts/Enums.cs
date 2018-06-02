@@ -6,7 +6,8 @@ public enum PlayerAniState
     Attack,
     KnockBack,
     Stun,
-    Fall
+    Fall,
+    Emotion
 }
 
 public enum FireworkType
