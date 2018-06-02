@@ -36,11 +36,6 @@ public class PlayerStat : Photon.PunBehaviour
     /// </summary>
     public int curHP;
 
-    /// <summary>
-    /// 남은 생명
-    /// </summary>
-    public int life = 6;
-
     
     private PlayerController pc;
 

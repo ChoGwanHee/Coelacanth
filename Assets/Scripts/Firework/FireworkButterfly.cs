@@ -113,8 +113,6 @@ public class FireworkButterfly : Firework
             int myIndex = GameManagerPhoton._instance.playerList.IndexOf(executer.GetComponent<PlayerStat>());
             bullet.SearchTarget(myIndex);
 
-            FMODUnity.RuntimeManager.PlayOneShot(startSound);
-
             if (chainFireTime > 0)
                 yield return new WaitForSeconds(chainFireTime);
             else

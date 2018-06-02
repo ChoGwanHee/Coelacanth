@@ -60,7 +60,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
         cameraController = Camera.main.transform.parent.parent.GetComponent<CameraController>();
         itemManager = GetComponent<ItemManager>();
 
-        Cursor.SetCursor(cursorTex, new Vector2(43, 43), CursorMode.ForceSoftware);
+        Cursor.SetCursor(cursorTex, new Vector2(32, 32), CursorMode.ForceSoftware);
 
         PhotonNetwork.isMessageQueueRunning = true;
 

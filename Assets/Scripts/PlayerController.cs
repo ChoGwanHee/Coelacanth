@@ -470,6 +470,10 @@ public class PlayerController : Photon.PunBehaviour
             case "Move Sound":
                 FMODUnity.RuntimeManager.PlayOneShot(walkingSound);
                 break;
+
+            case "Play Start Sound":
+                FMODUnity.RuntimeManager.PlayOneShot(executer.curFirework.startSound);
+                break;
         }
     }
 }

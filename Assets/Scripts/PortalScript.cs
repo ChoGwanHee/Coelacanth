@@ -19,5 +19,12 @@ public class PortalScript : MonoBehaviour {
         {
             other.gameObject.GetPhotonView().RPC("Teleport", other.gameObject.GetPhotonView().owner, movePos.position);
         }
+        else if(other.CompareTag("Object"))
+        {
+            if(other.GetComponent<DynamicObject>() != null)
+            {
+                other.gameObject.GetPhotonView().RPC("RespawnObject", PhotonTargets.All, null);
+            }
+        }
     }
 }

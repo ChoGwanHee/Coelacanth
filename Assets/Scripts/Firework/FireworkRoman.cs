@@ -28,6 +28,5 @@ public class FireworkRoman : Firework
         bullet.SetSpeed(projectileSpeed);
 
         executer.DecreaseAmmo();
-        executer.photonView.RPC("PlayStartSound", PhotonTargets.All, null);
     }
 }

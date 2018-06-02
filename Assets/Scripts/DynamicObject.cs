@@ -5,21 +5,22 @@
 /// </summary>
 public class DynamicObject : Photon.PunBehaviour
 {
+    /// <summary>
+    /// 위치 동기화 여부
+    /// </summary>
+    public bool syncObject = false;
 
     private Rigidbody rb;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
-        /*if (PhotonNetwork.isMasterClient)
-        {
-            rb.useGravity = true;
-        }*/
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (!syncObject) return;
+
         if (PhotonNetwork.isMasterClient && collision.gameObject.CompareTag("Player"))
         {
             if (collision.gameObject.GetComponent<PlayerDummy>() != null) return;
@@ -34,6 +35,8 @@ public class DynamicObject : Photon.PunBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
+        if (!syncObject) return;
+
         if (PhotonNetwork.isMasterClient && collision.gameObject.CompareTag("Player"))
         {
             if (collision.gameObject.GetComponent<PlayerDummy>() != null) return;

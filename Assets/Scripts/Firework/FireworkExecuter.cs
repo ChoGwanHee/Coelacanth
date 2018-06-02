@@ -112,12 +112,6 @@ public class FireworkExecuter : Photon.PunBehaviour {
         UIManager._instance.userStatus.SetCount(num);
     }
 
-    [PunRPC]
-    public void PlayStartSound()
-    {
-        FMODUnity.RuntimeManager.PlayOneShot(curFirework.startSound);
-    }
-
     public void CheckFireworkChanged()
     {
         if (newFirework != null && replaceable) {

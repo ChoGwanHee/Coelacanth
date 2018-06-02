@@ -28,8 +28,6 @@ public class FireworkFist : Firework
             }
         }
 
-        FMODUnity.RuntimeManager.PlayOneShot(startSound);
-
         self.enabled = true;
     }
 }

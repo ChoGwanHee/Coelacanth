@@ -82,8 +82,6 @@ public class FireworkParty : Firework {
 
         PhotonNetwork.Instantiate("Prefabs/party_firework_boom_fx", firePos, executer.transform.rotation, 0);
 
-        FMODUnity.RuntimeManager.PlayOneShot(startSound);
-
         self.enabled = true;
 
         executer.DecreaseAmmo();
