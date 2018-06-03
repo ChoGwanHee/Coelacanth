@@ -37,3 +37,5 @@ ChungKang College of Cultural Industries CapstoneDesign Project Coelacanth Team 
 
 # Sound Desinger
 * 14학번 유수현
+
+![Alt text](/c/Users/cch/Desktop/땋라잡기/INTRO_IMG.jpg "Optional title")
