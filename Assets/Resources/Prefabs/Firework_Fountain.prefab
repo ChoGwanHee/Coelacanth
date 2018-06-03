@@ -463,7 +463,7 @@ MonoBehaviour:
   hitForce: 0
   hitRadius: 0
   enableTime: 1.2
-  duringSound: event:/SFX/Weapon/Shoot/SFX_AutoShot
+  duringSound: t:/SFX/Weapon/Shoot/SFX_AutoShotShot
 --- !u!198 &198241861434640618
 ParticleSystem:
   m_ObjectHideFlags: 1

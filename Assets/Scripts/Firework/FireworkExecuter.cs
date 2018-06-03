@@ -16,6 +16,14 @@ public class FireworkExecuter : Photon.PunBehaviour {
     public bool replaceable = true;        // 폭죽 교체 가능 여부
     public bool charging = false;           // 충전 중인지 여부
 
+    public delegate void OnFireworkChangedDelegate(Firework newFirework);
+
+    /// <summary>
+    /// 폭죽이 바뀌었을 때 호출되는 델리게이트 입니다.
+    /// </summary>
+    public OnFireworkChangedDelegate onFireworkChanged;
+
+
     private PlayerController pc;
 
 
@@ -118,7 +126,7 @@ public class FireworkExecuter : Photon.PunBehaviour {
             curFirework = newFirework;
             newFirework = null;
             Initialize();
-
+            onFireworkChanged(curFirework);
             if (photonView.isMine)
             {
                 UIManager._instance.userStatus.SetWeaponImg(curFirework.uiSprite);
