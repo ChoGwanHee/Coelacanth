@@ -22,7 +22,14 @@ public class UIStatus : MonoBehaviour {
 
     public void SetWeaponImg(Sprite newSprite)
     {
-        weapon.sprite = newSprite;
+        if(newSprite == null)
+        {
+            weapon.enabled = false;
+        } else
+        {
+            weapon.enabled = true;
+            weapon.sprite = newSprite;
+        }
     }
 
     // 숫자에 맞게 스프라이트 교체, 0~999까지 가능

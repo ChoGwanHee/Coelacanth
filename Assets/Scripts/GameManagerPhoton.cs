@@ -27,10 +27,10 @@ public class GameManagerPhoton : Photon.PunBehaviour
     /// </summary>
     public Texture2D cursorTex;
 
-    [HideInInspector]
-    public CameraController cameraController;
-    [HideInInspector]
-    public ItemManager itemManager;
+
+    public float gameElapsedTime;
+
+    
 
     [FMODUnity.EventRef]
     public string BGM;
@@ -40,6 +40,12 @@ public class GameManagerPhoton : Photon.PunBehaviour
     /// </summary>
     [HideInInspector]
     public List<PlayerStat> playerList = new List<PlayerStat>();
+
+
+    [HideInInspector]
+    public CameraController cameraController;
+    [HideInInspector]
+    public ItemManager itemManager;
 
 
     void Awake()

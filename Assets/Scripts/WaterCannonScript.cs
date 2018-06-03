@@ -9,6 +9,7 @@ public class WaterCannonScript : Photon.PunBehaviour {
     public float duration = 3.0f;
 
     public GameObject hitEffect_ref;
+    public GameObject hitRangeEffect;
 
     [FMODUnity.EventRef]
     public string metalQuakeSound;
@@ -39,6 +40,7 @@ public class WaterCannonScript : Photon.PunBehaviour {
     {
         animator.SetBool("Blasting", true);
         PlaySound(0);
+        hitRangeEffect.SetActive(true);
         yield return new WaitForSeconds(3.4f);
 
         
@@ -49,6 +51,7 @@ public class WaterCannonScript : Photon.PunBehaviour {
 
         PlaySound(1);
         ps.Play();
+        hitRangeEffect.SetActive(false);
 
         while (distance < maxDistance)
         {

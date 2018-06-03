@@ -20,7 +20,7 @@ MonoBehaviour:
   hitRadius: 2.13
   lifetime: 10
   coolDown: 0.5
-  uiSprite: {fileID: 21300000, guid: dda16c23d4c401844be25a2c917d850a, type: 3}
+  uiSprite: {fileID: 21300000, guid: b6c718ae085b4ff4a83e4568d00a6372, type: 3}
   startSound: 
   fountain_ref: {fileID: 1978563458120296, guid: 127bfdf1b50d1f44794a971b2f0d5198,
     type: 2}
