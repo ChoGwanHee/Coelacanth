@@ -39,11 +39,11 @@ typora 프로그램으로 볼 경우, 좋은 환경에서 내용을 읽어보실
 > 	여러분이 겪는 고통은 저의 행복입니다.
 
 1. https://git-scm.com/downloads Git Bash 사이트에 접속해서 플랫폼에 맞는 버전으로 다운로드 합니다.
-![ex_screenshot](./Image/Git Bash Site.PNG)
+![ex_screenshot](./Image/Git Bash Site.png)
 2. 처음 설치화면이 나타나면, 당황하지말고 **Next >** 버튼을 정확히 8번 클릭합니다.
-![ex_screenshot](./Image/Git bash download intro.PNG)
+![ex_screenshot](./Image/Git bash download intro.png)
 3. 설치가 완료되면, Release를 생략하고 바로 실행합니다.
-![ex_screenshot](./Image/git bash download finality.PNG)
+![ex_screenshot](./Image/git bash download finality.png)
 
 #### Chapter 2. 프로젝트 관리 폴더 생성 : 부모 디렉토리
 
@@ -74,7 +74,7 @@ typora 프로그램으로 볼 경우, 좋은 환경에서 내용을 읽어보실
 > 참고로 명령어를 복사 / 붙여넣기 과정으로 편리하게 진행할 수 있는데, 윈도우의 단축키와 다르므로 이 점 유의하시고 Chapter 3를 진행해주시기 바랍니다.
 >
 > 마우스 드래그로 복사를 한 뒤, 오른쪽 클릭을 하면 팝업이 생성됩니다. (사진참고)
-> ![ex_screenshot](./Image/Copy & Paste explanation.PNG)
+> ![ex_screenshot](./Image/Copy & Paste explanation.png)
 > **아래에 적힌 2가지 방법 중 한가지를 선택**
 > ------------
 > - 마우스 오른쪽 클릭을 통한 클릭방식
@@ -83,36 +83,36 @@ typora 프로그램으로 볼 경우, 좋은 환경에서 내용을 읽어보실
 > : 매뉴얼에 적힌 명령어를 복사가 되어있는 상태에서 bash 화면에 Shift + Ins 입력
 
 1. 홈 디렉토리로 이동 : cd ~
-![ex_screenshot](./Image/1_ Move Home Directory.PNG)
+![ex_screenshot](./Image/1_ Move Home Directory.png)
 2. 내문서로 이동 : cd Documents
-![ex_screenshot](./Image/2_ Moving the Inner Document.PNG)
+![ex_screenshot](./Image/2_ Moving the Inner Document.png)
 3. Project 폴더 생성 : mkdir Project
-![ex_screenshot](./Image/3_ Generate Project Management Directory.PNG)
+![ex_screenshot](./Image/3_ Generate Project Management Directory.png)
 4. 생성한 Project 폴더 이동 : cd Project
-![ex_screenshot](./Image/4_ Move Project Management Directory.PNG)
+![ex_screenshot](./Image/4_ Move Project Management Directory.png)
 5. Git 원격 저장소와 연동할 폴더 생성 : mkdir Coelacanth
-![ex_screenshot](./Image/5_ Generate Project Directory.PNG)
+![ex_screenshot](./Image/5_ Generate Project Directory.png)
 6. 폴더 생성여부 확인 : ls
-![ex_screenshot](./Image/6_ Confirming Directory Generation.PNG)
+![ex_screenshot](./Image/6_ Confirming Directory Generation.png)
 7. 생성한 Coelacanth 폴더 이동
-![ex_screenshot](./Image/7_ Move Project Directory.PNG)
+![ex_screenshot](./Image/7_ Move Project Directory.png)
 8. 디렉토리 Git 초기화 : git init
-![ex_screenshot](./Image/8_ Git Initialization.PNG)
+![ex_screenshot](./Image/8_ Git Initialization.png)
 9. Git 원격 저장소 데이터 가져오기 : git remote add origin
 **[Warning] 9번에서는 절대 Enter치지 말고**
 아래 사진과 같이 붙여넣기만 해주시기 바랍니다.
-![ex_screenshot](./Image/9_ Synchronize Remote Storage.PNG)
+![ex_screenshot](./Image/9_ Synchronize Remote Storage.png)
 10. Coelacanth Github 주소 복사 : https://github.com/ChoGwanHee/Coelacanth
 https 사이트 경로를 복사해주시면 됩니다.
 ![ex_screenshot](./Image/10_ Coelacanth Github.PNG)
 11. 8번에서 작성한 부분 뒤에 주소 붙여넣기 : 마우스 클릭 또는 키보드 입력
-![ex_screenshot](./Image/11_ Remote Storage Registration.PNG)
+![ex_screenshot](./Image/11_ Remote Storage Registration.png)
 12. 원격 저장소 데이터 가져오기 : git pull origin master
-![ex_screenshot](./Image/12_ Client Data Uploading.PNG)
+![ex_screenshot](./Image/12_ Client Data Uploading.png)
 13. error 여부 확인 : -
-![ex_screenshot](./Image/13_ Data Synchronization Completed.PNG)
+![ex_screenshot](./Image/13_ Data Synchronization Completed.png)
 14. 데이터 확인 : ls -alrt
-![ex_screenshot](./Image/14_ Check Remote Store Data Matching.PNG)
+![ex_screenshot](./Image/14_ Check Remote Store Data Matching.png)
 
 위 과정까지 진행하면, 원격 저장소에 있는 데이터가 /c/Users/이름/Documents/Project/Coelacanth 경로에 Fork 됩니다.
 유니티를 실행해서 위 경로에 해당하는 프로젝트를 Open 해주시면 됩니다.
@@ -121,7 +121,7 @@ https 사이트 경로를 복사해주시면 됩니다.
 정상적으로 로딩이 됐을 경우, Git 원격 저장소에 업데이트가 된 데이터를 최신화 시키기 위해서는 명령어 입력을 한번 더 행동해줘야 합니다.
 
 15. 데이터 최신화 : git pull origin master
-![ex_screenshot](./Image/15_ Invoke changed data.PNG)
+![ex_screenshot](./Image/15_ Invoke changed data.png)
 
 error가 발생하는지 확인하고 유니티 프로젝트를 확인하면, 업데이트되면서 데이터가 적용된 것을 확인할 수 있습니다.
 
