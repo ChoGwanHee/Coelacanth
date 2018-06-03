@@ -18,7 +18,7 @@ ChungKang College of Cultural Industries CapstoneDesign Project Coelacanth Team 
 * 16학번 조관희
 
 ### Client Programmer
-* 14학번 차진민
+* 13학번 차진민
 
 # Graphics Designer
 ### Art Director
