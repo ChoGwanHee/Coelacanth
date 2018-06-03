@@ -39,7 +39,6 @@ typora 프로그램으로 볼 경우, 좋은 환경에서 내용을 읽어보실
 > 	여러분이 겪는 고통은 저의 행복입니다.
 
 1. https://git-scm.com/downloads Git Bash 사이트에 접속해서 플랫폼에 맞는 버전으로 다운로드 합니다.
-![Alt text](./Image/Git Bash Site.png)
 ![ex_screenshot](./Image/Git Bash Site.png)
 2. 처음 설치화면이 나타나면, 당황하지말고 **Next >** 버튼을 정확히 8번 클릭합니다.
 ![ex_screenshot](./Image/Git bash download intro.png)
