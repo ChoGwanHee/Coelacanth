@@ -14,6 +14,13 @@ public class UIStatus : MonoBehaviour {
 
     private bool infinity = true;
 
+    
+
+    public void ChangeWeapon(Firework newFirework)
+    {
+        SetWeaponImg(newFirework.uiSprite);
+    }
+
     [Obsolete()]
     public void SetColor(Color color)
     {
