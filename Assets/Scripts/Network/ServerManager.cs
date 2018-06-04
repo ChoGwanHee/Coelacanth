@@ -1,5 +1,6 @@
 ﻿using System;
 
+// http://treeofimaginary.tistory.com/96 .NET exception 버그 참고
 // Unity\Editor\Data\PlaybackEngines\windowsstandalonesupport\Variations\win32_development_mono\Data\Managed
 public class ServerManager : InstanceValue
 {
