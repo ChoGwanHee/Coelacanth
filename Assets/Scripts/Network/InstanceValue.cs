@@ -18,13 +18,22 @@ public enum PeerValue
 
 public class InstanceValue : MonoBehaviour
 {
-	// server argument
-	private Socket _tcp = null;
+    /// <summary>
+    /// server argument
+    /// </summary>
+    private Socket _tcp;
 	public Socket TCP
 	{
 		get { return _tcp; }
 		set { _tcp = value; }
 	}
+
+    private UdpClient _udp;
+    public UdpClient UDP
+    {
+        get { return _udp; }
+        set { _udp = value; }
+    }
 
 	private string _address;
 	public string Address
@@ -54,7 +63,9 @@ public class InstanceValue : MonoBehaviour
 		set { _receive = value; }
 	}
 
-	// lobby argument
+    /// <summary>
+    /// lobby argument
+    /// </summary>
 	private bool _connected;
 	public bool Connected
 	{

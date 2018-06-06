@@ -5,22 +5,27 @@ using System.Text;
 using System.Threading;
 using System.IO;
 using System;
-using FMOD;
 using UnityEngine;
-using Debug = FMOD.Debug;
 
 public class ConnectServer : ServerManager
 {
-    public ConnectServer(string _address, int _port)
+    [HideInInspector]
+    public string _sequance;
+
+    public override void SetConnect()
     {
+        base.SetConnect();
         try
         {
-            Connect(_address, _port);
+            Connect("127.0.0.1", 2020);
+            //multicastServer(UDPaddress, Port);
         }
         catch (Exception ex)
         {
             Console.WriteLine(ex.ToString());
+            throw;
         }
+        Debug.Log("서버 접속 시도");
         StartCoroutine(PacketProc());
     }
 
@@ -33,7 +38,23 @@ public class ConnectServer : ServerManager
         Instance.TCP.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.SendTimeout, 3000);
         Instance.TCP.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveTimeout, 3000);
         Instance.TCP.Connect(new IPEndPoint(serverIP, serverPort));
+        Debug.Log("Server Connect To Client (" + serverIP + ":" + serverPort + ")");
         Console.WriteLine("Server Connect To Client (" + serverIP + ":" + serverPort + ")");        
+    }
+
+    // UDP 클래스의 서버 주소 등록 함수
+    private void multicastServer(string addr, int port)
+    {
+        // 상대편 좌표를 얻기 위한 멀티캐스트 접속을 위한 초기화
+        // 블로킹모드로 상대방의 좌표값을 최신화시킨다.
+        Instance.UDP = new UdpClient();
+        int serverPort = Convert.ToInt32(port);
+        IPAddress multicastIP = IPAddress.Parse(addr);
+        IPEndPoint localEP = new IPEndPoint(IPAddress.Any, serverPort);
+        Instance.UDP.Client.Bind(localEP);
+        Instance.UDP.JoinMulticastGroup(multicastIP);
+        IPEndPoint _remote = new IPEndPoint(IPAddress.Any, 0);
+        Debug.Log("Multicast Initialize Setting ( " + addr + ":" + port + ":" + _remote + ")");
     }
 
     IEnumerator PacketProc()
@@ -93,13 +114,20 @@ public class ConnectServer : ServerManager
         switch(text[0])
         {
             case "CONNECT":
-                Send(string.Format("CONNECT"));
+                Send(string.Format("INITIALIZE"));
+                Debug.Log("Client Server Connected : " + text[0]);
                 Console.WriteLine("Client Server Connected : " + text[0]);
                 break;
+            case "INITIALIZE":
+                Debug.Log("Play to game set data : " + text[0]);
+                _sequance = text[1];
+                Send(string.Format("GAMESTART"));
+                break;
             case "DISCONNECT":
-                Console.WriteLine("Client Server Disconnected : " + text[0]);
+                Debug.Log("Client Server Disconnected : " + text[0]);
                 break;
             default:
+                Debug.Log("Data does not exist");
                 break;
         }
     }

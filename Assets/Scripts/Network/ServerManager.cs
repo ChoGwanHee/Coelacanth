@@ -12,10 +12,16 @@ public class ServerManager : InstanceValue
 		set { _server = value; }
 	}
 
-	private void Initialized()
+    private void Start()
+    {
+        SetConnect();
+    }
+
+    private void Initialized()
 	{
 		// server argument
 		Instance.TCP = null;
+        Instance.UDP = null;
 		Instance.Address = null;
 		Instance.Port = 0;
 		Instance.BufferSize = new byte[4096];
@@ -27,6 +33,7 @@ public class ServerManager : InstanceValue
 		Instance.Version = null;
 		Instance.Nickname = null;
 	}
+    public virtual void SetConnect() { }
 	public virtual void Connect(string _address, int _port) { Initialized(); }
 	public virtual void Disconnect() { }
 	public virtual void StringSplitsWordsDelimiter(string _text) { }
