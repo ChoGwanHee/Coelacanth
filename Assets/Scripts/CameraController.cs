@@ -6,7 +6,8 @@ public enum CameraMode
 {
     TotalView,
     PersonalView,
-    FrontView
+    FrontView,
+    PersonalView2
 }
 
 public class CameraController : Photon.PunBehaviour {
@@ -21,12 +22,16 @@ public class CameraController : Photon.PunBehaviour {
     public float fastMoveDistance = 5.0f;
     public float baseAddOffset = 6.0f;
 
+    public float maxDistance = 4.0f;
+
     private Vector3 moveVelocity;
     private Vector3 targetPosition = Vector3.zero;
     private Vector3 minPos = Vector3.zero;
     private Vector3 maxPos = Vector3.zero;
     private float displayedPlayerCount = 0;
     private Vector3 originPosition;
+
+
 
 
     // Zoom
@@ -64,14 +69,20 @@ public class CameraController : Photon.PunBehaviour {
             case CameraMode.TotalView:
                 CalculateMinMax();
                 CalculateCenter2();
+                AutoZoom();
+                SmoothMovement();
                 break;
             case CameraMode.PersonalView:
                 SingleCalculateMinMax();
                 FollowTarget();
+                AutoZoom();
+                SmoothMovement();
+                break;
+            case CameraMode.PersonalView2:
+                CalculateCenter3();
+                SmoothMovement();
                 break;
         }
-        AutoZoom();
-        SmoothMovement();
     }
 
     // 최소, 최대 위치 계산
@@ -182,20 +193,52 @@ public class CameraController : Photon.PunBehaviour {
         }
     }
 
+    void CalculateCenter3()
+    {
+        if (target != null)
+        {
+            Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            Physics.Raycast(mouseRay, out hit, 50.0f, LayerMask.GetMask("Ground"));
+
+            Vector3 centerPosition = Vector3.Lerp(target.position, hit.point, 0.5f);
+            Vector3 subVec = centerPosition - target.position;
+
+
+            if (subVec.sqrMagnitude < maxDistance * maxDistance)
+            {
+                targetPosition = centerPosition;
+            }
+            else
+            {
+                targetPosition = target.position + subVec.normalized * maxDistance;
+            }
+
+        }
+        else
+        {
+            targetPosition = originPosition;
+        }
+        
+    }
+
     // 부드러운 움직임
     void SmoothMovement()
     {
         // Pivot 이동
-        float subDistance = (targetPosition - transform.position).magnitude;
+        /*float subDistance = (targetPosition - transform.position).magnitude;
         transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref moveVelocity,
-            (subDistance < fastMoveDistance) ? smoothMoveTime : fastSmoothMoveTime);
+            (subDistance < fastMoveDistance) ? smoothMoveTime : fastSmoothMoveTime);*/
+        float subDistance = (targetPosition - transform.position).magnitude;
+        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref moveVelocity, fastSmoothMoveTime);
 
         // 카메라 이동(줌 인,아웃)
         //camT.localPosition = Vector3.SmoothDamp(camT.localPosition, offsetPosition, ref offsetVelocity, smoothMoveTime);
-        float distance = Mathf.SmoothDamp(camT.localPosition.z, targetZoomDistance, ref distanceVelocity, smoothZoomTime);
+        /*float distance = Mathf.SmoothDamp(camT.localPosition.z, targetZoomDistance, ref distanceVelocity, smoothZoomTime);
         Vector3 targetZoomPosition = camT.localPosition;
         targetZoomPosition.z = distance;
-        camT.localPosition = targetZoomPosition;
+        camT.localPosition = targetZoomPosition;*/
     }
 
     // 줌 길이 계산
