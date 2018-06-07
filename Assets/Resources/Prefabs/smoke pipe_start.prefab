@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4698756428909144}
   - component: {fileID: 198777720871136208}
   - component: {fileID: 199292025879530294}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: smoke_2D1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4277827410841086}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: smoke pipe_start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 4595208770528506}
   - component: {fileID: 198253500682947674}
   - component: {fileID: 199959992924826166}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: smoke_2D2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 4899304101613316}
   - component: {fileID: 198794109161032874}
   - component: {fileID: 199065869717451612}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: smoke_2D3
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4697152003455390}
   - component: {fileID: 114166890340365526}
   - component: {fileID: 114847199694290926}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Romang_Hit_fx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4645765813590052}
   - component: {fileID: 198563066807793424}
   - component: {fileID: 199742747090348718}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Romang_Hit_fx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4132692712556960}
   - component: {fileID: 198637281873957890}
   - component: {fileID: 199383469801993666}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Particle System (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 4660449152132652}
   - component: {fileID: 198329358964092466}
   - component: {fileID: 199157547836914012}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Romang_Hit_fx1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 4248598271445300}
   - component: {fileID: 198719429208189010}
   - component: {fileID: 199348265494574814}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}

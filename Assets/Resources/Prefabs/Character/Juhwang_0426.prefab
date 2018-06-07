@@ -4579,8 +4579,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stunSound: event:/SFX/Character/Sound/SFX_Stun
   walkingSound: event:/SFX/Character/Sound/SFX_Foot
+  fallingSound: 
+  stunVoice: 
   photonMove: 1
-  isControlable: 1
+  isControlable: 0
   isStun: 0
   accSpeed: 28
   maxSpeed: 6
@@ -4612,14 +4614,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adc87bdba7e0c624bb8107a38a7aa1d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerIndex: 0
   onStage: 1
   alive: 1
-  nickname: 
+  nickname: "\uC8FC\uC655"
   maxHP: 100
   curHP: 0
-  life: 6
-  fallingSound: 
 --- !u!136 &136812405621065560
 CapsuleCollider:
   m_ObjectHideFlags: 1

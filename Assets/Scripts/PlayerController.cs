@@ -28,6 +28,9 @@ public class PlayerController : Photon.PunBehaviour
     [FMODUnity.EventRef]
     public string fallingSound;
 
+    [FMODUnity.EventRef]
+    public string stunVoice;
+
     FMOD.Studio.EventInstance walkingEvent;
     FMOD.Studio.PLAYBACK_STATE walkingSoundState;
 
@@ -40,7 +43,7 @@ public class PlayerController : Photon.PunBehaviour
     /// <summary>
     /// 캐릭터의 조종 가능 여부
     /// </summary>
-    public bool isControlable = true;
+    public bool isControlable = false;
 
     /// <summary>
     /// 캐릭터의 기절 여부
@@ -262,7 +265,7 @@ public class PlayerController : Photon.PunBehaviour
     /// </summary>
     void CheckFall()
     {
-        if(transform.position.y < 3f)
+        if(transform.position.y < -2f)
         {
             photonView.RPC("Fall", PhotonTargets.All);
         }
@@ -277,9 +280,17 @@ public class PlayerController : Photon.PunBehaviour
         stat.onStage = false;
         ChangeState(PlayerAniState.Fall);
         Invoke("Respawn", respawnTime);
-        Invoke("StandBy", 2.0f);
+        //Invoke("StandBy", 3.0f);
         executer.ChangeFirework(0, 0);
+
+        
+
+        Vector3 genPos = transform.position;
+        //genPos.y = 2.51f;
+        GameObject.Instantiate(GameManagerPhoton._instance.deadEfx_ref, genPos, Quaternion.identity);
         FMODUnity.RuntimeManager.PlayOneShot(fallingSound);
+
+        StandBy();
     }
 
     /// <summary>
@@ -302,6 +313,8 @@ public class PlayerController : Photon.PunBehaviour
         rb.angularVelocity = Vector3.zero;
         rb.Sleep();
         transform.position = Vector3.zero;
+
+        
     }
 
     /// <summary>
@@ -322,7 +335,8 @@ public class PlayerController : Photon.PunBehaviour
         GameManagerPhoton._instance.RespawnPlayer(transform);
         stat.HPReset();
         stat.onStage = true;
-        isControlable = true;
+        if(GameManagerPhoton._instance.IsPlaying)
+            isControlable = true;
         rb.WakeUp();
         rb.useGravity = true;
         ChangeState(PlayerAniState.Idle);
@@ -377,6 +391,7 @@ public class PlayerController : Photon.PunBehaviour
                 stunEfx.SetActive(true);
                 isStun = true;
                 FMODUnity.RuntimeManager.PlayOneShot(stunSound);
+                FMODUnity.RuntimeManager.PlayOneShot(stunVoice);
                 Invoke("StunRecovery", stunTime);
                 break;
             case PlayerAniState.Fall:

@@ -526,6 +526,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1287868525563630
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4406645940647606}
+  m_Layer: 0
+  m_Name: Bone_weapon_2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1287940235637754
 GameObject:
   m_ObjectHideFlags: 1
@@ -628,6 +643,21 @@ GameObject:
   - component: {fileID: 4487405102055470}
   m_Layer: 0
   m_Name: R_Ribbon_F_3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1366372712048730
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4333748475462964}
+  m_Layer: 0
+  m_Name: Bone_weapon_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1807,6 +1837,7 @@ Transform:
   - {fileID: 4478692222984650}
   - {fileID: 4445943128730456}
   - {fileID: 4204293444643516}
+  - {fileID: 4333748475462964}
   m_Father: {fileID: 4204806519492444}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2084,6 +2115,20 @@ Transform:
   m_Father: {fileID: 4410970234203414}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4333748475462964
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1366372712048730}
+  m_LocalRotation: {x: 0.6736872, y: 0.22561762, z: -0.6665713, w: 0.22566546}
+  m_LocalPosition: {x: -0.09825209, y: 0.04529115, z: -0.056451425}
+  m_LocalScale: {x: 10.000028, y: 10.000003, z: 10.000027}
+  m_Children:
+  - {fileID: 4406645940647606}
+  m_Father: {fileID: 4152074434910654}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4337434963903484
 Transform:
   m_ObjectHideFlags: 1
@@ -2261,6 +2306,20 @@ Transform:
   - {fileID: 4438296947853460}
   m_Father: {fileID: 4752376761272958}
   m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4406645940647606
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1287868525563630}
+  m_LocalRotation: {x: -4.0765992e-17, y: -0.000000010943039, z: -0.0000000037252899,
+    w: 1}
+  m_LocalPosition: {x: -0.028171258, y: 0.0000000038146974, z: -0.0000000038146974}
+  m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4333748475462964}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4409685674450256
 Transform:
@@ -2641,7 +2700,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1567401845146868}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 4.9, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4684220259162828}
@@ -2955,8 +3014,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stunSound: event:/SFX/Character/Sound/SFX_Stun
   walkingSound: event:/SFX/Character/Sound/SFX_Foot
+  fallingSound: 
+  stunVoice: 
   photonMove: 1
-  isControlable: 1
+  isControlable: 0
   isStun: 0
   accSpeed: 28
   maxSpeed: 6
@@ -2975,14 +3036,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adc87bdba7e0c624bb8107a38a7aa1d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerIndex: 0
   onStage: 1
   alive: 1
-  nickname: 
+  nickname: "\uBC0D\uBC0D"
   maxHP: 100
   curHP: 0
-  life: 6
-  fallingSound: 
 --- !u!114 &114188252553660150
 MonoBehaviour:
   m_ObjectHideFlags: 1

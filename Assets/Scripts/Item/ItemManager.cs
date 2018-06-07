@@ -18,7 +18,7 @@ public class ItemManager : Photon.PunBehaviour {
 
     public Transform[] itemRegenPos;
 
-    private bool active = true;
+    public bool active = false;
 
     private void Start()
     {
@@ -186,18 +186,4 @@ public class ItemManager : Photon.PunBehaviour {
 
         return result;
     }
-
-    /*void IPunObservable.OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        Debug.Log("직렬화중");
-
-        if (stream.isWriting)
-        {
-            stream.SendNext(curBoxCount);
-        }
-        else
-        {
-            Debug.Log(stream.ReceiveNext());
-        }
-    }*/
 }

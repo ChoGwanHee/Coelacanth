@@ -44,6 +44,11 @@ public abstract class Firework : ScriptableObject {
     public int capacity;
 
     /// <summary>
+    /// 맞췄을 때 얻는 점수
+    /// </summary>
+    public int gainScore;
+
+    /// <summary>
     /// 넉백력
     /// </summary>
     public float hitForce;
@@ -73,6 +78,12 @@ public abstract class Firework : ScriptableObject {
     /// </summary>
     [FMODUnity.EventRef]
     public string startSound;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [FMODUnity.EventRef]
+    public string voiceSound;
 
 
     public abstract void Execute(FireworkExecuter executer);

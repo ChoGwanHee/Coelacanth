@@ -42,15 +42,26 @@ public class ProjectileRocket : BaseProjectile
 
             if (effectedObjects[i].CompareTag("Player"))
             {
-                effectedObjects[i].gameObject.GetPhotonView().RPC("Damage", PhotonTargets.All, damage);
+                effectedObjects[i].gameObject.GetPhotonView().RPC("Damage", PhotonTargets.All, damage, photonView.ownerId);
                 Vector3 efxPos = effectedObjects[i].GetComponent<CapsuleCollider>().ClosestPointOnBounds(transform.position);
                 PhotonNetwork.Instantiate("Prefabs/Effect_base_Hit_fx", efxPos, Quaternion.identity, 0);
+
+                // 점수 처리
+                if (effectedObjects[i].gameObject.GetPhotonView().ownerId == photonView.ownerId)
+                {
+                    // 본인 피격
+                    Debug.Log("본인 피격");
+                }
+                else
+                {
+                    PhotonNetwork.player.AddScore(gainScore);
+                }
             }
         }
 
         photonView.RPC("PlayEndSound", PhotonTargets.All, null);
 
-        PhotonNetwork.Instantiate("Prefabs/Rocket_boom_Hit_fx", transform.position, transform.rotation, 0);
+        PhotonNetwork.Instantiate("Prefabs/Rocket_explo_hit", transform.position, transform.rotation, 0);
         PhotonNetwork.Destroy(gameObject);
     }
 }

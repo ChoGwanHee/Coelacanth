@@ -33,7 +33,10 @@ public class FireworkFountain : Firework
         fountain.damage = damage;
         fountain.hitForce = hitForce;
         fountain.hitRadius = hitRadius;
+        fountain.gainScore = gainScore;
 
         executer.DecreaseAmmo();
+
+        FMODUnity.RuntimeManager.PlayOneShot(voiceSound);
     }
 }

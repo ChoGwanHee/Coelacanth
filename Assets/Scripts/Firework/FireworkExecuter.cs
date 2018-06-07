@@ -30,8 +30,12 @@ public class FireworkExecuter : Photon.PunBehaviour {
     public OnFireworkAmmoChangedDelegate onFireworkAmmoChanged;
     
 
-
     private PlayerController pc;
+    private PlayerStat stat;
+    public PlayerStat Stat
+    {
+        get { return stat; }
+    }
 
 
     private void Awake()
@@ -42,11 +46,14 @@ public class FireworkExecuter : Photon.PunBehaviour {
     private void Start()
     {
         pc = GetComponent<PlayerController>();
+        stat = GetComponent<PlayerStat>();
 
         if (photonView.isMine)
         {
             onFireworkChanged = new OnFireworkChangedDelegate(UIManager._instance.userStatus.ChangeWeapon);
-            onFireworkAmmoChanged = new OnFireworkAmmoChangedDelegate(UIManager._instance.userStatus.SetCount);
+            //onFireworkAmmoChanged = new OnFireworkAmmoChangedDelegate(UIManager._instance.userStatus.SetCount);
+            onFireworkAmmoChanged = new OnFireworkAmmoChangedDelegate(RecalAmmoUI);
+
         }
     }
 
@@ -131,11 +138,6 @@ public class FireworkExecuter : Photon.PunBehaviour {
         CheckFireworkChanged();
     }
 
-    public void ChangeAmmoUI(int num)
-    {
-        UIManager._instance.userStatus.SetCount(num);
-    }
-
     public void CheckFireworkChanged()
     {
         if (newFirework != null && replaceable) {
@@ -150,5 +152,18 @@ public class FireworkExecuter : Photon.PunBehaviour {
 
             Debug.Log(" 무기교체:" + curFirework.GetType() + "\n교체자:" + photonView.owner);
         }
+    }
+
+    private void RecalAmmoUI(int num)
+    {
+        if(num == -1)
+        {
+            UIManager._instance.gauge.SetRatio(1);
+        }
+        else
+        {
+            UIManager._instance.gauge.SetRatio((float)num / curFirework.capacity);
+        }
+        
     }
 }

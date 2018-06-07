@@ -16,12 +16,14 @@ MonoBehaviour:
   atType: 1
   damage: 20
   capacity: 5
+  gainScore: 20
   hitForce: 7
   hitRadius: 1.5
   lifetime: 1.2
   coolDown: 0.3
-  uiSprite: {fileID: 21300000, guid: 61bd1ff7dcb86554eb31a921674365c5, type: 3}
+  uiSprite: {fileID: 21300000, guid: 5cee57aefd92e7a4c9960dc4efcbe45b, type: 3}
   startSound: event:/SFX/Weapon/Shoot/SFX_ButterShot
+  voiceSound: event:/SFX/Character/Voice/Attack/Romang, Butter/SFX_Dahong_Attack
   projectileSpeed: 12.5
   rotateAngle: 180
   chargingTime: 0.5
@@ -30,3 +32,4 @@ MonoBehaviour:
   projectile_ref: {fileID: 1794594348348516, guid: 9d36b482510cfe54f843dc07199ebf77,
     type: 2}
   chargingSound: event:/SFX/Weapon/Special/SFX_ButterCharge
+  chargingVoice: event:/SFX/Character/Voice/Attack/Charge/SFX_Dahong_Charge

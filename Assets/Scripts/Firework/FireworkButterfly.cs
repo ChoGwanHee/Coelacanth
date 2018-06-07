@@ -40,6 +40,9 @@ public class FireworkButterfly : Firework
     [FMODUnity.EventRef]
     public string chargingSound;
 
+    [FMODUnity.EventRef]
+    public string chargingVoice;
+
 
     public override void Execute(FireworkExecuter executer)
     {
@@ -59,6 +62,8 @@ public class FireworkButterfly : Firework
 
         UIManager._instance.chargingUI.SetActivate(true);
         UIManager._instance.chargingUI.SetAmount(chargingAmount);
+
+        FMODUnity.RuntimeManager.PlayOneShot(chargingVoice);
 
         Debug.Log("chargingAmount:" + chargingAmount);
         while(Input.GetMouseButton(0))
@@ -96,7 +101,11 @@ public class FireworkButterfly : Firework
     {
         yield return new WaitForSeconds(0.15f);
 
-        for(int i=0; i< chargingAmount; i++)
+        PlayerStat stat = executer.GetComponent<PlayerStat>();
+
+        FMODUnity.RuntimeManager.PlayOneShot(voiceSound);
+
+        for (int i=0; i< chargingAmount; i++)
         {
             ProjectileButterfly bullet = PhotonNetwork.Instantiate("Prefabs/" + projectile_ref.name, executer.firePoint.position, executer.transform.rotation, 0).GetComponent<ProjectileButterfly>();
 
@@ -105,12 +114,12 @@ public class FireworkButterfly : Firework
             bullet.hitRadius = hitRadius;
             bullet.lifetime = lifetime;
             bullet.SetSpeed(projectileSpeed);
-            bullet.ownerId = executer.photonView.ownerId;
             bullet.rotateAngle = rotateAngle;
+            bullet.gainScore = gainScore;
 
             executer.DecreaseAmmo();
 
-            int myIndex = GameManagerPhoton._instance.playerList.IndexOf(executer.GetComponent<PlayerStat>());
+            int myIndex = GameManagerPhoton._instance.playerList.IndexOf(stat);
             bullet.SearchTarget(myIndex);
 
             if (chainFireTime > 0)

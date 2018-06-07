@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 95435913148237844}
   - component: {fileID: 114456917274004424}
   - component: {fileID: 114045024184181668}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: party_firework_boom_fx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 4798212852542424}
   - component: {fileID: 198532460038882246}
   - component: {fileID: 199314261360321346}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: party_pang (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 4009442732193252}
   - component: {fileID: 198428054446550218}
   - component: {fileID: 199308901429686754}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: party_pang (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 4623017417190690}
   - component: {fileID: 198979204525861004}
   - component: {fileID: 199676093911125018}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: party_pang (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 4639898608580968}
   - component: {fileID: 198739929902926156}
   - component: {fileID: 199540316019748558}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: party_star
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 4177777308416422}
   - component: {fileID: 198089465414933686}
   - component: {fileID: 199252184074225642}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: line1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 4234309135215144}
   - component: {fileID: 198034151232640330}
   - component: {fileID: 199321616218498404}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 4256426729003738}
   - component: {fileID: 198874254135342432}
   - component: {fileID: 199923931311865192}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: party_pang (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,7 +158,7 @@ GameObject:
   - component: {fileID: 4219877484050200}
   - component: {fileID: 198356511982874040}
   - component: {fileID: 199272890078194392}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: line1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

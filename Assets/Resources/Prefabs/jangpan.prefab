@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4733379669189546}
   - component: {fileID: 95053915924147626}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: jangpan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 4014585862717088}
   - component: {fileID: 198098139329525916}
   - component: {fileID: 199092442837408634}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: B_Main_jangpan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   - component: {fileID: 4381005012619984}
   - component: {fileID: 198624363392562566}
   - component: {fileID: 199747658919444086}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Main_jangpan
   m_TagString: Untagged
   m_Icon: {fileID: 0}

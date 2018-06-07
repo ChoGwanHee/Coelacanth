@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4736511098089646}
   - component: {fileID: 198318755966155464}
   - component: {fileID: 199223429770687224}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: smoke_pipe (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4096693085890514}
   - component: {fileID: 198858216586745542}
   - component: {fileID: 199019562176085790}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: smoke_pipe (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4459812075003126}
   - component: {fileID: 198525036853276474}
   - component: {fileID: 199831386037393902}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: smoke_pipe (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 4587115390249880}
   - component: {fileID: 198118181147061142}
   - component: {fileID: 199376109986145998}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: smoke_pipe
   m_TagString: Untagged
   m_Icon: {fileID: 0}

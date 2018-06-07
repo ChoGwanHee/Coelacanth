@@ -7,11 +7,6 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 public class PlayerStat : Photon.PunBehaviour
 {
     /// <summary>
-    /// 플레이어의 고유 인덱스
-    /// </summary>
-    public int playerIndex;
-
-    /// <summary>
     /// 플레이어가 스테이지 상에서 살아있는지 여부
     /// </summary>
     public bool onStage = true;
@@ -36,6 +31,62 @@ public class PlayerStat : Photon.PunBehaviour
     /// </summary>
     public int curHP;
 
+    /// <summary>
+    /// 플레이어의 점수
+    /// </summary>
+    private int score;
+    public int Score
+    {
+        get { return score; }
+        set
+        {
+            if(value < 0)
+            {
+                score = 0;
+            }
+            else
+            {
+                score = value;
+            }
+            if(onScoreChanged != null)
+                onScoreChanged(score);
+        }
+    }
+
+    /// <summary>
+    /// 킬 판정 여부
+    /// </summary>
+    private bool killApproval;
+
+    /// <summary>
+    /// 이 플레이어를 마지막으로 공격한 플레이어의 인덱스
+    /// </summary>
+    private int lastAttacker = -1;
+    public int LastAttacker
+    {
+        get { return lastAttacker; }
+        set { lastAttacker = value; }
+    }
+
+    /// <summary>
+    /// 마지막 피격으로부터 지난 시간
+    /// </summary>
+    private float lastHitElapsedTime;
+
+    public bool IsControlable
+    {
+        get { return pc.isControlable; }
+        set { pc.isControlable = value; }
+    }
+
+
+    public delegate void OnScoreChangedDelegate(int newScore);
+
+    /// <summary>
+    /// 플레이어의 점수가 바뀌었을 때 호출되는 델리게이트
+    /// </summary>
+    public OnScoreChangedDelegate onScoreChanged;
+
     
     private PlayerController pc;
 
@@ -52,13 +103,42 @@ public class PlayerStat : Photon.PunBehaviour
 
         if (GetComponent<PlayerDummy>()) return;
 
-        Hashtable playerProperties = photonView.owner.CustomProperties;
-        playerIndex = (int)playerProperties["PlayerIndex"];
-
         if (photonView.isMine)
         {
             UIManager._instance.chargingUI.target = transform;
             GameManagerPhoton._instance.cameraController.SetTarget(transform);
+
+            UIManager._instance.scoreBoard.cells[0].SetPlayerStat(this);
+        }
+        else
+        {
+            for(int i=0; i<UIManager._instance.scoreBoard.cells.Length; i++)
+            {
+                if(UIManager._instance.scoreBoard.cells[i].IsNotRegist)
+                {
+                    UIManager._instance.scoreBoard.cells[i].SetPlayerStat(this);
+                    break;
+                }
+            }
+        }
+
+        if (PhotonNetwork.isMasterClient)
+        {
+            GameManagerPhoton._instance.CheckFull();
+        }
+    }
+
+    private void Update()
+    {
+        if (!photonView.isMine) return;
+
+        if(killApproval)
+        {
+            lastHitElapsedTime += Time.deltaTime;
+            if(lastHitElapsedTime >= 10.0f)
+            {
+                killApproval = false;
+            }
         }
     }
 
@@ -72,7 +152,7 @@ public class PlayerStat : Photon.PunBehaviour
     /// </summary>
     /// <param name="dmg">피해량</param>
     [PunRPC]
-    public void Damage(int dmg)
+    public void Damage(int dmg, int attackerIndex)
     {
         if (!onStage || pc.isStun) return;
 
@@ -86,6 +166,9 @@ public class PlayerStat : Photon.PunBehaviour
         {
             curHP -= dmg;
         }
+
+        if(attackerIndex != -1)
+            SetAttacker(attackerIndex);
     }
 
     /// <summary>
@@ -95,4 +178,16 @@ public class PlayerStat : Photon.PunBehaviour
     {
         curHP = maxHP;
     }
+
+    /// <summary>
+    /// 공격자를 설정합니다.
+    /// </summary>
+    /// <param name="attackerIndex">공격자의 인덱스</param>
+    public void SetAttacker(int attackerIndex)
+    {
+        lastAttacker = attackerIndex;
+        lastHitElapsedTime = 0;
+        killApproval = true;
+    }
+
 }

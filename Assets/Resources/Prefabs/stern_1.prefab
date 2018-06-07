@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4531621967934540}
   - component: {fileID: 198046011678270748}
   - component: {fileID: 199741424491466960}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: s_star_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4057076969780018}
   - component: {fileID: 198582077200397492}
   - component: {fileID: 199847043459074204}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: stern_main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4120037502357602}
   - component: {fileID: 198266544903486290}
   - component: {fileID: 199518919058931664}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: s_star
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 4048775636508274}
   - component: {fileID: 198218423512573560}
   - component: {fileID: 199892471591512184}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: M_star
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4427627265663682}
   - component: {fileID: 95660208548917948}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: stern_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 4558600234209836}
   - component: {fileID: 198752918448443674}
   - component: {fileID: 199768165872069610}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Main_star
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 4073311878049424}
   - component: {fileID: 198375249873417618}
   - component: {fileID: 199103792749275580}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: stern_black
   m_TagString: Untagged
   m_Icon: {fileID: 0}

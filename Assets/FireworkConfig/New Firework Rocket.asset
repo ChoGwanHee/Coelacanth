@@ -16,12 +16,14 @@ MonoBehaviour:
   atType: 1
   damage: 50
   capacity: 5
+  gainScore: 50
   hitForce: 10
   hitRadius: 2.5
   lifetime: 3
   coolDown: 1
-  uiSprite: {fileID: 21300000, guid: dd06cc927e7781548afb508c439efb5e, type: 3}
+  uiSprite: {fileID: 21300000, guid: 377d429f928b0734f9c2e515f24bb7e7, type: 3}
   startSound: event:/SFX/Weapon/Shoot/SFX_RocketShot
+  voiceSound: event:/SFX/Character/Voice/Attack/Rocket/SFX_Dahong_Rocket
   projectileSpeed: 13
   projectile_ref: {fileID: 1111972890408646, guid: f8e87fb34af16a245b71210814c096c2,
     type: 2}
