@@ -1659,6 +1659,11 @@ namespace FMOD
             }
         }
 
+        public static void Log(string v)
+        {
+            throw new NotImplementedException();
+        }
+
         #region importfunctions
         [DllImport(VERSION.dll)]
         private static extern RESULT FMOD5_Debug_Initialize(DEBUG_FLAGS flags, DEBUG_MODE mode, DEBUG_CALLBACK callback, byte[] filename);

@@ -4,7 +4,7 @@ using System.IO;
 
 public class LobbyManager : InstanceValue
 {
-    public GameObject PhotonLobby;
+    public GameObject PhotonLobby, NetworkManager;
 
     private static LobbyManager _lobby;
     public static LobbyManager Lobby
@@ -16,13 +16,15 @@ public class LobbyManager : InstanceValue
     void Start()
     {
         PhotonLobby.SetActive(false);
+        NetworkManager.SetActive(false);
         Lobby = GetComponent<LobbyManager>();
         Debug.Log("Lobby Object Disabled");
     }
 
     public void AvailablePhoton()
     {
-        PhotonLobby.SetActive(true);
         Debug.Log("Lobby object Availabled");
+        NetworkManager.SetActive(true);
+        //PhotonLobby.SetActive(true);
     }
 }
