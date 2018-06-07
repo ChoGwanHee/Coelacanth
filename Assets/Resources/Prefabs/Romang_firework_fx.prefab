@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114480670357444592}
   - component: {fileID: 114277689303823304}
   - component: {fileID: 114500033247235978}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Romang_firework_fx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 4062749800520176}
   - component: {fileID: 198761953673945940}
   - component: {fileID: 199067001570771594}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Romang_firework (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 4465544931476526}
   - component: {fileID: 198852570928366884}
   - component: {fileID: 199568459743697920}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Romang_firework (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 4081072274585042}
   - component: {fileID: 198502162968122530}
   - component: {fileID: 199286340349415228}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Romang_firework_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -234,6 +234,7 @@ MonoBehaviour:
   hitRadius: 0
   lifetime: 0
   speed: 0
+  gainScore: 0
   duringSound: .
   endSound: event:/SFX/Weapon/Hit/SFX_RomanHit
 --- !u!114 &114480670357444592

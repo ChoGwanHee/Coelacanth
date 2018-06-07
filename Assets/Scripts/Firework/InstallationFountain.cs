@@ -49,6 +49,8 @@ public class InstallationFountain : BaseInstallation
     [FMODUnity.EventRef]
     public string duringSound;
 
+    
+
     private ParticleSystem particle;
     private LayerMask dynamicObjMask;
 
@@ -56,7 +58,7 @@ public class InstallationFountain : BaseInstallation
     private void Start()
     {
         // 게임매니저에서 글로벌 틱 시간을 가져옴
-        tickTime = GameManagerPhoton._instance.gameTick;
+        tickTime = GameManagerPhoton._instance.GameTick;
         particle = GetComponentInChildren<ParticleSystem>();
         dynamicObjMask = LayerMask.GetMask("DynamicObject");
     }
@@ -107,11 +109,23 @@ public class InstallationFountain : BaseInstallation
 
             if (effectedObjects[i].CompareTag("Player"))
             {
-                effectedObjects[i].gameObject.GetPhotonView().RPC("Damage", PhotonTargets.All, damage);
+                effectedObjects[i].gameObject.GetPhotonView().RPC("Damage", PhotonTargets.All, damage, photonView.ownerId);
                 Vector3 centerPos = transform.position;
                 centerPos.y += 0.7f;
                 Vector3 efxPos = effectedObjects[i].GetComponent<CapsuleCollider>().ClosestPointOnBounds(centerPos);
                 PhotonNetwork.Instantiate("Prefabs/Effect_base_Hit_fx", efxPos, Quaternion.identity, 0);
+
+                // 점수 처리
+                if(effectedObjects[i].gameObject.GetPhotonView().ownerId == photonView.ownerId)
+                {
+                    // 본인 피격
+                    Debug.Log("본인 피격");
+                }
+                else
+                {
+                    PhotonNetwork.player.AddScore(gainScore);
+                }
+                
             }
         }
     }

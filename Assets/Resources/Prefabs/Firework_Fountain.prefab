@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4093214418477926}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: fountain_firework_fx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   - component: {fileID: 4303903647561248}
   - component: {fileID: 198345265663679840}
   - component: {fileID: 199964417376391126}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Glow_q
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 4045485033666890}
   - component: {fileID: 33466092290154296}
   - component: {fileID: 23702849246681888}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: B1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 4764774048778258}
   - component: {fileID: 198849674495003224}
   - component: {fileID: 199619398515010850}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 4430290764272332}
   - component: {fileID: 198485353417757270}
   - component: {fileID: 199279943261776904}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: particle_under_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 4037114412868836}
   - component: {fileID: 198326750278669906}
   - component: {fileID: 199770498940361762}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Particle System (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 4636441849196442}
   - component: {fileID: 198932862186911948}
   - component: {fileID: 199292905821130558}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: particle_under_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 4895896609310564}
   - component: {fileID: 198989364643294196}
   - component: {fileID: 199489770418124522}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: waterfull_firework (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: 4147009304806700}
   - component: {fileID: 198241861434640618}
   - component: {fileID: 199240690025182106}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: particle_under_3 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,7 +172,7 @@ GameObject:
   - component: {fileID: 4849487222903874}
   - component: {fileID: 198700792009502982}
   - component: {fileID: 199721414339187760}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 4961627181678244}
   - component: {fileID: 198300148751974694}
   - component: {fileID: 199022249637720610}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: waterfull_firework
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -206,7 +206,7 @@ GameObject:
   - component: {fileID: 4123833444505760}
   - component: {fileID: 114895792107036656}
   - component: {fileID: 114230349459028244}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Firework_Fountain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -459,11 +459,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifetime: 0
+  gainScore: 0
   damage: 0
   hitForce: 0
   hitRadius: 0
   enableTime: 1.2
-  duringSound: t:/SFX/Weapon/Shoot/SFX_AutoShotShot
+  duringSound: event:/SFX/Weapon/Shoot/SFX_FountainShot
 --- !u!198 &198241861434640618
 ParticleSystem:
   m_ObjectHideFlags: 1

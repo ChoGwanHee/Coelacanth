@@ -17,14 +17,25 @@ public class FireworkExecuter : Photon.PunBehaviour {
     public bool charging = false;           // 충전 중인지 여부
 
     public delegate void OnFireworkChangedDelegate(Firework newFirework);
+    public delegate void OnFireworkAmmoChangedDelegate(int num);
 
     /// <summary>
     /// 폭죽이 바뀌었을 때 호출되는 델리게이트 입니다.
     /// </summary>
     public OnFireworkChangedDelegate onFireworkChanged;
 
+    /// <summary>
+    /// 남은 탄약수가 바뀌었을 때 호출되는 델리게이트 입니다.
+    /// </summary>
+    public OnFireworkAmmoChangedDelegate onFireworkAmmoChanged;
+    
 
     private PlayerController pc;
+    private PlayerStat stat;
+    public PlayerStat Stat
+    {
+        get { return stat; }
+    }
 
 
     private void Awake()
@@ -35,6 +46,15 @@ public class FireworkExecuter : Photon.PunBehaviour {
     private void Start()
     {
         pc = GetComponent<PlayerController>();
+        stat = GetComponent<PlayerStat>();
+
+        if (photonView.isMine)
+        {
+            onFireworkChanged = new OnFireworkChangedDelegate(UIManager._instance.userStatus.ChangeWeapon);
+            //onFireworkAmmoChanged = new OnFireworkAmmoChangedDelegate(UIManager._instance.userStatus.SetCount);
+            onFireworkAmmoChanged = new OnFireworkAmmoChangedDelegate(RecalAmmoUI);
+
+        }
     }
 
     private void Update()
@@ -58,6 +78,8 @@ public class FireworkExecuter : Photon.PunBehaviour {
     public void Initialize()
     {
         ammo = curFirework.capacity;
+        if (onFireworkAmmoChanged != null)
+            onFireworkAmmoChanged(ammo);
     }
 
     public void Trigger()
@@ -91,7 +113,8 @@ public class FireworkExecuter : Photon.PunBehaviour {
     public void DecreaseAmmo()
     {
         ammo--;
-        ChangeAmmoUI(ammo);
+        if (onFireworkAmmoChanged != null)
+            onFireworkAmmoChanged(ammo);
     }
 
     public void CheckRunOutAmmo()
@@ -115,25 +138,32 @@ public class FireworkExecuter : Photon.PunBehaviour {
         CheckFireworkChanged();
     }
 
-    public void ChangeAmmoUI(int num)
-    {
-        UIManager._instance.userStatus.SetCount(num);
-    }
-
     public void CheckFireworkChanged()
     {
         if (newFirework != null && replaceable) {
             curFirework = newFirework;
             newFirework = null;
             Initialize();
-            onFireworkChanged(curFirework);
-            if (photonView.isMine)
-            {
-                UIManager._instance.userStatus.SetWeaponImg(curFirework.uiSprite);
-                ChangeAmmoUI(ammo);
-            }
+
+            if(onFireworkChanged != null)
+                onFireworkChanged(curFirework);
+            if (onFireworkAmmoChanged != null)
+                onFireworkAmmoChanged(ammo);
 
             Debug.Log(" 무기교체:" + curFirework.GetType() + "\n교체자:" + photonView.owner);
         }
+    }
+
+    private void RecalAmmoUI(int num)
+    {
+        if(num == -1)
+        {
+            UIManager._instance.gauge.SetRatio(1);
+        }
+        else
+        {
+            UIManager._instance.gauge.SetRatio((float)num / curFirework.capacity);
+        }
+        
     }
 }

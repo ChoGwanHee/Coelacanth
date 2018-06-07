@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4625205883399692}
   - component: {fileID: 198691554408815588}
   - component: {fileID: 199853161430597268}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: star_sub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4636136348520126}
   - component: {fileID: 108383761343008310}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   - component: {fileID: 4372945663166548}
   - component: {fileID: 198630917613077290}
   - component: {fileID: 199434502754641084}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: pang
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 114638005783406624}
   - component: {fileID: 114327103225136890}
   - component: {fileID: 114547234380808122}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Navi_start_fx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 4733891204890156}
   - component: {fileID: 198585515617033398}
   - component: {fileID: 199382187713649630}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: nabi_start_fx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -235,11 +235,11 @@ MonoBehaviour:
   hitRadius: 0
   lifetime: 0
   speed: 0
+  gainScore: 0
   duringSound: 
   endSound: event:/SFX/Weapon/Hit/SFX_ButterHit
   target: {fileID: 0}
   rotateAngle: 0
-  ownerId: 0
 --- !u!114 &114327103225136890
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -28,7 +28,7 @@ public class MapManager : Photon.PunBehaviour {
 
     private void Start()
     {
-        StartMapFacilities();
+        //StartMapFacilities();
     }
 
     public void StartMapFacilities()

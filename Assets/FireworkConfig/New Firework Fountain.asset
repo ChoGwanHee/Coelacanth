@@ -16,11 +16,13 @@ MonoBehaviour:
   atType: 2
   damage: 10
   capacity: 3
+  gainScore: 20
   hitForce: 7
   hitRadius: 2.13
   lifetime: 10
   coolDown: 0.5
-  uiSprite: {fileID: 21300000, guid: b6c718ae085b4ff4a83e4568d00a6372, type: 3}
+  uiSprite: {fileID: 21300000, guid: 9ba85bac439e98a449d236c52b3e7964, type: 3}
   startSound: 
+  voiceSound: event:/SFX/Character/Voice/Attack/Fountain/SFX_Dahong_Fountain
   fountain_ref: {fileID: 1978563458120296, guid: 127bfdf1b50d1f44794a971b2f0d5198,
     type: 2}

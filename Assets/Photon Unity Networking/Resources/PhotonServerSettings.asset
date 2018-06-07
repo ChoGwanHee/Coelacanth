@@ -63,4 +63,7 @@ MonoBehaviour:
   - RespawnObject
   - StartWaterBlast
   - PlayEndSound
+  - GameStart
+  - GameStarting
+  - RunGameEvent
   DisableAutoOpenWizard: 1

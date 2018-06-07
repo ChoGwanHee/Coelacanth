@@ -45,7 +45,7 @@
 
 
 			if (NdotL > 0.8) {
-				NdotL = 0.8;
+				NdotL = 0.9;
 			}
 
 			/*else if (NdotL > 0.8) {
@@ -55,7 +55,7 @@
 				NdotL = 1;
 			}
 			else {
-				NdotL = 0.4;
+				NdotL = 0.6;
 			}
 			
 			float4 c;

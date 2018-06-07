@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4625297035118330}
   - component: {fileID: 198797731365240130}
   - component: {fileID: 199330395712801480}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Rocket_start(2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 114379953359454176}
   - component: {fileID: 114449311384962502}
   - component: {fileID: 95880695882789156}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: ProjectileRocket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60,7 +60,7 @@ GameObject:
   - component: {fileID: 4256049449091824}
   - component: {fileID: 198735947245430140}
   - component: {fileID: 199965557697780032}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Rocket_start (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77,7 +77,7 @@ GameObject:
   - component: {fileID: 4775841006927266}
   - component: {fileID: 198728157272614692}
   - component: {fileID: 199511236765547840}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Rocket_start222
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4175973036464674}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Rocket_start_fx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 4198455514026372}
   - component: {fileID: 198871320915329742}
   - component: {fileID: 199325830333004976}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Rocket_start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 4863892381231456}
   - component: {fileID: 198809610616495614}
   - component: {fileID: 199835821323263590}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Rocket_start333
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,7 +143,7 @@ GameObject:
   - component: {fileID: 4568669787740634}
   - component: {fileID: 198615949244808596}
   - component: {fileID: 199791512314852698}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Rocket_start (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: 4434033535457894}
   - component: {fileID: 198179901293323006}
   - component: {fileID: 199700833690725030}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 4498480436171518}
   - component: {fileID: 198208487277860126}
   - component: {fileID: 199411592737957694}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Rocket_start(1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,7 +194,7 @@ GameObject:
   - component: {fileID: 4989521090235464}
   - component: {fileID: 198104368058848634}
   - component: {fileID: 199837032167577228}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -211,7 +211,7 @@ GameObject:
   - component: {fileID: 4399702946954780}
   - component: {fileID: 198922781654632052}
   - component: {fileID: 199612763080192576}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Rocket_start 444
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -228,7 +228,7 @@ GameObject:
   - component: {fileID: 4616314244129194}
   - component: {fileID: 198226332658707090}
   - component: {fileID: 199705508229678482}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Rocket_start111
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -245,7 +245,7 @@ GameObject:
   - component: {fileID: 4682955484304858}
   - component: {fileID: 198876694877146718}
   - component: {fileID: 199711255918783228}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -262,7 +262,7 @@ GameObject:
   - component: {fileID: 4024347905723424}
   - component: {fileID: 198084668875876790}
   - component: {fileID: 199645613001098718}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: start (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -279,7 +279,7 @@ GameObject:
   - component: {fileID: 4257718620730850}
   - component: {fileID: 33234411018652652}
   - component: {fileID: 23984822004044084}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: B5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -703,6 +703,7 @@ MonoBehaviour:
   hitRadius: 0
   lifetime: 0
   speed: 0
+  gainScore: 0
   duringSound: .
   endSound: event:/SFX/Weapon/Hit/SFX_RocketHit
 --- !u!135 &135218553652072910

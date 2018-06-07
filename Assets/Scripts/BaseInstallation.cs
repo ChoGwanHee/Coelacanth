@@ -16,6 +16,12 @@ public abstract class BaseInstallation : Photon.PunBehaviour
     /// </summary>
     protected float elapsedTime = 0;
 
+    /// <summary>
+    /// 얻는 점수
+    /// </summary>
+    public int gainScore;
+
+
     protected virtual void Update()
     {
         elapsedTime += Time.deltaTime;

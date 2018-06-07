@@ -36,6 +36,12 @@ public abstract class BaseProjectile : Photon.PunBehaviour {
     public float speed;
 
     /// <summary>
+    /// 얻는 점수
+    /// </summary>
+    [HideInInspector]
+    public int gainScore;
+
+    /// <summary>
     /// 날아가는 도중 재생되는 사운드
     /// </summary>
     [FMODUnity.EventRef]
@@ -46,6 +52,7 @@ public abstract class BaseProjectile : Photon.PunBehaviour {
     /// </summary>
     [FMODUnity.EventRef]
     public string endSound;
+
 
     protected Rigidbody rb;
     protected int dynamicObjMask;

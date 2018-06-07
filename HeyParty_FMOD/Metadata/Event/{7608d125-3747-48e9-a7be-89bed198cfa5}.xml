@@ -2,13 +2,13 @@
 <objects serializationModel="Studio.01.10.00">
     <object class="Event" id="{7608d125-3747-48e9-a7be-89bed198cfa5}">
         <property name="name">
-            <value>SFX_C2_Attack_Voice</value>
+            <value>SFX_MinMin_Attack</value>
         </property>
         <property name="outputFormat">
             <value>2</value>
         </property>
         <relationship name="folder">
-            <destination>{5f47001c-d222-41dd-b49c-b8d824b349be}</destination>
+            <destination>{f45dfc00-9f47-4639-9b51-bb16eceba7f8}</destination>
         </relationship>
         <relationship name="mixer">
             <destination>{e9fd44b2-c97d-4628-b491-a45633877c13}</destination>
@@ -30,6 +30,9 @@
         </relationship>
         <relationship name="timeline">
             <destination>{f2505dc9-ca2a-486c-8c1e-887084fe20ed}</destination>
+        </relationship>
+        <relationship name="banks">
+            <destination>{5cf7a617-0dc0-4100-bbb6-73e265bc97d2}</destination>
         </relationship>
     </object>
     <object class="EventMixer" id="{e9fd44b2-c97d-4628-b491-a45633877c13}">

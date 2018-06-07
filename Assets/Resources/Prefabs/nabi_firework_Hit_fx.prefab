@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4542676086923682}
   - component: {fileID: 198759887605316424}
   - component: {fileID: 199881177145001342}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: particle_spread (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 114725563731794354}
   - component: {fileID: 114881507037250584}
   - component: {fileID: 114361894979022630}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: nabi_firework_Hit_fx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 4745364752837970}
   - component: {fileID: 198567958674596158}
   - component: {fileID: 199515780500279776}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: SubEmitter2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 4688325393346046}
   - component: {fileID: 198729191756640414}
   - component: {fileID: 199416281679367148}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: particle_spread
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 4960578553122762}
   - component: {fileID: 198832730697436608}
   - component: {fileID: 199559387206257658}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: star_spread
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 4911811220896084}
   - component: {fileID: 198914946502873266}
   - component: {fileID: 199382872374990374}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 4080715602231990}
   - component: {fileID: 198389687444909732}
   - component: {fileID: 199707890976686066}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: glow (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 4161839565182572}
   - component: {fileID: 198983718861281208}
   - component: {fileID: 199675627882842160}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: particle_pang_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,7 +158,7 @@ GameObject:
   - component: {fileID: 4410290620787304}
   - component: {fileID: 198764060721760558}
   - component: {fileID: 199825136263743790}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: startin_particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

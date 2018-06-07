@@ -20,3 +20,15 @@ public enum FireworkType
     Party,
     Sparkling
 }
+
+public enum GameState {
+    Wait,
+    Playing,
+    Result
+}
+
+public enum GameEvent
+{
+    GameStart,
+    GameStop
+}

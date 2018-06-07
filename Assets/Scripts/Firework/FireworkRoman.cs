@@ -26,7 +26,10 @@ public class FireworkRoman : Firework
         bullet.hitRadius = hitRadius;
         bullet.lifetime = lifetime;
         bullet.SetSpeed(projectileSpeed);
+        bullet.gainScore = gainScore;
 
         executer.DecreaseAmmo();
+
+        FMODUnity.RuntimeManager.PlayOneShot(voiceSound);
     }
 }

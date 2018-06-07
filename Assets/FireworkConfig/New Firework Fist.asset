@@ -16,6 +16,7 @@ MonoBehaviour:
   atType: 0
   damage: 15
   capacity: -1
+  gainScore: 10
   hitForce: 7
   hitRadius: 0.6
   lifetime: 0

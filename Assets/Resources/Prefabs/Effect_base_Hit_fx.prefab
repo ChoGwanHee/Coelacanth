@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4671291698433676}
   - component: {fileID: 198209848512269190}
   - component: {fileID: 199010095839593468}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: main_hit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4315385043100368}
   - component: {fileID: 114838161107023688}
   - component: {fileID: 114801249952371374}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Effect_base_Hit_fx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4255392139682980}
   - component: {fileID: 198953474823903286}
   - component: {fileID: 199328971316634716}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: main_light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 4119832831184354}
   - component: {fileID: 198002581542405994}
   - component: {fileID: 199038690541877526}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Effect_Hit
   m_TagString: Untagged
   m_Icon: {fileID: 0}

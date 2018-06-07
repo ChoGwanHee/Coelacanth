@@ -35,7 +35,6 @@ public class WaterCannonScript : Photon.PunBehaviour {
     /// <summary>
     /// 물대포 발사
     /// </summary>
-    /// <returns></returns>
     public IEnumerator Splash()
     {
         animator.SetBool("Blasting", true);
@@ -80,7 +79,7 @@ public class WaterCannonScript : Photon.PunBehaviour {
         Vector3 centerPos = transform.TransformPoint(new Vector3(0f, 0f, 10f));
         Vector3 extents = new Vector3(10.0f, 0.65f, 0.65f);
         Vector3 direction;
-        float tickTime = GameManagerPhoton._instance.gameTick;
+        float tickTime = GameManagerPhoton._instance.GameTick;
         float tickElapsedTime = tickTime;
 
         while (elapsedTime <= duration)

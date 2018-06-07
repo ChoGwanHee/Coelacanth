@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
+[RequireComponent(typeof(PhotonView))]
 /// <summary>
 /// 포톤을 사용한 게임 매니저 클래스
 /// </summary>
@@ -12,10 +14,15 @@ public class GameManagerPhoton : Photon.PunBehaviour
     /// </summary>
     public static GameManagerPhoton _instance;
 
+
     /// <summary>
     /// 글로벌 판정 간격
     /// </summary>
-    public float gameTick = 0.1f;
+    private float gameTick = 0.1f;
+    public float GameTick
+    {
+        get { return gameTick; }
+    }
     
     /// <summary>
     /// 플레이어가 생성되는 위치 배열
@@ -27,10 +34,42 @@ public class GameManagerPhoton : Photon.PunBehaviour
     /// </summary>
     public Texture2D cursorTex;
 
+    /// <summary>
+    /// 현재 게임의 상태
+    /// </summary>
+    public GameState currentState = GameState.Wait;
 
-    public float gameElapsedTime;
+    /// <summary>
+    /// 게임이 진행 중인지 여부
+    /// </summary>
+    private bool isPlaying;
+    public bool IsPlaying
+    {
+        get { return isPlaying; }
+    }
 
-    
+    /// <summary>
+    /// 게임이 중단 중인지 여부
+    /// </summary>
+    private bool isStopping = false;
+
+    /// <summary>
+    /// 총 게임 진행 시간
+    /// </summary>
+    public float playTime;
+
+    /// <summary>
+    /// 남은 게임 시간
+    /// </summary>
+    private float remainGameTime;
+    public float RemainGameTime
+    {
+        get { return remainGameTime; }
+    }
+
+
+    public int startPlayerCount = 4;
+
 
     [FMODUnity.EventRef]
     public string BGM;
@@ -40,6 +79,12 @@ public class GameManagerPhoton : Photon.PunBehaviour
     /// </summary>
     [HideInInspector]
     public List<PlayerStat> playerList = new List<PlayerStat>();
+
+
+    /// <summary>
+    /// 사망 이펙트
+    /// </summary>
+    public GameObject deadEfx_ref;
 
 
     [HideInInspector]
@@ -66,7 +111,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
         cameraController = Camera.main.transform.parent.parent.GetComponent<CameraController>();
         itemManager = GetComponent<ItemManager>();
 
-        Cursor.SetCursor(cursorTex, new Vector2(32, 32), CursorMode.ForceSoftware);
+        Cursor.SetCursor(cursorTex, new Vector2(44, 44), CursorMode.ForceSoftware);
 
         PhotonNetwork.isMessageQueueRunning = true;
 
@@ -75,6 +120,18 @@ public class GameManagerPhoton : Photon.PunBehaviour
         CreatePlayer(playerIndex, playerGenPos[playerIndex].position);
 
         //FMODUnity.RuntimeManager.PlayOneShot(BGM);
+    }
+
+    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.isWriting)
+        {
+            stream.SendNext(remainGameTime);
+        }
+        else
+        {
+            this.remainGameTime = (float)stream.ReceiveNext();
+        }
     }
 
     public override void OnPhotonPlayerConnected(PhotonPlayer player)
@@ -118,7 +175,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
                 prefabName = "MingMing_0516";
                 break;
             case 2:
-                prefabName = "ShoSho_0530";
+                prefabName = "ShoSho_0605_2";
                 break;
             case 3:
                 prefabName = "Juhwang_0426";
@@ -143,6 +200,115 @@ public class GameManagerPhoton : Photon.PunBehaviour
         pos.y += 0.5f;
 
         playerTF.position = pos;
+    }
+
+    /// <summary>
+    /// 4명의 플레이어들이 모두 들어왔는지 확인합니다.
+    /// </summary>
+    public void CheckFull()
+    {
+        if(PhotonNetwork.room.PlayerCount >= startPlayerCount)
+        {
+            // 게임 시작
+            photonView.RPC("RunGameEvent", PhotonTargets.All, (int)GameEvent.GameStart);
+        }
+    }
+
+    private void EnterState(GameState state)
+    {
+        switch(state)
+        {
+            case GameState.Wait:
+                break;
+            case GameState.Playing:
+                if (PhotonNetwork.isMasterClient)
+                {
+                    MapManager._instance.StartMapFacilities();
+                    itemManager.active = true;
+                    remainGameTime = playTime;
+                    StartCoroutine(GameLoop());
+                }
+                isPlaying = true;
+                SetPlayerActive(true);
+
+                break;
+            case GameState.Result:
+                isPlaying = false;
+                SetPlayerActive(false);
+                break;
+        }
+    }
+
+    public void ChangeState(GameState newState)
+    {
+        currentState = newState;
+        EnterState(newState);
+    }
+
+    [PunRPC]
+    public void RunGameEvent(int eventNum)
+    {
+        switch(eventNum)
+        {
+            case (int)GameEvent.GameStart:
+                StartCoroutine(GameCountProcess(true));
+                break;
+            case (int)GameEvent.GameStop:
+                StartCoroutine(GameCountProcess(false));
+                break;
+        }
+        
+    }
+
+    private IEnumerator GameCountProcess(bool isStart)
+    {
+        UIManager._instance.counterAnim.gameObject.SetActive(true);
+        UIManager._instance.counterAnim.SetInteger("Count", 3);
+        yield return new WaitForSeconds(1.0f);
+        UIManager._instance.counterAnim.SetInteger("Count", 2);
+        yield return new WaitForSeconds(1.0f);
+        UIManager._instance.counterAnim.SetInteger("Count", 1);
+        yield return new WaitForSeconds(1.0f);
+        UIManager._instance.counterAnim.gameObject.SetActive(false);
+
+        if (isStart)
+        {
+            ChangeState(GameState.Playing);
+        }
+        else
+        {
+            ChangeState(GameState.Result);
+        }
+        
+    }
+
+    private void SetPlayerActive(bool active)
+    {
+        for (int i = 0; i < playerList.Count; i++)
+        {
+            if (playerList[i].photonView.isMine)
+            {
+                playerList[i].IsControlable = active;
+                break;
+            }
+        }
+    }
+
+
+    private IEnumerator GameLoop()
+    {
+        while (remainGameTime > 0)
+        {
+            remainGameTime -= Time.deltaTime;
+
+            if (!isStopping && remainGameTime <= 4)
+            {
+                isStopping = true;
+                photonView.RPC("RunGameEvent", PhotonTargets.All, (int)GameEvent.GameStop);
+            }
+            yield return null;
+        }
+
     }
 
 }

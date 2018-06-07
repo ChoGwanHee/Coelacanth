@@ -59,9 +59,12 @@ public class FireworkParty : Firework {
 
                 if (hits[j].collider.CompareTag("Player"))
                 {
-                    hits[j].collider.gameObject.GetPhotonView().RPC("Damage", PhotonTargets.All, damage);
+                    hits[j].collider.gameObject.GetPhotonView().RPC("Damage", PhotonTargets.All, damage, executer.photonView.ownerId);
                     Vector3 efxPos = hits[j].collider.GetComponent<CapsuleCollider>().ClosestPointOnBounds(executer.firePoint.position);
                     PhotonNetwork.Instantiate("Prefabs/Effect_base_Hit_fx", efxPos, Quaternion.identity, 0);
+
+                    // 점수 처리
+                    PhotonNetwork.player.AddScore(gainScore);
                 }
 
                 effectedObjects.Add(hits[j].collider);
@@ -85,6 +88,8 @@ public class FireworkParty : Firework {
         self.enabled = true;
 
         executer.DecreaseAmmo();
+
+        FMODUnity.RuntimeManager.PlayOneShot(voiceSound);
     }
 
     private Vector3 DirFromAngle(float angle)

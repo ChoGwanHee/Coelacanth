@@ -22,9 +22,12 @@ public class FireworkFist : Firework
 
             if (effectedObjects[i].CompareTag("Player"))
             {
-                effectedObjects[i].gameObject.GetPhotonView().RPC("Damage", PhotonTargets.All, damage);
+                effectedObjects[i].gameObject.GetPhotonView().RPC("Damage", PhotonTargets.All, damage, executer.photonView.ownerId);
                 Vector3 efxPos = effectedObjects[i].GetComponent<CapsuleCollider>().ClosestPointOnBounds(executer.firePoint.position);
                 PhotonNetwork.Instantiate("Prefabs/Effect_base_Hit_fx", efxPos, Quaternion.identity, 0);
+
+                // 점수 처리
+                PhotonNetwork.player.AddScore(gainScore);
             }
         }
 
