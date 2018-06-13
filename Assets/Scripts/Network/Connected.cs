@@ -5,7 +5,7 @@ using ServerModule;
 using System;
 using System.Threading;
 
-public class testServer : MonoBehaviour
+public class Connected : MonoBehaviour
 {
     private void Awake()
     {
@@ -22,7 +22,7 @@ public class testServer : MonoBehaviour
     {
         Debug.Log("서버 접속 시도");
         ServerManager.Disconnect();
-        
+
         try
         {
             ServerManager.TCPConnect(_address, _port);
@@ -69,7 +69,7 @@ public class testServer : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (InstanceValue.TCP !=  null && InstanceValue.TCP.Connected)
+        if (InstanceValue.TCP != null && InstanceValue.TCP.Connected)
         {
             ServerManager.Send("DISCONNECT");
             Thread.Sleep(500);
@@ -77,4 +77,4 @@ public class testServer : MonoBehaviour
         }
         StopCoroutine(PacketProc());
     }
-} 
+}

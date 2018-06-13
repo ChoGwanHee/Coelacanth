@@ -692,7 +692,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &408379564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -701,20 +701,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 408379563}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 753d62f0cea84774d9648c240c1307b1, type: 3}
+  m_Script: {fileID: 11500000, guid: a72d529e2d6d5c44aba55b2ce6b3eee8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _address: 
-  _port: 0
-  _buffersize: []
-  _receive: 0
-  _connected: 0
-  _id: 0
-  _state: 0
-  _version: 
-  _nickname: 
-  _min: 0
-  _max: 0
   PhotonLobby: {fileID: 2052573149}
   NetworkManager: {fileID: 1164781692}
 --- !u!4 &408379565
@@ -728,7 +717,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &449851657
 GameObject:
@@ -1323,7 +1312,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1164781694}
-  - component: {fileID: 1164781695}
   - component: {fileID: 1164781693}
   m_Layer: 0
   m_Name: NetworkManager
@@ -1331,7 +1319,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1164781693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1340,7 +1328,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1164781692}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d00e3a0fc956f314ab5f201071160b6c, type: 3}
+  m_Script: {fileID: 11500000, guid: 72eae4c34cde80d48a12804f7751428d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1164781694
@@ -1354,19 +1342,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1164781695
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1164781692}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca24fd27cfc0b264d9089ee9673a22af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1171555439
 GameObject:
   m_ObjectHideFlags: 0
@@ -1988,20 +1965,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1729722457}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 881c771e967f7fd47beba52f5dd11907, type: 3}
+  m_Script: {fileID: 11500000, guid: 5156f077597a4b044b491c0bf72a65ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _address: 
-  _port: 0
-  _buffersize: []
-  _receive: 0
-  _connected: 0
-  _id: 0
-  _state: 0
-  _version: 
-  _nickname: 
-  _min: 0
-  _max: 0
   PlayButton: {fileID: 1625146240}
 --- !u!1 &1851835388
 GameObject:
