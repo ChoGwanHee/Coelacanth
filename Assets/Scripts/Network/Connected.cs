@@ -9,6 +9,7 @@ public class Connected : MonoBehaviour
 {
     private void Awake()
     {
+        DontDestroyOnLoad(this);
         Debug.Log("초기화");
         ServerManager.Initialized();
     }
@@ -76,5 +77,7 @@ public class Connected : MonoBehaviour
             InstanceValue.TCP.Close();
         }
         StopCoroutine(PacketProc());
+        Thread.Sleep(100);
+        Destroy(this);
     }
 }
