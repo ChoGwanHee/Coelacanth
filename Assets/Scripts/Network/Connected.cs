@@ -19,6 +19,11 @@ public class Connected : MonoBehaviour
         StartConnectServer("127.0.0.1", 2020);
     }
 
+    void NicknameWriteLine()
+    {
+        Debug.Log(InstanceValue.Nickname);
+    }
+
     private void StartConnectServer(string _address, int _port)
     {
         Debug.Log("서버 접속 시도");
