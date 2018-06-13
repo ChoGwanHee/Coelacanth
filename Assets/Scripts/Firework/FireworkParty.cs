@@ -9,7 +9,7 @@ using UnityEngine;
 public class FireworkParty : Firework {
 
     /// <summary>
-    /// 공격 범위의 각도
+    /// 공격 범위의 각도 (호의 중심각)
     /// </summary>
     public float hitAngle;
 
@@ -64,7 +64,8 @@ public class FireworkParty : Firework {
                     PhotonNetwork.Instantiate("Prefabs/Effect_base_Hit_fx", efxPos, Quaternion.identity, 0);
 
                     // 점수 처리
-                    PhotonNetwork.player.AddScore(gainScore);
+                    effectedObjects[i].GetComponent<PlayerStat>().AddScore(-10);
+                    executer.Stat.AddScore(gainScore);
                 }
 
                 effectedObjects.Add(hits[j].collider);
@@ -88,8 +89,6 @@ public class FireworkParty : Firework {
         self.enabled = true;
 
         executer.DecreaseAmmo();
-
-        FMODUnity.RuntimeManager.PlayOneShot(voiceSound);
     }
 
     private Vector3 DirFromAngle(float angle)

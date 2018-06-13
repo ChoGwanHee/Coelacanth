@@ -92,6 +92,9 @@
         </relationship>
     </object>
     <object class="EventMixerMaster" id="{7f45dc90-f91b-45d3-8b3b-54f1d5f56f49}">
+        <property name="volume">
+            <value>-1</value>
+        </property>
         <relationship name="effectChain">
             <destination>{f2e76d3f-2d32-41cf-a489-355b91a09afa}</destination>
         </relationship>
@@ -222,7 +225,6 @@
     <object class="MixerBusEffectChain" id="{f2e76d3f-2d32-41cf-a489-355b91a09afa}">
         <relationship name="effects">
             <destination>{3176a2f0-3fd7-4115-8016-0edcaa58e1ae}</destination>
-            <destination>{79dadcc0-e508-42c9-99d7-af856e5d3692}</destination>
         </relationship>
     </object>
     <object class="MixerBusPanner" id="{0b170382-2476-4c72-9fc8-b5c1cb9c359c}">
@@ -339,7 +341,6 @@
     </object>
     <object class="MixerBusPanner" id="{635ecde2-8544-41be-9e30-5941d53ebc24}"/>
     <object class="MixerBusFader" id="{3176a2f0-3fd7-4115-8016-0edcaa58e1ae}"/>
-    <object class="SpatialiserEffect" id="{79dadcc0-e508-42c9-99d7-af856e5d3692}"/>
     <object class="AutomationPoint" id="{ee01ae12-0bf2-438c-bca2-de8c1d50ecd3}">
         <property name="position">
             <value>0.64000000000000012</value>

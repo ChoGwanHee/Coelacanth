@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 [RequireComponent(typeof(PhotonView))]
@@ -70,9 +71,14 @@ public class GameManagerPhoton : Photon.PunBehaviour
 
     public int startPlayerCount = 4;
 
+    private bool isSceneMoving = false;
+
 
     [FMODUnity.EventRef]
     public string BGM;
+
+    [FMODUnity.EventRef]
+    public string resultBGM;
 
     /// <summary>
     /// 현재 존재하는 플레이어의 리스트
@@ -85,6 +91,11 @@ public class GameManagerPhoton : Photon.PunBehaviour
     /// 사망 이펙트
     /// </summary>
     public GameObject deadEfx_ref;
+
+    /// <summary>
+    /// 캐릭터 정면뷰로 확대시 배경에서 터지는 폭죽 이펙트
+    /// </summary>
+    public GameObject[] backgroundFireworks;
 
 
     [HideInInspector]
@@ -110,8 +121,9 @@ public class GameManagerPhoton : Photon.PunBehaviour
     {
         cameraController = Camera.main.transform.parent.parent.GetComponent<CameraController>();
         itemManager = GetComponent<ItemManager>();
+        remainGameTime = playTime;
 
-        Cursor.SetCursor(cursorTex, new Vector2(44, 44), CursorMode.ForceSoftware);
+        Cursor.SetCursor(cursorTex, new Vector2(0, 0), CursorMode.ForceSoftware);
 
         PhotonNetwork.isMessageQueueRunning = true;
 
@@ -119,7 +131,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
         int playerIndex = (int)customProperties["PlayerIndex"];
         CreatePlayer(playerIndex, playerGenPos[playerIndex].position);
 
-        //FMODUnity.RuntimeManager.PlayOneShot(BGM);
+        FMODUnity.RuntimeManager.PlayOneShot(BGM);
     }
 
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -178,7 +190,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
                 prefabName = "ShoSho_0605_2";
                 break;
             case 3:
-                prefabName = "Juhwang_0426";
+                prefabName = "CuChen_0612";
                 break;
             default:
                 prefabName = "Dahong_0424";
@@ -209,9 +221,31 @@ public class GameManagerPhoton : Photon.PunBehaviour
     {
         if(PhotonNetwork.room.PlayerCount >= startPlayerCount)
         {
-            // 게임 시작
-            photonView.RPC("RunGameEvent", PhotonTargets.All, (int)GameEvent.GameStart);
+            GameStartRequest();
         }
+    }
+
+    /// <summary>
+    /// 게임 시작을 요청합니다.
+    /// </summary>
+    /// <returns>성공 여부를 반환합니다.</returns>
+    public bool GameStartRequest()
+    {
+        if (!photonView.isMine)
+        {
+            Debug.LogWarning("게임을 시작하려면 방장이어야 합니다.");
+            return false;
+        }
+
+        if(isPlaying)
+        {
+            Debug.LogWarning("게임이 이미 시작 됐습니다.");
+            return false;
+        }
+
+        // 게임 시작
+        photonView.RPC("RunGameEvent", PhotonTargets.All, (int)GameEvent.GameStart);
+        return true;
     }
 
     private void EnterState(GameState state)
@@ -225,7 +259,6 @@ public class GameManagerPhoton : Photon.PunBehaviour
                 {
                     MapManager._instance.StartMapFacilities();
                     itemManager.active = true;
-                    remainGameTime = playTime;
                     StartCoroutine(GameLoop());
                 }
                 isPlaying = true;
@@ -233,6 +266,14 @@ public class GameManagerPhoton : Photon.PunBehaviour
 
                 break;
             case GameState.Result:
+                if (PhotonNetwork.isMasterClient)
+                {
+                    MapManager._instance.StopAllCoroutines();
+                    itemManager.active = false;
+
+                    int focusedPlayerOwnerId = GetHighScorePlayerOwnerId();
+                    photonView.RPC("Spotlight", PhotonTargets.All, focusedPlayerOwnerId);
+                }
                 isPlaying = false;
                 SetPlayerActive(false);
                 break;
@@ -257,7 +298,6 @@ public class GameManagerPhoton : Photon.PunBehaviour
                 StartCoroutine(GameCountProcess(false));
                 break;
         }
-        
     }
 
     private IEnumerator GameCountProcess(bool isStart)
@@ -311,4 +351,92 @@ public class GameManagerPhoton : Photon.PunBehaviour
 
     }
 
+    /// <summary>
+    /// 가장 점수가 높은 플레이어의 ownerId를 얻어옵니다.
+    /// </summary>
+    /// <returns>플레이어 인덱스</returns>
+    public int GetHighScorePlayerOwnerId()
+    {
+        if (playerList.Count < 1) return -1;
+
+        PlayerStat highScorePlayer = playerList[0];
+        int highScore = playerList[0].Score;
+
+        for(int i=1; i<playerList.Count; i++)
+        {
+            if (highScore <= playerList[i].Score)
+            {
+                highScore = playerList[i].Score;
+                highScorePlayer = playerList[i];
+            }
+        }
+
+        return highScorePlayer.photonView.ownerId;
+    }
+
+    /// <summary>
+    /// ownerId로 플레이어를 찾습니다.
+    /// </summary>
+    /// <param name="findOwnerId"></param>
+    /// <returns></returns>
+    public PlayerStat GetPlayerByOwnerId(int findOwnerId)
+    {
+        for(int i=0; i<playerList.Count; i++)
+        {
+            if(playerList[i].photonView.ownerId == findOwnerId)
+            {
+                return playerList[i];
+            }
+        }
+
+        return null;
+    }
+
+    [PunRPC]
+    private void Spotlight(int spotlightOwnerId)
+    {
+        PlayerController focusedPlayer = GetPlayerByOwnerId(spotlightOwnerId).GetComponent<PlayerController>();
+
+        focusedPlayer.ChangeState(PlayerAniState.Idle);
+        focusedPlayer.TurnToScreen();
+        cameraController.ChangeMode(CameraMode.FrontView);
+        cameraController.SetTarget(focusedPlayer.transform);
+        UIManager._instance.ChangeScreen(UIManager.ScreenType.Result);
+        UIManager._instance.resultScoreBoard.CalcResult();
+        UIManager._instance.resultEmotion.SetPlayerController(focusedPlayer);
+        if(focusedPlayer.photonView.isMine)
+            UIManager._instance.resultEmotion.gameObject.SetActive(true);
+
+        // 배경의 폭죽 켜기
+        for(int i = 0; i < backgroundFireworks.Length; i++)
+        {
+            backgroundFireworks[i].SetActive(true);
+        }
+
+        // 배경음악 재생
+        FMODUnity.RuntimeManager.PlayOneShot(resultBGM);
+    }
+
+    public void StartLoadTitleScene()
+    {
+        if(!isSceneMoving)
+        {
+            PhotonNetwork.Disconnect();
+            StartCoroutine(LoadTitleScene());
+            isSceneMoving = true;
+        }
+        else
+        {
+            Debug.LogWarning("이미 작동 중 입니다.");
+        }
+        
+    }
+
+    private IEnumerator LoadTitleScene()
+    {
+        // 게임씬을 완벽하게 로딩 후 씬을 변경한다
+        AsyncOperation oper = SceneManager.LoadSceneAsync("Title");
+
+        yield return oper; // 로딩이 완료될때까지 대기 한다
+    }
 }

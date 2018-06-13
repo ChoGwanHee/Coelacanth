@@ -54,8 +54,8 @@ MonoBehaviour:
     m_Settings:
       reflection:
         blendType: 0
-        reflectionQuality: 0
-        maxDistance: 125
+        reflectionQuality: 2
+        maxDistance: 100
         iterationCount: 411
         stepSize: 3
         widthModifier: 1.81
@@ -69,13 +69,13 @@ MonoBehaviour:
       screenEdgeMask:
         intensity: 0.03
   depthOfField:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
-      focusDistance: 22
-      aperture: 0.2
+      focusDistance: 12
+      aperture: 0.5
       focalLength: 17
       useCameraFov: 1
-      kernelSize: 2
+      kernelSize: 1
   motionBlur:
     m_Enabled: 0
     m_Settings:
@@ -113,10 +113,10 @@ MonoBehaviour:
     m_Settings:
       tonemapping:
         tonemapper: 2
-        neutralBlackIn: 0.043
-        neutralWhiteIn: 14.1
-        neutralBlackOut: 0.019
-        neutralWhiteOut: 2
+        neutralBlackIn: 0.006
+        neutralWhiteIn: 14
+        neutralBlackOut: 0.023
+        neutralWhiteOut: 6.8
         neutralWhiteLevel: 6.6
         neutralWhiteClip: 10
       basic:
@@ -127,7 +127,7 @@ MonoBehaviour:
         saturation: 1.4
         contrast: 1.13
       channelMixer:
-        red: {x: 0.9, y: 0.07, z: 0}
+        red: {x: 0.85, y: 0.07, z: 0}
         green: {x: 0, y: 1, z: 0}
         blue: {x: 0, y: 0, z: 1}
         currentEditingChannel: 0

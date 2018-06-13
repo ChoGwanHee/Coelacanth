@@ -263,7 +263,7 @@ GameObject:
   - component: {fileID: 4570203842582952}
   - component: {fileID: 198118966744446754}
   - component: {fileID: 199892404564740950}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Main_star
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -310,7 +310,7 @@ GameObject:
   - component: {fileID: 4393149259582110}
   - component: {fileID: 198845825771197044}
   - component: {fileID: 199275379323419122}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: stern_black
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -342,7 +342,7 @@ GameObject:
   - component: {fileID: 4434136757666800}
   - component: {fileID: 198862259929458450}
   - component: {fileID: 199037758577740992}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: s_star
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -732,7 +732,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4022398044081654}
-  m_Layer: 9
+  m_Layer: 13
   m_Name: CH_ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -992,7 +992,7 @@ GameObject:
   - component: {fileID: 4014975495772504}
   - component: {fileID: 198166091004678666}
   - component: {fileID: 199650203234932758}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: M_star
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1272,7 +1272,7 @@ GameObject:
   - component: {fileID: 4382684636111688}
   - component: {fileID: 198418597889828596}
   - component: {fileID: 199257940457773264}
-  m_Layer: 9
+  m_Layer: 13
   m_Name: Ch_ring_Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1740,7 +1740,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4405786743115260}
   - component: {fileID: 95485899755923990}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: stern_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1757,7 +1757,7 @@ GameObject:
   - component: {fileID: 4823113429217152}
   - component: {fileID: 198402457619660038}
   - component: {fileID: 199847954388850868}
-  m_Layer: 9
+  m_Layer: 13
   m_Name: Ch_ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2285,7 +2285,7 @@ GameObject:
   - component: {fileID: 4537902756240870}
   - component: {fileID: 198480767832824434}
   - component: {fileID: 199513683557219008}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: s_star_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2317,7 +2317,7 @@ GameObject:
   - component: {fileID: 4041297024035446}
   - component: {fileID: 198937257616053736}
   - component: {fileID: 199662582999566344}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: stern_main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2441,7 +2441,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1795567098338256}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.4055421, y: 4.853034, z: 2.2075453}
+  m_LocalPosition: {x: 1.4997599, y: 4.853034, z: 0.12410819}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4980890656778514}
@@ -4949,6 +4949,9 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 1
     Name: Charging
+  - Type: 3
+    SynchronizeType: 1
+    Name: EmotionType
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
@@ -5065,8 +5068,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stunSound: event:/SFX/Character/Sound/SFX_Stun
   walkingSound: event:/SFX/Character/Sound/SFX_Foot
-  fallingSound: event:/SFX/Character/Voice/Fall/SFX_Dahong_Fall
-  stunVoice: event:/SFX/Character/Voice/Stun/SFX_Dahong_Stun
+  fallingSound: event:/SFX/Character/Sound/SFX_Fall
+  characterVoice: {fileID: 11400000, guid: 5406938f66ba1ad4b8ffe1b60e1d3d41, type: 2}
   photonMove: 1
   isControlable: 0
   isStun: 0

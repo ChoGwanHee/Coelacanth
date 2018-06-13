@@ -2,10 +2,10 @@
 <objects serializationModel="Studio.01.10.00">
     <object class="Event" id="{95cbaa79-c487-4f21-a080-0a7dc58f2a35}">
         <property name="name">
-            <value>SFX_C2_Fall</value>
+            <value>SFX_MinMin_Fall</value>
         </property>
         <property name="outputFormat">
-            <value>2</value>
+            <value>1</value>
         </property>
         <relationship name="folder">
             <destination>{0e909451-12d6-4097-a0ae-a872bb0a852d}</destination>
@@ -30,6 +30,9 @@
         </relationship>
         <relationship name="timeline">
             <destination>{45490475-c028-489c-8f45-faddac3ab724}</destination>
+        </relationship>
+        <relationship name="banks">
+            <destination>{5cf7a617-0dc0-4100-bbb6-73e265bc97d2}</destination>
         </relationship>
     </object>
     <object class="EventMixer" id="{d226ce13-8785-4949-a68c-c4e99df61753}">
@@ -56,11 +59,18 @@
     <object class="EventAutomatableProperties" id="{b209a19f-9b0e-463e-81b5-b5c24cd910f3}"/>
     <object class="MarkerTrack" id="{8f5bd6a9-e96d-43ef-8002-b6dbbb2a6373}"/>
     <object class="GroupTrack" id="{a4c55982-8fdf-4036-961d-526237a3c3c9}">
+        <relationship name="modules">
+            <destination>{c209d397-967c-4362-a24a-725c3ee58794}</destination>
+        </relationship>
         <relationship name="mixerGroup">
             <destination>{79f00577-45f9-44c9-931d-9a23d9f221d6}</destination>
         </relationship>
     </object>
-    <object class="Timeline" id="{45490475-c028-489c-8f45-faddac3ab724}"/>
+    <object class="Timeline" id="{45490475-c028-489c-8f45-faddac3ab724}">
+        <relationship name="modules">
+            <destination>{c209d397-967c-4362-a24a-725c3ee58794}</destination>
+        </relationship>
+    </object>
     <object class="EventMixerMaster" id="{8bbb491b-eec5-4789-a2f4-90f0594d56a0}">
         <relationship name="effectChain">
             <destination>{6656dff8-9a68-4cdc-a41e-1bde90fcf59b}</destination>
@@ -78,7 +88,21 @@
         </relationship>
     </object>
     <object class="MixerBusPanner" id="{5dabe0ab-1a0c-46e8-8556-fe1647c279c6}"/>
+    <object class="SingleSound" id="{c209d397-967c-4362-a24a-725c3ee58794}">
+        <property name="length">
+            <value>1.0646712018140589</value>
+        </property>
+        <property name="volume">
+            <value>5.5</value>
+        </property>
+        <relationship name="audioFile">
+            <destination>{60709c71-6e9f-47b2-873e-8e795331f2f2}</destination>
+        </relationship>
+    </object>
     <object class="EventMixerGroup" id="{79f00577-45f9-44c9-931d-9a23d9f221d6}">
+        <property name="volume">
+            <value>10</value>
+        </property>
         <property name="name">
             <value>Audio 1</value>
         </property>
@@ -95,10 +119,16 @@
     <object class="MixerBusEffectChain" id="{6656dff8-9a68-4cdc-a41e-1bde90fcf59b}">
         <relationship name="effects">
             <destination>{6dd60fd2-f326-4dc5-aa66-693f84cab30c}</destination>
-            <destination>{ab5218d6-4963-40cb-a687-94b60e50bce9}</destination>
         </relationship>
     </object>
-    <object class="MixerBusPanner" id="{40097710-2b55-439f-8b1c-e6384980078a}"/>
+    <object class="MixerBusPanner" id="{40097710-2b55-439f-8b1c-e6384980078a}">
+        <property name="overridingOutputFormat">
+            <value>1</value>
+        </property>
+        <property name="outputFormatOverridden">
+            <value>true</value>
+        </property>
+    </object>
     <object class="MixerBusFader" id="{039da4be-8d34-4825-a4a0-f5bd0c64350a}"/>
     <object class="MixerBusEffectChain" id="{307f73f4-7882-4b43-8ae7-32da1e7eb88e}">
         <relationship name="effects">
@@ -107,6 +137,5 @@
     </object>
     <object class="MixerBusPanner" id="{9471f50e-8e39-4f09-b9cd-07a6e7c896ba}"/>
     <object class="MixerBusFader" id="{6dd60fd2-f326-4dc5-aa66-693f84cab30c}"/>
-    <object class="SpatialiserEffect" id="{ab5218d6-4963-40cb-a687-94b60e50bce9}"/>
     <object class="MixerBusFader" id="{8456d977-c7de-47e2-869d-2a8eaaa807be}"/>
 </objects>

@@ -75,11 +75,13 @@ public class ProjectileButterfly : BaseProjectile
                 if (effectedObjects[i].gameObject.GetPhotonView().ownerId == photonView.ownerId)
                 {
                     // 본인 피격
-                    Debug.Log("본인 피격");
+                    effectedObjects[i].GetComponent<PlayerStat>().AddScore(-20);
                 }
                 else
                 {
-                    PhotonNetwork.player.AddScore(gainScore);
+                    // 다른 사람 피격
+                    effectedObjects[i].GetComponent<PlayerStat>().AddScore(-10);
+                    GameManagerPhoton._instance.GetPlayerByOwnerId(photonView.ownerId).AddScore(gainScore);
                 }
             }
         }
@@ -121,7 +123,6 @@ public class ProjectileButterfly : BaseProjectile
 
         for (int i=0; i< playerCount; i++)
         {
-            //Debug.Log(i + ": " + GameManagerPhoton._instance.playerList[i].onStage);
             // 제외시킬 인덱스는 통과
             if (i == exclusive) continue;
 

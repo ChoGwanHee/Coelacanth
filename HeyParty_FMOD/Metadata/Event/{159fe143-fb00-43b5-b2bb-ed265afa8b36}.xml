@@ -96,13 +96,13 @@
             <value>true</value>
         </property>
         <property name="triggerProbability">
-            <value>48.5</value>
+            <value>58</value>
         </property>
         <property name="length">
             <value>1.2174829931972788</value>
         </property>
         <property name="volume">
-            <value>4</value>
+            <value>5.5</value>
         </property>
         <property name="pitch">
             <value>1.20000005</value>
@@ -112,6 +112,9 @@
         </relationship>
     </object>
     <object class="EventMixerGroup" id="{87db053d-1c3d-4114-8166-c2a7c2d9bb43}">
+        <property name="volume">
+            <value>1</value>
+        </property>
         <property name="name">
             <value>Audio 1</value>
         </property>
@@ -128,7 +131,6 @@
     <object class="MixerBusEffectChain" id="{9699f655-dbbc-421c-acfc-5d6a9e37115f}">
         <relationship name="effects">
             <destination>{c94991df-f397-4100-9322-34879258d8ba}</destination>
-            <destination>{fff7fff7-fab0-4527-ad1c-3ecaba856969}</destination>
         </relationship>
     </object>
     <object class="MixerBusPanner" id="{6c83705b-330a-43d6-8c94-832cd73e88f6}">
@@ -147,6 +149,5 @@
     </object>
     <object class="MixerBusPanner" id="{3c73d77f-4b79-40a5-a750-fe4e5947c516}"/>
     <object class="MixerBusFader" id="{c94991df-f397-4100-9322-34879258d8ba}"/>
-    <object class="SpatialiserEffect" id="{fff7fff7-fab0-4527-ad1c-3ecaba856969}"/>
     <object class="MixerBusFader" id="{6f48598c-042b-45d0-81be-eadc5e87f3ce}"/>
 </objects>

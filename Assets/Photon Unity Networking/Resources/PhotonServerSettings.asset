@@ -66,4 +66,5 @@ MonoBehaviour:
   - GameStart
   - GameStarting
   - RunGameEvent
+  - Spotlight
   DisableAutoOpenWizard: 1

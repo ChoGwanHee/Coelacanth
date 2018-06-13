@@ -66,6 +66,12 @@ public class WaterCannonScript : Photon.PunBehaviour {
                 //if(effectedObjects[i].gameObject.GetPhotonView().isMine)
 
                 effectedObjects[i].GetComponent<Rigidbody>().AddForce(transform.TransformDirection(Vector3.forward) * thrustForce, ForceMode.Impulse);
+
+                // 플레이어가 피격 되었을 때 점수 감산
+                if (effectedObjects[i].CompareTag("Player"))
+                {
+                    effectedObjects[i].GetComponent<PlayerStat>().AddScore(-10);
+                }
             }
 
             elapsedTime += Time.deltaTime;
@@ -104,6 +110,12 @@ public class WaterCannonScript : Photon.PunBehaviour {
                     }
                     //effectedObjects[i].GetComponent<Rigidbody>().velocity = Vector3.zero;
                     effectedObjects[i].GetComponent<Rigidbody>().AddForce(direction * blockForce, ForceMode.Impulse);
+
+                    // 플레이어가 피격 되었을 때 점수 감산
+                    if (effectedObjects[i].CompareTag("Player"))
+                    {
+                        effectedObjects[i].GetComponent<PlayerStat>().AddScore(-10);
+                    }
 
                     Vector3 efxPos = effectedObjects[i].GetComponent<Collider>().ClosestPoint(transform.position);
                     Instantiate(hitEffect_ref, efxPos, Quaternion.identity);

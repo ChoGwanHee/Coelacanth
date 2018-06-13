@@ -79,12 +79,6 @@ public abstract class Firework : ScriptableObject {
     [FMODUnity.EventRef]
     public string startSound;
 
-    /// <summary>
-    /// 
-    /// </summary>
-    [FMODUnity.EventRef]
-    public string voiceSound;
-
 
     public abstract void Execute(FireworkExecuter executer);
 }

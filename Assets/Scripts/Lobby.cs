@@ -9,7 +9,7 @@ public class Lobby : Photon.PunBehaviour {
     private void Start()
     {
         // 게임 버전
-        PhotonNetwork.ConnectUsingSettings("0.5.3");
+        PhotonNetwork.ConnectUsingSettings("0.5.4");
     }
 
     public void OnPhotonRandomJoinFailed()
@@ -43,7 +43,7 @@ public class Lobby : Photon.PunBehaviour {
     public override void OnJoinedRoom()
     {
         base.OnJoinedRoom();
-        PhotonNetwork.isMessageQueueRunning = false;
+        
 
         // 플레이어 커스텀 프로퍼티 조정
         Hashtable roomProperties = PhotonNetwork.room.CustomProperties;
@@ -62,6 +62,8 @@ public class Lobby : Photon.PunBehaviour {
 
         roomProperties["PlayerEnter" + playerIndex] = true;
         PhotonNetwork.room.SetCustomProperties(roomProperties);
+
+        PhotonNetwork.isMessageQueueRunning = false;
 
         StartCoroutine(LoadGameScene());
 

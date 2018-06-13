@@ -35,7 +35,7 @@ public class PlayerStat : Photon.PunBehaviour
     /// 플레이어의 점수
     /// </summary>
     private int score;
-    public int Score
+    /*public int Score
     {
         get { return score; }
         set
@@ -51,12 +51,33 @@ public class PlayerStat : Photon.PunBehaviour
             if(onScoreChanged != null)
                 onScoreChanged(score);
         }
+    }*/
+    public int Score
+    {
+        get { return photonView.owner.GetScore(); }
+        set
+        {
+            if(value < 0)
+            {
+                photonView.owner.SetScore(0);
+            }
+            else
+            {
+                photonView.owner.SetScore(value);
+            }
+        }
     }
+
 
     /// <summary>
     /// 킬 판정 여부
     /// </summary>
     private bool killApproval;
+
+    /// <summary>
+    /// 킬 판정 유효 시간
+    /// </summary>
+    private float killApprovalTime = 10.0f;
 
     /// <summary>
     /// 이 플레이어를 마지막으로 공격한 플레이어의 인덱스
@@ -135,7 +156,7 @@ public class PlayerStat : Photon.PunBehaviour
         if(killApproval)
         {
             lastHitElapsedTime += Time.deltaTime;
-            if(lastHitElapsedTime >= 10.0f)
+            if(lastHitElapsedTime >= killApprovalTime)
             {
                 killApproval = false;
             }
@@ -190,4 +211,49 @@ public class PlayerStat : Photon.PunBehaviour
         killApproval = true;
     }
 
+    /// <summary>
+    /// 킬 점수 판정을 합니다.
+    /// </summary>
+    public void KillScoring()
+    {
+        if (!photonView.isMine) return;
+
+        // 다른 사람에 의해 킬
+        if (killApproval)
+        {
+            // 공격자 점수 가산
+            for(int i=0; i<GameManagerPhoton._instance.playerList.Count; i++)
+            {
+                if(GameManagerPhoton._instance.playerList[i].photonView.ownerId == lastAttacker)
+                {
+                    GameManagerPhoton._instance.playerList[i].AddScore(100);
+                    break;
+                }
+            }
+
+            // 사망자 점수 감산
+            AddScore(-30);
+
+            killApproval = false;
+            lastAttacker = -1;
+        }
+        // 스스로 킬
+        else
+        {
+            // 사망자 점수 감산
+            AddScore(-50);
+        }
+    }
+
+    public void AddScore(int score)
+    {
+        if(Score + score < 0)
+        {
+            Score = 0;
+        }
+        else
+        {
+            photonView.owner.AddScore(score);
+        }
+    }
 }

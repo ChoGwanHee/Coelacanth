@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{73ead53e-64c5-42c7-aa0d-6b95218dd287}">
+        <property name="assetPath">
+            <value>ShoSho_Hit_2.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>1</value>
+        </property>
+        <property name="length">
+            <value>0.58981859410430837</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{00c47356-6e7c-4b58-839f-6cd51f0dba88}</destination>
+        </relationship>
+    </object>
+</objects>

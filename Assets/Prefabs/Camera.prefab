@@ -36,7 +36,6 @@ GameObject:
   - component: {fileID: 4668112741651116}
   - component: {fileID: 20347377045511126}
   - component: {fileID: 124903435876853174}
-  - component: {fileID: 81047682315977618}
   - component: {fileID: 114974600272838828}
   m_Layer: 0
   m_Name: FxCamera
@@ -86,7 +85,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1768166243061254}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.4, y: 6, z: 6.4}
+  m_LocalPosition: {x: 0.2, y: 6, z: 2.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4074895152077152}
@@ -100,7 +99,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1292748924299108}
   m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
-  m_LocalPosition: {x: -1, y: 1, z: -4}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4421387143772456}
@@ -114,7 +113,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1950820711483148}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -21}
+  m_LocalPosition: {x: 0, y: 0, z: -19}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4668112741651116}
@@ -206,13 +205,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &81047682315977618
-AudioListener:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1537438292367282}
-  m_Enabled: 1
 --- !u!114 &114272883736745608
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -225,16 +217,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  mode: 1
+  mode: 3
   smoothMoveTime: 0.7
   fastSmoothMoveTime: 0.2
   fastMoveDistance: 5
   baseAddOffset: 7
+  minDistance: 3
+  maxDistance: 5
   smoothZoomTime: 0.9
   zoomXFactor: 1.5
   zoomZFactor: 1.6
-  minZoomDistance: 20
+  minZoomDistance: 18
   maxZoomDistance: 28
+  zoomProfile: {fileID: 11400000, guid: e2169f4b255a8d9419b1ad670bbb1ee4, type: 2}
 --- !u!114 &114936024297461308
 MonoBehaviour:
   m_ObjectHideFlags: 1

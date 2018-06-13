@@ -50,18 +50,20 @@ public class ProjectileRocket : BaseProjectile
                 if (effectedObjects[i].gameObject.GetPhotonView().ownerId == photonView.ownerId)
                 {
                     // 본인 피격
-                    Debug.Log("본인 피격");
+                    effectedObjects[i].GetComponent<PlayerStat>().AddScore(-20);
                 }
                 else
                 {
-                    PhotonNetwork.player.AddScore(gainScore);
+                    // 다른 사람 피격
+                    effectedObjects[i].GetComponent<PlayerStat>().AddScore(-10);
+                    GameManagerPhoton._instance.GetPlayerByOwnerId(photonView.ownerId).AddScore(gainScore);
                 }
             }
         }
 
         photonView.RPC("PlayEndSound", PhotonTargets.All, null);
 
-        PhotonNetwork.Instantiate("Prefabs/Rocket_explo_hit", transform.position, transform.rotation, 0);
+        PhotonNetwork.Instantiate("Prefabs/Rocket_boom_Hit_fx", transform.position, transform.rotation, 0);
         PhotonNetwork.Destroy(gameObject);
     }
 }

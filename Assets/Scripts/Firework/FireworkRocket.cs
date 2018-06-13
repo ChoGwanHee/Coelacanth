@@ -29,7 +29,5 @@ public class FireworkRocket : Firework
         bullet.gainScore = gainScore;
 
         executer.DecreaseAmmo();
-
-        FMODUnity.RuntimeManager.PlayOneShot(voiceSound);
     }
 }

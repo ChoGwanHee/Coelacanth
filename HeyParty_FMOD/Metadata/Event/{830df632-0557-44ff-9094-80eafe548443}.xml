@@ -5,7 +5,7 @@
             <value>SFX_BridgePipeQuake</value>
         </property>
         <property name="outputFormat">
-            <value>2</value>
+            <value>1</value>
         </property>
         <relationship name="folder">
             <destination>{9ca2a022-1a63-4afb-9575-594277276671}</destination>
@@ -211,7 +211,6 @@
     <object class="MixerBusEffectChain" id="{fc59bd46-6f05-4509-a8fd-6d10aec47544}">
         <relationship name="effects">
             <destination>{4808f6df-8e15-44d6-b7fa-0eabf789ff7e}</destination>
-            <destination>{5baf04fe-ddbe-400b-9af6-290d4ae999ce}</destination>
         </relationship>
     </object>
     <object class="MixerBusPanner" id="{e6af76b7-ef81-4086-b8cd-b3685b6d3b17}"/>
@@ -275,7 +274,6 @@
     </object>
     <object class="MixerBusPanner" id="{bfa07004-100a-4dec-b0ab-f41e09614c35}"/>
     <object class="MixerBusFader" id="{4808f6df-8e15-44d6-b7fa-0eabf789ff7e}"/>
-    <object class="SpatialiserEffect" id="{5baf04fe-ddbe-400b-9af6-290d4ae999ce}"/>
     <object class="MixerBusFader" id="{cbb404b2-6626-4022-a538-7230f76cd735}"/>
     <object class="AutomationPoint" id="{9c7794e2-265b-4b89-b2de-bafdbc896044}">
         <property name="position">

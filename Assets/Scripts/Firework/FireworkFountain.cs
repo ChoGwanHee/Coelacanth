@@ -36,7 +36,5 @@ public class FireworkFountain : Firework
         fountain.gainScore = gainScore;
 
         executer.DecreaseAmmo();
-
-        FMODUnity.RuntimeManager.PlayOneShot(voiceSound);
     }
 }

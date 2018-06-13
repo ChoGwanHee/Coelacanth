@@ -109,7 +109,7 @@ MonoBehaviour:
         texture: {fileID: 0}
         intensity: 3
   colorGrading:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
       tonemapping:
         tonemapper: 2
@@ -127,7 +127,7 @@ MonoBehaviour:
         saturation: 1.4
         contrast: 1.13
       channelMixer:
-        red: {x: 0.9, y: 0.07, z: 0}
+        red: {x: 0.71, y: 0.07, z: 0}
         green: {x: 0, y: 1, z: 0}
         blue: {x: 0, y: 0, z: 1}
         currentEditingChannel: 0

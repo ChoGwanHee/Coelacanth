@@ -26,7 +26,8 @@
 		void surf(Input IN, inout SurfaceOutput o) {
 
 			fixed4 c = tex2D(_MainTex, IN.uv_MainTex) * _Color;
-			o.Albedo = c.rgb*5-0.3;
+			o.Albedo = c.rgb*2.5-0.3;
+			o.Emission = c.rgb*1 - 0.15;
 			o.Alpha = c.a;
 
 
@@ -55,7 +56,7 @@
 				NdotL = 1;
 			}
 			else {
-				NdotL = 0.6;
+				NdotL = 0.4;
 			}
 			
 			float4 c;

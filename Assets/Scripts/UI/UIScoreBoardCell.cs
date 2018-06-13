@@ -82,7 +82,7 @@ public class UIScoreBoardCell : MonoBehaviour {
         score = newScore;
         scoreText.text = newScore.ToString();
 
-        //scoreBoard.SortingCells();
+        scoreBoard.SortingCells();
         scoreBoard.CalcRanks();
     }
 

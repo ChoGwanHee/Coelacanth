@@ -29,7 +29,5 @@ public class FireworkRoman : Firework
         bullet.gainScore = gainScore;
 
         executer.DecreaseAmmo();
-
-        FMODUnity.RuntimeManager.PlayOneShot(voiceSound);
     }
 }

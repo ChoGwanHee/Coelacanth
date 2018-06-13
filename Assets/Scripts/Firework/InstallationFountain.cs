@@ -49,7 +49,6 @@ public class InstallationFountain : BaseInstallation
     [FMODUnity.EventRef]
     public string duringSound;
 
-    
 
     private ParticleSystem particle;
     private LayerMask dynamicObjMask;
@@ -119,11 +118,14 @@ public class InstallationFountain : BaseInstallation
                 if(effectedObjects[i].gameObject.GetPhotonView().ownerId == photonView.ownerId)
                 {
                     // 본인 피격
-                    Debug.Log("본인 피격");
+                    effectedObjects[i].GetComponent<PlayerStat>().AddScore(-20);
                 }
                 else
                 {
-                    PhotonNetwork.player.AddScore(gainScore);
+                    // 다른 사람 피격
+                    effectedObjects[i].GetComponent<PlayerStat>().AddScore(-10);
+                    GameManagerPhoton._instance.GetPlayerByOwnerId(photonView.ownerId).AddScore(gainScore);
+                    
                 }
                 
             }

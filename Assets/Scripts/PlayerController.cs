@@ -28,13 +28,17 @@ public class PlayerController : Photon.PunBehaviour
     [FMODUnity.EventRef]
     public string fallingSound;
 
-    [FMODUnity.EventRef]
-    public string stunVoice;
 
     FMOD.Studio.EventInstance walkingEvent;
     FMOD.Studio.PLAYBACK_STATE walkingSoundState;
 
+    /// <summary>
+    /// 캐릭터 목소리 에셋
+    /// </summary>
+    public CharacterVoicePack characterVoice;
+
     // Move
+    [Header("Move")]
     /// <summary>
     /// 포톤으로 움직일 때 True, False 일 때 씬에서 바로 재생 후 제어 가능
     /// </summary>
@@ -80,7 +84,7 @@ public class PlayerController : Photon.PunBehaviour
 
     private Vector2 axisVelocity;
     
-
+    [Space()]
     /// <summary>
     /// 플레이어 재생성 대기 시간
     /// </summary>
@@ -114,7 +118,6 @@ public class PlayerController : Photon.PunBehaviour
     private Animator anim;
 
     // 외부 컴포넌트
-    private Transform cameraT;
     private Camera cam;
 
 
@@ -193,8 +196,8 @@ public class PlayerController : Photon.PunBehaviour
     void ApplyAnimatorParams()
     {
         anim.SetInteger("AniNum", (int)state);
-        anim.SetFloat("MoveX", inputAxis.x, 0.1f, Time.fixedDeltaTime);
-        anim.SetFloat("MoveY", inputAxis.y, 0.1f, Time.fixedDeltaTime);
+        anim.SetFloat("MoveX", inputAxis.x, 0.1f, Time.deltaTime);
+        anim.SetFloat("MoveY", inputAxis.y, 0.1f, Time.deltaTime);
     }
 
     /// <summary>
@@ -250,6 +253,19 @@ public class PlayerController : Photon.PunBehaviour
     }
 
     /// <summary>
+    /// 카메라 방향으로 캐릭터를 회전합니다.
+    /// </summary>
+    public void TurnToScreen()
+    {
+        if (!photonView.isMine) return;
+
+        //Vector3 toDir = Vector3.Scale(cam.transform.position - transform.position , new Vector3(1, 0, 1)).normalized;
+        Vector3 toDir = new Vector3(0, 0, -1);
+
+        transform.rotation = Quaternion.LookRotation(toDir);
+    }
+
+    /// <summary>
     /// 캐릭터의 속도를 초기화 하고 특정 방향으로 힘을 줍니다.
     /// </summary>
     /// <param name="force">힘</param>
@@ -278,16 +294,16 @@ public class PlayerController : Photon.PunBehaviour
     public void Fall()
     {
         stat.onStage = false;
+        stat.KillScoring();
         ChangeState(PlayerAniState.Fall);
         Invoke("Respawn", respawnTime);
         //Invoke("StandBy", 3.0f);
         executer.ChangeFirework(0, 0);
 
-        
-
         Vector3 genPos = transform.position;
         //genPos.y = 2.51f;
         GameObject.Instantiate(GameManagerPhoton._instance.deadEfx_ref, genPos, Quaternion.identity);
+        PlayVoiceSound("Falling");
         FMODUnity.RuntimeManager.PlayOneShot(fallingSound);
 
         StandBy();
@@ -313,8 +329,6 @@ public class PlayerController : Photon.PunBehaviour
         rb.angularVelocity = Vector3.zero;
         rb.Sleep();
         transform.position = Vector3.zero;
-
-        
     }
 
     /// <summary>
@@ -364,6 +378,42 @@ public class PlayerController : Photon.PunBehaviour
         }
     }
 
+    public void PlayVoiceSound(string soundType)
+    {
+        if (characterVoice == null || !photonView.isMine) return;
+
+        switch (soundType)
+        {
+            case "Common":
+                FMODUnity.RuntimeManager.PlayOneShot(characterVoice.commonFireVoice);
+                break;
+            case "Fountain":
+                FMODUnity.RuntimeManager.PlayOneShot(characterVoice.fountainVoice);
+                break;
+            case "Rocket":
+                FMODUnity.RuntimeManager.PlayOneShot(characterVoice.rocketVoice);
+                break;
+            case "Party":
+                FMODUnity.RuntimeManager.PlayOneShot(characterVoice.partyVoice);
+                break;
+            case "Charging":
+                FMODUnity.RuntimeManager.PlayOneShot(characterVoice.chargingVoice);
+                break;
+            case "Hit":
+                FMODUnity.RuntimeManager.PlayOneShot(characterVoice.hitVoice);
+                break;
+            case "Stun":
+                FMODUnity.RuntimeManager.PlayOneShot(characterVoice.stunVoice);
+                break;
+            case "Falling":
+                FMODUnity.RuntimeManager.PlayOneShot(characterVoice.fallingVoice);
+                break;
+            case "Victory":
+                FMODUnity.RuntimeManager.PlayOneShot(characterVoice.victoryVoice);
+                break;
+        }
+    }
+
     /// <summary>
     /// 캐릭터의 애니메이션 상태를 교체합니다.
     /// </summary>
@@ -384,6 +434,9 @@ public class PlayerController : Photon.PunBehaviour
         switch (newState)
         {
             case PlayerAniState.Idle:
+                anim.SetFloat("MoveX", 0);
+                anim.SetFloat("MoveY", 0);
+                inputAxis = Vector2.zero;
                 break;
             case PlayerAniState.Attack:
                 break;
@@ -391,12 +444,13 @@ public class PlayerController : Photon.PunBehaviour
                 stunEfx.SetActive(true);
                 isStun = true;
                 FMODUnity.RuntimeManager.PlayOneShot(stunSound);
-                FMODUnity.RuntimeManager.PlayOneShot(stunVoice);
+                PlayVoiceSound("Stun");
                 Invoke("StunRecovery", stunTime);
                 break;
             case PlayerAniState.Fall:
                 anim.SetFloat("MoveX", 0);
                 anim.SetFloat("MoveY", 0);
+                inputAxis = Vector2.zero;
                 break;
         }
     }

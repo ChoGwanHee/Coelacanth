@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{f319ea7e-8b95-4779-876d-13647f5f336c}">
+        <property name="assetPath">
+            <value>Cuchen_Hit_2.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>1</value>
+        </property>
+        <property name="length">
+            <value>0.56589569160997732</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{00c47356-6e7c-4b58-839f-6cd51f0dba88}</destination>
+        </relationship>
+    </object>
+</objects>

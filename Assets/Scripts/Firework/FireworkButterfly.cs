@@ -37,11 +37,11 @@ public class FireworkButterfly : Firework
     /// </summary>
     public GameObject projectile_ref;
 
+    /// <summary>
+    /// 충전 사운드
+    /// </summary>
     [FMODUnity.EventRef]
     public string chargingSound;
-
-    [FMODUnity.EventRef]
-    public string chargingVoice;
 
 
     public override void Execute(FireworkExecuter executer)
@@ -63,12 +63,10 @@ public class FireworkButterfly : Firework
         UIManager._instance.chargingUI.SetActivate(true);
         UIManager._instance.chargingUI.SetAmount(chargingAmount);
 
-        FMODUnity.RuntimeManager.PlayOneShot(chargingVoice);
-
         Debug.Log("chargingAmount:" + chargingAmount);
         while(Input.GetMouseButton(0))
         {
-            if(chargingAmount < executer.ammo)
+            if(chargingAmount < maxChargingAmount)
             {
                 elapsedTime += Time.deltaTime;
 
@@ -102,8 +100,6 @@ public class FireworkButterfly : Firework
         yield return new WaitForSeconds(0.15f);
 
         PlayerStat stat = executer.GetComponent<PlayerStat>();
-
-        FMODUnity.RuntimeManager.PlayOneShot(voiceSound);
 
         for (int i=0; i< chargingAmount; i++)
         {

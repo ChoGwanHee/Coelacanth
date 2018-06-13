@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PostProcessing;
 
 public enum CameraMode
 {
@@ -22,7 +23,8 @@ public class CameraController : Photon.PunBehaviour {
     public float fastMoveDistance = 5.0f;
     public float baseAddOffset = 6.0f;
 
-    public float maxDistance = 4.0f;
+    public float minDistance = 3.0f;
+    public float maxDistance = 5.0f;
 
     private Vector3 moveVelocity;
     private Vector3 targetPosition = Vector3.zero;
@@ -30,7 +32,6 @@ public class CameraController : Photon.PunBehaviour {
     private Vector3 maxPos = Vector3.zero;
     private float displayedPlayerCount = 0;
     private Vector3 originPosition;
-
 
 
 
@@ -48,21 +49,45 @@ public class CameraController : Photon.PunBehaviour {
     private float originZoomDistance;
 
 
+
+    private float originXAngle;
+    private float targetXAngle;
+    private float rotationXVelocity;
+
+
+    public PostProcessingProfile zoomProfile;
+    private PostProcessingProfile originProfile;
+
+
     private Transform camT;
+    private Transform pivotT;
 
     private PlayerStat targetStat;
+
+    private PostProcessingBehaviour ppb;
 
     private Vector3 defaultMinMax = new Vector3(50f, 0f, 50f);
     
 
     void Start () {
         camT = Camera.main.transform;
+        ppb = camT.GetComponent<PostProcessingBehaviour>();
+        originProfile = ppb.profile;
+        pivotT = transform.GetChild(0);
         targetPosition.y = transform.position.y;
         originPosition = transform.position;
         originZoomDistance = camT.localPosition.z;
+        originXAngle = pivotT.eulerAngles.x;
+        targetXAngle = originXAngle;
+
     }
-	
-	void FixedUpdate () {
+
+    private void OnDisable()
+    {
+        ppb.profile = originProfile;
+    }
+
+    void FixedUpdate () {
 
         switch (mode)
         {
@@ -71,12 +96,20 @@ public class CameraController : Photon.PunBehaviour {
                 CalculateCenter2();
                 AutoZoom();
                 SmoothMovement();
+                SmoothZoom();
                 break;
             case CameraMode.PersonalView:
                 SingleCalculateMinMax();
-                FollowTarget();
+                FollowTargetFocusCenter();
                 AutoZoom();
                 SmoothMovement();
+                SmoothZoom();
+                break;
+            case CameraMode.FrontView:
+                FollowTarget();
+                SmoothMovement();
+                SmoothZoom();
+                SmoothRotation();
                 break;
             case CameraMode.PersonalView2:
                 CalculateCenter3();
@@ -181,7 +214,7 @@ public class CameraController : Photon.PunBehaviour {
     }
 
     // 타겟 따라 다니기
-    void FollowTarget()
+    void FollowTargetFocusCenter()
     {
         if (target != null && targetStat != null && targetStat.onStage)
         {
@@ -193,9 +226,21 @@ public class CameraController : Photon.PunBehaviour {
         }
     }
 
+    void FollowTarget()
+    {
+        if (target != null && targetStat != null && targetStat.onStage)
+        {
+            targetPosition = target.position;
+        }
+        else
+        {
+            targetPosition = originPosition;
+        }
+    }
+
     void CalculateCenter3()
     {
-        if (target != null)
+        if (target != null && targetStat != null && targetStat.onStage)
         {
             Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -206,13 +251,17 @@ public class CameraController : Photon.PunBehaviour {
             Vector3 subVec = centerPosition - target.position;
 
 
-            if (subVec.sqrMagnitude < maxDistance * maxDistance)
+            if (subVec.sqrMagnitude < minDistance * minDistance)
             {
-                targetPosition = centerPosition;
+                targetPosition = target.position;
+            }
+            else if(subVec.sqrMagnitude > maxDistance * maxDistance)
+            {
+                targetPosition = target.position + subVec.normalized * maxDistance;
             }
             else
             {
-                targetPosition = target.position + subVec.normalized * maxDistance;
+                targetPosition = centerPosition;
             }
 
         }
@@ -223,22 +272,25 @@ public class CameraController : Photon.PunBehaviour {
         
     }
 
+
+
     // 부드러운 움직임
     void SmoothMovement()
     {
         // Pivot 이동
-        /*float subDistance = (targetPosition - transform.position).magnitude;
-        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref moveVelocity,
-            (subDistance < fastMoveDistance) ? smoothMoveTime : fastSmoothMoveTime);*/
         float subDistance = (targetPosition - transform.position).magnitude;
-        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref moveVelocity, fastSmoothMoveTime);
+        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref moveVelocity,
+            (subDistance < fastMoveDistance) ? smoothMoveTime : fastSmoothMoveTime);
+    }
 
+    // 부드러운 확대 축소
+    void SmoothZoom()
+    {
         // 카메라 이동(줌 인,아웃)
-        //camT.localPosition = Vector3.SmoothDamp(camT.localPosition, offsetPosition, ref offsetVelocity, smoothMoveTime);
-        /*float distance = Mathf.SmoothDamp(camT.localPosition.z, targetZoomDistance, ref distanceVelocity, smoothZoomTime);
+        float distance = Mathf.SmoothDamp(camT.localPosition.z, targetZoomDistance, ref distanceVelocity, smoothZoomTime);
         Vector3 targetZoomPosition = camT.localPosition;
         targetZoomPosition.z = distance;
-        camT.localPosition = targetZoomPosition;*/
+        camT.localPosition = targetZoomPosition;
     }
 
     // 줌 길이 계산
@@ -278,9 +330,41 @@ public class CameraController : Photon.PunBehaviour {
         }
     }
 
+    // 부드러운 각도 조절
+    void SmoothRotation()
+    {
+        float newXAngle = Mathf.SmoothDampAngle(pivotT.localEulerAngles.x, targetXAngle, ref rotationXVelocity, smoothZoomTime);
+        Vector3 newRotation = pivotT.localEulerAngles;
+        newRotation.x = newXAngle;
+        pivotT.localEulerAngles = newRotation;
+    }
+
     public void SetTarget(Transform newTarget)
     {
         target = newTarget;
         targetStat = target.GetComponent<PlayerStat>();
+    }
+
+    public void ChangeMode(CameraMode newMode)
+    {
+        switch (newMode)
+        {
+            case CameraMode.TotalView:
+                break;
+            case CameraMode.PersonalView:
+                break;
+            case CameraMode.FrontView:
+                targetXAngle = 3.0f;
+                targetZoomDistance = -4.0f;
+                ppb.profile = zoomProfile;
+                break;
+            case CameraMode.PersonalView2:
+                targetXAngle = originXAngle;
+                targetZoomDistance = originZoomDistance;
+                ppb.profile = originProfile;
+                break;
+        }
+
+        mode = newMode;
     }
 }

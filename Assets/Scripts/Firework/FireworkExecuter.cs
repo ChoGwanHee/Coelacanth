@@ -52,7 +52,7 @@ public class FireworkExecuter : Photon.PunBehaviour {
         {
             onFireworkChanged = new OnFireworkChangedDelegate(UIManager._instance.userStatus.ChangeWeapon);
             //onFireworkAmmoChanged = new OnFireworkAmmoChangedDelegate(UIManager._instance.userStatus.SetCount);
-            onFireworkAmmoChanged = new OnFireworkAmmoChangedDelegate(RecalAmmoUI);
+            onFireworkAmmoChanged = new OnFireworkAmmoChangedDelegate(UIManager._instance.ammoCounter.SetAmount);
 
         }
     }
@@ -125,7 +125,7 @@ public class FireworkExecuter : Photon.PunBehaviour {
             // 남은 탄환이 0이면
             if (ammo == 0)
             {
-                ChangeFirework(0, 0);
+                photonView.RPC("ChangeFirework", PhotonTargets.All, 0, 0);
             }
         }
     }

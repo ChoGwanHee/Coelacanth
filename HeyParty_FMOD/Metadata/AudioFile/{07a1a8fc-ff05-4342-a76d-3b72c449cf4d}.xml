@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{07a1a8fc-ff05-4342-a76d-3b72c449cf4d}">
+        <property name="assetPath">
+            <value>MinMin_Win_1.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>1</value>
+        </property>
+        <property name="length">
+            <value>1.8073469387755101</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{00c47356-6e7c-4b58-839f-6cd51f0dba88}</destination>
+        </relationship>
+    </object>
+</objects>

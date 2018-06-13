@@ -27,7 +27,8 @@ public class FireworkFist : Firework
                 PhotonNetwork.Instantiate("Prefabs/Effect_base_Hit_fx", efxPos, Quaternion.identity, 0);
 
                 // 점수 처리
-                PhotonNetwork.player.AddScore(gainScore);
+                effectedObjects[i].GetComponent<PlayerStat>().AddScore(-10);
+                executer.Stat.AddScore(gainScore);
             }
         }
 

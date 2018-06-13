@@ -11406,7 +11406,14 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_GenerateMotionCurves: 0
   m_Events:
-  - time: 0.46666667
+  - time: 0
+    functionName: PlayVoiceSound
+    data: Charging
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.5
     functionName: OnAnimEvent
     data: Attack Execute
     objectReferenceParameter: {fileID: 0}
