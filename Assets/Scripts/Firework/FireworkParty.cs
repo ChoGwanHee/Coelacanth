@@ -64,7 +64,7 @@ public class FireworkParty : Firework {
                     PhotonNetwork.Instantiate("Prefabs/Effect_base_Hit_fx", efxPos, Quaternion.identity, 0);
 
                     // 점수 처리
-                    effectedObjects[i].GetComponent<PlayerStat>().AddScore(-10);
+                    hits[j].collider.GetComponent<PlayerStat>().AddScore(-10);
                     executer.Stat.AddScore(gainScore);
                 }
 
