@@ -63,10 +63,13 @@ public class FireworkButterfly : Firework
         UIManager._instance.chargingUI.SetActivate(true);
         UIManager._instance.chargingUI.SetAmount(chargingAmount);
 
+        PlayerController pc = executer.GetComponent<PlayerController>();
+        pc.SetAnimParam("Charging", true);
+
         Debug.Log("chargingAmount:" + chargingAmount);
         while(Input.GetMouseButton(0))
         {
-            if(chargingAmount < maxChargingAmount)
+            if(chargingAmount < maxChargingAmount && chargingAmount < executer.ammo)
             {
                 elapsedTime += Time.deltaTime;
 
@@ -85,6 +88,8 @@ public class FireworkButterfly : Firework
 
             yield return null;
         }
+        executer.charging = false;
+        pc.SetAnimParam("Charging", false);
 
         executer.StartCoroutine(ChainFire(executer, chargingAmount));
     }

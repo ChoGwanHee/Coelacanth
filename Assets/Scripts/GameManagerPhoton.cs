@@ -415,6 +415,9 @@ public class GameManagerPhoton : Photon.PunBehaviour
 
         // 배경음악 재생
         FMODUnity.RuntimeManager.PlayOneShot(resultBGM);
+
+        // 캐릭터 승리대사 재생
+        focusedPlayer.PlayVoiceSound("Victory");
     }
 
     public void StartLoadTitleScene()

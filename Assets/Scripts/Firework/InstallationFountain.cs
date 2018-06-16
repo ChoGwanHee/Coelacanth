@@ -31,7 +31,7 @@ public class InstallationFountain : BaseInstallation
     /// <summary>
     /// 활성화까지 걸리는 시간
     /// </summary>
-    public float enableTime = 2.0f;
+    public float enableTime = 1.0f;
 
     /// <summary>
     /// 판정 간격

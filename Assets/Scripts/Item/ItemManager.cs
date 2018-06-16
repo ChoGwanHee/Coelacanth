@@ -12,7 +12,8 @@ public class ItemManager : Photon.PunBehaviour {
     public float regenTime = 5.0f;
     private bool regenTimerEnable = true;
     private float elapsedTime = 0f;
-    public int maxBoxCount = 4;
+    public int maxBoxCount = 10;
+    public int startBoxCount = 6;
     [SerializeField]
     public int curBoxCount = 0;
 
@@ -24,7 +25,7 @@ public class ItemManager : Photon.PunBehaviour {
     {
         if(!PhotonNetwork.player.IsMasterClient) return;
 
-        for (int i=0; i <= 4; i++)
+        for (int i=0; i <= startBoxCount; i++)
         {
             RegenItemBox();
         }

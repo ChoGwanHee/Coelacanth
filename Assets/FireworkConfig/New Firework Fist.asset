@@ -14,10 +14,10 @@ MonoBehaviour:
   fwName: "\uC8FC\uBA39"
   fwType: 0
   atType: 0
-  damage: 15
+  damage: 5
   capacity: -1
   gainScore: 10
-  hitForce: 7
+  hitForce: 9
   hitRadius: 0.6
   lifetime: 0
   coolDown: 1

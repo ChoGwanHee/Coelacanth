@@ -210,6 +210,11 @@ public class PlayerController : Photon.PunBehaviour
         anim.SetInteger(param, val);
     }
 
+    public void SetAnimParam(string param, bool val)
+    {
+        anim.SetBool(param, val);
+    }
+
     /// <summary>
     /// 캐릭터를 지정한 위치로 이동시킵니다.
     /// </summary>
@@ -500,15 +505,6 @@ public class PlayerController : Photon.PunBehaviour
             case PlayerAniState.Attack:
                 if (executer.curFirework.fwType == FireworkType.Butterfly)
                 {
-                    if(executer.charging && !Input.GetMouseButton(0))
-                    {
-                        executer.charging = false;
-                        anim.SetBool("Charging", false);
-                    }
-                    else if(!executer.charging && Input.GetMouseButton(0))
-                    {
-                        anim.SetBool("Charging", true);
-                    }
 
                     TurnToMouse();
                 }
