@@ -18055,6 +18055,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 930911931}
+  - component: {fileID: 482860285}
   - component: {fileID: 930911932}
   m_Layer: 5
   m_Name: Status_UI
@@ -18063,6 +18064,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!95 &482860285
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 482860284}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b23e083493dfc2b4a9a6e632362aee69, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1001 &486897303
 Prefab:
   m_ObjectHideFlags: 0
@@ -32702,6 +32720,10 @@ Prefab:
       propertyPath: instantiationId
       value: 35
       objectReference: {fileID: 0}
+    - target: {fileID: 1710261770501044, guid: df9865eed80ff324393733592bc292d7, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: df9865eed80ff324393733592bc292d7, type: 2}
   m_IsPrefabParent: 0
@@ -33295,20 +33317,6 @@ Prefab:
     - target: {fileID: 4009200859597518, guid: 4465ba950529457438ae7c886ba2f26b, type: 2}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114272883736745608, guid: 4465ba950529457438ae7c886ba2f26b,
-        type: 2}
-      propertyPath: minZoomDistance
-      value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 4421387143772456, guid: 4465ba950529457438ae7c886ba2f26b, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -14.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114272883736745608, guid: 4465ba950529457438ae7c886ba2f26b,
-        type: 2}
-      propertyPath: maxDistance
-      value: 3.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4465ba950529457438ae7c886ba2f26b, type: 2}

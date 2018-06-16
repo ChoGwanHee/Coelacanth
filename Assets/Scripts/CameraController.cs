@@ -23,8 +23,10 @@ public class CameraController : Photon.PunBehaviour {
     public float fastMoveDistance = 5.0f;
     public float baseAddOffset = 6.0f;
 
-    public float minDistance = 3.0f;
-    public float maxDistance = 5.0f;
+    public float minPixel = 150.0f;
+    public float maxPixel = 300.0f;
+    //public float minDistance = 3.0f;
+    //public float maxDistance = 6.0f;
 
     private Vector3 moveVelocity;
     private Vector3 targetPosition = Vector3.zero;
@@ -240,7 +242,7 @@ public class CameraController : Photon.PunBehaviour {
 
     void CalculateCenter3()
     {
-        if (target != null && targetStat != null && targetStat.onStage)
+        /*if (target != null && targetStat != null && targetStat.onStage)
         {
             Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -268,8 +270,34 @@ public class CameraController : Photon.PunBehaviour {
         else
         {
             targetPosition = originPosition;
+        }*/
+
+        if(target != null && targetStat != null && targetStat.onStage)
+        {
+            Vector3 mouseVec = Input.mousePosition - new Vector3(Screen.width / 2, Screen.height / 2);
+            float mouseVecSqrMag = mouseVec.sqrMagnitude;
+
+            Vector3 toMouseDirection = new Vector3(mouseVec.x, 0, mouseVec.y).normalized;
+
+            if (mouseVecSqrMag < minPixel * minPixel)
+            {
+                targetPosition = target.position;
+            }
+            else if(mouseVecSqrMag > maxPixel * maxPixel)
+            {
+                targetPosition = target.position + toMouseDirection * (maxPixel / 100);
+            }
+            else
+            {
+                targetPosition = target.position + toMouseDirection * (mouseVec.magnitude / 100);
+            }
+            
         }
-        
+        else
+        {
+            targetPosition = originPosition;
+        }
+
     }
 
 

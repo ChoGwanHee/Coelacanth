@@ -12,9 +12,15 @@ public class UIStatus : MonoBehaviour {
     //public Transform countDisplay;
     public Sprite[] numbers;
 
+
     private bool infinity = true;
 
-    
+    private Animator anim;
+
+    private void Awake()
+    {
+        anim = GetComponent<Animator>();
+    }
 
     public void ChangeWeapon(Firework newFirework)
     {
@@ -36,6 +42,7 @@ public class UIStatus : MonoBehaviour {
         {
             weapon.enabled = true;
             weapon.sprite = newSprite;
+            anim.SetTrigger("GetItem");
         }
     }
 

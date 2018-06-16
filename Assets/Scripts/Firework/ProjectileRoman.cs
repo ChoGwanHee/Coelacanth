@@ -15,6 +15,11 @@ public class ProjectileRoman : BaseProjectile
         {
             Explosion();
         }
+
+        if(speed > 5.0f)
+        {
+            SetSpeed(speed - (300.0f * Time.deltaTime));
+        }
     }
 
     private void OnTriggerEnter(Collider other)

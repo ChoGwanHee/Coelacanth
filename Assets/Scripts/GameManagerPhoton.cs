@@ -76,9 +76,12 @@ public class GameManagerPhoton : Photon.PunBehaviour
 
     [FMODUnity.EventRef]
     public string BGM;
+    FMOD.Studio.EventInstance BGMEvent;
 
     [FMODUnity.EventRef]
     public string resultBGM;
+    FMOD.Studio.EventInstance resultBGMEvent;
+
 
     /// <summary>
     /// 현재 존재하는 플레이어의 리스트
@@ -131,7 +134,11 @@ public class GameManagerPhoton : Photon.PunBehaviour
         int playerIndex = (int)customProperties["PlayerIndex"];
         CreatePlayer(playerIndex, playerGenPos[playerIndex].position);
 
-        FMODUnity.RuntimeManager.PlayOneShot(BGM);
+        // BGM
+        BGMEvent = FMODUnity.RuntimeManager.CreateInstance(BGM);
+        BGMEvent.start();
+
+        resultBGMEvent = FMODUnity.RuntimeManager.CreateInstance(resultBGM);
     }
 
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -407,6 +414,18 @@ public class GameManagerPhoton : Photon.PunBehaviour
         if(focusedPlayer.photonView.isMine)
             UIManager._instance.resultEmotion.gameObject.SetActive(true);
 
+
+        // 시야를 방해하는 오브젝트들 끄기
+        Collider[] colls = Physics.OverlapBox(focusedPlayer.transform.position + new Vector3(0, 4.0f, -2f), new Vector3(1.0f, 4.0f, 2.0f), Quaternion.identity, LayerMask.GetMask("DynamicObject", "SubObject", "TableTopObject","Item"));
+        for(int i=0; i<colls.Length; i++)
+        {
+            if (colls[i].CompareTag("Player")) continue;
+
+            colls[i].gameObject.SetActive(false);
+            Debug.Log(colls[i].gameObject);
+        }
+
+        
         // 배경의 폭죽 켜기
         for(int i = 0; i < backgroundFireworks.Length; i++)
         {
@@ -414,7 +433,8 @@ public class GameManagerPhoton : Photon.PunBehaviour
         }
 
         // 배경음악 재생
-        FMODUnity.RuntimeManager.PlayOneShot(resultBGM);
+        BGMEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        resultBGMEvent.start();
 
         // 캐릭터 승리대사 재생
         focusedPlayer.PlayVoiceSound("Victory");
