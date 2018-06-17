@@ -77,7 +77,7 @@ public class Connected : MonoBehaviour
     {
         if (InstanceValue.TCP != null && InstanceValue.TCP.Connected)
         {
-            ServerManager.Send("DISCONNECT");
+            ServerManager.Send(string.Format("DISCONNECT"));
             Thread.Sleep(500);
             InstanceValue.TCP.Close();
         }

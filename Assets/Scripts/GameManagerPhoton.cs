@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ServerModule;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 [RequireComponent(typeof(PhotonView))]
@@ -241,6 +242,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
 
     public void ChangeState(GameState newState)
     {
+        StateManager.ChangeState((int)newState);
         currentState = newState;
         EnterState(newState);
     }
