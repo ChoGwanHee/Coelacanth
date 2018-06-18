@@ -89,6 +89,8 @@ public class GameManagerPhoton : Photon.PunBehaviour
     [HideInInspector]
     public List<PlayerStat> playerList = new List<PlayerStat>();
 
+    private bool[] playerEnter;
+
 
     /// <summary>
     /// 사망 이펙트
@@ -128,7 +130,10 @@ public class GameManagerPhoton : Photon.PunBehaviour
 
         Cursor.SetCursor(cursorTex, new Vector2(0, 0), CursorMode.ForceSoftware);
 
+        playerEnter = new bool[(PhotonNetwork.room.MaxPlayers)];
+
         PhotonNetwork.isMessageQueueRunning = true;
+
 
         Hashtable customProperties = PhotonNetwork.player.CustomProperties;
         int playerIndex = (int)customProperties["PlayerIndex"];
@@ -146,10 +151,12 @@ public class GameManagerPhoton : Photon.PunBehaviour
         if (stream.isWriting)
         {
             stream.SendNext(remainGameTime);
+            stream.SendNext(playerEnter);
         }
         else
         {
             this.remainGameTime = (float)stream.ReceiveNext();
+            this.playerEnter = (bool[])stream.ReceiveNext();
         }
     }
 
@@ -178,10 +185,16 @@ public class GameManagerPhoton : Photon.PunBehaviour
         Debug.Log("플레이어 퇴장:" + PhotonNetwork.player.NickName);
     }
 
+    [PunRPC]
+    private void AllowCreatePlayer(int characterIndex)
+    {
+        CreatePlayer(characterIndex, playerGenPos[characterIndex].position);
+    }
+
     /// <summary>
     /// 플레이어를 생성합니다.
     /// </summary>
-    public void CreatePlayer(int characterIndex, Vector3 spawnPosition, bool isRandom = false)
+    public void CreatePlayer(int characterIndex, Vector3 spawnPosition)
     {
         string prefabName;
 
@@ -214,8 +227,8 @@ public class GameManagerPhoton : Photon.PunBehaviour
     /// <param name="playerTF">이동시킬 플레이어</param>
     public void RespawnPlayer(Transform playerTF)
     {
-        Hashtable playerProperties = PhotonNetwork.player.CustomProperties;
-        Vector3 pos = playerGenPos[(int)playerProperties["PlayerIndex"]].position;
+        int random = Random.Range(0, 4);
+        Vector3 pos = playerGenPos[random].position;
         pos.y += 0.5f;
 
         playerTF.position = pos;

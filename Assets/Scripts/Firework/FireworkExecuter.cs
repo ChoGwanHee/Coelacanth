@@ -13,7 +13,7 @@ public class FireworkExecuter : Photon.PunBehaviour {
     private float elapsedTime;              // 마지막 발사 후 지난 시간
     public int ammo;                        // 남은 탄약수
     private bool fireEnable = true;         // 발사 가능 여부
-    public bool replaceable = true;        // 폭죽 교체 가능 여부
+    public bool replaceable = true;         // 폭죽 교체 가능 여부
     public bool charging = false;           // 충전 중인지 여부
 
     public delegate void OnFireworkChangedDelegate(Firework newFirework);
@@ -51,9 +51,7 @@ public class FireworkExecuter : Photon.PunBehaviour {
         if (photonView.isMine)
         {
             onFireworkChanged = new OnFireworkChangedDelegate(UIManager._instance.userStatus.ChangeWeapon);
-            //onFireworkAmmoChanged = new OnFireworkAmmoChangedDelegate(UIManager._instance.userStatus.SetCount);
             onFireworkAmmoChanged = new OnFireworkAmmoChangedDelegate(UIManager._instance.ammoCounter.SetAmount);
-
         }
     }
 
@@ -152,18 +150,5 @@ public class FireworkExecuter : Photon.PunBehaviour {
 
             Debug.Log(" 무기교체:" + curFirework.GetType() + "\n교체자:" + photonView.owner);
         }
-    }
-
-    private void RecalAmmoUI(int num)
-    {
-        if(num == -1)
-        {
-            UIManager._instance.gauge.SetRatio(1);
-        }
-        else
-        {
-            UIManager._instance.gauge.SetRatio((float)num / curFirework.capacity);
-        }
-        
     }
 }

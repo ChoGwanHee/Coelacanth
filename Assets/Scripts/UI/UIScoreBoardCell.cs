@@ -63,10 +63,7 @@ public class UIScoreBoardCell : MonoBehaviour {
             elapsedTime += Time.deltaTime;
         }
 
-        if(refStat != null)
-        {
-            SetScore(refPlayer.GetScore());
-        }
+        UpdateScore();
     }
 
     public void SetNickname(string newNick)
@@ -81,9 +78,6 @@ public class UIScoreBoardCell : MonoBehaviour {
         preScore = score;
         score = newScore;
         scoreText.text = newScore.ToString();
-
-        scoreBoard.SortingCells();
-        scoreBoard.CalcRanks();
     }
 
     public void SetTargetPosition(Vector3 targetPos)
@@ -99,5 +93,13 @@ public class UIScoreBoardCell : MonoBehaviour {
         refPlayer = refStat.gameObject.GetPhotonView().owner;
         if(nicknameText != null)
             nicknameText.text = stat.nickname;
+    }
+
+    public void UpdateScore()
+    {
+        if (refStat != null)
+        {
+            SetScore(refPlayer.GetScore());
+        }
     }
 }

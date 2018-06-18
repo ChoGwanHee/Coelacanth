@@ -69,6 +69,8 @@ public class CameraController : Photon.PunBehaviour {
     private PostProcessingBehaviour ppb;
 
     private Vector3 defaultMinMax = new Vector3(50f, 0f, 50f);
+
+    private Vector3 halfScreenSize;
     
 
     void Start () {
@@ -82,6 +84,7 @@ public class CameraController : Photon.PunBehaviour {
         originXAngle = pivotT.eulerAngles.x;
         targetXAngle = originXAngle;
 
+        halfScreenSize = new Vector3(Screen.width * 0.5f, Screen.height * 0.5f);
     }
 
     private void OnDisable()
@@ -274,7 +277,7 @@ public class CameraController : Photon.PunBehaviour {
 
         if(target != null && targetStat != null && targetStat.onStage)
         {
-            Vector3 mouseVec = Input.mousePosition - new Vector3(Screen.width / 2, Screen.height / 2);
+            Vector3 mouseVec = Input.mousePosition - halfScreenSize;
             float mouseVecSqrMag = mouseVec.sqrMagnitude;
 
             Vector3 toMouseDirection = new Vector3(mouseVec.x, 0, mouseVec.y).normalized;
@@ -285,13 +288,12 @@ public class CameraController : Photon.PunBehaviour {
             }
             else if(mouseVecSqrMag > maxPixel * maxPixel)
             {
-                targetPosition = target.position + toMouseDirection * (maxPixel / 100);
+                targetPosition = target.position + toMouseDirection * (maxPixel * 0.01f);
             }
             else
             {
-                targetPosition = target.position + toMouseDirection * (mouseVec.magnitude / 100);
+                targetPosition = target.position + toMouseDirection * (mouseVec.magnitude * 0.01f);
             }
-            
         }
         else
         {

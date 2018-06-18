@@ -12,7 +12,15 @@ public class UIScoreBoard : MonoBehaviour {
     public UIScoreBoardCell[] cells;
 
     public float cellSpacing = 19f;
-    
+
+    public float scoreUpdateTime = 0.3f;
+    private float lastUpdateElapsedTime = 0;
+
+
+    private void Update()
+    {
+        UpdateScores();
+    }
 
     public void SetMyRankImg(int num)
     {
@@ -21,7 +29,7 @@ public class UIScoreBoard : MonoBehaviour {
         rankImg.sprite = rankRefs[num-1];
     }
 
-    public void CalcRanks()
+    private void CalcRanks()
     {
         for (int i = 0; i < cells.Length; i++)
         {
@@ -46,7 +54,7 @@ public class UIScoreBoard : MonoBehaviour {
         }
     }
 
-    public void SortingCells()
+    private void SortingCells()
     {
         UIScoreBoardCell tmpCell;
 
@@ -72,6 +80,24 @@ public class UIScoreBoard : MonoBehaviour {
             
             cells[i].SetTargetPosition(new Vector3(0, curY));
             curY -= cellHeight;
+        }
+    }
+
+    private void UpdateScores()
+    {
+        lastUpdateElapsedTime += Time.deltaTime;
+
+        if(lastUpdateElapsedTime >= scoreUpdateTime)
+        {
+            for (int i = 0; i < cells.Length; i++)
+            {
+                cells[i].UpdateScore();
+            }
+
+            SortingCells();
+            CalcRanks();
+
+            lastUpdateElapsedTime = 0;
         }
     }
 

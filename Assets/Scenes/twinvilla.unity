@@ -336,7 +336,12 @@ Prefab:
       propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 1212260409393928, guid: 52b45b5d6b890b74bb6f56cff35fc47b, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 95100337902895402, guid: 52b45b5d6b890b74bb6f56cff35fc47b, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 52b45b5d6b890b74bb6f56cff35fc47b, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &55550543
@@ -29341,6 +29346,7 @@ MonoBehaviour:
   - {fileID: 1948231341}
   - {fileID: 1115657633}
   cellSpacing: 19
+  scoreUpdateTime: 0.3
 --- !u!1001 &1309845097
 Prefab:
   m_ObjectHideFlags: 0
@@ -33612,6 +33618,10 @@ Prefab:
         type: 2}
       propertyPath: m_CastShadows
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538458691796010, guid: 96ea1e8902d42184e87a49a31ef82f4b, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96ea1e8902d42184e87a49a31ef82f4b, type: 2}

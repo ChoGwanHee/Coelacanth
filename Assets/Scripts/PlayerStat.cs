@@ -34,7 +34,7 @@ public class PlayerStat : Photon.PunBehaviour
     /// <summary>
     /// 플레이어의 점수
     /// </summary>
-    private int score;
+    //private int score;
     /*public int Score
     {
         get { return score; }
