@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System;
 using System.IO;
+using System.Threading;
 
-public class LobbyManager : InstanceValue
+public class LobbyManager : MonoBehaviour
 {
     public GameObject PhotonLobby, NetworkManager;
 
@@ -25,6 +26,7 @@ public class LobbyManager : InstanceValue
     {
         Debug.Log("Lobby object Availabled");
         NetworkManager.SetActive(true);
-        //PhotonLobby.SetActive(true);
+        Thread.Sleep(1000);
+        PhotonLobby.SetActive(true);
     }
 }
