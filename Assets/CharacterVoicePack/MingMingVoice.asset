@@ -11,12 +11,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70dce7a955d79a94ca571b0ca648be6b, type: 3}
   m_Name: MingMingVoice
   m_EditorClassIdentifier: 
-  commonFireVoice: event:/SFX/Character/Voice/Attack/Romang, Butter/SFX_MinMin_Attack
-  fountainVoice: event:/SFX/Character/Voice/Attack/Fountain/SFX_MinMin_Fountain
-  rocketVoice: event:/SFX/Character/Voice/Attack/Rocket/SFX_MinMin_Rocket
-  partyVoice: event:/SFX/Character/Voice/Attack/Party/SFX_MinMin_Party
-  chargingVoice: event:/SFX/Character/Voice/Attack/Charge/SFX_MinMin_Charge
-  hitVoice: event:/SFX/Character/Voice/Hit/SFX_MinMin_Hit
-  stunVoice: event:/SFX/Character/Voice/Stun/SFX_MinMin_Stun
-  fallingVoice: event:/SFX/Character/Voice/Fall/SFX_MinMin_Fall
-  victoryVoice: event:/SFX/Character/Voice/Win/SFX_MinMin_Win
+  commonFireVoice: event:/SFX_Stage1/Character/Voice/Attack/Romang, Butter/SFX_MinMin_Attack
+  fountainVoice: event:/SFX_Stage1/Character/Voice/Attack/Fountain/SFX_MinMin_Fountain
+  rocketVoice: event:/SFX_Stage1/Character/Voice/Attack/Rocket/SFX_MinMin_Rocket
+  partyVoice: event:/SFX_Stage1/Character/Voice/Attack/Party/SFX_MinMin_Party
+  chargingVoice: event:/SFX_Stage1/Character/Voice/Attack/Charge/SFX_MinMin_Charge
+  hitVoice: event:/SFX_Stage1/Character/Voice/Hit/SFX_MinMin_Hit
+  stunVoice: event:/SFX_Stage1/Character/Voice/Stun/SFX_MinMin_Stun
+  fallingVoice: event:/SFX_Stage1/Character/Voice/Fall/SFX_MinMin_Fall
+  victoryVoice: event:/SFX_Stage1/Character/Voice/Win/SFX_MinMin_Win

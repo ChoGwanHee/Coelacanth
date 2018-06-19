@@ -152,6 +152,21 @@ public class ItemManager : Photon.PunBehaviour {
         curBoxCount++;
     }
 
+    /// <summary>
+    /// 아이템 매니저의 모든 기능을 중단하고 아이템 박스들을 비활성화 합니다.
+    /// </summary>
+    public void StopAllFeature()
+    {
+        StopAllCoroutines();
+        active = false;
+
+        // 아이템 박스들 비활성화
+        for (int i = 0; i < itemBoxPool.Length; i++)
+        {
+            itemBoxPool[i].gameObject.SetActive(false);
+        }
+    }
+
     private Vector3 GetRandomPos(Vector3 pos1, Vector3 pos2)
     {
         Vector3 minPos = Vector3.zero;

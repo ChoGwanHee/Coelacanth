@@ -1012,8 +1012,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tableIndex: 0
   alive: 0
-  getSound: event:/SFX/Item/WeaponBox/SFX_Normalbox
-  spawnSound: event:/SFX/Item/WeaponBox/SFX_Boombox
+  getSound: event:/SFX_Stage1/Item/WeaponBox/SFX_Normalbox
+  spawnSound: event:/SFX_Stage1/Item/WeaponBox/SFX_Boombox
 --- !u!137 &137035828619020788
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

@@ -54,7 +54,7 @@ GameObject:
   - component: {fileID: 33466092290154296}
   - component: {fileID: 23702849246681888}
   m_Layer: 13
-  m_Name: B1
+  m_Name: B2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -260,7 +260,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1978563458120296}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.38480636, y: 4.8530345, z: 1.9776345}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4045485033666890}
@@ -394,7 +394,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 478c7ba55de06c24ab5af6271171045e, type: 2}
+  - {fileID: 2100000, guid: 79e5df098b4331144a539ece57a33f7a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -420,7 +420,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1208879381909008}
-  m_Mesh: {fileID: 4300000, guid: fd31443785e73e64682cc508efea528d, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 639254726e2e68a45804d151545cae45, type: 3}
 --- !u!114 &114230349459028244
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -464,7 +464,7 @@ MonoBehaviour:
   hitForce: 0
   hitRadius: 0
   enableTime: 1
-  duringSound: event:/SFX/Weapon/Shoot/SFX_FountainShot
+  duringSound: event:/SFX_Stage1/Weapon/Shoot/SFX_FountainShot
 --- !u!198 &198241861434640618
 ParticleSystem:
   m_ObjectHideFlags: 1

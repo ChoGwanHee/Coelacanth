@@ -68,4 +68,5 @@ MonoBehaviour:
   - RunGameEvent
   - Spotlight
   - AllowCreatePlayer
+  - RemoteCreatePlayer
   DisableAutoOpenWizard: 1

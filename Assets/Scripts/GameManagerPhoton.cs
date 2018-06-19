@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
@@ -82,6 +83,10 @@ public class GameManagerPhoton : Photon.PunBehaviour
     public string resultBGM;
     FMOD.Studio.EventInstance resultBGMEvent;
 
+    [FMODUnity.EventRef]
+    public string backgroundFirework;
+    FMOD.Studio.EventInstance backgroundFireworkEvent;
+
 
     /// <summary>
     /// 현재 존재하는 플레이어의 리스트
@@ -89,7 +94,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
     [HideInInspector]
     public List<PlayerStat> playerList = new List<PlayerStat>();
 
-    private bool[] playerEnter;
+    private int[] playerEnter;
 
 
     /// <summary>
@@ -130,20 +135,31 @@ public class GameManagerPhoton : Photon.PunBehaviour
 
         Cursor.SetCursor(cursorTex, new Vector2(0, 0), CursorMode.ForceSoftware);
 
-        playerEnter = new bool[(PhotonNetwork.room.MaxPlayers)];
+        playerEnter = new int[(PhotonNetwork.room.MaxPlayers)];
+        
 
         PhotonNetwork.isMessageQueueRunning = true;
-
-
-        Hashtable customProperties = PhotonNetwork.player.CustomProperties;
-        int playerIndex = (int)customProperties["PlayerIndex"];
-        CreatePlayer(playerIndex, playerGenPos[playerIndex].position);
+        
+        if(PhotonNetwork.isMasterClient)
+        {
+            CreatePlayer(0, playerGenPos[0].position);
+            
+            playerEnter[0] = photonView.ownerId;
+            for (int i = 1; i < playerEnter.Length; i++)
+            {
+                playerEnter[i] = -1;
+            }
+        }
 
         // BGM
-        BGMEvent = FMODUnity.RuntimeManager.CreateInstance(BGM);
-        BGMEvent.start();
+        //BGMEvent = FMODUnity.RuntimeManager.CreateInstance(BGM);
+        //BGMEvent.start();
+        //backgroundFireworkEvent = FMODUnity.RuntimeManager.CreateInstance(backgroundFirework);
+        //backgroundFireworkEvent.start();
 
         resultBGMEvent = FMODUnity.RuntimeManager.CreateInstance(resultBGM);
+
+        
     }
 
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -151,42 +167,81 @@ public class GameManagerPhoton : Photon.PunBehaviour
         if (stream.isWriting)
         {
             stream.SendNext(remainGameTime);
+            stream.SendNext(isPlaying);
             stream.SendNext(playerEnter);
         }
         else
         {
             this.remainGameTime = (float)stream.ReceiveNext();
-            this.playerEnter = (bool[])stream.ReceiveNext();
+            this.isPlaying = (bool)stream.ReceiveNext();
+            this.playerEnter = (int[])stream.ReceiveNext();
         }
     }
+
 
     public override void OnPhotonPlayerConnected(PhotonPlayer player)
     {
         Debug.Log("플레이어 접속:" + player.NickName);
-        
+
+        if (PhotonNetwork.isMasterClient)
+        {
+            CreateOtherPlayerCharacter(player);
+        }
     }
 
     public override void OnPhotonPlayerDisconnected(PhotonPlayer otherPlayer)
     {
-        Hashtable roomProperties = PhotonNetwork.room.CustomProperties;
-        Hashtable playerProperties = otherPlayer.CustomProperties;
+        Debug.Log("플레이어 접속 종료:" + otherPlayer.NickName);
 
         if (PhotonNetwork.isMasterClient)
         {
-            roomProperties["PlayerEnter" + (int)playerProperties["PlayerIndex"]] = false;
-            PhotonNetwork.room.SetCustomProperties(roomProperties);
+            for(int i=0; i<playerEnter.Length; i++)
+            {
+                if(playerEnter[i] == otherPlayer.ID)
+                {
+                    playerEnter[i] = -1;
+                    break;
+                }
+            }
         }
-
-        Debug.Log("플레이어 접속 종료:" + otherPlayer.NickName);
     }
 
     public override void OnLeftRoom()
     {
         Debug.Log("플레이어 퇴장:" + PhotonNetwork.player.NickName);
+        
     }
 
+    /// <summary>
+    /// 다른 사람의 플레이어블 캐릭터를 생성합니다. (마스터 전용)
+    /// </summary>
+    private void CreateOtherPlayerCharacter(PhotonPlayer player)
+    {
+        int characterIndex = -1;
+        for (int i = 0; i < playerEnter.Length; i++)
+        {
+            if (playerEnter[i] == -1)
+            {
+                characterIndex = i;
+                playerEnter[i] = player.ID;
+                break;
+            }
+        }
+
+        if (characterIndex == -1)
+        {
+            Debug.Log("남은 캐릭터 슬롯이 없음!");
+        }
+
+        photonView.RPC("RemoteCreatePlayer", player, characterIndex);
+    }
+
+    /// <summary>
+    /// 플레이어 캐릭터 원격 생성 명령
+    /// </summary>
+    /// <param name="characterIndex">플레이어</param>
     [PunRPC]
-    private void AllowCreatePlayer(int characterIndex)
+    private void RemoteCreatePlayer(int characterIndex)
     {
         CreatePlayer(characterIndex, playerGenPos[characterIndex].position);
     }
@@ -196,28 +251,29 @@ public class GameManagerPhoton : Photon.PunBehaviour
     /// </summary>
     public void CreatePlayer(int characterIndex, Vector3 spawnPosition)
     {
-        string prefabName;
+        StringBuilder prefabName = new StringBuilder("Prefabs/Character/");
 
         switch (characterIndex)
         {
             case 0:
-                prefabName = "Dahong_0521";
+                prefabName.Append("Dahong_0521");
                 break;
             case 1:
-                prefabName = "MingMing_0516";
+                prefabName.Append("MingMing_0516");
                 break;
             case 2:
-                prefabName = "ShoSho_0605_2";
+                prefabName.Append("ShoSho_0605_2");
                 break;
             case 3:
-                prefabName = "CuChen_0612";
+                prefabName.Append("CuChen_0612");
                 break;
             default:
-                prefabName = "Dahong_0424";
+                prefabName.Append("Dahong_0424");
                 break;
         }
 
-        PhotonNetwork.Instantiate("Prefabs/Character/"+prefabName, spawnPosition, Quaternion.identity, 0);
+        PhotonNetwork.Instantiate(prefabName.ToString(), spawnPosition, Quaternion.identity, 0);
+        
         Debug.Log("플레이어 생성");
     }
 
@@ -264,7 +320,8 @@ public class GameManagerPhoton : Photon.PunBehaviour
         }
 
         // 게임 시작
-        photonView.RPC("RunGameEvent", PhotonTargets.All, (int)GameEvent.GameStart);
+        isPlaying = true;
+        photonView.RPC("RunGameEvent", PhotonTargets.AllBuffered, (int)GameEvent.GameStart);
         return true;
     }
 
@@ -281,7 +338,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
                     itemManager.active = true;
                     StartCoroutine(GameLoop());
                 }
-                isPlaying = true;
+                
                 SetPlayerActive(true);
 
                 break;
@@ -429,24 +486,24 @@ public class GameManagerPhoton : Photon.PunBehaviour
 
 
         // 시야를 방해하는 오브젝트들 끄기
-        Collider[] colls = Physics.OverlapBox(focusedPlayer.transform.position + new Vector3(0, 4.0f, -2f), new Vector3(1.0f, 4.0f, 2.0f), Quaternion.identity, LayerMask.GetMask("DynamicObject", "SubObject", "TableTopObject","Item"));
+        Collider[] colls = Physics.OverlapBox(focusedPlayer.transform.position + new Vector3(0, 4.0f, -2f), new Vector3(1.0f, 4.0f, 2.0f), Quaternion.identity, LayerMask.GetMask("DynamicObject", "SubObject", "TableTopObject"));
         for(int i=0; i<colls.Length; i++)
         {
             if (colls[i].CompareTag("Player")) continue;
 
             colls[i].gameObject.SetActive(false);
-            Debug.Log(colls[i].gameObject);
         }
+        itemManager.StopAllFeature();
 
-        
+
         // 배경의 폭죽 켜기
-        for(int i = 0; i < backgroundFireworks.Length; i++)
+        for (int i = 0; i < backgroundFireworks.Length; i++)
         {
             backgroundFireworks[i].SetActive(true);
         }
 
         // 배경음악 재생
-        BGMEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        //BGMEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         resultBGMEvent.start();
 
         // 캐릭터 승리대사 재생

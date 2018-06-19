@@ -100,6 +100,20 @@ public class PlayerController : Photon.PunBehaviour
     private Ray mouseRay;
     private RaycastHit mouseHit;
 
+
+    /// <summary>
+    /// 폭죽을 들 수 있는 손안의 본
+    /// </summary>
+    public Transform weaponPoint;
+
+    /// <summary>
+    /// 손에 붙일 수 있는 폭죽 프리팹 모음
+    /// </summary>
+    public FireworkHandObjectSet handObjectSet;
+
+    private GameObject attachedHandObject;
+
+
     /// <summary>
     /// 플레이어 발 밑에 하얀색 원 (자신만 활성화)
     /// </summary>
@@ -115,6 +129,7 @@ public class PlayerController : Photon.PunBehaviour
     private PlayerStat stat;
     private FireworkExecuter executer;
     private Rigidbody rb;
+    private CapsuleCollider col;
     private Animator anim;
 
     // 외부 컴포넌트
@@ -129,18 +144,18 @@ public class PlayerController : Photon.PunBehaviour
 
     void Start () {
         rb = GetComponent<Rigidbody>();
+        col = GetComponent<CapsuleCollider>();
         cam = Camera.main;
         stat = GetComponent<PlayerStat>();
         executer = GetComponent<FireworkExecuter>();
         anim = GetComponent<Animator>();
         groundMask = LayerMask.GetMask("Ground");
-        //walkingEvent = FMODUnity.RuntimeManager.CreateInstance(walkingSound);
-        //FMODUnity.RuntimeManager.AttachInstanceToGameObject(walkingEvent, transform, rb);
 
         if (photonView.isMine)
         {
             ring.SetActive(true);
         }
+
     }
 
     private void Update()
@@ -298,15 +313,14 @@ public class PlayerController : Photon.PunBehaviour
     [PunRPC]
     public void Fall()
     {
+        col.enabled = false;
         stat.onStage = false;
         stat.KillScoring();
         ChangeState(PlayerAniState.Fall);
         Invoke("Respawn", respawnTime);
-        //Invoke("StandBy", 3.0f);
         executer.ChangeFirework(0, 0);
 
         Vector3 genPos = transform.position;
-        //genPos.y = 2.51f;
         GameObject.Instantiate(GameManagerPhoton._instance.deadEfx_ref, genPos, Quaternion.identity);
         PlayVoiceSound("Falling");
         FMODUnity.RuntimeManager.PlayOneShot(fallingSound);
@@ -351,36 +365,18 @@ public class PlayerController : Photon.PunBehaviour
     /// </summary>
     private void Respawn()
     {
-        GameManagerPhoton._instance.RespawnPlayer(transform);
+        if (photonView.isMine)
+        {
+            GameManagerPhoton._instance.RespawnPlayer(transform);
+        }
         stat.HPReset();
         stat.onStage = true;
         if(GameManagerPhoton._instance.IsPlaying)
             isControlable = true;
         rb.WakeUp();
         rb.useGravity = true;
+        col.enabled = true;
         ChangeState(PlayerAniState.Idle);
-    }
-
-    private void MoveSound()
-    {
-        walkingEvent.getPlaybackState(out walkingSoundState);
-
-        if (state == PlayerAniState.Idle)
-        {
-            if (Velocity.sqrMagnitude > 0.01f)
-            {
-                print(Velocity.sqrMagnitude);
-                if (walkingSoundState == FMOD.Studio.PLAYBACK_STATE.STOPPED)
-                {
-                    walkingEvent.start();
-                }
-            }
-        }
-        else
-        {
-            if(walkingSoundState == FMOD.Studio.PLAYBACK_STATE.PLAYING)
-                walkingEvent.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-        }
     }
 
     public void PlayVoiceSound(string soundType)
@@ -538,6 +534,49 @@ public class PlayerController : Photon.PunBehaviour
 
             case "Play Start Sound":
                 FMODUnity.RuntimeManager.PlayOneShot(executer.curFirework.startSound);
+                break;
+        }
+    }
+
+    /// <summary>
+    /// 손에 들 수 있는 폭죽인지 체크
+    /// </summary>
+    /// <param name="newFirework"></param>
+    public void CheckHandObject(Firework newFirework)
+    {
+        switch (newFirework.fwType)
+        {
+            case FireworkType.Roman:
+            case FireworkType.Fountain:
+            case FireworkType.Rocket:
+            case FireworkType.Party:
+                Destroy(attachedHandObject);
+                AttackToHand(newFirework.fwType);
+                break;
+            default:
+                break;
+        }
+    }
+
+    /// <summary>
+    /// 손에 폭죽 붙이기
+    /// </summary>
+    /// <param name="num">붙일 폭죽 번호</param>
+    public void AttackToHand(FireworkType type)
+    {
+        switch (type)
+        {
+            case FireworkType.Roman:
+                attachedHandObject = Instantiate(handObjectSet.objects[0], weaponPoint);
+                break;
+            case FireworkType.Fountain:
+                attachedHandObject = Instantiate(handObjectSet.objects[1], weaponPoint);
+                break;
+            case FireworkType.Rocket:
+                attachedHandObject = Instantiate(handObjectSet.objects[2], weaponPoint);
+                break;
+            case FireworkType.Party:
+                attachedHandObject = Instantiate(handObjectSet.objects[3], weaponPoint);
                 break;
         }
     }

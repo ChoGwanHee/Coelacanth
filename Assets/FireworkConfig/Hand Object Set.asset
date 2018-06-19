@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 820e1369897526f46b2279f888619879, type: 3}
+  m_Name: Hand Object Set
+  m_EditorClassIdentifier: 
+  objects:
+  - {fileID: 1460067055147986, guid: 229078c4d8b6b584f8a8294d0c69dc42, type: 2}
+  - {fileID: 1666223506227360, guid: 27602aa60332aa2418d485c7d8629a88, type: 2}
+  - {fileID: 1185575423877482, guid: 3753c2c27b814dd408fd95d3453f6692, type: 2}
+  - {fileID: 1125583138475082, guid: a46d4c00caf71554da4fa4743bfc033c, type: 2}

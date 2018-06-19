@@ -12,8 +12,120 @@ AnimationClip:
   m_UseHighQualityCurve: 0
   m_RotationCurves: []
   m_CompressedRotationCurves: []
-  m_EulerCurves: []
-  m_PositionCurves: []
+  m_EulerCurves:
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: 240, y: -110, z: -247.718}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.6
+        value: {x: 234.401, y: -71.77698, z: -308.363}
+        inSlope: {x: -1.9527366, y: 9.00546, z: -104.40557}
+        outSlope: {x: -1.9527366, y: 9.00546, z: -104.40557}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.73333335
+        value: {x: 234.043, y: -70.12598, z: -327.50403}
+        inSlope: {x: 0, y: 0, z: -91.78242}
+        outSlope: {x: 0, y: 0, z: -91.78242}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.8333333
+        value: {x: 238.851, y: -75.065, z: -332.858}
+        inSlope: {x: 66.07499, y: 0, z: -107.079475}
+        outSlope: {x: 66.07499, y: 0, z: -107.079475}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.93333334
+        value: {x: 247.258, y: -26.971008, z: -415.107}
+        inSlope: {x: 109.56002, y: 375.965, z: -574.59}
+        outSlope: {x: 109.56002, y: 375.965, z: -574.59}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1.0333333
+        value: {x: 260.763, y: 0.12799072, z: -447.776}
+        inSlope: {x: 100.40951, y: 149.09998, z: -143.94006}
+        outSlope: {x: 100.40951, y: 149.09998, z: -143.94006}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1.0666667
+        value: {x: 264.11, y: 5.097992, z: -452.574}
+        inSlope: {x: 72.869965, y: 106.5, z: 0}
+        outSlope: {x: 72.869965, y: 106.5, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1.1
+        value: {x: 265.621, y: 7.227997, z: -418.31598}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 R Clavicle/Bip001
+      R UpperArm/Bip001 R Forearm/Bip001 R Hand/Bone_Weapon
+  m_PositionCurves:
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: -0.512, y: 0.378, z: 0.065}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.6
+        value: {x: -0.438, y: 0.616, z: -0.117}
+        inSlope: {x: 0, y: 0, z: -0.41454545}
+        outSlope: {x: 0, y: 0, z: -0.41454545}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.73333335
+        value: {x: -0.659, y: 0.483, z: -0.239}
+        inSlope: {x: -0.87428594, y: -2.2800002, z: -0.5657147}
+        outSlope: {x: -0.87428594, y: -2.2800002, z: -0.5657147}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.8333333
+        value: {x: -0.71, y: 0.038, z: -0.272}
+        inSlope: {x: -1.02, y: -4.1400003, z: 0}
+        outSlope: {x: -1.02, y: -4.1400003, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.93333334
+        value: {x: -0.957, y: -0.345, z: -0.205}
+        inSlope: {x: 0, y: -2.6000001, z: 0}
+        outSlope: {x: 0, y: -2.6000001, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1.0333333
+        value: {x: -0.53, y: -0.482, z: -0.475}
+        inSlope: {x: 3.5399976, y: 0, z: -0.30000076}
+        outSlope: {x: 3.5399976, y: 0, z: -0.30000076}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1.0666667
+        value: {x: -0.412, y: -0.415, z: -0.485}
+        inSlope: {x: 2.819997, y: 4.0199966, z: 0}
+        outSlope: {x: 2.819997, y: 4.0199966, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1.1
+        value: {x: -0.342, y: -0.06, z: -0.318}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 R Clavicle/Bip001
+      R UpperArm/Bip001 R Forearm/Bip001 R Hand/Bone_Weapon
   m_ScaleCurves: []
   m_FloatCurves:
   - curve:
@@ -16040,6 +16152,29 @@ AnimationClip:
     path: 
     classID: 95
     script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+      - serializedVersion: 2
+        time: 1.1333333
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_IsActive
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 R Clavicle/Bip001
+      R UpperArm/Bip001 R Forearm/Bip001 R Hand/Bone_Weapon
+    classID: 1
+    script: {fileID: 0}
   m_PPtrCurves: []
   m_SampleRate: 30
   m_WrapMode: 0
@@ -16048,6 +16183,27 @@ AnimationClip:
     m_Extent: {x: 0, y: 0, z: 0}
   m_ClipBindingConstant:
     genericBindings:
+    - serializedVersion: 2
+      path: 623190350
+      attribute: 2086281974
+      script: {fileID: 0}
+      typeID: 1
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 623190350
+      attribute: 1
+      script: {fileID: 0}
+      typeID: 4
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 623190350
+      attribute: 4
+      script: {fileID: 0}
+      typeID: 4
+      customType: 4
+      isPPtrCurve: 0
     - serializedVersion: 2
       path: 0
       attribute: 7
@@ -33046,7 +33202,417 @@ AnimationClip:
     path: 
     classID: 95
     script: {fileID: 0}
-  m_EulerEditorCurves: []
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+      - serializedVersion: 2
+        time: 1.1333333
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_IsActive
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 R Clavicle/Bip001
+      R UpperArm/Bip001 R Forearm/Bip001 R Hand/Bone_Weapon
+    classID: 1
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 240
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.6
+        value: 234.401
+        inSlope: -1.9527366
+        outSlope: -1.9527366
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.73333335
+        value: 234.043
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.8333333
+        value: 238.851
+        inSlope: 66.07499
+        outSlope: 66.07499
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.93333334
+        value: 247.258
+        inSlope: 109.56002
+        outSlope: 109.56002
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1.0333333
+        value: 260.763
+        inSlope: 100.40951
+        outSlope: 100.40951
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1.0666667
+        value: 264.11
+        inSlope: 72.869965
+        outSlope: 72.869965
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1.1
+        value: 265.621
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.x
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 R Clavicle/Bip001
+      R UpperArm/Bip001 R Forearm/Bip001 R Hand/Bone_Weapon
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -110
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.6
+        value: -71.77698
+        inSlope: 9.00546
+        outSlope: 9.00546
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.73333335
+        value: -70.12598
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.8333333
+        value: -75.065
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.93333334
+        value: -26.971008
+        inSlope: 375.965
+        outSlope: 375.965
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1.0333333
+        value: 0.12799072
+        inSlope: 149.09998
+        outSlope: 149.09998
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1.0666667
+        value: 5.097992
+        inSlope: 106.5
+        outSlope: 106.5
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1.1
+        value: 7.227997
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.y
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 R Clavicle/Bip001
+      R UpperArm/Bip001 R Forearm/Bip001 R Hand/Bone_Weapon
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -247.718
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.6
+        value: -308.363
+        inSlope: -104.40557
+        outSlope: -104.40557
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.73333335
+        value: -327.50403
+        inSlope: -91.78242
+        outSlope: -91.78242
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.8333333
+        value: -332.858
+        inSlope: -107.079475
+        outSlope: -107.079475
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.93333334
+        value: -415.107
+        inSlope: -574.59
+        outSlope: -574.59
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1.0333333
+        value: -447.776
+        inSlope: -143.94006
+        outSlope: -143.94006
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1.0666667
+        value: -452.574
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1.1
+        value: -418.31598
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.z
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 R Clavicle/Bip001
+      R UpperArm/Bip001 R Forearm/Bip001 R Hand/Bone_Weapon
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -0.512
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.6
+        value: -0.438
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.73333335
+        value: -0.659
+        inSlope: -0.87428594
+        outSlope: -0.87428594
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.8333333
+        value: -0.71
+        inSlope: -1.02
+        outSlope: -1.02
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.93333334
+        value: -0.957
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1.0333333
+        value: -0.53
+        inSlope: 3.5399976
+        outSlope: 3.5399976
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1.0666667
+        value: -0.412
+        inSlope: 2.819997
+        outSlope: 2.819997
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1.1
+        value: -0.342
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.x
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 R Clavicle/Bip001
+      R UpperArm/Bip001 R Forearm/Bip001 R Hand/Bone_Weapon
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0.378
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.6
+        value: 0.616
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.73333335
+        value: 0.483
+        inSlope: -2.2800002
+        outSlope: -2.2800002
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.8333333
+        value: 0.038
+        inSlope: -4.1400003
+        outSlope: -4.1400003
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.93333334
+        value: -0.345
+        inSlope: -2.6000001
+        outSlope: -2.6000001
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1.0333333
+        value: -0.482
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1.0666667
+        value: -0.415
+        inSlope: 4.0199966
+        outSlope: 4.0199966
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1.1
+        value: -0.06
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.y
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 R Clavicle/Bip001
+      R UpperArm/Bip001 R Forearm/Bip001 R Hand/Bone_Weapon
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0.065
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.6
+        value: -0.117
+        inSlope: -0.41454545
+        outSlope: -0.41454545
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.73333335
+        value: -0.239
+        inSlope: -0.5657147
+        outSlope: -0.5657147
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.8333333
+        value: -0.272
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.93333334
+        value: -0.205
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1.0333333
+        value: -0.475
+        inSlope: -0.30000076
+        outSlope: -0.30000076
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1.0666667
+        value: -0.485
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1.1
+        value: -0.318
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.z
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 R Clavicle/Bip001
+      R UpperArm/Bip001 R Forearm/Bip001 R Hand/Bone_Weapon
+    classID: 4
+    script: {fileID: 0}
+  m_EulerEditorCurves:
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 R Clavicle/Bip001
+      R UpperArm/Bip001 R Forearm/Bip001 R Hand/Bone_Weapon
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 R Clavicle/Bip001
+      R UpperArm/Bip001 R Forearm/Bip001 R Hand/Bone_Weapon
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 R Clavicle/Bip001
+      R UpperArm/Bip001 R Forearm/Bip001 R Hand/Bone_Weapon
+    classID: 4
+    script: {fileID: 0}
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_GenerateMotionCurves: 0

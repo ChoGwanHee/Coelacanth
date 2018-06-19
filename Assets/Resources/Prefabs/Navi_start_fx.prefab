@@ -237,7 +237,7 @@ MonoBehaviour:
   speed: 0
   gainScore: 0
   duringSound: 
-  endSound: event:/SFX/Weapon/Hit/SFX_ButterHit
+  endSound: event:/SFX_Stage1/Weapon/Hit/SFX_ButterHit
   target: {fileID: 0}
   rotateAngle: 0
 --- !u!114 &114327103225136890
