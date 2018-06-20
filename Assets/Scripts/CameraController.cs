@@ -25,8 +25,6 @@ public class CameraController : Photon.PunBehaviour {
 
     public float minPixel = 150.0f;
     public float maxPixel = 300.0f;
-    //public float minDistance = 3.0f;
-    //public float maxDistance = 6.0f;
 
     private Vector3 moveVelocity;
     private Vector3 targetPosition = Vector3.zero;
@@ -34,7 +32,6 @@ public class CameraController : Photon.PunBehaviour {
     private Vector3 maxPos = Vector3.zero;
     private float displayedPlayerCount = 0;
     private Vector3 originPosition;
-
 
 
     // Zoom
@@ -49,7 +46,6 @@ public class CameraController : Photon.PunBehaviour {
     private float targetZoomDistance;
     private float distanceVelocity;
     private float originZoomDistance;
-
 
 
     private float originXAngle;
@@ -121,6 +117,37 @@ public class CameraController : Photon.PunBehaviour {
                 SmoothMovement();
                 break;
         }
+    }
+
+    // 타겟 설정
+    public void SetTarget(Transform newTarget)
+    {
+        target = newTarget;
+        targetStat = target.GetComponent<PlayerStat>();
+    }
+
+    // 모드 변경
+    public void ChangeMode(CameraMode newMode)
+    {
+        switch (newMode)
+        {
+            case CameraMode.TotalView:
+                break;
+            case CameraMode.PersonalView:
+                break;
+            case CameraMode.FrontView:
+                targetXAngle = 3.0f;
+                targetZoomDistance = -4.0f;
+                ppb.profile = zoomProfile;
+                break;
+            case CameraMode.PersonalView2:
+                targetXAngle = originXAngle;
+                targetZoomDistance = originZoomDistance;
+                ppb.profile = originProfile;
+                break;
+        }
+
+        mode = newMode;
     }
 
     // 최소, 최대 위치 계산
@@ -218,64 +245,10 @@ public class CameraController : Photon.PunBehaviour {
 
     }
 
-    // 타겟 따라 다니기
-    void FollowTargetFocusCenter()
-    {
-        if (target != null && targetStat != null && targetStat.onStage)
-        {
-            targetPosition = Vector3.Lerp(originPosition, target.position, 0.35f);
-        }
-        else
-        {
-            targetPosition = originPosition;
-        }
-    }
-
-    void FollowTarget()
-    {
-        if (target != null && targetStat != null && targetStat.onStage)
-        {
-            targetPosition = target.position;
-        }
-        else
-        {
-            targetPosition = originPosition;
-        }
-    }
-
+    // 마우스가 있는 방향으로 카메라 이동
     void CalculateCenter3()
     {
-        /*if (target != null && targetStat != null && targetStat.onStage)
-        {
-            Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            Physics.Raycast(mouseRay, out hit, 50.0f, LayerMask.GetMask("Ground"));
-
-            Vector3 centerPosition = Vector3.Lerp(target.position, hit.point, 0.5f);
-            Vector3 subVec = centerPosition - target.position;
-
-
-            if (subVec.sqrMagnitude < minDistance * minDistance)
-            {
-                targetPosition = target.position;
-            }
-            else if(subVec.sqrMagnitude > maxDistance * maxDistance)
-            {
-                targetPosition = target.position + subVec.normalized * maxDistance;
-            }
-            else
-            {
-                targetPosition = centerPosition;
-            }
-
-        }
-        else
-        {
-            targetPosition = originPosition;
-        }*/
-
-        if(target != null && targetStat != null && targetStat.onStage)
+        if (target != null && targetStat != null && targetStat.onStage)
         {
             Vector3 mouseVec = Input.mousePosition - halfScreenSize;
             float mouseVecSqrMag = mouseVec.sqrMagnitude;
@@ -286,7 +259,7 @@ public class CameraController : Photon.PunBehaviour {
             {
                 targetPosition = target.position;
             }
-            else if(mouseVecSqrMag > maxPixel * maxPixel)
+            else if (mouseVecSqrMag > maxPixel * maxPixel)
             {
                 targetPosition = target.position + toMouseDirection * (maxPixel * 0.01f);
             }
@@ -302,7 +275,31 @@ public class CameraController : Photon.PunBehaviour {
 
     }
 
+    // 맵 중앙 집중형으로 타겟 따라 다니기
+    void FollowTargetFocusCenter()
+    {
+        if (target != null && targetStat != null && targetStat.onStage)
+        {
+            targetPosition = Vector3.Lerp(originPosition, target.position, 0.35f);
+        }
+        else
+        {
+            targetPosition = originPosition;
+        }
+    }
 
+    // 그냥 타겟 따라 다니기
+    void FollowTarget()
+    {
+        if (target != null && targetStat != null && targetStat.onStage)
+        {
+            targetPosition = target.position;
+        }
+        else
+        {
+            targetPosition = originPosition;
+        }
+    }
 
     // 부드러운 움직임
     void SmoothMovement()
@@ -369,32 +366,5 @@ public class CameraController : Photon.PunBehaviour {
         pivotT.localEulerAngles = newRotation;
     }
 
-    public void SetTarget(Transform newTarget)
-    {
-        target = newTarget;
-        targetStat = target.GetComponent<PlayerStat>();
-    }
-
-    public void ChangeMode(CameraMode newMode)
-    {
-        switch (newMode)
-        {
-            case CameraMode.TotalView:
-                break;
-            case CameraMode.PersonalView:
-                break;
-            case CameraMode.FrontView:
-                targetXAngle = 3.0f;
-                targetZoomDistance = -4.0f;
-                ppb.profile = zoomProfile;
-                break;
-            case CameraMode.PersonalView2:
-                targetXAngle = originXAngle;
-                targetZoomDistance = originZoomDistance;
-                ppb.profile = originProfile;
-                break;
-        }
-
-        mode = newMode;
-    }
+    
 }

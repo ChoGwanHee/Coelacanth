@@ -1,8 +1,6 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class Lobby : Photon.PunBehaviour {
 
@@ -20,7 +18,6 @@ public class Lobby : Photon.PunBehaviour {
         roomOptions.IsVisible = true;
         roomOptions.IsOpen = true;
         roomOptions.MaxPlayers = 4;
-        //roomOptions.CustomRoomProperties = new Hashtable() { { "PlayerEnter0", false }, { "PlayerEnter1", false }, { "PlayerEnter2", false }, { "PlayerEnter3", false } };
         PhotonNetwork.CreateRoom(null, roomOptions, null);
     }
 

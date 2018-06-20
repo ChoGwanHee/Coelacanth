@@ -26490,10 +26490,10 @@ MonoBehaviour:
   timer: {fileID: 1175625571}
   counterAnim: {fileID: 253194985}
   illusts:
-  - {fileID: 21300000, guid: 8718e2028a928d9408e3bb6462414069, type: 3}
-  - {fileID: 21300000, guid: 24bfe955295f30c4bb1c24bd9200d1fd, type: 3}
-  - {fileID: 21300000, guid: 088f18dcd63cf8a41bf5b8428740900c, type: 3}
-  - {fileID: 21300000, guid: 3e526eceda739a94aad7da3a2edf1124, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   resultCanvas: {fileID: 1719490425}
   resultScoreBoard: {fileID: 840231304}
   resultEmotion: {fileID: 1166136387}
@@ -35948,7 +35948,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 55, y: 0}
-  m_SizeDelta: {x: 63, y: 65}
+  m_SizeDelta: {x: 64, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2137035028
 MonoBehaviour:
@@ -35969,7 +35969,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 9c5938ee73d168942ae2e63b9df48fe0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dbed08f2a0d602a41b91cb278e0501b8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

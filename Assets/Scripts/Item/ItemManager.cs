@@ -108,17 +108,16 @@ public class ItemManager : Photon.PunBehaviour {
         {
             do
             {
-                //randomIndex = Random.Range(0, 2) * 2;
-                randomIndex = Mathf.FloorToInt(Random.value * 2) *2;
+                randomIndex = Mathf.FloorToInt(Random.value * 2) * 2;
 
                 regenPos = GetRandomPos(itemRegenPos[randomIndex].position, itemRegenPos[randomIndex + 1].position);
                 regenPos.y += 6.0f;
 
                 retry1 = Physics.BoxCast(regenPos, new Vector3(0.9f, 1.0f, 0.9f), Vector3.down, out hit1, Quaternion.identity, 6.1f, LayerMask.GetMask("Ground"), QueryTriggerInteraction.Ignore);
 
-                if(++count > 10000)
+                if (++count > 10000)
                 {
-                    Debug.Log("비정상적인 연산입니다. 아이템 생성을 비활성화 합니다.");
+                    Debug.LogError("비정상적인 연산입니다. 아이템 생성을 비활성화 합니다.");
                     active = false;
                     return;
                 }
@@ -132,9 +131,9 @@ public class ItemManager : Photon.PunBehaviour {
 
         int selectIndex = -1;
 
-        for(int i=0; i<itemBoxPool.Length; i++)
+        for (int i = 0; i < itemBoxPool.Length; i++)
         {
-            if(!itemBoxPool[i].alive)
+            if (!itemBoxPool[i].alive)
             {
                 selectIndex = i;
                 break;
@@ -143,7 +142,7 @@ public class ItemManager : Photon.PunBehaviour {
 
         if (selectIndex == -1)
         {
-            Debug.Log("비활성화된 아이템 박스가 없음");
+            Debug.LogWarning("비활성화된 아이템 박스가 없음");
             return;
         }
 
@@ -167,6 +166,12 @@ public class ItemManager : Photon.PunBehaviour {
         }
     }
 
+    /// <summary>
+    /// 두 위치를 기준으로 사각형 범위 안의 위치를 랜덤으로 얻습니다.
+    /// </summary>
+    /// <param name="pos1">첫 번째 기준</param>
+    /// <param name="pos2">두 번째 기준</param>
+    /// <returns>랜덤 위치</returns>
     private Vector3 GetRandomPos(Vector3 pos1, Vector3 pos2)
     {
         Vector3 minPos = Vector3.zero;

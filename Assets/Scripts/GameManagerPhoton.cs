@@ -69,20 +69,34 @@ public class GameManagerPhoton : Photon.PunBehaviour
         get { return remainGameTime; }
     }
 
-
+    /// <summary>
+    /// 게임이 자동으로 시작되는 플레이어 숫자
+    /// </summary>
     public int startPlayerCount = 4;
 
+    /// <summary>
+    /// 씬 이동 중인지 여부
+    /// </summary>
     private bool isSceneMoving = false;
 
 
+    /// <summary>
+    /// 게임 배경음악
+    /// </summary>
     [FMODUnity.EventRef]
     public string BGM;
     FMOD.Studio.EventInstance BGMEvent;
 
+    /// <summary>
+    /// 결과화면 배경음악
+    /// </summary>
     [FMODUnity.EventRef]
     public string resultBGM;
     FMOD.Studio.EventInstance resultBGMEvent;
 
+    /// <summary>
+    /// 배경에서 터지는 폭죽 사운드
+    /// </summary>
     [FMODUnity.EventRef]
     public string backgroundFirework;
     FMOD.Studio.EventInstance backgroundFireworkEvent;
@@ -124,7 +138,6 @@ public class GameManagerPhoton : Photon.PunBehaviour
         {
             Destroy(gameObject);
         }
-
     }
 
     private void Start()
@@ -133,10 +146,10 @@ public class GameManagerPhoton : Photon.PunBehaviour
         itemManager = GetComponent<ItemManager>();
         remainGameTime = playTime;
 
+        // 커서 설정
         Cursor.SetCursor(cursorTex, new Vector2(0, 0), CursorMode.ForceSoftware);
 
         playerEnter = new int[(PhotonNetwork.room.MaxPlayers)];
-        
 
         PhotonNetwork.isMessageQueueRunning = true;
         
@@ -152,14 +165,12 @@ public class GameManagerPhoton : Photon.PunBehaviour
         }
 
         // BGM
-        //BGMEvent = FMODUnity.RuntimeManager.CreateInstance(BGM);
-        //BGMEvent.start();
+        BGMEvent = FMODUnity.RuntimeManager.CreateInstance(BGM);
+        BGMEvent.start();
         //backgroundFireworkEvent = FMODUnity.RuntimeManager.CreateInstance(backgroundFirework);
         //backgroundFireworkEvent.start();
 
         resultBGMEvent = FMODUnity.RuntimeManager.CreateInstance(resultBGM);
-
-        
     }
 
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -363,6 +374,10 @@ public class GameManagerPhoton : Photon.PunBehaviour
         EnterState(newState);
     }
 
+    /// <summary>
+    /// 게임 이벤트 호출
+    /// </summary>
+    /// <param name="eventNum">호출할 게임 이벤트</param>
     [PunRPC]
     public void RunGameEvent(int eventNum)
     {
@@ -396,7 +411,6 @@ public class GameManagerPhoton : Photon.PunBehaviour
         {
             ChangeState(GameState.Result);
         }
-        
     }
 
     private void SetPlayerActive(bool active)
@@ -411,7 +425,10 @@ public class GameManagerPhoton : Photon.PunBehaviour
         }
     }
 
-
+    /// <summary>
+    /// 게임 진행 루프 (마스터만 사용)
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator GameLoop()
     {
         while (remainGameTime > 0)
@@ -425,7 +442,6 @@ public class GameManagerPhoton : Photon.PunBehaviour
             }
             yield return null;
         }
-
     }
 
     /// <summary>
@@ -469,6 +485,10 @@ public class GameManagerPhoton : Photon.PunBehaviour
         return null;
     }
 
+    /// <summary>
+    /// 특정 플레이어를 카메라로 확대해 보여줍니다
+    /// </summary>
+    /// <param name="spotlightOwnerId">보여줄 플레이어의 OwnerId</param>
     [PunRPC]
     private void Spotlight(int spotlightOwnerId)
     {
@@ -503,7 +523,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
         }
 
         // 배경음악 재생
-        //BGMEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        BGMEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         resultBGMEvent.start();
 
         // 캐릭터 승리대사 재생
@@ -527,7 +547,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
 
     private IEnumerator LoadTitleScene()
     {
-        // 게임씬을 완벽하게 로딩 후 씬을 변경한다
+        // 타이틀씬을 완벽하게 로딩 후 씬을 변경한다
         AsyncOperation oper = SceneManager.LoadSceneAsync("Title");
 
         yield return oper; // 로딩이 완료될때까지 대기 한다

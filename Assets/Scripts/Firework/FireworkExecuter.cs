@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+/// <summary>
+/// 플레이어가 갖고 있는 폭죽을 작동, 발사, 관리하는 클래스
+/// </summary>
 public class FireworkExecuter : Photon.PunBehaviour {
 
     public Transform firePoint;             // 투사체가 생성되는 위치
@@ -74,7 +76,9 @@ public class FireworkExecuter : Photon.PunBehaviour {
         }
     }
 
-    // 갖고 있는 폭죽이 바뀐 후에 호출
+    /// <summary>
+    /// 갖고 있는 폭죽이 바뀐뒤에 호출하는 초기화 함수
+    /// </summary>
     public void Initialize()
     {
         ammo = curFirework.capacity;
@@ -82,6 +86,9 @@ public class FireworkExecuter : Photon.PunBehaviour {
             onFireworkAmmoChanged(ammo);
     }
 
+    /// <summary>
+    /// 폭죽 작동 시작
+    /// </summary>
     public void Trigger()
     {
         if (!fireEnable) return;
@@ -96,9 +103,11 @@ public class FireworkExecuter : Photon.PunBehaviour {
         elapsedTime = 0f;
         pc.SetAnimParam("FireworkType", (int)curFirework.fwType);
         pc.ChangeState(PlayerAniState.Attack);
-
     }
 
+    /// <summary>
+    /// 폭죽 발사
+    /// </summary>
     public void Execute()
     {
         if (!photonView.isMine) return;
@@ -117,6 +126,9 @@ public class FireworkExecuter : Photon.PunBehaviour {
             onFireworkAmmoChanged(ammo);
     }
 
+    /// <summary>
+    /// 탄환이 다 떨어졌는지 체크합니다.
+    /// </summary>
     public void CheckRunOutAmmo()
     {
         // -1은 탄환 무한이기 때문에 예외처리
@@ -130,6 +142,11 @@ public class FireworkExecuter : Photon.PunBehaviour {
         }
     }
 
+    /// <summary>
+    /// 갖고 있는 폭죽을 바꿉니다.
+    /// </summary>
+    /// <param name="tableIndex">아이템 테이플의 인덱스</param>
+    /// <param name="itemIndex">아이템의 인덱스</param>
     [PunRPC]
     public void ChangeFirework(int tableIndex, int itemIndex)
     {
@@ -138,6 +155,9 @@ public class FireworkExecuter : Photon.PunBehaviour {
         CheckFireworkChanged();
     }
 
+    /// <summary>
+    /// 갖고 있는 폭죽이 바뀌었는지 체크합니다.
+    /// </summary>
     public void CheckFireworkChanged()
     {
         if (newFirework != null && replaceable) {

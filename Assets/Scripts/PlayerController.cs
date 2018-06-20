@@ -29,9 +29,6 @@ public class PlayerController : Photon.PunBehaviour
     public string fallingSound;
 
 
-    FMOD.Studio.EventInstance walkingEvent;
-    FMOD.Studio.PLAYBACK_STATE walkingSoundState;
-
     /// <summary>
     /// 캐릭터 목소리 에셋
     /// </summary>
@@ -111,6 +108,9 @@ public class PlayerController : Photon.PunBehaviour
     /// </summary>
     public FireworkHandObjectSet handObjectSet;
 
+    /// <summary>
+    /// 손에 붙어 있는 오브젝트
+    /// </summary>
     private GameObject attachedHandObject;
 
 
@@ -137,10 +137,6 @@ public class PlayerController : Photon.PunBehaviour
 
 
     int groundMask;
-
-
-    // 임시
-
 
     void Start () {
         rb = GetComponent<Rigidbody>();
@@ -201,6 +197,7 @@ public class PlayerController : Photon.PunBehaviour
         inputAxis.x = Input.GetAxisRaw("Horizontal");
         inputAxis.y = Input.GetAxisRaw("Vertical");
 
+        // 카메라의 방향이 Z축을 바라보게 고정이 되어 있어서 사용할 필요가 없음 나중에 바뀌면 이걸로 바꿔야 됨
         //targetDirection = (inputAxis.y * Vector3.Scale(cam.transform.forward, new Vector3(1, 0, 1)).normalized + inputAxis.x * cam.transform.right).normalized;
         targetDirection = (inputAxis.y * Vector3.forward + inputAxis.x * Vector3.right).normalized;
     }
@@ -265,7 +262,7 @@ public class PlayerController : Photon.PunBehaviour
         mouseRay = cam.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(mouseRay, out mouseHit, 50.0f, groundMask))
         {
-            Vector3 toDir = Vector3.Scale( mouseHit.point - transform.position, new Vector3(1,0,1)).normalized;
+            Vector3 toDir = Vector3.Scale(mouseHit.point - transform.position, new Vector3(1, 0, 1)).normalized;
 
             Quaternion targetRoation = Quaternion.LookRotation(toDir);
             transform.rotation = targetRoation;
@@ -279,6 +276,7 @@ public class PlayerController : Photon.PunBehaviour
     {
         if (!photonView.isMine) return;
 
+        // 카메라의 방향이 Z축을 바라보게 고정이 되어 있어서 사용할 필요가 없음 나중에 바뀌면 이걸로 바꿔야 됨
         //Vector3 toDir = Vector3.Scale(cam.transform.position - transform.position , new Vector3(1, 0, 1)).normalized;
         Vector3 toDir = new Vector3(0, 0, -1);
 
@@ -379,6 +377,10 @@ public class PlayerController : Photon.PunBehaviour
         ChangeState(PlayerAniState.Idle);
     }
 
+    /// <summary>
+    /// 캐릭터의 보이스를 재생합니다.
+    /// </summary>
+    /// <param name="soundType">재생할 보이스 종류</param>
     public void PlayVoiceSound(string soundType)
     {
         if (characterVoice == null || !photonView.isMine) return;

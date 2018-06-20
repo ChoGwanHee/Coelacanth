@@ -9,9 +9,10 @@ public class UITimer : MonoBehaviour {
 
     private Text displayText;
 
-	void Start () {
+    void Start()
+    {
         displayText = GetComponentInChildren<Text>();
-	}
+    }
 
     private void Update()
     {
@@ -20,7 +21,7 @@ public class UITimer : MonoBehaviour {
 
     public void SetTime(float num)
     {
-        if(num < 0)
+        if (num < 0)
         {
             displayText.text = "0";
         }
