@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemFireworkBox : BaseItem {
+public class ItemFireworkBox : BaseItemBox {
 
     [FMODUnity.EventRef]
     public string getSound;
