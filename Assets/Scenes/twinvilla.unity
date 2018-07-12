@@ -17634,6 +17634,11 @@ Prefab:
       propertyPath: m_LocalPosition.z
       value: -0.28
       objectReference: {fileID: 0}
+    - target: {fileID: 114208032706146620, guid: df9865eed80ff324393733592bc292d7,
+        type: 2}
+      propertyPath: soundActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: df9865eed80ff324393733592bc292d7, type: 2}
   m_IsPrefabParent: 0
@@ -30684,7 +30689,7 @@ MonoBehaviour:
   itemBoxPool: []
   itemBoxReferences:
   - {fileID: 114903379295803134, guid: 0b7aafb6661afe049ba29997204330ec, type: 2}
-  poolExtraRate: 0.8
+  poolExtraRate: 1
   regenTime: 2
   maxBoxCount: 10
   startBoxCount: 6
@@ -32079,26 +32084,6 @@ Prefab:
     - target: {fileID: 1710261770501044, guid: df9865eed80ff324393733592bc292d7, type: 2}
       propertyPath: m_IsActive
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114268745706420484, guid: df9865eed80ff324393733592bc292d7,
-        type: 2}
-      propertyPath: preBreakSound
-      value: event:/SFX_Stage1/Object/Trigger/SFX_BridgePipeQuake
-      objectReference: {fileID: 0}
-    - target: {fileID: 114268745706420484, guid: df9865eed80ff324393733592bc292d7,
-        type: 2}
-      propertyPath: breakSound
-      value: event:/SFX_Stage1/Object/Trigger/SFX_PipeBreak
-      objectReference: {fileID: 0}
-    - target: {fileID: 114208032706146620, guid: df9865eed80ff324393733592bc292d7,
-        type: 2}
-      propertyPath: metalQuakeSound
-      value: event:/SFX_Stage1/Object/Trigger/SFX_WaterPipeQuake
-      objectReference: {fileID: 0}
-    - target: {fileID: 114208032706146620, guid: df9865eed80ff324393733592bc292d7,
-        type: 2}
-      propertyPath: waterFireSound
-      value: event:/SFX_Stage1/Object/Trigger/SFX_WaterCannon
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: df9865eed80ff324393733592bc292d7, type: 2}

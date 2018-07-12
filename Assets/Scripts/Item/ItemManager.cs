@@ -14,7 +14,7 @@ public class ItemManager : Photon.PunBehaviour {
     /// 아이템 박스 종류당 여분 비율 (maxBoxCount * poolExtraRate = 여분 개수)
     /// </summary>
     [Range(0, 1)]
-    public float poolExtraRate = 0.8f;
+    public float poolExtraRate = 1.0f;
 
     /// <summary>
     /// 아이템 박스 종류당 여분 개수
@@ -89,6 +89,7 @@ public class ItemManager : Photon.PunBehaviour {
             new GameObject("ItemBoxes");
         }
 
+        // 이후부터 마스터만 실행
         if (!PhotonNetwork.isMasterClient) return;
 
         InitItemBoxPool();
@@ -188,7 +189,7 @@ public class ItemManager : Photon.PunBehaviour {
                 regenPos = GetRandomPos(itemRegenPos[randomIndex].position, itemRegenPos[randomIndex + 1].position);
                 regenPos.y += 6.0f;
 
-                retry1 = Physics.BoxCast(regenPos, new Vector3(0.9f, 1.0f, 0.9f), Vector3.down, out hit1, Quaternion.identity, 6.1f, LayerMask.GetMask("Ground"), QueryTriggerInteraction.Ignore);
+                retry1 = Physics.Raycast(regenPos, Vector3.down, out hit1, 6.1f, LayerMask.GetMask("Ground"), QueryTriggerInteraction.Ignore);
 
                 if (++count > 10000)
                 {
@@ -199,7 +200,7 @@ public class ItemManager : Photon.PunBehaviour {
             }
             while (!retry1);
 
-            retry2 = Physics.BoxCast(regenPos, new Vector3(0.9f, 1.0f, 0.9f), Vector3.down, out hit2, Quaternion.identity, 6.1f, LayerMask.GetMask("DynamicObject", "StaticObject", "Item"));
+            retry2 = Physics.SphereCast(regenPos, 1.0f, Vector3.down, out hit2, 6.1f, LayerMask.GetMask("DynamicObject", "StaticObject", "Item"));
 
         } while (retry2);
 
@@ -221,7 +222,7 @@ public class ItemManager : Photon.PunBehaviour {
             return;
         }
 
-        itemBoxPool[selectIndex].transform.position = hit1.point;
+        itemBoxPool[selectIndex].transform.position = hit1.point + Vector3.up * 0.1f;
         itemBoxPool[selectIndex].photonView.RPC("SetActiveItemBox", PhotonTargets.All, true);
         curBoxCount++;
     }

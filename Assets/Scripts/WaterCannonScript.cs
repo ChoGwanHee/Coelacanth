@@ -11,6 +11,8 @@ public class WaterCannonScript : Photon.PunBehaviour {
     public GameObject hitEffect_ref;
     public GameObject hitRangeEffect;
 
+    public bool soundActive = true;
+
     [FMODUnity.EventRef]
     public string metalQuakeSound;
 
@@ -131,6 +133,8 @@ public class WaterCannonScript : Photon.PunBehaviour {
 
     public void PlaySound(int soundNum)
     {
+        if (!soundActive) return;
+
         switch (soundNum)
         {
             case 0:

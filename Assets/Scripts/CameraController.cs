@@ -53,6 +53,10 @@ public class CameraController : Photon.PunBehaviour {
     private float rotationXVelocity;
 
 
+    // Shake
+    private float frequency = 20.0f;
+
+
     public PostProcessingProfile zoomProfile;
     private PostProcessingProfile originProfile;
 
@@ -366,5 +370,55 @@ public class CameraController : Photon.PunBehaviour {
         pivotT.localEulerAngles = newRotation;
     }
 
-    
+    public void Shake(float power, float duration)
+    {
+        StartCoroutine(ShakeEvent(power, duration));
+    }
+
+    private IEnumerator ShakeEvent(float amplitude, float duration)
+    {
+        Vector3 realPosition;
+        Vector3 noise = Vector3.zero;
+        Vector2 noiseOffset = Vector2.zero;
+        float timeRemaining = duration;
+
+
+        float rand = 32.0f;
+
+        noiseOffset.x = Random.Range(0.0f, rand);
+        noiseOffset.y = Random.Range(0.0f, rand);
+
+
+        while (timeRemaining > 0.0f)
+        {
+            timeRemaining -= Time.deltaTime;
+
+            float noiseOffsetDelta = Time.deltaTime * frequency;
+
+            noiseOffset.x += noiseOffsetDelta;
+            noiseOffset.y += noiseOffsetDelta;
+
+            noise.x = Mathf.PerlinNoise(noiseOffset.x, 0.0f);
+            noise.y = Mathf.PerlinNoise(noiseOffset.y, 1.0f);
+
+            noise.x -= 0.5f;
+            noise.y -= 0.5f;
+
+            noise *= amplitude;
+
+            noise *= timeRemaining / duration;
+
+
+            realPosition = camT.localPosition;
+            realPosition.x = noise.x;
+            realPosition.y = noise.y;
+            camT.localPosition = realPosition;
+
+            yield return null;
+        }
+        realPosition = camT.localPosition;
+        realPosition.x = 0.0f;
+        realPosition.y = 0.0f;
+        camT.localPosition = realPosition;
+    }
 }

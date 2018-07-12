@@ -292,6 +292,9 @@ public class PlayerController : Photon.PunBehaviour
     {
         rb.velocity = Vector3.zero;
         rb.AddForce(force, ForceMode.Impulse);
+
+        if(photonView.isMine)
+            GameManagerPhoton._instance.cameraController.Shake(2.0f, 0.3f);
     }
 
     /// <summary>
