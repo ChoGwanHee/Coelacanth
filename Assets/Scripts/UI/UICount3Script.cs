@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Count3Script : MonoBehaviour {
+public class UICount3Script : MonoBehaviour {
 
     [FMODUnity.EventRef]
     public string countSound;

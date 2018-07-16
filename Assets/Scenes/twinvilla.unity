@@ -30639,6 +30639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0111ccb533d7a144b60b677e69df4f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeProgress: 1
   playerGenPos:
   - {fileID: 1527152136}
   - {fileID: 138490443}
@@ -30652,8 +30653,6 @@ MonoBehaviour:
   resultBGM: event:/BGM/Result/BGM_Result
   backgroundFirework: event:/Ambient/Fireworks/AMT_BackBoom
   playerList: []
-  deadEfx_ref: {fileID: 1956332014287468, guid: 19cb9b16b9a133648a19812957506c97,
-    type: 2}
   backgroundFireworks:
   - {fileID: 687192020}
   - {fileID: 2059733924}

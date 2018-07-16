@@ -18,6 +18,12 @@ public class GameManagerPhoton : Photon.PunBehaviour
 
 
     /// <summary>
+    /// 시간 진행 활성화
+    /// </summary>
+    public bool timeProgress = true;
+
+
+    /// <summary>
     /// 글로벌 판정 간격
     /// </summary>
     private float gameTick = 0.1f;
@@ -109,12 +115,6 @@ public class GameManagerPhoton : Photon.PunBehaviour
     public List<PlayerStat> playerList = new List<PlayerStat>();
 
     private int[] playerEnter;
-
-
-    /// <summary>
-    /// 사망 이펙트
-    /// </summary>
-    public GameObject deadEfx_ref;
 
     /// <summary>
     /// 캐릭터 정면뷰로 확대시 배경에서 터지는 폭죽 이펙트
@@ -241,7 +241,8 @@ public class GameManagerPhoton : Photon.PunBehaviour
 
         if (characterIndex == -1)
         {
-            Debug.Log("남은 캐릭터 슬롯이 없음!");
+            Debug.LogError("남은 캐릭터 슬롯이 없음!");
+            return;
         }
 
         photonView.RPC("RemoteCreatePlayer", player, characterIndex);
@@ -433,12 +434,15 @@ public class GameManagerPhoton : Photon.PunBehaviour
     {
         while (remainGameTime > 0)
         {
-            remainGameTime -= Time.deltaTime;
-
-            if (!isStopping && remainGameTime <= 4)
+            if (timeProgress)
             {
-                isStopping = true;
-                photonView.RPC("RunGameEvent", PhotonTargets.All, (int)GameEvent.GameStop);
+                remainGameTime -= Time.deltaTime;
+
+                if (!isStopping && remainGameTime <= 4)
+                {
+                    isStopping = true;
+                    photonView.RPC("RunGameEvent", PhotonTargets.All, (int)GameEvent.GameStop);
+                }
             }
             yield return null;
         }

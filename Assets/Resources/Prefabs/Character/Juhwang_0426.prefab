@@ -4595,6 +4595,8 @@ MonoBehaviour:
   handObjectSet: {fileID: 0}
   ring: {fileID: 1433471974510610}
   stunEfx: {fileID: 1487680090549838}
+  deadEfx_ref: {fileID: 1956332014287468, guid: 19cb9b16b9a133648a19812957506c97,
+    type: 2}
 --- !u!114 &114806341782848788
 MonoBehaviour:
   m_ObjectHideFlags: 1

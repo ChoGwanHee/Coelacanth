@@ -4535,6 +4535,9 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 1
     Name: Charging
+  - Type: 3
+    SynchronizeType: 0
+    Name: EmotionType
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
@@ -4579,6 +4582,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stunSound: event:/SFX/Character/Sound/SFX_Stun
   walkingSound: event:/SFX/Character/Sound/SFX_Foot
+  fallingSound: 
+  characterVoice: {fileID: 0}
   photonMove: 1
   isControlable: 1
   isStun: 0
@@ -4586,8 +4591,12 @@ MonoBehaviour:
   maxSpeed: 6
   respawnTime: 6
   stunTime: 3
+  weaponPoint: {fileID: 0}
+  handObjectSet: {fileID: 0}
   ring: {fileID: 1099236655789670}
   stunEfx: {fileID: 1178661588538412}
+  deadEfx_ref: {fileID: 1956332014287468, guid: 19cb9b16b9a133648a19812957506c97,
+    type: 2}
 --- !u!114 &114806341782848788
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4612,14 +4621,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adc87bdba7e0c624bb8107a38a7aa1d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerIndex: 0
   onStage: 1
   alive: 1
   nickname: 
   maxHP: 100
   curHP: 0
-  life: 6
-  fallingSound: 
+  characterPicture: {fileID: 0}
 --- !u!136 &136812405621065560
 CapsuleCollider:
   m_ObjectHideFlags: 1
