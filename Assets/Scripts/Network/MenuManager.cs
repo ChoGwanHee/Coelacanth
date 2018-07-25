@@ -25,6 +25,7 @@ public class MenuManager : MonoBehaviour
     {
         if (PlayButton.GetComponentInChildren<InputField>().text.Length <= 0)
         {
+            ServerManager.Send(string.Format("NICKERROR:{0}:{1}:{2}", 1, PlayButton.GetComponentInChildren<InputField>().text.Length, PlayButton.GetComponentInChildren<InputField>().text));
             Debug.Log(PlayButton.GetComponentInChildren<InputField>().text.Length + " : 닉네임 입력 필요");
         }
         else
@@ -32,11 +33,13 @@ public class MenuManager : MonoBehaviour
             if (NickNameRegexCheck(PlayButton.GetComponentInChildren<InputField>().text) == true)
             {
                 InstanceValue.Nickname = PlayButton.GetComponentInChildren<InputField>().text;
+                ServerManager.Send(string.Format("NICKNAME:{0}:{1}:{2}", 0, PlayButton.GetComponentInChildren<InputField>().text.Length, InstanceValue.Nickname));
                 Debug.Log("나의 닉네임 : " + InstanceValue.Nickname);
                 LobbyManager.Lobby.AvailablePhoton();
             }
             else
             {
+                ServerManager.Send(string.Format("NICKERROR:{0}:{1}:{2}", 2, PlayButton.GetComponentInChildren<InputField>().text.Length, PlayButton.GetComponentInChildren<InputField>().text));
                 Debug.Log("특수문자 사용 불가");
             }
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using ServerModule;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 [RequireComponent(typeof(PhotonView))]
@@ -370,6 +371,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
 
     public void ChangeState(GameState newState)
     {
+        StateManager.ChangeState((int)newState);
         currentState = newState;
         EnterState(newState);
     }

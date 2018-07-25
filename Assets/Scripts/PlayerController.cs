@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using ServerModule;
 
 /// <summary>
 /// 사용자의 입력을 받아 플레이어 캐릭터를 조종, 관리하는 클래스
@@ -318,6 +319,10 @@ public class PlayerController : Photon.PunBehaviour
         stat.onStage = false;
         stat.KillScoring();
         ChangeState(PlayerAniState.Fall);
+
+        // 보내는 정보   = 정보 : 플레이어 : 상태 : 라이프차감
+        // 받는 정보      = 정보 : 플레이어 : 상태 : 보유라이프
+        ServerManager.Send(string.Format("FALL:{0}:{1}:{2}", true, PlayerAniState.Fall, respawnTime));
         Invoke("Respawn", respawnTime);
         executer.ChangeFirework(0, 0);
 

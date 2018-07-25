@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using ServerModule;
 using UnityEngine;
 
 /// <summary>
@@ -151,7 +152,6 @@ public class FireworkExecuter : Photon.PunBehaviour {
     public void ChangeFirework(int tableIndex, int itemIndex)
     {
         newFirework = GameManagerPhoton._instance.itemManager.GetFireworkItem(tableIndex, itemIndex);
-
         CheckFireworkChanged();
     }
 
@@ -170,6 +170,7 @@ public class FireworkExecuter : Photon.PunBehaviour {
             if (onFireworkAmmoChanged != null)
                 onFireworkAmmoChanged(ammo);
 
+            ServerManager.Send(string.Format("WEAPONCHANGE:{0}:{1}:{2}", true, curFirework.GetType(), photonView.owner));
             Debug.Log(" 무기교체:" + curFirework.GetType() + "\n교체자:" + photonView.owner);
         }
     }
