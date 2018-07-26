@@ -63,16 +63,17 @@ public class ProjectileButterfly : BaseProjectile
         {
             Vector3 direction = Vector3.Scale(effectedObjects[i].transform.position - transform.position, new Vector3(1, 0, 1)).normalized;
 
-            effectedObjects[i].gameObject.GetPhotonView().RPC("Pushed", PhotonTargets.All, (direction * hitForce));
+            PhotonView objPhotonView = effectedObjects[i].GetComponent<PhotonView>();
+            objPhotonView.RPC("Pushed", PhotonTargets.All, (direction * hitForce));
 
             if (effectedObjects[i].CompareTag("Player"))
             {
-                effectedObjects[i].gameObject.GetPhotonView().RPC("Damage", PhotonTargets.All, damage, photonView.ownerId);
+                objPhotonView.RPC("DamageShake", objPhotonView.owner, 4, photonView.ownerId);
                 Vector3 efxPos = effectedObjects[i].GetComponent<CapsuleCollider>().ClosestPointOnBounds(transform.position);
                 PhotonNetwork.Instantiate("Prefabs/Effect_base_Hit_fx", efxPos, Quaternion.identity, 0);
 
                 // 점수 처리
-                if (effectedObjects[i].gameObject.GetPhotonView().ownerId == photonView.ownerId)
+                if (objPhotonView.ownerId == photonView.ownerId)
                 {
                     // 본인 피격
                     effectedObjects[i].GetComponent<PlayerStat>().AddScore(-20);

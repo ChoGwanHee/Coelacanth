@@ -21,6 +21,8 @@ MonoBehaviour:
   hitRadius: 3
   lifetime: 3
   coolDown: 1
+  amplitude: 2
+  duration: 0.6
   uiSprite: {fileID: 21300000, guid: 377d429f928b0734f9c2e515f24bb7e7, type: 3}
   startSound: event:/SFX_Stage1/Weapon/Shoot/SFX_RocketShot
   projectileSpeed: 14

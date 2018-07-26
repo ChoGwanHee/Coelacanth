@@ -117,13 +117,13 @@ public class ItemManager : Photon.PunBehaviour {
         }
 
         string folderPath = "Prefabs/";
-        GameObject obj;
+
         for (int i = 0; i < itemBoxReferences.Length; i++)
         {
             string path = folderPath + itemBoxReferences[i].name;
             for (int j = 0; j < poolExtraAmount; j++)
             {
-                obj = PhotonNetwork.Instantiate(path, Vector3.zero, Quaternion.identity, 0);
+                PhotonNetwork.Instantiate(path, Vector3.zero, Quaternion.identity, 0);
             }
         }
     }

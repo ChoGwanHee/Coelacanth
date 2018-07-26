@@ -30649,6 +30649,13 @@ MonoBehaviour:
   currentState: 0
   playTime: 99
   startPlayerCount: 4
+  damageEvents:
+  - {fileID: 11400000, guid: 96b081a6f7554564d977c7d3829c306c, type: 2}
+  - {fileID: 11400000, guid: 9bd2a3735f1bb0345b369ea69bd7d1c3, type: 2}
+  - {fileID: 11400000, guid: ba6ffe48cde59b64bb0a171c5881e047, type: 2}
+  - {fileID: 11400000, guid: dadded2f1af588a41a9b0ef43a322774, type: 2}
+  - {fileID: 11400000, guid: e2315578cffeedb438b1d7c72eb540c9, type: 2}
+  - {fileID: 11400000, guid: 6187d5317c9e0f340becf9fbefeca7d0, type: 2}
   BGM: event:/BGM/InGame/BGM_Stage1
   resultBGM: event:/BGM/Result/BGM_Result
   backgroundFirework: event:/Ambient/Fireworks/AMT_BackBoom

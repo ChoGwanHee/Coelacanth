@@ -24,6 +24,18 @@ public class InstallationFountain : BaseInstallation
     public float hitRadius;
 
     /// <summary>
+    /// 화면 진동 세기
+    /// </summary>
+    [HideInInspector]
+    public float amplitude;
+
+    /// <summary>
+    /// 화면 진동 지속 시간
+    /// </summary>
+    [HideInInspector]
+    public float duration;
+
+    /// <summary>
     /// 활성화 여부
     /// </summary>
     private bool enable = false;
@@ -104,18 +116,19 @@ public class InstallationFountain : BaseInstallation
         {
             Vector3 direction = Vector3.Scale(effectedObjects[i].transform.position - transform.position, new Vector3(1, 0, 1)).normalized;
 
-            effectedObjects[i].gameObject.GetPhotonView().RPC("Pushed", PhotonTargets.All, (direction * hitForce));
+            PhotonView objPhotonView = effectedObjects[i].GetComponent<PhotonView>();
+            objPhotonView.RPC("Pushed", PhotonTargets.All, (direction * hitForce));
 
             if (effectedObjects[i].CompareTag("Player"))
             {
-                effectedObjects[i].gameObject.GetPhotonView().RPC("Damage", PhotonTargets.All, damage, photonView.ownerId);
+                objPhotonView.RPC("Damage", objPhotonView.owner, damage, photonView.ownerId);
                 Vector3 centerPos = transform.position;
                 centerPos.y += 0.7f;
                 Vector3 efxPos = effectedObjects[i].GetComponent<CapsuleCollider>().ClosestPointOnBounds(centerPos);
                 PhotonNetwork.Instantiate("Prefabs/Effect_base_Hit_fx", efxPos, Quaternion.identity, 0);
 
                 // 점수 처리
-                if(effectedObjects[i].gameObject.GetPhotonView().ownerId == photonView.ownerId)
+                if(objPhotonView.ownerId == photonView.ownerId)
                 {
                     // 본인 피격
                     effectedObjects[i].GetComponent<PlayerStat>().AddScore(-20);

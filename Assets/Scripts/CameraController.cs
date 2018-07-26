@@ -370,12 +370,17 @@ public class CameraController : Photon.PunBehaviour {
         pivotT.localEulerAngles = newRotation;
     }
 
-    public void Shake(float power, float duration)
+    public void Shake(float amplitude, float duration)
     {
-        StartCoroutine(ShakeEvent(power, duration));
+        StartCoroutine(ShakeProcess(amplitude, duration, frequency));
     }
 
-    private IEnumerator ShakeEvent(float amplitude, float duration)
+    public void Shake(float amplitude, float duration, float frequency)
+    {
+        StartCoroutine(ShakeProcess(amplitude, duration, frequency));
+    }
+
+    private IEnumerator ShakeProcess(float amplitude, float duration, float frequency)
     {
         Vector3 realPosition;
         Vector3 noise = Vector3.zero;

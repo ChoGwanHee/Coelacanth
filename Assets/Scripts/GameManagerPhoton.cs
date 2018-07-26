@@ -82,9 +82,15 @@ public class GameManagerPhoton : Photon.PunBehaviour
     public int startPlayerCount = 4;
 
     /// <summary>
+    /// 미리 정의 되어 있는 데미지 이벤트들
+    /// </summary>
+    public DamageEvent[] damageEvents;
+
+    /// <summary>
     /// 씬 이동 중인지 여부
     /// </summary>
     private bool isSceneMoving = false;
+
 
 
     /// <summary>

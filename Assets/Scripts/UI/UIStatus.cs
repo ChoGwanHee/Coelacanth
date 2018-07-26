@@ -13,8 +13,6 @@ public class UIStatus : MonoBehaviour {
     public Sprite[] numbers;
 
 
-    private bool infinity = true;
-
     private Animator anim;
 
     private void Awake()

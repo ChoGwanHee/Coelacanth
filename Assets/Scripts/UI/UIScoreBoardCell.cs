@@ -44,12 +44,12 @@ public class UIScoreBoardCell : MonoBehaviour {
         get { return refStat == null; }
     }
     private PhotonPlayer refPlayer;
-    private UIScoreBoard scoreBoard;
+    //private UIScoreBoard scoreBoard;
 
 
     private void Start()
     {
-        scoreBoard = transform.parent.parent.GetComponent<UIScoreBoard>();
+        //scoreBoard = transform.parent.parent.GetComponent<UIScoreBoard>();
         picture = GetComponentInChildren<Image>();
     }
 

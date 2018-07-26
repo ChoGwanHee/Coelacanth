@@ -7,6 +7,8 @@ public class WaterCannonScript : Photon.PunBehaviour {
     public float thrustForce = 5.0f;
     public float blockForce = 8.0f;
     public float duration = 3.0f;
+    public float shakePower = 2.0f;
+    public float shakeDuration = 0.3f;
 
     public GameObject hitEffect_ref;
     public GameObject hitRangeEffect;
@@ -53,6 +55,7 @@ public class WaterCannonScript : Photon.PunBehaviour {
         PlaySound(1);
         ps.Play();
         hitRangeEffect.SetActive(false);
+        GameManagerPhoton._instance.cameraController.Shake(shakePower, shakeDuration);
 
         while (distance < maxDistance)
         {

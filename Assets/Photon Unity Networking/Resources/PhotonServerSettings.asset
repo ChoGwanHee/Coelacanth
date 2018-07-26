@@ -69,4 +69,5 @@ MonoBehaviour:
   - Spotlight
   - AllowCreatePlayer
   - RemoteCreatePlayer
+  - DamageShake
   DisableAutoOpenWizard: 1

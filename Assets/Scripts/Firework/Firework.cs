@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System;
+﻿using System;
+using UnityEngine;
 
 /// <summary>
 /// 폭죽의 기본 클래스
@@ -67,6 +67,16 @@ public abstract class Firework : ScriptableObject {
     /// 재사용 대기 시간
     /// </summary>
     public float coolDown;
+
+    /// <summary>
+    /// 화면 진동 세기
+    /// </summary>
+    public float amplitude;
+
+    /// <summary>
+    /// 화면 진동 지속 시간
+    /// </summary>
+    public float duration;
 
     /// <summary>
     /// 폭죽 UI 스프라이트

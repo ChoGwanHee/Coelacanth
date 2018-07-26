@@ -116,6 +116,8 @@ public class FireworkButterfly : Firework
             bullet.SetSpeed(projectileSpeed);
             bullet.rotateAngle = rotateAngle;
             bullet.gainScore = gainScore;
+            bullet.amplitude = amplitude;
+            bullet.duration = duration;
 
             executer.DecreaseAmmo();
 

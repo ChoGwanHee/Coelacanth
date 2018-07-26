@@ -336,6 +336,9 @@ public class PlayerController : Photon.PunBehaviour
         PlayVoiceSound("Falling");
         FMODUnity.RuntimeManager.PlayOneShot(fallingSound);
 
+        if(photonView.isMine)
+            GameManagerPhoton._instance.cameraController.Shake(4, 0.5f);
+
         StandBy();
     }
 

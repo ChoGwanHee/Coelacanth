@@ -34,6 +34,8 @@ public class FireworkFountain : Firework
         fountain.hitForce = hitForce;
         fountain.hitRadius = hitRadius;
         fountain.gainScore = gainScore;
+        fountain.amplitude = amplitude;
+        fountain.duration = duration;
 
         executer.DecreaseAmmo();
     }

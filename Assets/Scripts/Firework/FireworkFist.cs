@@ -18,11 +18,12 @@ public class FireworkFist : Firework
 
         for (int i = 0; i < effectedObjects.Length; i++)
         {
-            effectedObjects[i].gameObject.GetPhotonView().RPC("Pushed", PhotonTargets.All, (direction * hitForce));
+            PhotonView objPhotonView = effectedObjects[i].GetComponent<PhotonView>();
+            objPhotonView.RPC("Pushed", PhotonTargets.All, (direction * hitForce));
 
             if (effectedObjects[i].CompareTag("Player"))
             {
-                effectedObjects[i].gameObject.GetPhotonView().RPC("Damage", PhotonTargets.All, damage, executer.photonView.ownerId);
+                objPhotonView.RPC("Damage", objPhotonView.owner, damage, executer.photonView.ownerId);
                 Vector3 efxPos = effectedObjects[i].GetComponent<CapsuleCollider>().ClosestPointOnBounds(executer.firePoint.position);
                 PhotonNetwork.Instantiate("Prefabs/Effect_base_Hit_fx", efxPos, Quaternion.identity, 0);
 
