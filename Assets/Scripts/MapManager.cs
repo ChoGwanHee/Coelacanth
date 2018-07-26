@@ -52,7 +52,7 @@ public class MapManager : Photon.PunBehaviour {
                 photonView.RPC("StartWaterBlast", PhotonTargets.All, null);
             }
 
-            yield return null;
+            yield return new WaitUntil(() => GameManagerPhoton._instance.timeProgress == true);
         }
     }
 

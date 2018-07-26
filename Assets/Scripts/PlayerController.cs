@@ -125,6 +125,11 @@ public class PlayerController : Photon.PunBehaviour
     /// </summary>
     public GameObject stunEfx;
 
+    /// <summary>
+    /// 사망 이펙트
+    /// </summary>
+    public GameObject deadEfx_ref;
+
 
     // 내부 컴포넌트
     private PlayerStat stat;
@@ -327,7 +332,7 @@ public class PlayerController : Photon.PunBehaviour
         executer.ChangeFirework(0, 0);
 
         Vector3 genPos = transform.position;
-        GameObject.Instantiate(GameManagerPhoton._instance.deadEfx_ref, genPos, Quaternion.identity);
+        GameObject.Instantiate(deadEfx_ref, genPos, Quaternion.identity);
         PlayVoiceSound("Falling");
         FMODUnity.RuntimeManager.PlayOneShot(fallingSound);
 
@@ -561,7 +566,7 @@ public class PlayerController : Photon.PunBehaviour
             case FireworkType.Rocket:
             case FireworkType.Party:
                 Destroy(attachedHandObject);
-                AttackToHand(newFirework.fwType);
+                AttachToHand(newFirework.fwType);
                 break;
             default:
                 break;
@@ -572,7 +577,7 @@ public class PlayerController : Photon.PunBehaviour
     /// 손에 폭죽 붙이기
     /// </summary>
     /// <param name="num">붙일 폭죽 번호</param>
-    public void AttackToHand(FireworkType type)
+    public void AttachToHand(FireworkType type)
     {
         switch (type)
         {

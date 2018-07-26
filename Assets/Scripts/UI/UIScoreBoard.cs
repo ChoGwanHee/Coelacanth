@@ -24,7 +24,7 @@ public class UIScoreBoard : MonoBehaviour {
 
     public void SetMyRankImg(int num)
     {
-        if (num < 0 || num >= rankRefs.Length) return;
+        if (num < 0 || num > rankRefs.Length) return;
 
         rankImg.sprite = rankRefs[num-1];
     }
