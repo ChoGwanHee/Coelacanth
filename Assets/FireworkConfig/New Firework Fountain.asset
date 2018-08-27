@@ -22,6 +22,6 @@ MonoBehaviour:
   lifetime: 10
   coolDown: 0.5
   uiSprite: {fileID: 21300000, guid: 9ba85bac439e98a449d236c52b3e7964, type: 3}
-  startSound: 
+  startSound: event:/SFX_Stage1/Weapon/Shoot/SFX_FountainShot
   fountain_ref: {fileID: 1978563458120296, guid: 127bfdf1b50d1f44794a971b2f0d5198,
     type: 2}

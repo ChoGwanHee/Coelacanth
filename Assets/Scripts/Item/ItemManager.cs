@@ -1,14 +1,26 @@
-﻿
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 [RequireComponent(typeof(PhotonView))]
 public class ItemManager : Photon.PunBehaviour {
 
     public FireworkItemTable[] fireworkItemTables;
-    public BaseItem[] itemBoxPool;
-    
+    public List<BaseItemBox> itemBoxPool;
+    public BaseItemBox[] itemBoxReferences;
+
+    /// <summary>
+    /// 아이템 박스 종류당 여분 비율 (maxBoxCount * poolExtraRate = 여분 개수)
+    /// </summary>
+    [Range(0, 1)]
+    public float poolExtraRate = 1.0f;
+
+    /// <summary>
+    /// 아이템 박스 종류당 여분 개수
+    /// </summary>
+    private int poolExtraAmount;
+
     public float regenTime = 5.0f;
     private bool regenTimerEnable = true;
     private float elapsedTime = 0f;
@@ -23,12 +35,7 @@ public class ItemManager : Photon.PunBehaviour {
 
     private void Start()
     {
-        if(!PhotonNetwork.player.IsMasterClient) return;
-
-        for (int i=0; i <= startBoxCount; i++)
-        {
-            RegenItemBox();
-        }
+        Initialize();
     }
 
     private void Update()
@@ -73,6 +80,64 @@ public class ItemManager : Photon.PunBehaviour {
     }
 
     /// <summary>
+    /// 아이템 매니저를 초기화 합니다.
+    /// </summary>
+    public void Initialize()
+    {
+        if (GameObject.Find("ItemBoxes") == null)
+        {
+            new GameObject("ItemBoxes");
+        }
+
+        // 이후부터 마스터만 실행
+        if (!PhotonNetwork.isMasterClient) return;
+
+        InitItemBoxPool();
+    }
+
+    /// <summary>
+    /// 아이템 박스 풀 초기화
+    /// </summary>
+    private void InitItemBoxPool()
+    {
+        for (int i = 0; i < itemBoxPool.Count; i++)
+        {
+            PhotonNetwork.Destroy(itemBoxPool[i].gameObject);
+        }
+        itemBoxPool.Clear();
+
+
+        if (itemBoxReferences.Length > 1)
+        {
+            poolExtraAmount = Mathf.CeilToInt(maxBoxCount * poolExtraRate);
+        }
+        else
+        {
+            poolExtraAmount = maxBoxCount;
+        }
+
+        string folderPath = "Prefabs/";
+
+        for (int i = 0; i < itemBoxReferences.Length; i++)
+        {
+            string path = folderPath + itemBoxReferences[i].name;
+            for (int j = 0; j < poolExtraAmount; j++)
+            {
+                PhotonNetwork.Instantiate(path, Vector3.zero, Quaternion.identity, 0);
+            }
+        }
+    }
+
+    /// <summary>
+    /// 아이템 박스 풀에 아이템 박스를 추가합니다.
+    /// </summary>
+    /// <param name="itemBox">추가할 아이템 박스</param>
+    public void AddItemBox(BaseItemBox itemBox)
+    {
+        itemBoxPool.Add(itemBox);
+    }
+
+    /// <summary>
     /// 특정 아이템 테이블의 아이템 리스트 중 특정 아이템을 얻어옵니다.
     /// </summary>
     /// <param name="tableIndex"></param>
@@ -94,6 +159,17 @@ public class ItemManager : Photon.PunBehaviour {
     }
 
     /// <summary>
+    /// 겜 시작시 아이템 박스 생성
+    /// </summary>
+    public void FirstRegen()
+    {
+        for (int i = 0; i <= startBoxCount; i++)
+        {
+            RegenItemBox();
+        }
+    }
+
+    /// <summary>
     /// 맵에 아이템박스를 다시 생성합니다.
     /// </summary>
     public void RegenItemBox()
@@ -108,33 +184,32 @@ public class ItemManager : Photon.PunBehaviour {
         {
             do
             {
-                //randomIndex = Random.Range(0, 2) * 2;
-                randomIndex = Mathf.FloorToInt(Random.value * 2) *2;
+                randomIndex = Mathf.FloorToInt(Random.value * 2) * 2;
 
                 regenPos = GetRandomPos(itemRegenPos[randomIndex].position, itemRegenPos[randomIndex + 1].position);
                 regenPos.y += 6.0f;
 
-                retry1 = Physics.BoxCast(regenPos, new Vector3(0.9f, 1.0f, 0.9f), Vector3.down, out hit1, Quaternion.identity, 6.1f, LayerMask.GetMask("Ground"), QueryTriggerInteraction.Ignore);
+                retry1 = Physics.Raycast(regenPos, Vector3.down, out hit1, 6.1f, LayerMask.GetMask("Ground"), QueryTriggerInteraction.Ignore);
 
-                if(++count > 10000)
+                if (++count > 10000)
                 {
-                    Debug.Log("비정상적인 연산입니다. 아이템 생성을 비활성화 합니다.");
+                    Debug.LogError("비정상적인 연산입니다. 아이템 생성을 비활성화 합니다.");
                     active = false;
                     return;
                 }
             }
             while (!retry1);
 
-            retry2 = Physics.BoxCast(regenPos, new Vector3(0.9f, 1.0f, 0.9f), Vector3.down, out hit2, Quaternion.identity, 6.1f, LayerMask.GetMask("DynamicObject", "StaticObject", "Item"));
+            retry2 = Physics.SphereCast(regenPos, 1.0f, Vector3.down, out hit2, 6.1f, LayerMask.GetMask("DynamicObject", "StaticObject", "Item"));
 
         } while (retry2);
 
 
         int selectIndex = -1;
 
-        for(int i=0; i<itemBoxPool.Length; i++)
+        for (int i = 0; i < itemBoxPool.Count; i++)
         {
-            if(!itemBoxPool[i].alive)
+            if (!itemBoxPool[i].alive)
             {
                 selectIndex = i;
                 break;
@@ -143,15 +218,36 @@ public class ItemManager : Photon.PunBehaviour {
 
         if (selectIndex == -1)
         {
-            Debug.Log("비활성화된 아이템 박스가 없음");
+            Debug.LogWarning("비활성화된 아이템 박스가 없음");
             return;
         }
 
-        itemBoxPool[selectIndex].transform.position = hit1.point;
+        itemBoxPool[selectIndex].transform.position = hit1.point + Vector3.up * 0.1f;
         itemBoxPool[selectIndex].photonView.RPC("SetActiveItemBox", PhotonTargets.All, true);
         curBoxCount++;
     }
 
+    /// <summary>
+    /// 아이템 매니저의 모든 기능을 중단하고 아이템 박스들을 비활성화 합니다.
+    /// </summary>
+    public void StopAllFeature()
+    {
+        StopAllCoroutines();
+        active = false;
+
+        // 아이템 박스들 비활성화
+        for (int i = 0; i < itemBoxPool.Count; i++)
+        {
+            itemBoxPool[i].gameObject.SetActive(false);
+        }
+    }
+
+    /// <summary>
+    /// 두 위치를 기준으로 사각형 범위 안의 위치를 랜덤으로 얻습니다.
+    /// </summary>
+    /// <param name="pos1">첫 번째 기준</param>
+    /// <param name="pos2">두 번째 기준</param>
+    /// <returns>랜덤 위치</returns>
     private Vector3 GetRandomPos(Vector3 pos1, Vector3 pos2)
     {
         Vector3 minPos = Vector3.zero;

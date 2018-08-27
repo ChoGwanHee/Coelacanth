@@ -42,6 +42,18 @@ public abstract class BaseProjectile : Photon.PunBehaviour {
     public int gainScore;
 
     /// <summary>
+    /// 화면 진동 세기
+    /// </summary>
+    [HideInInspector]
+    public float amplitude;
+
+    /// <summary>
+    /// 화면 진동 지속 시간
+    /// </summary>
+    [HideInInspector]
+    public float duration;
+
+    /// <summary>
     /// 날아가는 도중 재생되는 사운드
     /// </summary>
     [FMODUnity.EventRef]

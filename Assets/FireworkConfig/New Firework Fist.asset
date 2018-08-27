@@ -22,4 +22,4 @@ MonoBehaviour:
   lifetime: 0
   coolDown: 1
   uiSprite: {fileID: 0}
-  startSound: event:/SFX/Weapon/Shoot/SFX_Punch
+  startSound: event:/SFX_Stage1/Weapon/Shoot/SFX_Punch

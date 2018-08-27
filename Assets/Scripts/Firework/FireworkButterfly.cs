@@ -66,7 +66,6 @@ public class FireworkButterfly : Firework
         PlayerController pc = executer.GetComponent<PlayerController>();
         pc.SetAnimParam("Charging", true);
 
-        Debug.Log("chargingAmount:" + chargingAmount);
         while(Input.GetMouseButton(0))
         {
             if(chargingAmount < maxChargingAmount && chargingAmount < executer.ammo)
@@ -117,6 +116,8 @@ public class FireworkButterfly : Firework
             bullet.SetSpeed(projectileSpeed);
             bullet.rotateAngle = rotateAngle;
             bullet.gainScore = gainScore;
+            bullet.amplitude = amplitude;
+            bullet.duration = duration;
 
             executer.DecreaseAmmo();
 

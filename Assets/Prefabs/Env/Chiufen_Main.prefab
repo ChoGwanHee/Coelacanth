@@ -2110,8 +2110,8 @@ MonoBehaviour:
   hitEffect_ref: {fileID: 1225241528977946, guid: 8ab7350990e836045adb28ec3b12b745,
     type: 2}
   hitRangeEffect: {fileID: 1223102424007550}
-  metalQuakeSound: event:/SFX/Object/Trigger/SFX_WaterPipeQuake
-  waterFireSound: event:/SFX/Object/Trigger/SFX_WaterCannon
+  metalQuakeSound: event:/SFX_Stage1/Object/Trigger/SFX_WaterPipeQuake
+  waterFireSound: event:/SFX_Stage1/Object/Trigger/SFX_WaterCannon
 --- !u!114 &114268745706420484
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2126,8 +2126,8 @@ MonoBehaviour:
   isBroken: 0
   respawnTime: 6
   breakChance: 0.2
-  preBreakSound: event:/SFX/Object/Trigger/SFX_BridgePipeQuake
-  breakSound: event:/SFX/Object/Trigger/SFX_PipeBreak
+  preBreakSound: event:/SFX_Stage1/Object/Trigger/SFX_BridgePipeQuake
+  breakSound: event:/SFX_Stage1/Object/Trigger/SFX_PipeBreak
   smokeObjs:
   - {fileID: 1047715601820030}
   - {fileID: 1612465004057234}

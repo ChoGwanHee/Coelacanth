@@ -32,6 +32,11 @@ public class PlayerStat : Photon.PunBehaviour
     public int curHP;
 
     /// <summary>
+    /// 캐릭터 초상화
+    /// </summary>
+    public Sprite characterPicture;
+
+    /// <summary>
     /// 플레이어의 점수
     /// </summary>
     //private int score;
@@ -124,20 +129,22 @@ public class PlayerStat : Photon.PunBehaviour
 
         if (GetComponent<PlayerDummy>()) return;
 
+        UIScoreBoard scoreBoard = UIManager._instance.scoreBoard;
+
         if (photonView.isMine)
         {
-            UIManager._instance.chargingUI.target = transform;
             GameManagerPhoton._instance.cameraController.SetTarget(transform);
-
-            UIManager._instance.scoreBoard.cells[0].SetPlayerStat(this);
+            UIManager._instance.chargingUI.target = transform;
+            scoreBoard.cells[0].SetPlayerStat(this);
+            scoreBoard.cells[0].SetPlayerPicture(characterPicture);
         }
         else
         {
             for(int i=0; i<UIManager._instance.scoreBoard.cells.Length; i++)
             {
-                if(UIManager._instance.scoreBoard.cells[i].IsNotRegist)
+                if(!scoreBoard.cells[i].isMine && scoreBoard.cells[i].IsNotRegist)
                 {
-                    UIManager._instance.scoreBoard.cells[i].SetPlayerStat(this);
+                    scoreBoard.cells[i].SetPlayerStat(this);
                     break;
                 }
             }
@@ -145,6 +152,7 @@ public class PlayerStat : Photon.PunBehaviour
 
         if (PhotonNetwork.isMasterClient)
         {
+            Debug.Log(PhotonNetwork.isMasterClient + ", " + photonView.owner);
             GameManagerPhoton._instance.CheckFull();
         }
     }
@@ -192,6 +200,31 @@ public class PlayerStat : Photon.PunBehaviour
             SetAttacker(attackerIndex);
     }
 
+    [PunRPC]
+    public void DamageShake(int damageEventNum, int attackerIndex)
+    {
+        if (!onStage || pc.isStun) return;
+
+        DamageEvent de = GameManagerPhoton._instance.damageEvents[damageEventNum];
+
+        if (curHP - de.Damage <= 0)
+        {
+            curHP = 0;
+            if (pc != null)
+                pc.ChangeState(PlayerAniState.Stun);
+        }
+        else
+        {
+            curHP -= de.Damage;
+        }
+
+        if (attackerIndex != -1)
+            SetAttacker(attackerIndex);
+
+        // 카메라 쉐이크
+        GameManagerPhoton._instance.cameraController.Shake(de.Amplitude, de.Duration);
+    }
+
     /// <summary>
     /// 체력을 재설정합니다.
     /// </summary>
@@ -219,7 +252,7 @@ public class PlayerStat : Photon.PunBehaviour
         if (!photonView.isMine) return;
 
         // 다른 사람에 의해 킬
-        if (killApproval)
+        if (killApproval && lastAttacker != photonView.ownerId)
         {
             // 공격자 점수 가산
             for(int i=0; i<GameManagerPhoton._instance.playerList.Count; i++)

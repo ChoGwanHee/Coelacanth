@@ -236,7 +236,7 @@ MonoBehaviour:
   speed: 0
   gainScore: 0
   duringSound: .
-  endSound: event:/SFX/Weapon/Hit/SFX_RomanHit
+  endSound: event:/SFX_Stage1/Weapon/Hit/SFX_RomanHit
 --- !u!114 &114480670357444592
 MonoBehaviour:
   m_ObjectHideFlags: 1

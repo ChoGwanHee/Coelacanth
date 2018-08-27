@@ -19,15 +19,17 @@ MonoBehaviour:
   gainScore: 20
   hitForce: 9
   hitRadius: 1.5
-  lifetime: 1
+  lifetime: 1.3
   coolDown: 0.6
+  amplitude: 1
+  duration: 0.1
   uiSprite: {fileID: 21300000, guid: 5cee57aefd92e7a4c9960dc4efcbe45b, type: 3}
-  startSound: event:/SFX/Weapon/Shoot/SFX_ButterShot
-  projectileSpeed: 8
+  startSound: event:/SFX_Stage1/Weapon/Shoot/SFX_ButterShot
+  projectileSpeed: 11
   rotateAngle: 180
   chargingTime: 0.4
   chainFireTime: 0.05
   maxChargingAmount: 5
   projectile_ref: {fileID: 1794594348348516, guid: 9d36b482510cfe54f843dc07199ebf77,
     type: 2}
-  chargingSound: event:/SFX/Weapon/Special/SFX_ButterCharge
+  chargingSound: event:/SFX_Stage1/Weapon/Special/SFX_ButterCharge

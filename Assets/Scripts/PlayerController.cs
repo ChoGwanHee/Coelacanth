@@ -30,9 +30,6 @@ public class PlayerController : Photon.PunBehaviour
     public string fallingSound;
 
 
-    FMOD.Studio.EventInstance walkingEvent;
-    FMOD.Studio.PLAYBACK_STATE walkingSoundState;
-
     /// <summary>
     /// 캐릭터 목소리 에셋
     /// </summary>
@@ -101,6 +98,23 @@ public class PlayerController : Photon.PunBehaviour
     private Ray mouseRay;
     private RaycastHit mouseHit;
 
+
+    /// <summary>
+    /// 폭죽을 들 수 있는 손안의 본
+    /// </summary>
+    public Transform weaponPoint;
+
+    /// <summary>
+    /// 손에 붙일 수 있는 폭죽 프리팹 모음
+    /// </summary>
+    public FireworkHandObjectSet handObjectSet;
+
+    /// <summary>
+    /// 손에 붙어 있는 오브젝트
+    /// </summary>
+    private GameObject attachedHandObject;
+
+
     /// <summary>
     /// 플레이어 발 밑에 하얀색 원 (자신만 활성화)
     /// </summary>
@@ -111,11 +125,17 @@ public class PlayerController : Photon.PunBehaviour
     /// </summary>
     public GameObject stunEfx;
 
+    /// <summary>
+    /// 사망 이펙트
+    /// </summary>
+    public GameObject deadEfx_ref;
+
 
     // 내부 컴포넌트
     private PlayerStat stat;
     private FireworkExecuter executer;
     private Rigidbody rb;
+    private CapsuleCollider col;
     private Animator anim;
 
     // 외부 컴포넌트
@@ -124,24 +144,20 @@ public class PlayerController : Photon.PunBehaviour
 
     int groundMask;
 
-
-    // 임시
-
-
     void Start () {
         rb = GetComponent<Rigidbody>();
+        col = GetComponent<CapsuleCollider>();
         cam = Camera.main;
         stat = GetComponent<PlayerStat>();
         executer = GetComponent<FireworkExecuter>();
         anim = GetComponent<Animator>();
         groundMask = LayerMask.GetMask("Ground");
-        //walkingEvent = FMODUnity.RuntimeManager.CreateInstance(walkingSound);
-        //FMODUnity.RuntimeManager.AttachInstanceToGameObject(walkingEvent, transform, rb);
 
         if (photonView.isMine)
         {
             ring.SetActive(true);
         }
+
     }
 
     private void Update()
@@ -187,6 +203,7 @@ public class PlayerController : Photon.PunBehaviour
         inputAxis.x = Input.GetAxisRaw("Horizontal");
         inputAxis.y = Input.GetAxisRaw("Vertical");
 
+        // 카메라의 방향이 Z축을 바라보게 고정이 되어 있어서 사용할 필요가 없음 나중에 바뀌면 이걸로 바꿔야 됨
         //targetDirection = (inputAxis.y * Vector3.Scale(cam.transform.forward, new Vector3(1, 0, 1)).normalized + inputAxis.x * cam.transform.right).normalized;
         targetDirection = (inputAxis.y * Vector3.forward + inputAxis.x * Vector3.right).normalized;
     }
@@ -251,7 +268,7 @@ public class PlayerController : Photon.PunBehaviour
         mouseRay = cam.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(mouseRay, out mouseHit, 50.0f, groundMask))
         {
-            Vector3 toDir = Vector3.Scale( mouseHit.point - transform.position, new Vector3(1,0,1)).normalized;
+            Vector3 toDir = Vector3.Scale(mouseHit.point - transform.position, new Vector3(1, 0, 1)).normalized;
 
             Quaternion targetRoation = Quaternion.LookRotation(toDir);
             transform.rotation = targetRoation;
@@ -265,6 +282,7 @@ public class PlayerController : Photon.PunBehaviour
     {
         if (!photonView.isMine) return;
 
+        // 카메라의 방향이 Z축을 바라보게 고정이 되어 있어서 사용할 필요가 없음 나중에 바뀌면 이걸로 바꿔야 됨
         //Vector3 toDir = Vector3.Scale(cam.transform.position - transform.position , new Vector3(1, 0, 1)).normalized;
         Vector3 toDir = new Vector3(0, 0, -1);
 
@@ -280,6 +298,9 @@ public class PlayerController : Photon.PunBehaviour
     {
         rb.velocity = Vector3.zero;
         rb.AddForce(force, ForceMode.Impulse);
+
+        if(photonView.isMine)
+            GameManagerPhoton._instance.cameraController.Shake(2.0f, 0.3f);
     }
 
     /// <summary>
@@ -299,6 +320,7 @@ public class PlayerController : Photon.PunBehaviour
     [PunRPC]
     public void Fall()
     {
+        col.enabled = false;
         stat.onStage = false;
         stat.KillScoring();
         ChangeState(PlayerAniState.Fall);
@@ -307,14 +329,15 @@ public class PlayerController : Photon.PunBehaviour
         // 받는 정보      = 정보 : 플레이어 : 상태 : 보유라이프
         ServerManager.Send(string.Format("FALL:{0}:{1}:{2}", true, PlayerAniState.Fall, respawnTime));
         Invoke("Respawn", respawnTime);
-        //Invoke("StandBy", 3.0f);
         executer.ChangeFirework(0, 0);
 
         Vector3 genPos = transform.position;
-        //genPos.y = 2.51f;
-        GameObject.Instantiate(GameManagerPhoton._instance.deadEfx_ref, genPos, Quaternion.identity);
+        GameObject.Instantiate(deadEfx_ref, genPos, Quaternion.identity);
         PlayVoiceSound("Falling");
         FMODUnity.RuntimeManager.PlayOneShot(fallingSound);
+
+        if(photonView.isMine)
+            GameManagerPhoton._instance.cameraController.Shake(4, 0.5f);
 
         StandBy();
     }
@@ -356,38 +379,24 @@ public class PlayerController : Photon.PunBehaviour
     /// </summary>
     private void Respawn()
     {
-        GameManagerPhoton._instance.RespawnPlayer(transform);
+        if (photonView.isMine)
+        {
+            GameManagerPhoton._instance.RespawnPlayer(transform);
+        }
         stat.HPReset();
         stat.onStage = true;
         if(GameManagerPhoton._instance.IsPlaying)
             isControlable = true;
         rb.WakeUp();
         rb.useGravity = true;
+        col.enabled = true;
         ChangeState(PlayerAniState.Idle);
     }
 
-    private void MoveSound()
-    {
-        walkingEvent.getPlaybackState(out walkingSoundState);
-
-        if (state == PlayerAniState.Idle)
-        {
-            if (Velocity.sqrMagnitude > 0.01f)
-            {
-                print(Velocity.sqrMagnitude);
-                if (walkingSoundState == FMOD.Studio.PLAYBACK_STATE.STOPPED)
-                {
-                    walkingEvent.start();
-                }
-            }
-        }
-        else
-        {
-            if(walkingSoundState == FMOD.Studio.PLAYBACK_STATE.PLAYING)
-                walkingEvent.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-        }
-    }
-
+    /// <summary>
+    /// 캐릭터의 보이스를 재생합니다.
+    /// </summary>
+    /// <param name="soundType">재생할 보이스 종류</param>
     public void PlayVoiceSound(string soundType)
     {
         if (characterVoice == null || !photonView.isMine) return;
@@ -543,6 +552,49 @@ public class PlayerController : Photon.PunBehaviour
 
             case "Play Start Sound":
                 FMODUnity.RuntimeManager.PlayOneShot(executer.curFirework.startSound);
+                break;
+        }
+    }
+
+    /// <summary>
+    /// 손에 들 수 있는 폭죽인지 체크
+    /// </summary>
+    /// <param name="newFirework"></param>
+    public void CheckHandObject(Firework newFirework)
+    {
+        switch (newFirework.fwType)
+        {
+            case FireworkType.Roman:
+            case FireworkType.Fountain:
+            case FireworkType.Rocket:
+            case FireworkType.Party:
+                Destroy(attachedHandObject);
+                AttachToHand(newFirework.fwType);
+                break;
+            default:
+                break;
+        }
+    }
+
+    /// <summary>
+    /// 손에 폭죽 붙이기
+    /// </summary>
+    /// <param name="num">붙일 폭죽 번호</param>
+    public void AttachToHand(FireworkType type)
+    {
+        switch (type)
+        {
+            case FireworkType.Roman:
+                attachedHandObject = Instantiate(handObjectSet.objects[0], weaponPoint);
+                break;
+            case FireworkType.Fountain:
+                attachedHandObject = Instantiate(handObjectSet.objects[1], weaponPoint);
+                break;
+            case FireworkType.Rocket:
+                attachedHandObject = Instantiate(handObjectSet.objects[2], weaponPoint);
+                break;
+            case FireworkType.Party:
+                attachedHandObject = Instantiate(handObjectSet.objects[3], weaponPoint);
                 break;
         }
     }

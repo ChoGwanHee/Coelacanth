@@ -5,7 +5,7 @@
             <value>SFX_UnReady</value>
         </property>
         <property name="outputFormat">
-            <value>2</value>
+            <value>1</value>
         </property>
         <relationship name="folder">
             <destination>{b1d8bcb7-bd08-42e9-965a-bc744b092473}</destination>
@@ -50,7 +50,7 @@
             <destination>{48372e37-5922-48ae-8b40-8efeac61fa68}</destination>
         </relationship>
         <relationship name="output">
-            <destination>{0f8623d4-220e-40b3-ac8d-e17f41adcc31}</destination>
+            <destination>{a3ff7962-f3fd-4e6f-8e4a-cd97c96e8681}</destination>
         </relationship>
     </object>
     <object class="EventAutomatableProperties" id="{4e377e91-3204-41d1-92ed-bfa534c478fc}"/>
@@ -98,7 +98,14 @@
             <destination>{46c5e68c-0cb3-4fea-9c79-49bc53a3ec4e}</destination>
         </relationship>
     </object>
-    <object class="MixerBusPanner" id="{4963b9b1-9638-4471-a8de-2e50f0d82d29}"/>
+    <object class="MixerBusPanner" id="{4963b9b1-9638-4471-a8de-2e50f0d82d29}">
+        <property name="overridingOutputFormat">
+            <value>1</value>
+        </property>
+        <property name="outputFormatOverridden">
+            <value>true</value>
+        </property>
+    </object>
     <object class="MixerBusFader" id="{b05e5f38-40f7-493b-9f60-b63890763d25}"/>
     <object class="MixerBusEffectChain" id="{e7c7fe6a-f3e2-49d4-8b7f-f55dd91f92d0}">
         <relationship name="effects">

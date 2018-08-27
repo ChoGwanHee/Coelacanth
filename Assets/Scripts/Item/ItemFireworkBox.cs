@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemFireworkBox : BaseItem {
+public class ItemFireworkBox : BaseItemBox {
 
     [FMODUnity.EventRef]
     public string getSound;
@@ -25,7 +25,7 @@ public class ItemFireworkBox : BaseItem {
             }
             else
             {
-                Debug.Log("Executer가 null 입니다");
+                Debug.LogError("Executer가 null 입니다");
             }
 
             photonView.RPC("SetActiveItemBox", PhotonTargets.All, false);
@@ -40,7 +40,6 @@ public class ItemFireworkBox : BaseItem {
         {
             gameObject.SetActive(true);
             alive = true;
-            //GameManagerPhoton._instance.itemManager.curBoxCount++;
             GetComponent<Collider>().enabled = true;
             FMODUnity.RuntimeManager.PlayOneShot(spawnSound);
         }
@@ -49,7 +48,6 @@ public class ItemFireworkBox : BaseItem {
             alive = false;
             GetComponent<Collider>().enabled = false;
             transform.position = Vector3.zero;
-            //GameManagerPhoton._instance.itemManager.curBoxCount--;
             gameObject.SetActive(false);
             FMODUnity.RuntimeManager.PlayOneShot(getSound);
         }

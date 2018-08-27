@@ -36,18 +36,21 @@ public class UIScoreBoardCell : MonoBehaviour {
     public Text nicknameText;
     public Text scoreText;
 
+    private Image picture;
+
     private PlayerStat refStat;
     public bool IsNotRegist
     {
         get { return refStat == null; }
     }
     private PhotonPlayer refPlayer;
-    private UIScoreBoard scoreBoard;
+    //private UIScoreBoard scoreBoard;
 
 
     private void Start()
     {
-        scoreBoard = transform.parent.parent.GetComponent<UIScoreBoard>();
+        //scoreBoard = transform.parent.parent.GetComponent<UIScoreBoard>();
+        picture = GetComponentInChildren<Image>();
     }
 
     private void Update()
@@ -93,6 +96,11 @@ public class UIScoreBoardCell : MonoBehaviour {
         refPlayer = refStat.gameObject.GetPhotonView().owner;
         if(nicknameText != null)
             nicknameText.text = stat.nickname;
+    }
+
+    public void SetPlayerPicture(Sprite newPicture)
+    {
+        picture.sprite = newPicture;
     }
 
     public void UpdateScore()

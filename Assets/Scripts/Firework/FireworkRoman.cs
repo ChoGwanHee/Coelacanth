@@ -27,6 +27,8 @@ public class FireworkRoman : Firework
         bullet.lifetime = lifetime;
         bullet.SetSpeed(projectileSpeed);
         bullet.gainScore = gainScore;
+        bullet.amplitude = amplitude;
+        bullet.duration = duration;
 
         executer.DecreaseAmmo();
     }
