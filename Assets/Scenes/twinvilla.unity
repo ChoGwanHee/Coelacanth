@@ -32678,6 +32678,20 @@ Prefab:
       propertyPath: smoothMoveTime
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 20205165553383924, guid: 4465ba950529457438ae7c886ba2f26b,
+        type: 2}
+      propertyPath: field of view
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421387143772456, guid: 4465ba950529457438ae7c886ba2f26b, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -25
+      objectReference: {fileID: 0}
+    - target: {fileID: 20347377045511126, guid: 4465ba950529457438ae7c886ba2f26b,
+        type: 2}
+      propertyPath: field of view
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4465ba950529457438ae7c886ba2f26b, type: 2}
   m_IsPrefabParent: 0

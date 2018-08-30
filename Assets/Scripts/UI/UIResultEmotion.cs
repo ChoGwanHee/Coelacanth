@@ -13,7 +13,7 @@ public class UIResultEmotion : MonoBehaviour {
 
     public void EmotionDance(int type)
     {
-        pc.SetAnimParam("EmotionType", type - 1);
+        pc.SetAnimParam("SubAniNum", type - 1);
         pc.ChangeState(PlayerAniState.Emotion);
     }
 }
