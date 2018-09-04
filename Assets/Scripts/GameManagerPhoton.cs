@@ -84,7 +84,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
     /// <summary>
     /// 미리 정의 되어 있는 데미지 이벤트들
     /// </summary>
-    public DamageEvent[] damageEvents;
+    public DamageShakeEvent[] damageShakeEvents;
 
     /// <summary>
     /// 씬 이동 중인지 여부

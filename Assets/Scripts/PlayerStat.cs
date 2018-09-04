@@ -204,7 +204,7 @@ public class PlayerStat : Photon.PunBehaviour
     {
         if (!onStage || pc.isStun) return;
 
-        DamageEvent de = GameManagerPhoton._instance.damageEvents[damageEventNum];
+        DamageShakeEvent de = GameManagerPhoton._instance.damageShakeEvents[damageEventNum];
 
         if (curHP - de.Damage <= 0)
         {

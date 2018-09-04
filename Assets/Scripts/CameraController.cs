@@ -54,7 +54,7 @@ public class CameraController : Photon.PunBehaviour {
 
 
     // Shake
-    private float frequency = 20.0f;
+    private float frequency = 10.0f;
 
 
     public PostProcessingProfile zoomProfile;

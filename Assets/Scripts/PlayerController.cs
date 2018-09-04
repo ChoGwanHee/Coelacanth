@@ -219,7 +219,7 @@ public class PlayerController : Photon.PunBehaviour
     }
 
     /// <summary>
-    /// Integer형 애니메이션 파라미터를 설정합니다.
+    /// 애니메이션 파라미터를 설정합니다.
     /// </summary>
     /// <param name="param">파라미터 이름</param>
     /// <param name="val">값</param>
@@ -298,9 +298,6 @@ public class PlayerController : Photon.PunBehaviour
     {
         rb.velocity = Vector3.zero;
         rb.AddForce(force, ForceMode.Impulse);
-
-        if(photonView.isMine)
-            GameManagerPhoton._instance.cameraController.Shake(2.0f, 0.3f);
     }
 
     /// <summary>
@@ -315,7 +312,7 @@ public class PlayerController : Photon.PunBehaviour
     }
 
     /// <summary>
-    /// 플레이어의 생명을 하나깎고 리스폰 대기를 합니다.
+    /// 플레이어가 떨어졌을 때 처리를 합니다.
     /// </summary>
     [PunRPC]
     public void Fall()
