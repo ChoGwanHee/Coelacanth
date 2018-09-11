@@ -65,6 +65,11 @@ public abstract class BaseProjectile : Photon.PunBehaviour {
     [FMODUnity.EventRef]
     public string endSound;
 
+    public Vector3 Velocity
+    {
+        get { return rb.velocity; }
+        set { rb.velocity = value; }
+    }
 
     protected Rigidbody rb;
     protected int dynamicObjMask;
@@ -82,15 +87,6 @@ public abstract class BaseProjectile : Photon.PunBehaviour {
         {
             Destroy(gameObject);
         }
-    }
-
-    /// <summary>
-    /// 투사체의 속도을 설정합니다
-    /// </summary>
-    /// <param name="newVelocity">새로운 속도</param>
-    public void SetVelocity(Vector3 newVelocity)
-    {
-        rb.velocity = newVelocity;
     }
 
     /// <summary>

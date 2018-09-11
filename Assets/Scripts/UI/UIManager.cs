@@ -30,12 +30,26 @@ public class UIManager : MonoBehaviour {
     public UIResultScoreBoard resultScoreBoard;
     public UIResultEmotion resultEmotion;
 
+    // Chat
+    public GameObject chatUI;
+    private bool chatEnable = true;
+
+
     private void Awake()
     {
         if (_instance == null)
             _instance = this;
         else
             Destroy(gameObject);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Minus))
+        {
+            chatEnable = !chatEnable;
+            chatUI.SetActive(chatEnable);
+        }
     }
 
     /// <summary>
@@ -56,4 +70,6 @@ public class UIManager : MonoBehaviour {
                 break;
         }
     }
+
+
 }

@@ -145,6 +145,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
         {
             Destroy(gameObject);
         }
+
     }
 
     private void Start()
