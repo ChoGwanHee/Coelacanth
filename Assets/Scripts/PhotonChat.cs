@@ -84,6 +84,8 @@ public class PhotonChat : MonoBehaviour, IChatClientListener
         if (this.chatClient != null)
         {
             this.chatClient.Disconnect();
+            inputFieldChat.readOnly = true;
+            inputFieldChat.placeholder.GetComponent<Text>().text = "Disconnected";
         }
     }
 
@@ -92,6 +94,8 @@ public class PhotonChat : MonoBehaviour, IChatClientListener
         if (this.chatClient != null)
         {
             this.chatClient.Disconnect();
+            inputFieldChat.readOnly = true;
+            inputFieldChat.placeholder.GetComponent<Text>().text = "Disconnected";
         }
     }
 
@@ -146,6 +150,8 @@ public class PhotonChat : MonoBehaviour, IChatClientListener
     {
         Debug.Log("OnSubscribed: " + string.Join(", ", channels));
 
+        inputFieldChat.readOnly = false;
+        inputFieldChat.placeholder.GetComponent<Text>().text = "Enter text...";
         ShowChannel(channels[0]);
     }
 

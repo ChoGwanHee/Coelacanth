@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class DebugTool : MonoBehaviour {
 
     public Text debugText;
+    public Text pingText;
 
     bool debugEnable = false;
 
@@ -16,12 +17,14 @@ public class DebugTool : MonoBehaviour {
             {
                 debugEnable = false;
                 debugText.gameObject.SetActive(false);
+                pingText.gameObject.SetActive(false);
                 Debug.Log("Debug Mode Disable");
             }
             else
             {
                 debugEnable = true;
                 debugText.gameObject.SetActive(true);
+                pingText.gameObject.SetActive(true);
                 Debug.Log("Debug Mode Enable");
             }
             
@@ -50,6 +53,8 @@ public class DebugTool : MonoBehaviour {
         {
             SetFireworks(5);
         }
+
+        pingText.text = "Ping: " + PhotonNetwork.GetPing().ToString();
     }
 
     private void SetFireworks(int fireworkNum)

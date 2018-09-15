@@ -149,11 +149,6 @@ public class PlayerStat : Photon.PunBehaviour
                 }
             }
         }
-
-        if (PhotonNetwork.isMasterClient)
-        {
-            Debug.Log(PhotonNetwork.isMasterClient + ", " + photonView.owner);
-        }
     }
 
     private void Update()

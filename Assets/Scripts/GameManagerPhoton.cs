@@ -394,6 +394,8 @@ public class GameManagerPhoton : Photon.PunBehaviour
         switch(eventNum)
         {
             case (int)GameEvent.GameStart:
+                if(PhotonNetwork.isMasterClient)
+                    PhotonNetwork.room.IsOpen = false;
                 StartCoroutine(GameCountProcess(true));
                 break;
             case (int)GameEvent.GameStop:
@@ -547,6 +549,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
     {
         if(!isSceneMoving)
         {
+            PhotonNetwork.player.SetScore(0);
             PhotonNetwork.Disconnect();
             StartCoroutine(LoadTitleScene());
             isSceneMoving = true;

@@ -143,8 +143,8 @@
 			o.Albedo = c.rgb * _TintColor;
 			o.Alpha = c.a * _FrontTransparency;
 
-			/*fixed rim = 1.0 - saturate(dot(normalize(IN.viewDir), o.Normal));
-			o.Emission = (_RimColor.rgb * pow(rim, _RimPower));*/
+			fixed rim = 1.0 - saturate(dot(normalize(IN.viewDir), o.Normal));
+			o.Emission = (_RimColor.rgb * pow(rim, _RimPower));
 		}
 
 

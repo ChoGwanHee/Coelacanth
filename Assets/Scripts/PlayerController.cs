@@ -81,6 +81,11 @@ public class PlayerController : Photon.PunBehaviour
     private Vector3 targetDirection;
 
     private Vector2 axisVelocity;
+
+    /// <summary>
+    /// 떨어지고 있는지 여부
+    /// </summary>
+    private bool isFalling = false;
     
     [Space()]
     /// <summary>
@@ -152,6 +157,7 @@ public class PlayerController : Photon.PunBehaviour
         executer = GetComponent<FireworkExecuter>();
         anim = GetComponent<Animator>();
         groundMask = LayerMask.GetMask("Ground");
+        
 
         if (photonView.isMine)
         {
@@ -190,7 +196,14 @@ public class PlayerController : Photon.PunBehaviour
                 StateUpdate();
             }
 
-            CheckFall();
+            if(!isFalling)
+            {
+                CheckFalling();
+            }
+            else
+            {
+                CheckFall();
+            }
         }
         
 	}
@@ -301,6 +314,17 @@ public class PlayerController : Photon.PunBehaviour
     }
 
     /// <summary>
+    /// 스테이지 밖으로 떨어지고 있는지 체크합니다.
+    /// </summary>
+    void CheckFalling()
+    {
+        if(transform.position.y <= 4.5f)
+        {
+            ChangeState(PlayerAniState.Fall);
+        }
+    }
+
+    /// <summary>
     /// 스테이지 밖으로 떨어졌는지 체크합니다.
     /// </summary>
     void CheckFall()
@@ -320,7 +344,6 @@ public class PlayerController : Photon.PunBehaviour
         col.enabled = false;
         stat.onStage = false;
         stat.KillScoring();
-        ChangeState(PlayerAniState.Fall);
 
         // 보내는 정보   = 정보 : 플레이어 : 상태 : 라이프차감
         // 받는 정보      = 정보 : 플레이어 : 상태 : 보유라이프
@@ -464,9 +487,11 @@ public class PlayerController : Photon.PunBehaviour
                 Invoke("StunRecovery", stunTime);
                 break;
             case PlayerAniState.Fall:
+                anim.SetInteger("AniNum", (int)PlayerAniState.Fall);
                 anim.SetFloat("MoveX", 0);
                 anim.SetFloat("MoveY", 0);
                 inputAxis = Vector2.zero;
+                isFalling = true;
                 break;
         }
     }
@@ -498,6 +523,9 @@ public class PlayerController : Photon.PunBehaviour
             case PlayerAniState.Stun:
                 stunEfx.SetActive(false);
                 isStun = false;
+                break;
+            case PlayerAniState.Fall:
+                isFalling = false;
                 break;
         }
     }

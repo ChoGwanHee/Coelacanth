@@ -155,6 +155,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4965197858383738}
+  - component: {fileID: 114706242430659462}
   m_Layer: 13
   m_Name: dead_fx
   m_TagString: Untagged
@@ -287,6 +288,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114706242430659462
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1956332014287468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed639e08768846140bac0f74fe854f43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TimeOut: 1.5
+  m_DetachChildren: 0
+  m_PhotonView: 0
 --- !u!198 &198022716089622742
 ParticleSystem:
   m_ObjectHideFlags: 1

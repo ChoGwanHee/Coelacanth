@@ -54,7 +54,5 @@ public class ProjectileTasangyeonhwa : Photon.PunBehaviour {
         dynamicObjMask = LayerMask.GetMask("DynamicObject");
     }
 
-
-
     
 }
