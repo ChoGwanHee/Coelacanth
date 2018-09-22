@@ -563,10 +563,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e9b00c5c236b7b46a0a0e057cca6a48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fallingAmount: 20
+  fallingInterval: 0.1
+  respawnTime: 30
+  isMaster: 0
   tasangUp: {fileID: 1967153146783960, guid: a88a8133390d86f4990c9987b2fc32f8, type: 2}
   tasangProjectile: {fileID: 1222239855336828, guid: f5f9753c064e2864885d29e7fe8c7aa4,
     type: 2}
   firePos: {fileID: 4731347972636514}
+  hitRange: []
 --- !u!137 &137553456185527142
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

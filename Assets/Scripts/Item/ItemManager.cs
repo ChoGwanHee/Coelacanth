@@ -4,7 +4,9 @@ using System.Text;
 using UnityEngine;
 
 [RequireComponent(typeof(PhotonView))]
-public class ItemManager : Photon.PunBehaviour {
+public class ItemManager : Photon.PunBehaviour
+{
+    public bool active = false;
 
     public FireworkItemTable[] fireworkItemTables;
     public List<BaseItemBox> itemBoxPool;
@@ -31,7 +33,6 @@ public class ItemManager : Photon.PunBehaviour {
 
     public Transform[] itemRegenPos;
 
-    public bool active = false;
 
     private void Start()
     {

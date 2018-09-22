@@ -2,21 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapManager : Photon.PunBehaviour {
+public class MapManager : Photon.PunBehaviour
+{
     public static MapManager _instance;
 
-    /// <summary>
-    /// 물대포 재시작 간격
-    /// </summary>
-    public float waterCannonInterval = 60.0f;
+    public BaseMapFacility[] mapFacilities;
 
     /// <summary>
-    /// 마지막 물대포 작동으로 부터 지난 시간
+    /// 시간이 지남에 따라 정기적으로 작동하는 맵시설의 리스트
     /// </summary>
-    private float waterCannonElapsedTime = 30.0f;
+    private List<BaseMapFacility> regularMapFacilities = new List<BaseMapFacility>();
 
-
-    public WaterCannonScript[] waterCannons;
 
     private void Awake()
     {
@@ -31,6 +27,11 @@ public class MapManager : Photon.PunBehaviour {
         //StartMapFacilities();
     }
 
+    public void AddRegularMapFacility(BaseMapFacility facility)
+    {
+        regularMapFacilities.Add(facility);
+    }
+
     public void StartMapFacilities()
     {
         if (PhotonNetwork.isMasterClient)
@@ -39,17 +40,16 @@ public class MapManager : Photon.PunBehaviour {
         }
     }
 
-
     private IEnumerator LoopMapFacilities()
     {
         while (true)
         {
-            waterCannonElapsedTime += Time.deltaTime;
-
-            if(waterCannonElapsedTime >= waterCannonInterval)
+            for(int i=0; i<regularMapFacilities.Count; i++)
             {
-                waterCannonElapsedTime = 0;
-                photonView.RPC("StartWaterBlast", PhotonTargets.All, null);
+                if (regularMapFacilities[i].CheckTime())
+                {
+                    photonView.RPC("MapFacilityActivate", PhotonTargets.All, i);
+                }
             }
 
             yield return new WaitUntil(() => GameManagerPhoton._instance.timeProgress == true);
@@ -57,14 +57,9 @@ public class MapManager : Photon.PunBehaviour {
     }
 
     [PunRPC]
-    private void StartWaterBlast()
+    private void MapFacilityActivate(int index)
     {
-        for(int i=0; i<waterCannons.Length; i++)
-        {
-            waterCannons[i].StopAllCoroutines();
-            waterCannons[i].StartCoroutine(waterCannons[i].Splash());
-        }
+        regularMapFacilities[index].Activate();
     }
-
     
 }

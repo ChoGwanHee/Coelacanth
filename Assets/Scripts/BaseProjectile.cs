@@ -8,49 +8,41 @@ public abstract class BaseProjectile : Photon.PunBehaviour {
     /// <summary>
     /// 공격력
     /// </summary>
-    [HideInInspector]
     public int damage;
 
     /// <summary>
     /// 넉백력
     /// </summary>
-    [HideInInspector]
     public float hitForce;
 
     /// <summary>
     /// 공격 반경
     /// </summary>
-    [HideInInspector]
     public float hitRadius;
 
     /// <summary>
     /// 최대 수명
     /// </summary>
-    [HideInInspector]
     public float lifetime;
 
     /// <summary>
     /// 투사체 속력
     /// </summary>
-    [HideInInspector]
     public float speed;
 
     /// <summary>
     /// 얻는 점수
     /// </summary>
-    [HideInInspector]
     public int gainScore;
 
     /// <summary>
     /// 화면 진동 세기
     /// </summary>
-    [HideInInspector]
     public float amplitude;
 
     /// <summary>
     /// 화면 진동 지속 시간
     /// </summary>
-    [HideInInspector]
     public float duration;
 
     /// <summary>

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaterCannonScript : Photon.PunBehaviour {
+public class WaterCannonScript : MonoBehaviour {
 
     public float thrustForce = 5.0f;
     public float blockForce = 8.0f;

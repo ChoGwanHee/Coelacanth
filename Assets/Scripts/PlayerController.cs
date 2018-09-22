@@ -11,6 +11,11 @@ public class PlayerController : Photon.PunBehaviour
     /// </summary>
     private PlayerAniState state = PlayerAniState.Idle;
 
+    public PlayerAniState State
+    {
+        get { return state; }
+    }
+
     /// <summary>
     /// 플레이어가 스턴에 걸렸을 때 재생되는 사운드
     /// </summary>
@@ -300,6 +305,7 @@ public class PlayerController : Photon.PunBehaviour
         Vector3 toDir = new Vector3(0, 0, -1);
 
         transform.rotation = Quaternion.LookRotation(toDir);
+        print(transform.rotation + ", " + toDir);
     }
 
     /// <summary>
@@ -318,7 +324,7 @@ public class PlayerController : Photon.PunBehaviour
     /// </summary>
     void CheckFalling()
     {
-        if(transform.position.y <= 4.5f)
+        if(transform.position.y <= 4.4f)
         {
             ChangeState(PlayerAniState.Fall);
         }
@@ -353,7 +359,7 @@ public class PlayerController : Photon.PunBehaviour
 
         Vector3 genPos = transform.position;
         GameObject.Instantiate(deadEfx_ref, genPos, Quaternion.identity);
-        PlayVoiceSound("Falling");
+        PublicPlayVoiceSound("Falling");
         FMODUnity.RuntimeManager.PlayOneShot(fallingSound);
 
         if(photonView.isMine)
@@ -414,14 +420,79 @@ public class PlayerController : Photon.PunBehaviour
     }
 
     /// <summary>
-    /// 캐릭터의 보이스를 재생합니다.
+    /// 스포트라이트 받았을 때 처리를 합니다.
     /// </summary>
-    /// <param name="soundType">재생할 보이스 종류</param>
+    public void Spotlight()
+    {
+        CancelInvoke();
+
+        // 발 밑에 땅이 있으면
+        if (Physics.Raycast(transform.position, Vector3.down, 6.0f, LayerMask.GetMask("Ground"), QueryTriggerInteraction.Ignore))
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            ChangeState(PlayerAniState.Idle);
+        }
+        // 발 밑에 땅이 없으면
+        else
+        {
+            // 즉시 리스폰
+            Respawn();
+        }
+        isControlable = false;
+
+        TurnToScreen();
+    }
+
+    /// <summary>
+    /// 캐릭터의 목소리를 재생합니다.
+    /// </summary>
+    /// <param name="soundType">재생할 목소리 종류</param>
     public void PlayVoiceSound(string soundType)
     {
         if (characterVoice == null || !photonView.isMine) return;
 
         switch (soundType)
+        {
+            case "Common":
+                FMODUnity.RuntimeManager.PlayOneShot(characterVoice.commonFireVoice);
+                break;
+            case "Fountain":
+                FMODUnity.RuntimeManager.PlayOneShot(characterVoice.fountainVoice);
+                break;
+            case "Rocket":
+                FMODUnity.RuntimeManager.PlayOneShot(characterVoice.rocketVoice);
+                break;
+            case "Party":
+                FMODUnity.RuntimeManager.PlayOneShot(characterVoice.partyVoice);
+                break;
+            case "Charging":
+                FMODUnity.RuntimeManager.PlayOneShot(characterVoice.chargingVoice);
+                break;
+            case "Hit":
+                FMODUnity.RuntimeManager.PlayOneShot(characterVoice.hitVoice);
+                break;
+            case "Stun":
+                FMODUnity.RuntimeManager.PlayOneShot(characterVoice.stunVoice);
+                break;
+            case "Falling":
+                FMODUnity.RuntimeManager.PlayOneShot(characterVoice.fallingVoice);
+                break;
+            case "Victory":
+                FMODUnity.RuntimeManager.PlayOneShot(characterVoice.victoryVoice);
+                break;
+        }
+    }
+
+    /// <summary>
+    /// 캐릭터 소유와 상관없이 캐릭터의 목소리를 재생합니다.
+    /// </summary>
+    /// <param name="soundType">재생할 목소리 종류</param>
+    public void PublicPlayVoiceSound(string soundType)
+    {
+        if (characterVoice == null) return;
+
+        switch(soundType)
         {
             case "Common":
                 FMODUnity.RuntimeManager.PlayOneShot(characterVoice.commonFireVoice);
@@ -544,7 +615,6 @@ public class PlayerController : Photon.PunBehaviour
             case PlayerAniState.Attack:
                 if (executer.curFirework.fwType == FireworkType.Butterfly)
                 {
-
                     TurnToMouse();
                 }
                 break;

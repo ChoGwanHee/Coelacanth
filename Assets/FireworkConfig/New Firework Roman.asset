@@ -15,7 +15,7 @@ MonoBehaviour:
   fwType: 1
   atType: 1
   damage: 10
-  capacity: 5
+  capacity: 15
   gainScore: 30
   hitForce: 7
   hitRadius: 1.5

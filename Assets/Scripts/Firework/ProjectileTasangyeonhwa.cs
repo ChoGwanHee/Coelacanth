@@ -2,57 +2,82 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileTasangyeonhwa : Photon.PunBehaviour {
+public class ProjectileTasangyeonhwa : BaseProjectile
+{
 
-    /// <summary>
-    /// 공격력
-    /// </summary>
-    public int damage;
+    public GameObject hitRangeEfx_ref;
 
-    /// <summary>
-    /// 넉백력
-    /// </summary>
-    public float hitForce;
+    private float elapsedTime = 0.0f;
 
-    /// <summary>
-    /// 공격 반경
-    /// </summary>
-    public float hitRadius;
+    private GameObject hitRangeEfx;
 
-    /// <summary>
-    /// 최대 수명
-    /// </summary>
-    public float lifetime;
-
-    /// <summary>
-    /// 투사체 속력
-    /// </summary>
-    public float speed;
-
-    /// <summary>
-    /// 화면 진동 세기
-    /// </summary>
-    public float amplitude;
-
-    /// <summary>
-    /// 화면 진동 지속 시간
-    /// </summary>
-    public float duration;
-
-    public Vector3 Velocity
+    private void Start()
     {
-        get { return rb.velocity; }
-        set { rb.velocity = value; }
+        Velocity = new Vector3(0.0f, -speed);
+
+        DisplayHitRange();
     }
 
-    private Rigidbody rb;
-    private int dynamicObjMask;
-
-    private void Awake()
+    protected override void Update()
     {
-        rb = GetComponent<Rigidbody>();
-        dynamicObjMask = LayerMask.GetMask("DynamicObject");
+        elapsedTime += Time.deltaTime;
+
+        if (elapsedTime >= lifetime)
+        {
+            PhotonNetwork.Destroy(hitRangeEfx);
+            PhotonNetwork.Destroy(gameObject);
+        }
     }
 
-    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!photonView.isMine) return;
+        if (other.CompareTag("Item")) return;
+
+        Explosion();
+    }
+
+    /// <summary>
+    /// 폭발하여 일정 반경 안의 물체를 밀어내고 피해를 줍니다.
+    /// </summary>
+    private void Explosion()
+    {
+        GetComponent<Collider>().enabled = false;
+
+        Collider[] effectedObjects = Physics.OverlapSphere(transform.position, hitRadius, dynamicObjMask);
+
+        for (int i = 0; i < effectedObjects.Length; i++)
+        {
+            Vector3 direction = Vector3.Scale(effectedObjects[i].transform.position - transform.position, new Vector3(1, 0, 1)).normalized;
+
+            PhotonView objPhotonView = effectedObjects[i].GetComponent<PhotonView>();
+            objPhotonView.RPC("Pushed", PhotonTargets.All, (direction * hitForce));
+
+            if (effectedObjects[i].CompareTag("Player"))
+            {
+                objPhotonView.RPC("Damage", objPhotonView.owner, damage, -1);
+                Vector3 efxPos = effectedObjects[i].GetComponent<CapsuleCollider>().ClosestPointOnBounds(transform.position);
+                PhotonNetwork.Instantiate("Prefabs/Effect_base_Hit_fx", efxPos, Quaternion.identity, 0);
+
+            }
+        }
+
+        //photonView.RPC("PlayEndSound", PhotonTargets.All, null);
+
+        PhotonNetwork.Instantiate("Prefabs/Tasang_Hit_fx", transform.position, transform.rotation, 0);
+        PhotonNetwork.Destroy(hitRangeEfx);
+        PhotonNetwork.Destroy(gameObject);
+    }
+
+    /// <summary>
+    /// 타상연화가 떨어지면 피격되는 범위를 표시합니다.
+    /// </summary>
+    private void DisplayHitRange()
+    {
+        RaycastHit hit;
+
+        Physics.Raycast(transform.position, Vector3.down, out hit, 22.0f, LayerMask.GetMask("Ground"), QueryTriggerInteraction.Ignore);
+
+        hitRangeEfx = PhotonNetwork.Instantiate("Prefabs/" + hitRangeEfx_ref.name, hit.point, Quaternion.identity, 0);
+    }
 }

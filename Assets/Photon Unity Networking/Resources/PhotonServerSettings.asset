@@ -70,4 +70,5 @@ MonoBehaviour:
   - AllowCreatePlayer
   - RemoteCreatePlayer
   - DamageShake
+  - MapFacilityActivate
   DisableAutoOpenWizard: 1

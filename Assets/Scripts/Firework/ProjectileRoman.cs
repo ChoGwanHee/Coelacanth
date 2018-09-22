@@ -9,11 +9,11 @@ public class ProjectileRoman : BaseProjectile
     {
         if (!photonView.isMine) return;
 
-        // 수명이 다 되면 폭발
+        // 수명이 다 되면 삭제
         lifetime -= Time.deltaTime;
         if (lifetime <= 0)
         {
-            Explosion();
+            PhotonNetwork.Destroy(gameObject);
         }
     }
 

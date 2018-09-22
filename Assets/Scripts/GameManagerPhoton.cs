@@ -509,10 +509,14 @@ public class GameManagerPhoton : Photon.PunBehaviour
     {
         PlayerController focusedPlayer = GetPlayerByOwnerId(spotlightOwnerId).GetComponent<PlayerController>();
 
-        focusedPlayer.ChangeState(PlayerAniState.Idle);
-        focusedPlayer.TurnToScreen();
+        // 플레이어 업데이트
+        focusedPlayer.Spotlight();
+
+        // 카메라 업데이트
         cameraController.ChangeMode(CameraMode.FrontView);
         cameraController.SetTarget(focusedPlayer.transform);
+
+        // UI 업데이트
         UIManager._instance.ChangeScreen(UIManager.ScreenType.Result);
         UIManager._instance.resultScoreBoard.CalcResult();
         UIManager._instance.resultEmotion.SetPlayerController(focusedPlayer);
@@ -542,7 +546,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
         resultBGMEvent.start();
 
         // 캐릭터 승리대사 재생
-        focusedPlayer.PlayVoiceSound("Victory");
+        focusedPlayer.PublicPlayVoiceSound("Victory");
     }
 
     public void StartLoadTitleScene()
