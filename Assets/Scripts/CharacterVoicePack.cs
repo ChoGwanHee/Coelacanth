@@ -3,7 +3,7 @@
 /// <summary>
 /// 캐릭터의 목소리 사운드의 연결정보를 가지고 있는 클래스
 /// </summary>
-[CreateAssetMenu(menuName = "CharacterVoiceString")]
+[CreateAssetMenu(menuName = "Character Voice Pack")]
 public class CharacterVoicePack : ScriptableObject {
 
     /// <summary>

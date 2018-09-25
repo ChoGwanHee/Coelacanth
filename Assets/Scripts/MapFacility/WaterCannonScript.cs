@@ -35,6 +35,15 @@ public class WaterCannonScript : MonoBehaviour {
         ps.Stop();
     }
 
+    /// <summary>
+    /// 물대포를 초기화 합니다.
+    /// </summary>
+    public void Initialize()
+    {
+        StopAllCoroutines();
+        animator.SetBool("Blasting", false);
+        hitRangeEffect.SetActive(false);
+    }
 
     /// <summary>
     /// 물대포 발사

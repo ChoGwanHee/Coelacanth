@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,5 +20,12 @@ public class MapFacilityWaterCannon : BaseMapFacility
             waterCannons[i].StartCoroutine(waterCannons[i].Splash());
         }
     }
-    
+
+    public override void Deactivate()
+    {
+        for (int i = 0; i < waterCannons.Length; i++)
+        {
+            waterCannons[i].Initialize();
+        }
+    }
 }

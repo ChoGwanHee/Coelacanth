@@ -149,6 +149,7 @@ public class PlayerStat : Photon.PunBehaviour
                 }
             }
         }
+        
     }
 
     private void Update()

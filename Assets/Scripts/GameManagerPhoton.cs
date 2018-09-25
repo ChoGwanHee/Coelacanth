@@ -365,7 +365,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
             case GameState.Result:
                 if (PhotonNetwork.isMasterClient)
                 {
-                    MapManager._instance.StopAllCoroutines();
+                    MapManager._instance.photonView.RPC("StopMapFacilities", PhotonTargets.All);
                     itemManager.active = false;
 
                     int focusedPlayerOwnerId = GetHighScorePlayerOwnerId();

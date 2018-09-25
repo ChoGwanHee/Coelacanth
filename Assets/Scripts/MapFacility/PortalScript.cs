@@ -6,9 +6,9 @@
 public class PortalScript : MonoBehaviour {
 
     /// <summary>
-    /// 이동할 위치
+    /// 연결된 포탈
     /// </summary>
-    public Transform movePos;
+    public PortalScript connectedPortal;
 
     /// <summary>
     /// 순간이동 시 재생되는 사운드
@@ -23,7 +23,8 @@ public class PortalScript : MonoBehaviour {
 
         if (other.CompareTag("Player"))
         {
-            other.gameObject.GetPhotonView().RPC("Teleport", other.gameObject.GetPhotonView().owner, movePos.position);
+            PhotonView touchedPlayer = other.gameObject.GetPhotonView();
+            touchedPlayer.RPC("Teleport", touchedPlayer.owner, connectedPortal.transform.position + connectedPortal.transform.forward * 0.9f);
             FMODUnity.RuntimeManager.PlayOneShot(teleportSound);
         }
         else if(other.CompareTag("Object"))

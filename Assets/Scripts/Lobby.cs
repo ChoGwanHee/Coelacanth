@@ -52,7 +52,7 @@ public class Lobby : Photon.PunBehaviour {
     IEnumerator LoadGameScene()
     {
         // 게임씬을 완벽하게 로딩 후 씬을 변경한다
-        AsyncOperation oper = SceneManager.LoadSceneAsync("twinvilla");
+        AsyncOperation oper = SceneManager.LoadSceneAsync(2);
 
         yield return oper; // 로딩이 완료될때까지 대기 한다
     }

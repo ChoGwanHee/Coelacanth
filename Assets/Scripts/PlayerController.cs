@@ -169,6 +169,7 @@ public class PlayerController : Photon.PunBehaviour
             ring.SetActive(true);
         }
 
+        TurnToScreen();
     }
 
     private void Update()
@@ -305,7 +306,6 @@ public class PlayerController : Photon.PunBehaviour
         Vector3 toDir = new Vector3(0, 0, -1);
 
         transform.rotation = Quaternion.LookRotation(toDir);
-        print(transform.rotation + ", " + toDir);
     }
 
     /// <summary>

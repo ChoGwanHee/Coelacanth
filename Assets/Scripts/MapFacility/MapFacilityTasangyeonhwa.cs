@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,6 +29,15 @@ public class MapFacilityTasangyeonhwa : BaseMapFacility
     public override void Activate()
     {
         StartCoroutine(TestProcess());
+    }
+
+    public override void Deactivate()
+    {
+        StopAllCoroutines();
+        for (int i = 0; i < tasangs.Length; i++)
+        {
+            tasangs[i].SetState(TasangyeonhwaScript.TasangState.Camo);
+        }
     }
 
     private IEnumerator TestProcess()
@@ -150,4 +160,6 @@ public class MapFacilityTasangyeonhwa : BaseMapFacility
 
         return result;
     }
+
+    
 }

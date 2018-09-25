@@ -232,6 +232,7 @@ MonoBehaviour:
   duration: 0
   duringSound: 
   endSound: 
+  hitRangeEfx_ref: {fileID: 0}
 --- !u!198 &198428372281454674
 ParticleSystem:
   m_ObjectHideFlags: 1

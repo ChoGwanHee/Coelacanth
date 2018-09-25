@@ -27,11 +27,18 @@ public class MapManager : Photon.PunBehaviour
         //StartMapFacilities();
     }
 
+    /// <summary>
+    /// 주기적으로 작동하는 맵 시설 리스트에 맵 시설을 추가합니다.
+    /// </summary>
+    /// <param name="facility"></param>
     public void AddRegularMapFacility(BaseMapFacility facility)
     {
         regularMapFacilities.Add(facility);
     }
 
+    /// <summary>
+    /// 맵 시설들의 작동을 시작합니다.
+    /// </summary>
     public void StartMapFacilities()
     {
         if (PhotonNetwork.isMasterClient)
@@ -40,6 +47,23 @@ public class MapManager : Photon.PunBehaviour
         }
     }
 
+    /// <summary>
+    /// 맵 시설들의 작동을 정지시킵니다.
+    /// </summary>
+    [PunRPC]
+    public void StopMapFacilities()
+    {
+        StopAllCoroutines();
+        for (int i = 0; i < mapFacilities.Length; i++)
+        {
+            mapFacilities[i].Deactivate();
+        }
+    }
+
+    /// <summary>
+    /// 주기적으로 작동하는 맵 시설의 시간을 확인합니다.
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator LoopMapFacilities()
     {
         while (true)
@@ -56,10 +80,13 @@ public class MapManager : Photon.PunBehaviour
         }
     }
 
+    /// <summary>
+    /// 개별적인 맵 시설을 작동시킵니다.
+    /// </summary>
+    /// <param name="index"></param>
     [PunRPC]
     private void MapFacilityActivate(int index)
     {
         regularMapFacilities[index].Activate();
     }
-    
 }

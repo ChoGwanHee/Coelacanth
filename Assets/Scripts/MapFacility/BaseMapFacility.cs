@@ -20,7 +20,6 @@ public abstract class BaseMapFacility : MonoBehaviour
     protected float elapsedTime = 0.0f;
 
 
-
     protected void Start()
     {
         if (enable)
@@ -32,6 +31,11 @@ public abstract class BaseMapFacility : MonoBehaviour
     /// 시설을 작동시킵니다.
     /// </summary>
     public abstract void Activate();
+
+    /// <summary>
+    /// 시설을 정지시킵니다.
+    /// </summary>
+    public abstract void Deactivate();
 
     /// <summary>
     /// 시설이 작동할 시간이 되었는지 확인합니다.
