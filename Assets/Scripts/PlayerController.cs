@@ -91,6 +91,11 @@ public class PlayerController : Photon.PunBehaviour
     /// 떨어지고 있는지 여부
     /// </summary>
     private bool isFalling = false;
+
+    /// <summary>
+    /// 캐릭터가 떨어지기 시작하는 높이
+    /// </summary>
+    private float fallingHeight;
     
     [Space()]
     /// <summary>
@@ -102,6 +107,16 @@ public class PlayerController : Photon.PunBehaviour
     /// 플레이어 기절 시간
     /// </summary>
     public float stunTime = 2.0f;
+
+    /// <summary>
+    /// 넉백 시간
+    /// </summary>
+    public float knockbackTime = 0.2f;
+
+    /// <summary>
+    /// 넉백 시작 후 지난 시간
+    /// </summary>
+    private float knockbackElapsedTime = 0.0f;
 
 
     // Turn
@@ -162,7 +177,8 @@ public class PlayerController : Photon.PunBehaviour
         executer = GetComponent<FireworkExecuter>();
         anim = GetComponent<Animator>();
         groundMask = LayerMask.GetMask("Ground");
-        
+
+        fallingHeight = MapManager._instance.fallingHeight;
 
         if (photonView.isMine)
         {
@@ -196,13 +212,9 @@ public class PlayerController : Photon.PunBehaviour
 
         if (!photonMove || photonView.isMine)
         {
-            if (isControlable && !isStun)
-            {
-                GetInput();
-                StateUpdate();
-            }
+            StateUpdate();
 
-            if(!isFalling)
+            if (!isFalling)
             {
                 CheckFalling();
             }
@@ -317,6 +329,7 @@ public class PlayerController : Photon.PunBehaviour
     {
         rb.velocity = Vector3.zero;
         rb.AddForce(force, ForceMode.Impulse);
+        ChangeState(PlayerAniState.KnockBack);
     }
 
     /// <summary>
@@ -324,7 +337,7 @@ public class PlayerController : Photon.PunBehaviour
     /// </summary>
     void CheckFalling()
     {
-        if(transform.position.y <= 4.4f)
+        if(transform.position.y <= fallingHeight)
         {
             ChangeState(PlayerAniState.Fall);
         }
@@ -335,7 +348,7 @@ public class PlayerController : Photon.PunBehaviour
     /// </summary>
     void CheckFall()
     {
-        if(transform.position.y < -2f)
+        if(transform.position.y < fallingHeight-6.4f)
         {
             photonView.RPC("Fall", PhotonTargets.All);
         }
@@ -550,6 +563,10 @@ public class PlayerController : Photon.PunBehaviour
                 break;
             case PlayerAniState.Attack:
                 break;
+            case PlayerAniState.KnockBack:
+                inputAxis = Vector2.zero;
+                knockbackElapsedTime = 0.0f;
+                break;
             case PlayerAniState.Stun:
                 stunEfx.SetActive(true);
                 isStun = true;
@@ -591,6 +608,9 @@ public class PlayerController : Photon.PunBehaviour
                 else
                     executer.CheckFireworkChanged();
                 break;
+            case PlayerAniState.KnockBack:
+
+                break;
             case PlayerAniState.Stun:
                 stunEfx.SetActive(false);
                 isStun = false;
@@ -609,13 +629,28 @@ public class PlayerController : Photon.PunBehaviour
         switch (state)
         {
             case PlayerAniState.Idle:
-                AddVelocity();
-                TurnToMouse();
+                if (isControlable && !isStun)
+                {
+                    GetInput();
+                    AddVelocity();
+                    TurnToMouse();
+                }
                 break;
             case PlayerAniState.Attack:
-                if (executer.curFirework.fwType == FireworkType.Butterfly)
+                if (isControlable && !isStun)
                 {
-                    TurnToMouse();
+                    GetInput();
+                    if (executer.curFirework.fwType == FireworkType.Butterfly)
+                    {
+                        TurnToMouse();
+                    }
+                }
+                break;
+            case PlayerAniState.KnockBack:
+                knockbackElapsedTime += Time.fixedDeltaTime;
+                if(knockbackElapsedTime >= knockbackTime)
+                {
+                    ChangeState(PlayerAniState.Idle);
                 }
                 break;
             case PlayerAniState.Stun:
@@ -637,7 +672,7 @@ public class PlayerController : Photon.PunBehaviour
                 break;
 
             case "Attack End":
-                if(!isStun)
+                if(!isStun && state != PlayerAniState.KnockBack)
                     ChangeState(PlayerAniState.Idle);
                 break;
 

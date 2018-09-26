@@ -6,6 +6,11 @@ public class MapManager : Photon.PunBehaviour
 {
     public static MapManager _instance;
 
+    /// <summary>
+    /// 플레이어가 떨어지기 시작하는 높이 (트윈빌라 기준 4.4f)
+    /// </summary>
+    public float fallingHeight = 4.4f;
+
     public BaseMapFacility[] mapFacilities;
 
     /// <summary>

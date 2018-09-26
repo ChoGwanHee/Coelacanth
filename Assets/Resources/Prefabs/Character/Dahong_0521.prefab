@@ -5048,6 +5048,7 @@ MonoBehaviour:
   maxSpeed: 6
   respawnTime: 6
   stunTime: 3
+  knockbackTime: 0.2
   weaponPoint: {fileID: 4511453276953496}
   handObjectSet: {fileID: 11400000, guid: 424711bbec56411468c3bce4a195f078, type: 2}
   ring: {fileID: 1290355702447706}
