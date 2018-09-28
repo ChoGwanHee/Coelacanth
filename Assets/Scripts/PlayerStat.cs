@@ -62,7 +62,7 @@ public class PlayerStat : Photon.PunBehaviour
         get { return photonView.owner.GetScore(); }
         set
         {
-            if(value < 0)
+            if (value < 0)
             {
                 photonView.owner.SetScore(0);
             }
@@ -113,7 +113,7 @@ public class PlayerStat : Photon.PunBehaviour
     /// </summary>
     public OnScoreChangedDelegate onScoreChanged;
 
-    
+
     private PlayerController pc;
 
 
@@ -140,35 +140,26 @@ public class PlayerStat : Photon.PunBehaviour
         }
         else
         {
-            for(int i=0; i<UIManager._instance.scoreBoard.cells.Length; i++)
+            for (int i = 0; i < UIManager._instance.scoreBoard.cells.Length; i++)
             {
-                if(!scoreBoard.cells[i].isMine && scoreBoard.cells[i].IsNotRegist)
+                if (!scoreBoard.cells[i].isMine && scoreBoard.cells[i].IsNotRegist)
                 {
                     scoreBoard.cells[i].SetPlayerStat(this);
                     break;
                 }
             }
         }
-<<<<<<< HEAD
 
-        if (PhotonNetwork.isMasterClient)
-        {
-            Debug.Log(PhotonNetwork.isMasterClient + ", " + photonView.owner);
-            GameManagerPhoton._instance.CheckFull();
-        }
-=======
-        
->>>>>>> ChaJinMin
     }
 
     private void Update()
     {
         if (!photonView.isMine) return;
 
-        if(killApproval)
+        if (killApproval)
         {
             lastHitElapsedTime += Time.deltaTime;
-            if(lastHitElapsedTime >= killApprovalTime)
+            if (lastHitElapsedTime >= killApprovalTime)
             {
                 killApproval = false;
             }
@@ -200,7 +191,7 @@ public class PlayerStat : Photon.PunBehaviour
             curHP -= dmg;
         }
 
-        if(attackerIndex != -1)
+        if (attackerIndex != -1)
             SetAttacker(attackerIndex);
     }
 
@@ -209,11 +200,7 @@ public class PlayerStat : Photon.PunBehaviour
     {
         if (!onStage || pc.isStun) return;
 
-<<<<<<< HEAD
-        DamageEvent de = GameManagerPhoton._instance.damageEvents[damageEventNum];
-=======
         DamageShakeEvent de = GameManagerPhoton._instance.damageShakeEvents[damageEventNum];
->>>>>>> ChaJinMin
 
         if (curHP - de.Damage <= 0)
         {
@@ -263,9 +250,9 @@ public class PlayerStat : Photon.PunBehaviour
         if (killApproval && lastAttacker != photonView.ownerId)
         {
             // 공격자 점수 가산
-            for(int i=0; i<GameManagerPhoton._instance.playerList.Count; i++)
+            for (int i = 0; i < GameManagerPhoton._instance.playerList.Count; i++)
             {
-                if(GameManagerPhoton._instance.playerList[i].photonView.ownerId == lastAttacker)
+                if (GameManagerPhoton._instance.playerList[i].photonView.ownerId == lastAttacker)
                 {
                     GameManagerPhoton._instance.playerList[i].AddScore(100);
                     break;
@@ -288,7 +275,7 @@ public class PlayerStat : Photon.PunBehaviour
 
     public void AddScore(int score)
     {
-        if(Score + score < 0)
+        if (Score + score < 0)
         {
             Score = 0;
         }

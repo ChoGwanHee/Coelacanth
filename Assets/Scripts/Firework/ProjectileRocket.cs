@@ -40,10 +40,6 @@ public class ProjectileRocket : BaseProjectile
 
             PhotonView objPhotonView = effectedObjects[i].GetComponent<PhotonView>();
             objPhotonView.RPC("Pushed", PhotonTargets.All, (direction * hitForce));
-<<<<<<< HEAD
-=======
-            
->>>>>>> ChaJinMin
 
             if (effectedObjects[i].CompareTag("Player"))
             {

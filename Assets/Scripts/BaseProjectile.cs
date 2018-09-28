@@ -38,19 +38,13 @@ public abstract class BaseProjectile : Photon.PunBehaviour {
     /// <summary>
     /// 화면 진동 세기
     /// </summary>
-<<<<<<< HEAD
     [HideInInspector]
-=======
->>>>>>> ChaJinMin
     public float amplitude;
 
     /// <summary>
     /// 화면 진동 지속 시간
     /// </summary>
-<<<<<<< HEAD
     [HideInInspector]
-=======
->>>>>>> ChaJinMin
     public float duration;
 
     /// <summary>
