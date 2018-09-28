@@ -40,6 +40,10 @@ public class ProjectileRocket : BaseProjectile
 
             PhotonView objPhotonView = effectedObjects[i].GetComponent<PhotonView>();
             objPhotonView.RPC("Pushed", PhotonTargets.All, (direction * hitForce));
+<<<<<<< HEAD
+=======
+            
+>>>>>>> ChaJinMin
 
             if (effectedObjects[i].CompareTag("Player"))
             {
@@ -56,6 +60,7 @@ public class ProjectileRocket : BaseProjectile
                 else
                 {
                     // 다른 사람 피격
+                    effectedObjects[i].GetComponent<PlayerController>().Pushed(direction * hitForce * 0.5f);
                     effectedObjects[i].GetComponent<PlayerStat>().AddScore(-10);
                     GameManagerPhoton._instance.GetPlayerByOwnerId(photonView.ownerId).AddScore(gainScore);
                 }

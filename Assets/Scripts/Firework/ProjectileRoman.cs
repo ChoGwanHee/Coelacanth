@@ -9,11 +9,11 @@ public class ProjectileRoman : BaseProjectile
     {
         if (!photonView.isMine) return;
 
-        // 수명이 다 되면 폭발
+        // 수명이 다 되면 삭제
         lifetime -= Time.deltaTime;
         if (lifetime <= 0)
         {
-            Explosion();
+            PhotonNetwork.Destroy(gameObject);
         }
     }
 
@@ -56,6 +56,7 @@ public class ProjectileRoman : BaseProjectile
                 else
                 {
                     // 다른 사람 피격
+                    effectedObjects[i].GetComponent<PlayerController>().Pushed(direction * hitForce * 0.5f);
                     effectedObjects[i].GetComponent<PlayerStat>().AddScore(-10);
                     GameManagerPhoton._instance.GetPlayerByOwnerId(photonView.ownerId).AddScore(gainScore);
                 }

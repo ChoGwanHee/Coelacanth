@@ -7,7 +7,11 @@ public class Lobby : Photon.PunBehaviour {
     private void Start()
     {
         // 게임 버전
+<<<<<<< HEAD
         PhotonNetwork.ConnectUsingSettings("0.6.1");
+=======
+        PhotonNetwork.ConnectUsingSettings("0.7.2");
+>>>>>>> ChaJinMin
     }
 
     public void OnPhotonRandomJoinFailed()
@@ -52,7 +56,11 @@ public class Lobby : Photon.PunBehaviour {
     IEnumerator LoadGameScene()
     {
         // 게임씬을 완벽하게 로딩 후 씬을 변경한다
+<<<<<<< HEAD
         AsyncOperation oper = SceneManager.LoadSceneAsync("twinvilla");
+=======
+        AsyncOperation oper = SceneManager.LoadSceneAsync(2);
+>>>>>>> ChaJinMin
 
         yield return oper; // 로딩이 완료될때까지 대기 한다
     }

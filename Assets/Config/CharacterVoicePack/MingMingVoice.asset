@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70dce7a955d79a94ca571b0ca648be6b, type: 3}
+  m_Name: MingMingVoice
+  m_EditorClassIdentifier: 
+  commonFireVoice: event:/SFX_Stage1/Character/Voice/Attack/Romang, Butter/SFX_MinMin_Attack
+  fountainVoice: event:/SFX_Stage1/Character/Voice/Attack/Fountain/SFX_MinMin_Fountain
+  rocketVoice: event:/SFX_Stage1/Character/Voice/Attack/Rocket/SFX_MinMin_Rocket
+  partyVoice: event:/SFX_Stage1/Character/Voice/Attack/Party/SFX_MinMin_Party
+  chargingVoice: event:/SFX_Stage1/Character/Voice/Attack/Charge/SFX_MinMin_Charge
+  hitVoice: event:/SFX_Stage1/Character/Voice/Hit/SFX_MinMin_Hit
+  stunVoice: event:/SFX_Stage1/Character/Voice/Stun/SFX_MinMin_Stun
+  fallingVoice: event:/SFX_Stage1/Character/Voice/Fall/SFX_MinMin_Fall
+  victoryVoice: event:/SFX_Stage1/Character/Voice/Win/SFX_MinMin_Win

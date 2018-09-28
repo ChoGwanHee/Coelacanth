@@ -8,49 +8,49 @@ public abstract class BaseProjectile : Photon.PunBehaviour {
     /// <summary>
     /// 공격력
     /// </summary>
-    [HideInInspector]
     public int damage;
 
     /// <summary>
     /// 넉백력
     /// </summary>
-    [HideInInspector]
     public float hitForce;
 
     /// <summary>
     /// 공격 반경
     /// </summary>
-    [HideInInspector]
     public float hitRadius;
 
     /// <summary>
     /// 최대 수명
     /// </summary>
-    [HideInInspector]
     public float lifetime;
 
     /// <summary>
     /// 투사체 속력
     /// </summary>
-    [HideInInspector]
     public float speed;
 
     /// <summary>
     /// 얻는 점수
     /// </summary>
-    [HideInInspector]
     public int gainScore;
 
     /// <summary>
     /// 화면 진동 세기
     /// </summary>
+<<<<<<< HEAD
     [HideInInspector]
+=======
+>>>>>>> ChaJinMin
     public float amplitude;
 
     /// <summary>
     /// 화면 진동 지속 시간
     /// </summary>
+<<<<<<< HEAD
     [HideInInspector]
+=======
+>>>>>>> ChaJinMin
     public float duration;
 
     /// <summary>
@@ -65,6 +65,11 @@ public abstract class BaseProjectile : Photon.PunBehaviour {
     [FMODUnity.EventRef]
     public string endSound;
 
+    public Vector3 Velocity
+    {
+        get { return rb.velocity; }
+        set { rb.velocity = value; }
+    }
 
     protected Rigidbody rb;
     protected int dynamicObjMask;
@@ -82,15 +87,6 @@ public abstract class BaseProjectile : Photon.PunBehaviour {
         {
             Destroy(gameObject);
         }
-    }
-
-    /// <summary>
-    /// 투사체의 속도을 설정합니다
-    /// </summary>
-    /// <param name="newVelocity">새로운 속도</param>
-    public void SetVelocity(Vector3 newVelocity)
-    {
-        rb.velocity = newVelocity;
     }
 
     /// <summary>

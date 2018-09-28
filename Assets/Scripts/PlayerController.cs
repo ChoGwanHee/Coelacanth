@@ -11,6 +11,11 @@ public class PlayerController : Photon.PunBehaviour
     /// </summary>
     private PlayerAniState state = PlayerAniState.Idle;
 
+    public PlayerAniState State
+    {
+        get { return state; }
+    }
+
     /// <summary>
     /// 플레이어가 스턴에 걸렸을 때 재생되는 사운드
     /// </summary>
@@ -81,6 +86,16 @@ public class PlayerController : Photon.PunBehaviour
     private Vector3 targetDirection;
 
     private Vector2 axisVelocity;
+
+    /// <summary>
+    /// 떨어지고 있는지 여부
+    /// </summary>
+    private bool isFalling = false;
+
+    /// <summary>
+    /// 캐릭터가 떨어지기 시작하는 높이
+    /// </summary>
+    private float fallingHeight;
     
     [Space()]
     /// <summary>
@@ -92,6 +107,16 @@ public class PlayerController : Photon.PunBehaviour
     /// 플레이어 기절 시간
     /// </summary>
     public float stunTime = 2.0f;
+
+    /// <summary>
+    /// 넉백 시간
+    /// </summary>
+    public float knockbackTime = 0.2f;
+
+    /// <summary>
+    /// 넉백 시작 후 지난 시간
+    /// </summary>
+    private float knockbackElapsedTime = 0.0f;
 
 
     // Turn
@@ -152,12 +177,21 @@ public class PlayerController : Photon.PunBehaviour
         executer = GetComponent<FireworkExecuter>();
         anim = GetComponent<Animator>();
         groundMask = LayerMask.GetMask("Ground");
+<<<<<<< HEAD
+=======
+
+        fallingHeight = MapManager._instance.fallingHeight;
+>>>>>>> ChaJinMin
 
         if (photonView.isMine)
         {
             ring.SetActive(true);
         }
 
+<<<<<<< HEAD
+=======
+        TurnToScreen();
+>>>>>>> ChaJinMin
     }
 
     private void Update()
@@ -184,13 +218,16 @@ public class PlayerController : Photon.PunBehaviour
 
         if (!photonMove || photonView.isMine)
         {
-            if (isControlable && !isStun)
-            {
-                GetInput();
-                StateUpdate();
-            }
+            StateUpdate();
 
-            CheckFall();
+            if (!isFalling)
+            {
+                CheckFalling();
+            }
+            else
+            {
+                CheckFall();
+            }
         }
         
 	}
@@ -219,7 +256,7 @@ public class PlayerController : Photon.PunBehaviour
     }
 
     /// <summary>
-    /// Integer형 애니메이션 파라미터를 설정합니다.
+    /// 애니메이션 파라미터를 설정합니다.
     /// </summary>
     /// <param name="param">파라미터 이름</param>
     /// <param name="val">값</param>
@@ -298,9 +335,24 @@ public class PlayerController : Photon.PunBehaviour
     {
         rb.velocity = Vector3.zero;
         rb.AddForce(force, ForceMode.Impulse);
+<<<<<<< HEAD
 
         if(photonView.isMine)
             GameManagerPhoton._instance.cameraController.Shake(2.0f, 0.3f);
+=======
+        ChangeState(PlayerAniState.KnockBack);
+    }
+
+    /// <summary>
+    /// 스테이지 밖으로 떨어지고 있는지 체크합니다.
+    /// </summary>
+    void CheckFalling()
+    {
+        if(transform.position.y <= fallingHeight)
+        {
+            ChangeState(PlayerAniState.Fall);
+        }
+>>>>>>> ChaJinMin
     }
 
     /// <summary>
@@ -308,14 +360,14 @@ public class PlayerController : Photon.PunBehaviour
     /// </summary>
     void CheckFall()
     {
-        if(transform.position.y < -2f)
+        if(transform.position.y < fallingHeight-6.4f)
         {
             photonView.RPC("Fall", PhotonTargets.All);
         }
     }
 
     /// <summary>
-    /// 플레이어의 생명을 하나깎고 리스폰 대기를 합니다.
+    /// 플레이어가 떨어졌을 때 처리를 합니다.
     /// </summary>
     [PunRPC]
     public void Fall()
@@ -323,7 +375,6 @@ public class PlayerController : Photon.PunBehaviour
         col.enabled = false;
         stat.onStage = false;
         stat.KillScoring();
-        ChangeState(PlayerAniState.Fall);
 
         // 보내는 정보   = 정보 : 플레이어 : 상태 : 라이프차감
         // 받는 정보      = 정보 : 플레이어 : 상태 : 보유라이프
@@ -333,7 +384,11 @@ public class PlayerController : Photon.PunBehaviour
 
         Vector3 genPos = transform.position;
         GameObject.Instantiate(deadEfx_ref, genPos, Quaternion.identity);
+<<<<<<< HEAD
         PlayVoiceSound("Falling");
+=======
+        PublicPlayVoiceSound("Falling");
+>>>>>>> ChaJinMin
         FMODUnity.RuntimeManager.PlayOneShot(fallingSound);
 
         if(photonView.isMine)
@@ -394,14 +449,85 @@ public class PlayerController : Photon.PunBehaviour
     }
 
     /// <summary>
+<<<<<<< HEAD
     /// 캐릭터의 보이스를 재생합니다.
     /// </summary>
     /// <param name="soundType">재생할 보이스 종류</param>
+=======
+    /// 스포트라이트 받았을 때 처리를 합니다.
+    /// </summary>
+    public void Spotlight()
+    {
+        CancelInvoke();
+
+        // 발 밑에 땅이 있으면
+        if (Physics.Raycast(transform.position, Vector3.down, 6.0f, LayerMask.GetMask("Ground"), QueryTriggerInteraction.Ignore))
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            ChangeState(PlayerAniState.Idle);
+        }
+        // 발 밑에 땅이 없으면
+        else
+        {
+            // 즉시 리스폰
+            Respawn();
+        }
+        isControlable = false;
+
+        TurnToScreen();
+    }
+
+    /// <summary>
+    /// 캐릭터의 목소리를 재생합니다.
+    /// </summary>
+    /// <param name="soundType">재생할 목소리 종류</param>
+>>>>>>> ChaJinMin
     public void PlayVoiceSound(string soundType)
     {
         if (characterVoice == null || !photonView.isMine) return;
 
         switch (soundType)
+        {
+            case "Common":
+                FMODUnity.RuntimeManager.PlayOneShot(characterVoice.commonFireVoice);
+                break;
+            case "Fountain":
+                FMODUnity.RuntimeManager.PlayOneShot(characterVoice.fountainVoice);
+                break;
+            case "Rocket":
+                FMODUnity.RuntimeManager.PlayOneShot(characterVoice.rocketVoice);
+                break;
+            case "Party":
+                FMODUnity.RuntimeManager.PlayOneShot(characterVoice.partyVoice);
+                break;
+            case "Charging":
+                FMODUnity.RuntimeManager.PlayOneShot(characterVoice.chargingVoice);
+                break;
+            case "Hit":
+                FMODUnity.RuntimeManager.PlayOneShot(characterVoice.hitVoice);
+                break;
+            case "Stun":
+                FMODUnity.RuntimeManager.PlayOneShot(characterVoice.stunVoice);
+                break;
+            case "Falling":
+                FMODUnity.RuntimeManager.PlayOneShot(characterVoice.fallingVoice);
+                break;
+            case "Victory":
+                FMODUnity.RuntimeManager.PlayOneShot(characterVoice.victoryVoice);
+                break;
+        }
+    }
+
+    /// <summary>
+    /// 캐릭터 소유와 상관없이 캐릭터의 목소리를 재생합니다.
+    /// </summary>
+    /// <param name="soundType">재생할 목소리 종류</param>
+    public void PublicPlayVoiceSound(string soundType)
+    {
+        if (characterVoice == null) return;
+
+        switch(soundType)
         {
             case "Common":
                 FMODUnity.RuntimeManager.PlayOneShot(characterVoice.commonFireVoice);
@@ -459,6 +585,10 @@ public class PlayerController : Photon.PunBehaviour
                 break;
             case PlayerAniState.Attack:
                 break;
+            case PlayerAniState.KnockBack:
+                inputAxis = Vector2.zero;
+                knockbackElapsedTime = 0.0f;
+                break;
             case PlayerAniState.Stun:
                 stunEfx.SetActive(true);
                 isStun = true;
@@ -467,9 +597,11 @@ public class PlayerController : Photon.PunBehaviour
                 Invoke("StunRecovery", stunTime);
                 break;
             case PlayerAniState.Fall:
+                anim.SetInteger("AniNum", (int)PlayerAniState.Fall);
                 anim.SetFloat("MoveX", 0);
                 anim.SetFloat("MoveY", 0);
                 inputAxis = Vector2.zero;
+                isFalling = true;
                 break;
         }
     }
@@ -498,9 +630,15 @@ public class PlayerController : Photon.PunBehaviour
                 else
                     executer.CheckFireworkChanged();
                 break;
+            case PlayerAniState.KnockBack:
+
+                break;
             case PlayerAniState.Stun:
                 stunEfx.SetActive(false);
                 isStun = false;
+                break;
+            case PlayerAniState.Fall:
+                isFalling = false;
                 break;
         }
     }
@@ -513,14 +651,28 @@ public class PlayerController : Photon.PunBehaviour
         switch (state)
         {
             case PlayerAniState.Idle:
-                AddVelocity();
-                TurnToMouse();
+                if (isControlable && !isStun)
+                {
+                    GetInput();
+                    AddVelocity();
+                    TurnToMouse();
+                }
                 break;
             case PlayerAniState.Attack:
-                if (executer.curFirework.fwType == FireworkType.Butterfly)
+                if (isControlable && !isStun)
                 {
-
-                    TurnToMouse();
+                    GetInput();
+                    if (executer.curFirework.fwType == FireworkType.Butterfly)
+                    {
+                        TurnToMouse();
+                    }
+                }
+                break;
+            case PlayerAniState.KnockBack:
+                knockbackElapsedTime += Time.fixedDeltaTime;
+                if(knockbackElapsedTime >= knockbackTime)
+                {
+                    ChangeState(PlayerAniState.Idle);
                 }
                 break;
             case PlayerAniState.Stun:
@@ -542,7 +694,7 @@ public class PlayerController : Photon.PunBehaviour
                 break;
 
             case "Attack End":
-                if(!isStun)
+                if(!isStun && state != PlayerAniState.KnockBack)
                     ChangeState(PlayerAniState.Idle);
                 break;
 

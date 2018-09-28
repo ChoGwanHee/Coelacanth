@@ -32,5 +32,12 @@ AnimatorOverrideController:
     m_OverrideClip: {fileID: 7400000, guid: f346eef9cd835844b9f37fcbd47e2e7a, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: cfb07aa514cc7ce438a508c90eaaf3e7, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: 464789c27aba1814abf1a59b0df06059, type: 2}
+<<<<<<< HEAD
   - m_OriginalClip: {fileID: 7400000, guid: 166d169d3f7c5a343bbe6645f29d06ee, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: ef77024421d33a14b9b9c16614105c0f, type: 2}
+=======
+  - m_OriginalClip: {fileID: 7400000, guid: 59ca68258b1d44644bd88ac57a193909, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 53755d6a22c588346986a02465bbebe0, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 025d92a00ac0c01418ff06dd98457426, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 5d2647d1f21212648aa15d109b66eefd, type: 2}
+>>>>>>> ChaJinMin

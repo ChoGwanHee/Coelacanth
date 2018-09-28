@@ -2,9 +2,9 @@
 public enum PlayerAniState
 {
     Idle,
+    KnockBack,
     MovableAttack,
     Attack,
-    KnockBack,
     Stun,
     Fall,
     Emotion

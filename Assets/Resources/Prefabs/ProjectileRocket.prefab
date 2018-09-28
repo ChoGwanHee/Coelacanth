@@ -53,13 +53,13 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4556551484793900}
+  - component: {fileID: 95880695882789156}
   - component: {fileID: 135218553652072910}
   - component: {fileID: 54273147543917048}
   - component: {fileID: 114786578772629044}
   - component: {fileID: 114553708179199190}
   - component: {fileID: 114379953359454176}
   - component: {fileID: 114449311384962502}
-  - component: {fileID: 95880695882789156}
   m_Layer: 13
   m_Name: ProjectileRocket
   m_TagString: Untagged
@@ -704,6 +704,8 @@ MonoBehaviour:
   lifetime: 0
   speed: 0
   gainScore: 0
+  amplitude: 0
+  duration: 0
   duringSound: .
   endSound: event:/SFX_Stage1/Weapon/Hit/SFX_RocketHit
 --- !u!135 &135218553652072910

@@ -4,12 +4,22 @@ using System.Text;
 using UnityEngine;
 
 [RequireComponent(typeof(PhotonView))]
-public class ItemManager : Photon.PunBehaviour {
+public class ItemManager : Photon.PunBehaviour
+{
+    public bool active = false;
 
+<<<<<<< HEAD
     public FireworkItemTable[] fireworkItemTables;
     public List<BaseItemBox> itemBoxPool;
     public BaseItemBox[] itemBoxReferences;
 
+=======
+    public ItemTable[] itemTables;
+    public BaseItemBox[] itemBoxReferences;
+    public BaseItemBox[][] itemBoxPool;
+    private int[] lastIndex;
+    
+>>>>>>> ChaJinMin
     /// <summary>
     /// 아이템 박스 종류당 여분 비율 (maxBoxCount * poolExtraRate = 여분 개수)
     /// </summary>
@@ -31,11 +41,14 @@ public class ItemManager : Photon.PunBehaviour {
 
     public Transform[] itemRegenPos;
 
-    public bool active = false;
 
     private void Start()
     {
         Initialize();
+<<<<<<< HEAD
+=======
+
+>>>>>>> ChaJinMin
     }
 
     private void Update()
@@ -54,7 +67,7 @@ public class ItemManager : Photon.PunBehaviour {
             if (elapsedTime >= regenTime)
             {
                 elapsedTime = 0f;
-                RegenItemBox();
+                RegenItemBox(0);
             }
 
         }
@@ -100,6 +113,7 @@ public class ItemManager : Photon.PunBehaviour {
     /// </summary>
     private void InitItemBoxPool()
     {
+<<<<<<< HEAD
         for (int i = 0; i < itemBoxPool.Count; i++)
         {
             PhotonNetwork.Destroy(itemBoxPool[i].gameObject);
@@ -107,6 +121,8 @@ public class ItemManager : Photon.PunBehaviour {
         itemBoxPool.Clear();
 
 
+=======
+>>>>>>> ChaJinMin
         if (itemBoxReferences.Length > 1)
         {
             poolExtraAmount = Mathf.CeilToInt(maxBoxCount * poolExtraRate);
@@ -116,14 +132,61 @@ public class ItemManager : Photon.PunBehaviour {
             poolExtraAmount = maxBoxCount;
         }
 
+<<<<<<< HEAD
         string folderPath = "Prefabs/";
+=======
+        if (itemBoxPool != null)
+        {
+            for (int i = 0; i < itemBoxPool.Length; i++)
+            {
+                if(itemBoxPool[i] != null)
+                {
+                    for (int j = 0; j < itemBoxPool[i].Length; j++)
+                    {
+                        if (itemBoxPool[i][j] != null)
+                        {
+                            PhotonNetwork.Destroy(itemBoxPool[i][j].gameObject);
+                            itemBoxPool[i][j] = null;
+                        }
+                    }
+                    itemBoxPool[i] = null;
+                }
+            }
+            itemBoxPool = null;
+        }
+
+        itemBoxPool = new BaseItemBox[itemBoxReferences.Length][];
+        for(int i=0; i<itemBoxPool.Length; i++)
+        {
+            itemBoxPool[i] = new BaseItemBox[poolExtraAmount];
+        }
+
+        if (lastIndex == null)
+            lastIndex = new int[itemBoxPool.Length];
+        
+        for(int i = 0; i < itemBoxPool.Length; i++)
+        {
+            lastIndex[i] = 0;
+        }
+
+
+        string folderPath = "Prefabs/ItemBox/";
+>>>>>>> ChaJinMin
 
         for (int i = 0; i < itemBoxReferences.Length; i++)
         {
             string path = folderPath + itemBoxReferences[i].name;
+<<<<<<< HEAD
             for (int j = 0; j < poolExtraAmount; j++)
             {
                 PhotonNetwork.Instantiate(path, Vector3.zero, Quaternion.identity, 0);
+=======
+            object[] refIndex = new object[1] { i };
+
+            for (int j = 0; j < poolExtraAmount; j++)
+            {
+                PhotonNetwork.Instantiate(path, Vector3.zero, Quaternion.identity, 0, refIndex);
+>>>>>>> ChaJinMin
             }
         }
     }
@@ -134,7 +197,12 @@ public class ItemManager : Photon.PunBehaviour {
     /// <param name="itemBox">추가할 아이템 박스</param>
     public void AddItemBox(BaseItemBox itemBox)
     {
+<<<<<<< HEAD
         itemBoxPool.Add(itemBox);
+=======
+        int refIndex = (int)itemBox.photonView.instantiationData[0];
+        itemBoxPool[refIndex][lastIndex[refIndex]++] = itemBox;
+>>>>>>> ChaJinMin
     }
 
     /// <summary>
@@ -143,9 +211,9 @@ public class ItemManager : Photon.PunBehaviour {
     /// <param name="tableIndex"></param>
     /// <param name="itemIndex"></param>
     /// <returns></returns>
-    public Firework GetFireworkItem(int tableIndex, int itemIndex)
+    public BaseItem GetItem(int tableIndex, int itemIndex)
     {
-        return fireworkItemTables[tableIndex].itemList[itemIndex].item;
+        return itemTables[tableIndex].itemList[itemIndex].item;
     }
 
     /// <summary>
@@ -153,9 +221,34 @@ public class ItemManager : Photon.PunBehaviour {
     /// </summary>
     /// <param name="tableIndex">얻고 싶은 아이템 테이블의 인덱스 입니다.</param>
     /// <returns></returns>
-    public int GetRandomItem(int tableIndex)
+    public int GetRandomItemIndex(int tableIndex)
     {
-        return fireworkItemTables[tableIndex].RandomChoose();
+        return itemTables[tableIndex].RandomChoose();
+    }
+
+    private int TableIndexToPoolIndex(int tableIndex, int itemIndex)
+    {
+        for(int i=0;i<itemBoxPool.Length; i++)
+        {
+            if (itemBoxPool[i][0].tableIndex == tableIndex 
+                && itemBoxPool[i][0].itemIndex == itemIndex)
+            {
+                return i;
+            }
+        }
+        Debug.LogError("아이템 박스 풀에서 찾을 수 없습니다.");
+        return -1;
+    }
+
+    /// <summary>
+    /// 겜 시작시 아이템 박스 생성
+    /// </summary>
+    public void FirstRegen()
+    {
+        for (int i = 0; i <= startBoxCount; i++)
+        {
+            RegenItemBox(0);
+        }
     }
 
     /// <summary>
@@ -172,12 +265,13 @@ public class ItemManager : Photon.PunBehaviour {
     /// <summary>
     /// 맵에 아이템박스를 다시 생성합니다.
     /// </summary>
-    public void RegenItemBox()
+    public void RegenItemBox(int tableIndex)
     {
         Vector3 regenPos;
         RaycastHit hit1, hit2;
         bool retry1, retry2;
         int randomIndex;
+        int randomItemBox = TableIndexToPoolIndex(tableIndex, GetRandomItemIndex(tableIndex));
         int count = 0;
 
         do
@@ -207,9 +301,15 @@ public class ItemManager : Photon.PunBehaviour {
 
         int selectIndex = -1;
 
+<<<<<<< HEAD
         for (int i = 0; i < itemBoxPool.Count; i++)
         {
             if (!itemBoxPool[i].alive)
+=======
+        for (int i = 0; i < itemBoxPool[randomItemBox].Length; i++)
+        {
+            if (!itemBoxPool[randomItemBox][i].alive)
+>>>>>>> ChaJinMin
             {
                 selectIndex = i;
                 break;
@@ -222,8 +322,13 @@ public class ItemManager : Photon.PunBehaviour {
             return;
         }
 
+<<<<<<< HEAD
         itemBoxPool[selectIndex].transform.position = hit1.point + Vector3.up * 0.1f;
         itemBoxPool[selectIndex].photonView.RPC("SetActiveItemBox", PhotonTargets.All, true);
+=======
+        itemBoxPool[randomItemBox][selectIndex].transform.position = hit1.point + Vector3.up * itemBoxPool[randomItemBox][selectIndex].regenHeight;
+        itemBoxPool[randomItemBox][selectIndex].photonView.RPC("SetActiveItemBox", PhotonTargets.All, true);
+>>>>>>> ChaJinMin
         curBoxCount++;
     }
 
@@ -236,9 +341,18 @@ public class ItemManager : Photon.PunBehaviour {
         active = false;
 
         // 아이템 박스들 비활성화
+<<<<<<< HEAD
         for (int i = 0; i < itemBoxPool.Count; i++)
         {
             itemBoxPool[i].gameObject.SetActive(false);
+=======
+        for (int i = 0; i < itemBoxPool.Length; i++)
+        {
+            for (int j = 0; j < itemBoxPool[i].Length; j++)
+            {
+                itemBoxPool[i][j].gameObject.SetActive(false);
+            }
+>>>>>>> ChaJinMin
         }
     }
 

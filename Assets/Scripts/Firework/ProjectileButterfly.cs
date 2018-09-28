@@ -81,6 +81,7 @@ public class ProjectileButterfly : BaseProjectile
                 else
                 {
                     // 다른 사람 피격
+                    effectedObjects[i].GetComponent<PlayerController>().Pushed(direction * hitForce * 0.5f);
                     effectedObjects[i].GetComponent<PlayerStat>().AddScore(-10);
                     GameManagerPhoton._instance.GetPlayerByOwnerId(photonView.ownerId).AddScore(gainScore);
                 }

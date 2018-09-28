@@ -151,7 +151,8 @@ public class FireworkExecuter : Photon.PunBehaviour {
     [PunRPC]
     public void ChangeFirework(int tableIndex, int itemIndex)
     {
-        newFirework = GameManagerPhoton._instance.itemManager.GetFireworkItem(tableIndex, itemIndex);
+        //newFirework = GameManagerPhoton._instance.itemManager.GetFireworkItem(tableIndex, itemIndex);
+        newFirework = GameManagerPhoton._instance.itemManager.GetItem(tableIndex, itemIndex) as Firework;
         CheckFireworkChanged();
     }
 

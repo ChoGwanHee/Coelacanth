@@ -5,7 +5,7 @@ using UnityEngine;
 /// 폭죽의 기본 클래스
 /// </summary>
 [Serializable]
-public abstract class Firework : ScriptableObject {
+public abstract class Firework : BaseItem {
 
     /// <summary>
     /// 공격 방식에 대한 유형 정의

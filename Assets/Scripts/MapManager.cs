@@ -2,21 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapManager : Photon.PunBehaviour {
+public class MapManager : Photon.PunBehaviour
+{
     public static MapManager _instance;
 
     /// <summary>
-    /// 물대포 재시작 간격
+    /// 플레이어가 떨어지기 시작하는 높이 (트윈빌라 기준 4.4f)
     /// </summary>
-    public float waterCannonInterval = 60.0f;
+    public float fallingHeight = 4.4f;
+
+    public BaseMapFacility[] mapFacilities;
 
     /// <summary>
-    /// 마지막 물대포 작동으로 부터 지난 시간
+    /// 시간이 지남에 따라 정기적으로 작동하는 맵시설의 리스트
     /// </summary>
-    private float waterCannonElapsedTime = 30.0f;
+    private List<BaseMapFacility> regularMapFacilities = new List<BaseMapFacility>();
 
-
-    public WaterCannonScript[] waterCannons;
 
     private void Awake()
     {
@@ -31,6 +32,18 @@ public class MapManager : Photon.PunBehaviour {
         //StartMapFacilities();
     }
 
+    /// <summary>
+    /// 주기적으로 작동하는 맵 시설 리스트에 맵 시설을 추가합니다.
+    /// </summary>
+    /// <param name="facility"></param>
+    public void AddRegularMapFacility(BaseMapFacility facility)
+    {
+        regularMapFacilities.Add(facility);
+    }
+
+    /// <summary>
+    /// 맵 시설들의 작동을 시작합니다.
+    /// </summary>
     public void StartMapFacilities()
     {
         if (PhotonNetwork.isMasterClient)
@@ -39,32 +52,46 @@ public class MapManager : Photon.PunBehaviour {
         }
     }
 
+    /// <summary>
+    /// 맵 시설들의 작동을 정지시킵니다.
+    /// </summary>
+    [PunRPC]
+    public void StopMapFacilities()
+    {
+        StopAllCoroutines();
+        for (int i = 0; i < mapFacilities.Length; i++)
+        {
+            mapFacilities[i].Deactivate();
+        }
+    }
 
+    /// <summary>
+    /// 주기적으로 작동하는 맵 시설의 시간을 확인합니다.
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator LoopMapFacilities()
     {
         while (true)
         {
-            waterCannonElapsedTime += Time.deltaTime;
-
-            if(waterCannonElapsedTime >= waterCannonInterval)
+            for(int i=0; i<regularMapFacilities.Count; i++)
             {
-                waterCannonElapsedTime = 0;
-                photonView.RPC("StartWaterBlast", PhotonTargets.All, null);
+                if (regularMapFacilities[i].CheckTime())
+                {
+                    photonView.RPC("MapFacilityActivate", PhotonTargets.All, i);
+                }
             }
 
             yield return new WaitUntil(() => GameManagerPhoton._instance.timeProgress == true);
         }
     }
 
+    /// <summary>
+    /// 개별적인 맵 시설을 작동시킵니다.
+    /// </summary>
+    /// <param name="index"></param>
     [PunRPC]
-    private void StartWaterBlast()
+    private void MapFacilityActivate(int index)
     {
-        for(int i=0; i<waterCannons.Length; i++)
-        {
-            waterCannons[i].StopAllCoroutines();
-            waterCannons[i].StartCoroutine(waterCannons[i].Splash());
-        }
+        regularMapFacilities[index].Activate();
     }
-
-    
 }

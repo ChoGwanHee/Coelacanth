@@ -84,7 +84,11 @@ public class GameManagerPhoton : Photon.PunBehaviour
     /// <summary>
     /// 미리 정의 되어 있는 데미지 이벤트들
     /// </summary>
+<<<<<<< HEAD
     public DamageEvent[] damageEvents;
+=======
+    public DamageShakeEvent[] damageShakeEvents;
+>>>>>>> ChaJinMin
 
     /// <summary>
     /// 씬 이동 중인지 여부
@@ -364,7 +368,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
             case GameState.Result:
                 if (PhotonNetwork.isMasterClient)
                 {
-                    MapManager._instance.StopAllCoroutines();
+                    MapManager._instance.photonView.RPC("StopMapFacilities", PhotonTargets.All);
                     itemManager.active = false;
 
                     int focusedPlayerOwnerId = GetHighScorePlayerOwnerId();
@@ -393,6 +397,8 @@ public class GameManagerPhoton : Photon.PunBehaviour
         switch(eventNum)
         {
             case (int)GameEvent.GameStart:
+                if(PhotonNetwork.isMasterClient)
+                    PhotonNetwork.room.IsOpen = false;
                 StartCoroutine(GameCountProcess(true));
                 break;
             case (int)GameEvent.GameStop:
@@ -506,10 +512,14 @@ public class GameManagerPhoton : Photon.PunBehaviour
     {
         PlayerController focusedPlayer = GetPlayerByOwnerId(spotlightOwnerId).GetComponent<PlayerController>();
 
-        focusedPlayer.ChangeState(PlayerAniState.Idle);
-        focusedPlayer.TurnToScreen();
+        // 플레이어 업데이트
+        focusedPlayer.Spotlight();
+
+        // 카메라 업데이트
         cameraController.ChangeMode(CameraMode.FrontView);
         cameraController.SetTarget(focusedPlayer.transform);
+
+        // UI 업데이트
         UIManager._instance.ChangeScreen(UIManager.ScreenType.Result);
         UIManager._instance.resultScoreBoard.CalcResult();
         UIManager._instance.resultEmotion.SetPlayerController(focusedPlayer);
@@ -539,13 +549,14 @@ public class GameManagerPhoton : Photon.PunBehaviour
         resultBGMEvent.start();
 
         // 캐릭터 승리대사 재생
-        focusedPlayer.PlayVoiceSound("Victory");
+        focusedPlayer.PublicPlayVoiceSound("Victory");
     }
 
     public void StartLoadTitleScene()
     {
         if(!isSceneMoving)
         {
+            PhotonNetwork.player.SetScore(0);
             PhotonNetwork.Disconnect();
             StartCoroutine(LoadTitleScene());
             isSceneMoving = true;

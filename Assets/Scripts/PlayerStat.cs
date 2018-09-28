@@ -149,12 +149,16 @@ public class PlayerStat : Photon.PunBehaviour
                 }
             }
         }
+<<<<<<< HEAD
 
         if (PhotonNetwork.isMasterClient)
         {
             Debug.Log(PhotonNetwork.isMasterClient + ", " + photonView.owner);
             GameManagerPhoton._instance.CheckFull();
         }
+=======
+        
+>>>>>>> ChaJinMin
     }
 
     private void Update()
@@ -205,7 +209,11 @@ public class PlayerStat : Photon.PunBehaviour
     {
         if (!onStage || pc.isStun) return;
 
+<<<<<<< HEAD
         DamageEvent de = GameManagerPhoton._instance.damageEvents[damageEventNum];
+=======
+        DamageShakeEvent de = GameManagerPhoton._instance.damageShakeEvents[damageEventNum];
+>>>>>>> ChaJinMin
 
         if (curHP - de.Damage <= 0)
         {
