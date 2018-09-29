@@ -11,70 +11,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f3758f8f58fdef43803eb9be1df0608, type: 3}
   m_Name: PhotonServerSettings
   m_EditorClassIdentifier: 
-  AppID: 14054590-57e3-463f-b6ec-66600b5f5be6
+  AppID: 
   VoiceAppID: 
-  ChatAppID: 8b14c5fb-f2b7-4a0a-ae88-3dae3f271c7e
-  HostType: 1
-  PreferredRegion: 9
+  ChatAppID: 
+  HostType: 0
+  PreferredRegion: 0
   EnabledRegions: -1
   Protocol: 0
   ServerAddress: 
   ServerPort: 5055
   VoiceServerPort: 5055
-  JoinLobby: 1
+  JoinLobby: 0
   EnableLobbyStatistics: 0
   PunLogging: 0
   NetworkLogging: 1
   RunInBackground: 1
   RpcList:
+  - Break
+  - ChangeFirework
   - Chat
   - ColorRpc
   - Damage
-  - DestroyProjectile
+  - DamageShake
   - DestroyRpc
   - DoJump
   - Fall
-  - Fire
   - Flash
   - InstantiateRpc
+  - MapFacilityActivate
   - Marco
   - PickupItemInit
+  - PlayEndSound
   - Polo
   - PunPickup
   - PunPickupSimple
   - PunRespawn
   - Pushed
+  - RemoteCreatePlayer
   - RequestForPickupItems
   - RequestForPickupTimes
-  - TaggedPlayer
-  - SetValues
-  - SetPrams
-  - TakeItem
-  - ChangeFirework
-  - DisableItemBox
-  - SetActiveItemBox
-  - Teleport
-  - PlayStartSound
-  - ChangeAmmo
-  - ChangeAmmoUI
-  - SetHeartUI
-  - SetOtherHeartUI
-  - Break
   - RespawnObject
-  - StartWaterBlast
-  - PlayEndSound
-  - GameStart
-  - GameStarting
   - RunGameEvent
+  - SetActiveItemBox
   - Spotlight
-  - AllowCreatePlayer
-  - RemoteCreatePlayer
-  - DamageShake
-<<<<<<< HEAD
-=======
-  - MapFacilityActivate
-  - MapFacility
   - StopMapFacilities
-  - Test
->>>>>>> ChaJinMin
+  - TaggedPlayer
+  - Teleport
   DisableAutoOpenWizard: 1
