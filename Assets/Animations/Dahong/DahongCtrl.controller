@@ -973,13 +973,13 @@ AnimatorStateMachine:
   - first: {fileID: 1107638935789876408}
     second:
     - {fileID: 1109607697275292356}
-  - first: {fileID: 1107593928459559732}
-    second:
-    - {fileID: 1109691938120860752}
   - first: {fileID: 1107021197593447476}
     second:
     - {fileID: 1109196332767799580}
     - {fileID: 1109027845325823244}
+  - first: {fileID: 1107593928459559732}
+    second:
+    - {fileID: 1109691938120860752}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 48, y: 12, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}
