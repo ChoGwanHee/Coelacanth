@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33754586197636710}
   - component: {fileID: 23763459302663366}
   - component: {fileID: 65915767296985660}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Stage2_tilepiece
   m_TagString: Untagged
   m_Icon: {fileID: 0}

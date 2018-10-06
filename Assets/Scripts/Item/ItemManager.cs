@@ -232,7 +232,7 @@ public class ItemManager : Photon.PunBehaviour
         {
             do
             {
-                randomIndex = Mathf.FloorToInt(Random.value * 2) * 2;
+                randomIndex = Random.Range(0, itemRegenPos.Length/2) * 2;
 
                 regenPos = GetRandomPos(itemRegenPos[randomIndex].position, itemRegenPos[randomIndex + 1].position);
                 regenPos.y += 6.0f;

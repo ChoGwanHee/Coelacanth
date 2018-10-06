@@ -47,7 +47,7 @@ public class ItemBoxFirework : BaseItemBox {
         else
         {
             alive = false;
-            transform.position = Vector3.zero;
+            transform.position = new Vector3(0f, 0f, -20f);
             gameObject.SetActive(false);
             FMODUnity.RuntimeManager.PlayOneShot(getSound);
         }

@@ -125,7 +125,8 @@ public class PlayerStat : Photon.PunBehaviour
 
     private void Start()
     {
-        GameManagerPhoton._instance.playerList.Add(this);
+        if(GameManagerPhoton._instance != null)
+            GameManagerPhoton._instance.playerList.Add(this);
 
         if (GetComponent<PlayerDummy>()) return;
 
@@ -168,7 +169,8 @@ public class PlayerStat : Photon.PunBehaviour
 
     private void OnDestroy()
     {
-        GameManagerPhoton._instance.playerList.Remove(this);
+        if(GameManagerPhoton._instance != null)
+            GameManagerPhoton._instance.playerList.Remove(this);
     }
 
     /// <summary>

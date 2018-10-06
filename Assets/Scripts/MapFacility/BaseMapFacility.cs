@@ -20,13 +20,6 @@ public abstract class BaseMapFacility : MonoBehaviour
     protected float elapsedTime = 0.0f;
 
 
-    protected void Start()
-    {
-        if (enable)
-            MapManager._instance.AddRegularMapFacility(this);
-    }
-
-
     /// <summary>
     /// 시설을 작동시킵니다.
     /// </summary>
@@ -40,7 +33,7 @@ public abstract class BaseMapFacility : MonoBehaviour
     /// <summary>
     /// 시설이 작동할 시간이 되었는지 확인합니다.
     /// </summary>
-    public bool CheckTime()
+    public virtual bool CheckTime()
     {
         elapsedTime += Time.deltaTime;
 

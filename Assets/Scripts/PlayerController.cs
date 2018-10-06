@@ -118,6 +118,8 @@ public class PlayerController : Photon.PunBehaviour
     /// </summary>
     private float knockbackElapsedTime = 0.0f;
 
+    private float interactionCheckRadius = 1.0f;
+
 
     // Turn
     private Ray mouseRay;
@@ -178,7 +180,10 @@ public class PlayerController : Photon.PunBehaviour
         anim = GetComponent<Animator>();
         groundMask = LayerMask.GetMask("Ground");
 
-        fallingHeight = MapManager._instance.fallingHeight;
+        if (MapManager._instance != null)
+            fallingHeight = MapManager._instance.fallingHeight;
+        else
+            fallingHeight = -0.1f;
 
         if (photonView.isMine)
         {
@@ -196,9 +201,13 @@ public class PlayerController : Photon.PunBehaviour
         {
             if (isControlable && !isStun)
             {
-                if (Input.GetMouseButtonDown(0) && state == PlayerAniState.Idle)
+                if (state == PlayerAniState.Idle)
                 {
-                    executer.Trigger();
+                    if(Input.GetMouseButtonDown(0))
+                        executer.Trigger();
+
+                    if (Input.GetKeyDown(KeyCode.E))
+                        CheckInteraction();
                 }
             }
 
@@ -245,8 +254,9 @@ public class PlayerController : Photon.PunBehaviour
     void ApplyAnimatorParams()
     {
         anim.SetInteger("AniNum", (int)state);
-        anim.SetFloat("MoveX", inputAxis.x, 0.1f, Time.deltaTime);
-        anim.SetFloat("MoveY", inputAxis.y, 0.1f, Time.deltaTime);
+        //anim.SetFloat("MoveX", inputAxis.x, 0.1f, Time.deltaTime);
+        //anim.SetFloat("MoveY", inputAxis.y, 0.1f, Time.deltaTime);
+        anim.SetFloat("MoveX", inputAxis.sqrMagnitude, 0.1f, Time.deltaTime);
     }
 
     /// <summary>
@@ -400,7 +410,7 @@ public class PlayerController : Photon.PunBehaviour
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         rb.Sleep();
-        transform.position = Vector3.zero;
+        transform.position = new Vector3(0f,0f,-20f);
     }
 
     /// <summary>
@@ -726,6 +736,19 @@ public class PlayerController : Photon.PunBehaviour
             case FireworkType.Party:
                 attachedHandObject = Instantiate(handObjectSet.objects[3], weaponPoint);
                 break;
+        }
+    }
+
+    /// <summary>
+    /// 플레이어 주변에 상호작용 가능한 오브젝트가 있는지 확인하고 있으면 작동합니다.
+    /// </summary>
+    private void CheckInteraction()
+    {
+        Collider[] cols = Physics.OverlapSphere(transform.position, interactionCheckRadius, LayerMask.GetMask("InteractionObject"));
+
+        if(cols.Length > 0)
+        {
+            cols[0].GetComponent<IInteractable>().Interaction(this);
         }
     }
 }

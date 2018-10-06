@@ -179,6 +179,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
         //backgroundFireworkEvent.start();
 
         resultBGMEvent = FMODUnity.RuntimeManager.CreateInstance(resultBGM);
+
     }
 
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

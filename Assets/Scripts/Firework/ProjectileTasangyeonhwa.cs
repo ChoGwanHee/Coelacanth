@@ -11,8 +11,14 @@ public class ProjectileTasangyeonhwa : BaseProjectile
 
     private GameObject hitRangeEfx;
 
+    private int owner = -1;
+
     private void Start()
     {
+        object[] data = photonView.instantiationData;
+
+        owner = (int)data[0];
+
         Velocity = new Vector3(0.0f, -speed);
 
         DisplayHitRange();
@@ -51,17 +57,22 @@ public class ProjectileTasangyeonhwa : BaseProjectile
             Vector3 direction = Vector3.Scale(effectedObjects[i].transform.position - transform.position, new Vector3(1, 0, 1)).normalized;
 
             PhotonView objPhotonView = effectedObjects[i].GetComponent<PhotonView>();
-            objPhotonView.RPC("Pushed", PhotonTargets.All, (direction * hitForce));
 
             if (effectedObjects[i].CompareTag("Player"))
             {
-                objPhotonView.RPC("Damage", objPhotonView.owner, damage, -1);
-                Vector3 efxPos = effectedObjects[i].GetComponent<CapsuleCollider>().ClosestPointOnBounds(transform.position);
-                PhotonNetwork.Instantiate("Prefabs/Effect_base_Hit_fx", efxPos, Quaternion.identity, 0);
-
+                if (objPhotonView.ownerId != owner)
+                {
+                    objPhotonView.RPC("Pushed", PhotonTargets.All, (direction * hitForce));
+                    objPhotonView.RPC("Damage", objPhotonView.owner, damage, -1);
+                    Vector3 efxPos = effectedObjects[i].GetComponent<CapsuleCollider>().ClosestPointOnBounds(transform.position);
+                    PhotonNetwork.Instantiate("Prefabs/Effect_base_Hit_fx", efxPos, Quaternion.identity, 0);
+                }
+            }
+            else
+            {
+                objPhotonView.RPC("Pushed", PhotonTargets.All, (direction * hitForce));
             }
         }
-
         //photonView.RPC("PlayEndSound", PhotonTargets.All, null);
 
         PhotonNetwork.Instantiate("Prefabs/Tasang_Hit_fx", transform.position, transform.rotation, 0);

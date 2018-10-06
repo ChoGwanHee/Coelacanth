@@ -5,6 +5,9 @@ public enum PlayerAniState
     KnockBack,
     MovableAttack,
     Attack,
+    Lift,
+    Put,
+    Consume,
     Stun,
     Fall,
     Emotion

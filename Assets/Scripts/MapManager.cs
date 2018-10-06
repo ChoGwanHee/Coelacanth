@@ -11,14 +11,12 @@ public class MapManager : Photon.PunBehaviour
     /// </summary>
     public float fallingHeight = 4.4f;
 
-    public BaseMapFacility[] mapFacilities;
-
     /// <summary>
     /// 시간이 지남에 따라 정기적으로 작동하는 맵시설의 리스트
     /// </summary>
-    private List<BaseMapFacility> regularMapFacilities = new List<BaseMapFacility>();
+    public BaseMapFacility[] mapFacilities;
 
-
+    
     private void Awake()
     {
         if (_instance == null)
@@ -29,16 +27,6 @@ public class MapManager : Photon.PunBehaviour
 
     private void Start()
     {
-        //StartMapFacilities();
-    }
-
-    /// <summary>
-    /// 주기적으로 작동하는 맵 시설 리스트에 맵 시설을 추가합니다.
-    /// </summary>
-    /// <param name="facility"></param>
-    public void AddRegularMapFacility(BaseMapFacility facility)
-    {
-        regularMapFacilities.Add(facility);
     }
 
     /// <summary>
@@ -73,9 +61,9 @@ public class MapManager : Photon.PunBehaviour
     {
         while (true)
         {
-            for(int i=0; i<regularMapFacilities.Count; i++)
+            for(int i=0; i< mapFacilities.Length; i++)
             {
-                if (regularMapFacilities[i].CheckTime())
+                if (mapFacilities[i].CheckTime())
                 {
                     photonView.RPC("MapFacilityActivate", PhotonTargets.All, i);
                 }
@@ -92,6 +80,6 @@ public class MapManager : Photon.PunBehaviour
     [PunRPC]
     private void MapFacilityActivate(int index)
     {
-        regularMapFacilities[index].Activate();
+        mapFacilities[index].Activate();
     }
 }

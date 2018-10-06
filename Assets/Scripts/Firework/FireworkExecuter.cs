@@ -55,8 +55,11 @@ public class FireworkExecuter : Photon.PunBehaviour {
 
         if (photonView.isMine)
         {
-            onFireworkChanged += UIManager._instance.userStatus.ChangeWeapon;
-            onFireworkAmmoChanged = new OnFireworkAmmoChangedDelegate(UIManager._instance.ammoCounter.SetAmount);
+            if(UIManager._instance != null)
+            {
+                onFireworkChanged += UIManager._instance.userStatus.ChangeWeapon;
+                onFireworkAmmoChanged = new OnFireworkAmmoChangedDelegate(UIManager._instance.ammoCounter.SetAmount);
+            }
         }
     }
 

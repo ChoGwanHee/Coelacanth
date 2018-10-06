@@ -25,10 +25,22 @@ public class MapFacilityTasangyeonhwa : BaseMapFacility
 
     public Transform[] hitRange;
 
+    private int activatedTasang = -1;
+    private int owner = -1;
+
+    private void Start()
+    {
+        for (int i = 0; i < tasangs.Length; i++)
+        {
+            tasangs[i].parentFacility = this;
+        }
+    }
 
     public override void Activate()
     {
-        StartCoroutine(TestProcess());
+        activatedTasang = UnityEngine.Random.Range(0, tasangs.Length);
+
+        tasangs[activatedTasang].SetState(TasangyeonhwaScript.TasangState.Appear);
     }
 
     public override void Deactivate()
@@ -36,24 +48,41 @@ public class MapFacilityTasangyeonhwa : BaseMapFacility
         StopAllCoroutines();
         for (int i = 0; i < tasangs.Length; i++)
         {
-            tasangs[i].SetState(TasangyeonhwaScript.TasangState.Camo);
+            tasangs[i].SetState(TasangyeonhwaScript.TasangState.Hide);
         }
     }
 
-    private IEnumerator TestProcess()
+    public override bool CheckTime()
     {
-        // 등장
-        for(int i = 0; i < tasangs.Length; i++)
+        if(activatedTasang == -1)
         {
-            tasangs[i].SetState(TasangyeonhwaScript.TasangState.Appear);
-        }
-        yield return new WaitForSeconds(4.0f);
+            elapsedTime += Time.deltaTime;
 
-        // 발사
-        for (int i = 0; i < tasangs.Length; i++)
-        {
-            tasangs[i].SetState(TasangyeonhwaScript.TasangState.Fire);
+            if (elapsedTime >= interval)
+            {
+                elapsedTime = 0.0f;
+                return true;
+            }
         }
+
+        return false;
+    }
+
+    [PunRPC]
+    public void RequestFire(int requestId)
+    {
+        if(owner == -1)
+        {
+            owner = requestId;
+
+            StartCoroutine(FireProcess());
+        }
+    }
+
+    private IEnumerator FireProcess()
+    {
+        // 발사
+        tasangs[activatedTasang].SetState(TasangyeonhwaScript.TasangState.Fire);
         yield return new WaitForSeconds(3.0f);
 
         // 하늘에서 떨어지기 시작
@@ -61,13 +90,12 @@ public class MapFacilityTasangyeonhwa : BaseMapFacility
         {
             StartCoroutine(BombingProcess());
         }
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSeconds(7.0f);
 
-        // 들어감
-        for (int i = 0; i < tasangs.Length; i++)
-        {
-            tasangs[i].SetState(TasangyeonhwaScript.TasangState.Camo);
-        }
+        // 사라짐
+        tasangs[activatedTasang].SetState(TasangyeonhwaScript.TasangState.Hide);
+        activatedTasang = -1;
+        owner = -1;
     }
 
     private IEnumerator BombingProcess()
@@ -75,8 +103,11 @@ public class MapFacilityTasangyeonhwa : BaseMapFacility
         for (int i = 0; i < fallingAmount; i++)
         {
             Vector3 hitPos = GetRandomHitPos();
-            
-            PhotonNetwork.Instantiate("Prefabs/" + tasangProjectile.name, hitPos, Quaternion.identity, 0);
+
+
+            object[] data = new object[1] { owner };
+
+            PhotonNetwork.Instantiate("Prefabs/" + tasangProjectile.name, hitPos, Quaternion.identity, 0, data);
             
             yield return new WaitForSeconds(fallingInterval);
         }
