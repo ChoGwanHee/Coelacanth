@@ -54,6 +54,8 @@ public class MapFacilityTasangyeonhwa : BaseMapFacility
 
     public override bool CheckTime()
     {
+        if (!enable) return false;
+
         if(activatedTasang == -1)
         {
             elapsedTime += Time.deltaTime;

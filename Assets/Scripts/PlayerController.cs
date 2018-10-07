@@ -17,6 +17,11 @@ public class PlayerController : Photon.PunBehaviour
     }
 
     /// <summary>
+    /// 플레이어가 현재 가지고 있는 유틸 아이템
+    /// </summary>
+    public ItemBoxUtil utilItem;
+
+    /// <summary>
     /// 플레이어가 스턴에 걸렸을 때 재생되는 사운드
     /// </summary>
     [FMODUnity.EventRef]
@@ -118,6 +123,9 @@ public class PlayerController : Photon.PunBehaviour
     /// </summary>
     private float knockbackElapsedTime = 0.0f;
 
+    /// <summary>
+    /// 상호작용 가능한지 체크할 때 사용하는 반경
+    /// </summary>
     private float interactionCheckRadius = 1.0f;
 
 
@@ -203,11 +211,11 @@ public class PlayerController : Photon.PunBehaviour
             {
                 if (state == PlayerAniState.Idle)
                 {
-                    if(Input.GetMouseButtonDown(0))
+                    if (Input.GetMouseButtonDown(0))
                         executer.Trigger();
 
                     if (Input.GetKeyDown(KeyCode.E))
-                        CheckInteraction();
+                        Interaction();
                 }
             }
 
@@ -256,7 +264,7 @@ public class PlayerController : Photon.PunBehaviour
         anim.SetInteger("AniNum", (int)state);
         //anim.SetFloat("MoveX", inputAxis.x, 0.1f, Time.deltaTime);
         //anim.SetFloat("MoveY", inputAxis.y, 0.1f, Time.deltaTime);
-        anim.SetFloat("MoveX", inputAxis.sqrMagnitude, 0.1f, Time.deltaTime);
+        anim.SetFloat("MoveX", inputAxis.magnitude, 0.1f, Time.deltaTime);
     }
 
     /// <summary>
@@ -450,7 +458,7 @@ public class PlayerController : Photon.PunBehaviour
         CancelInvoke();
 
         // 발 밑에 땅이 있으면
-        if (Physics.Raycast(transform.position, Vector3.down, 6.0f, LayerMask.GetMask("Ground"), QueryTriggerInteraction.Ignore))
+        if (Physics.Raycast(transform.position, Vector3.down, 6.0f, groundMask, QueryTriggerInteraction.Ignore))
         {
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
@@ -742,13 +750,25 @@ public class PlayerController : Photon.PunBehaviour
     /// <summary>
     /// 플레이어 주변에 상호작용 가능한 오브젝트가 있는지 확인하고 있으면 작동합니다.
     /// </summary>
-    private void CheckInteraction()
+    private void Interaction()
     {
-        Collider[] cols = Physics.OverlapSphere(transform.position, interactionCheckRadius, LayerMask.GetMask("InteractionObject"));
+        Collider[] cols = Physics.OverlapSphere(transform.position, interactionCheckRadius, LayerMask.GetMask("InteractionObject", "Item"));
 
-        if(cols.Length > 0)
+        for(int i=0; i<cols.Length; i++)
         {
-            cols[0].GetComponent<IInteractable>().Interaction(this);
+            IInteractable obj = cols[i].GetComponent<IInteractable>();
+
+            if (obj != null)
+            {
+                obj.Interact(this);
+                return;
+            }
         }
+    }
+
+    public void LiftUtilItem(ItemBoxUtil itemBox)
+    {
+        utilItem = itemBox;
+        ChangeState(PlayerAniState.Lift);
     }
 }

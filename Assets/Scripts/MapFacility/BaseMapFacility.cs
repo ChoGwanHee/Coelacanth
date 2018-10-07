@@ -35,6 +35,8 @@ public abstract class BaseMapFacility : MonoBehaviour
     /// </summary>
     public virtual bool CheckTime()
     {
+        if (!enable) return false;
+
         elapsedTime += Time.deltaTime;
 
         if(elapsedTime >= interval)

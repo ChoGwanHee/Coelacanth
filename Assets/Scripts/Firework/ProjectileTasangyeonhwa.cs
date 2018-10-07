@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ProjectileTasangyeonhwa : BaseProjectile
 {
-
     public GameObject hitRangeEfx_ref;
 
     private float elapsedTime = 0.0f;

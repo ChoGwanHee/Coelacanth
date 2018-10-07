@@ -1,10 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public interface IInteractable
-{
-    void Interaction(PlayerController pc);
-}
 
 public class TasangyeonhwaScript : Photon.PunBehaviour, IInteractable {
 
@@ -159,7 +155,7 @@ public class TasangyeonhwaScript : Photon.PunBehaviour, IInteractable {
         flyCover.SetActive(false);
     }
 
-    public void Interaction(PlayerController pc)
+    public void Interact(PlayerController pc)
     {
         parentFacility.RequestFire(pc.photonView.ownerId);
     }

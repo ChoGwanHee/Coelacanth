@@ -33722,7 +33722,7 @@ MonoBehaviour:
   - {fileID: 1587847134}
   cursorTex: {fileID: 2800000, guid: 26aef0f83e8200f4e95d813bc323bb7f, type: 3}
   currentState: 0
-  playTime: 160
+  playTime: 99
   startPlayerCount: 4
   damageShakeEvents:
   - {fileID: 11400000, guid: 96b081a6f7554564d977c7d3829c306c, type: 2}
