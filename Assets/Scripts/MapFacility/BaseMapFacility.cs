@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BaseMapFacility : MonoBehaviour
+public abstract class BaseMapFacility : Photon.MonoBehaviour
 {
     /// <summary>
     /// 시설이 작동하는지 여부

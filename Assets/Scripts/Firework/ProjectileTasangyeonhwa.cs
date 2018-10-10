@@ -18,11 +18,13 @@ public class ProjectileTasangyeonhwa : BaseProjectile
 
         Velocity = new Vector3(0.0f, -speed);
 
-        DisplayHitRange();
+        if(photonView.isMine)
+            DisplayHitRange();
     }
 
     protected override void Update()
     {
+        if (!photonView.isMine) return;
         elapsedTime += Time.deltaTime;
 
         if (elapsedTime >= lifetime)

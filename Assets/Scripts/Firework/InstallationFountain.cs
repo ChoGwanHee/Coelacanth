@@ -36,6 +36,11 @@ public class InstallationFountain : BaseInstallation
     public float duration;
 
     /// <summary>
+    /// 얻는 점수
+    /// </summary>
+    public int gainScore;
+
+    /// <summary>
     /// 활성화 여부
     /// </summary>
     private bool enable = false;

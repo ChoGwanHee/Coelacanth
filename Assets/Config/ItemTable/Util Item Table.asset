@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd8e105e4fe25c54fb9551f735abbde5, type: 3}
+  m_Name: Util Item Table
+  m_EditorClassIdentifier: 
+  itemList:
+  - item: {fileID: 11400000, guid: e569be5982c98a74d8aac29637180518, type: 2}
+    itemBoxRef: {fileID: 1200319710891264, guid: a71302986c624e54187110c1e7a6d782,
+      type: 2}
+    chance: 0.2
+  - item: {fileID: 11400000, guid: 451963e09238cb54c91acf5f99282d72, type: 2}
+    itemBoxRef: {fileID: 1080752283620456, guid: 742325ff61231e045b410884852eacac,
+      type: 2}
+    chance: 0.2
+  - item: {fileID: 11400000, guid: 43539fea201b9584990de150ea18b715, type: 2}
+    itemBoxRef: {fileID: 1423522739461498, guid: 9aff78ca658dba442b1e976f91f7fbed,
+      type: 2}
+    chance: 0.2
+  - item: {fileID: 11400000, guid: 7fe4498f5debd844d84f5a91f89c80d6, type: 2}
+    itemBoxRef: {fileID: 1847574949844782, guid: c0bb1121e142de44190d5cbaeb481864,
+      type: 2}
+    chance: 0.2
+  - item: {fileID: 11400000, guid: 1c9beb4185da3a947b6f290ec5afe0a5, type: 2}
+    itemBoxRef: {fileID: 1493405662264632, guid: 48920701623ed8142b4070befc241ace,
+      type: 2}
+    chance: 0.2

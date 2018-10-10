@@ -84,7 +84,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
     /// <summary>
     /// 미리 정의 되어 있는 데미지 이벤트들
     /// </summary>
-    public DamageShakeEvent[] damageShakeEvents;
+    public ShakeEvent[] damageShakeEvents;
 
     /// <summary>
     /// 씬 이동 중인지 여부
@@ -283,7 +283,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
                 prefabName.Append("MingMing_0516");
                 break;
             case 2:
-                prefabName.Append("ShoSho_0605_2");
+                prefabName.Append("ShoSho_0605");
                 break;
             case 3:
                 prefabName.Append("CuChen_0612");

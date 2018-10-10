@@ -6,6 +6,9 @@
 public abstract class BaseItemBox : Photon.PunBehaviour
 {
     public BaseItem item;
+    
+    [FMODUnity.EventRef]
+    public string spawnSound;
 
     /// <summary>
     /// 리젠시 땅으로부터의 높이
@@ -21,6 +24,11 @@ public abstract class BaseItemBox : Photon.PunBehaviour
     /// 아이템 매니저에 등록되어 있는 아이템의 인덱스.
     /// </summary>
     public int itemIndex;
+
+    /// <summary>
+    /// 아이템 매니저에 등록되어 있는 아이템 박스의 아이템풀 인덱스
+    /// </summary>
+    public int poolIndex;
     
 
     /// <summary>
@@ -28,34 +36,43 @@ public abstract class BaseItemBox : Photon.PunBehaviour
     /// </summary>
     public bool alive;
 
-    protected void Start()
+    protected virtual void Start()
     {
-        FindItemIndex();
+        InitIndex();
         transform.SetParent(GameObject.Find("ItemBoxes").transform);
         GameManagerPhoton._instance.itemManager.AddItemBox(this);
         gameObject.SetActive(false);
     }
 
-    /// <summary>
-    /// 테이블 인덱스를 이용해 몇번째 아이템으로 등록되어 있는지 찾아서 저장합니다.
-    /// </summary>
-    protected void FindItemIndex()
+    protected void InitIndex()
     {
-        if(item == null)
-        {
-            itemIndex = -1;
-            return;
-        }
+        object[] data = photonView.instantiationData;
+        tableIndex = (int)data[0];
+        itemIndex = (int)data[1];
+        poolIndex = (int)data[2];
+    }
 
-        ItemTable curItemTable = GameManagerPhoton._instance.itemManager.itemTables[tableIndex];
-
-        for (int i = 0; i < curItemTable.itemList.Length; i++)
+    [PunRPC]
+    public virtual void SetActiveItemBox(bool active)
+    {
+        if (active)
         {
-            if (curItemTable.itemList[i].item.Equals(item))
-            {
-                itemIndex = i;
-                break;
-            }
+            gameObject.SetActive(true);
+            alive = true;
+            FMODUnity.RuntimeManager.PlayOneShot(spawnSound);
         }
+        else
+        {
+            alive = false;
+            transform.position = new Vector3(0f, 0f, -20f);
+            GameManagerPhoton._instance.itemManager.curBoxCount[tableIndex]--;
+            gameObject.SetActive(false);
+        }
+    }
+
+    [PunRPC]
+    public void SetPosition(Vector3 pos)
+    {
+        transform.position = pos;
     }
 }

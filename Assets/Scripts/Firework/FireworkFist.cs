@@ -25,7 +25,7 @@ public class FireworkFist : Firework
             {
                 effectedObjects[i].GetComponent<PlayerController>().Pushed(direction * hitForce * 0.5f);
 
-                objPhotonView.RPC("Damage", objPhotonView.owner, damage, executer.photonView.ownerId);
+                objPhotonView.RPC("Damage", objPhotonView.owner, Mathf.RoundToInt(damage * executer.damageFactor), executer.photonView.ownerId);
                 Vector3 efxPos = effectedObjects[i].GetComponent<CapsuleCollider>().ClosestPointOnBounds(executer.firePoint.position);
                 PhotonNetwork.Instantiate("Prefabs/Effect_base_Hit_fx", efxPos, Quaternion.identity, 0);
 

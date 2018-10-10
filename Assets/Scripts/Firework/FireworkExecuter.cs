@@ -19,6 +19,11 @@ public class FireworkExecuter : Photon.PunBehaviour {
     public bool replaceable = true;         // 폭죽 교체 가능 여부
     public bool charging = false;           // 충전 중인지 여부
 
+    /// <summary>
+    /// 데미지 계수
+    /// </summary>
+    public float damageFactor = 1.0f;
+
     public delegate void OnFireworkChangedDelegate(Firework newFirework);
     public delegate void OnFireworkAmmoChangedDelegate(int num);
 

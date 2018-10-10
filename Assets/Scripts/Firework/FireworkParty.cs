@@ -61,7 +61,7 @@ public class FireworkParty : Firework {
                 if (hits[j].collider.CompareTag("Player"))
                 {
                     hits[j].collider.GetComponent<PlayerController>().Pushed(DirFromAngle(curAngle) * hitForce * 0.5f);
-                    objPhotonView.RPC("DamageShake", objPhotonView.owner, 5, executer.photonView.ownerId);
+                    objPhotonView.RPC("DamageShake", objPhotonView.owner, Mathf.RoundToInt(damage * executer.damageFactor), 5, executer.photonView.ownerId);
                     Vector3 efxPos = hits[j].collider.GetComponent<CapsuleCollider>().ClosestPointOnBounds(executer.firePoint.position);
                     PhotonNetwork.Instantiate("Prefabs/Effect_base_Hit_fx", efxPos, Quaternion.identity, 0);
 

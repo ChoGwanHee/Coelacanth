@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using ServerModule;
 
 /// <summary>
@@ -45,6 +47,8 @@ public class PlayerController : Photon.PunBehaviour
     /// </summary>
     public CharacterVoicePack characterVoice;
 
+    
+
     // Move
     [Header("Move")]
     /// <summary>
@@ -63,6 +67,11 @@ public class PlayerController : Photon.PunBehaviour
     public bool isStun = false;
 
     /// <summary>
+    /// 캐릭터의 무적 여부
+    /// </summary>
+    public bool isUnbeatable = false;
+
+    /// <summary>
     /// 가속도
     /// </summary>
     public float accSpeed = 15.0f;
@@ -71,6 +80,11 @@ public class PlayerController : Photon.PunBehaviour
     /// 최대 속도
     /// </summary>
     public float maxSpeed = 10.0f;
+
+    /// <summary>
+    /// 최대 속도 계수
+    /// </summary>
+    public float maxSpeedFactor = 1.0f;
 
     /// <summary>
     /// 리지드바디의 속도
@@ -128,6 +142,13 @@ public class PlayerController : Photon.PunBehaviour
     /// </summary>
     private float interactionCheckRadius = 1.0f;
 
+    /// <summary>
+    /// 아이템을 들고 있는지 여부
+    /// </summary>
+    private bool isGrab = false;
+
+    private bool isConsumeable = true;
+
 
     // Turn
     private Ray mouseRay;
@@ -168,6 +189,15 @@ public class PlayerController : Photon.PunBehaviour
 
     // 내부 컴포넌트
     private PlayerStat stat;
+    public PlayerStat Stat
+    {
+        get { return stat; }
+    }
+    private BuffController bc;
+    public BuffController BC
+    {
+        get { return bc; }
+    }
     private FireworkExecuter executer;
     private Rigidbody rb;
     private CapsuleCollider col;
@@ -184,6 +214,7 @@ public class PlayerController : Photon.PunBehaviour
         col = GetComponent<CapsuleCollider>();
         cam = Camera.main;
         stat = GetComponent<PlayerStat>();
+        bc = GetComponent<BuffController>();
         executer = GetComponent<FireworkExecuter>();
         anim = GetComponent<Animator>();
         groundMask = LayerMask.GetMask("Ground");
@@ -211,11 +242,28 @@ public class PlayerController : Photon.PunBehaviour
             {
                 if (state == PlayerAniState.Idle)
                 {
-                    if (Input.GetMouseButtonDown(0))
-                        executer.Trigger();
+                    if (!isGrab)
+                    {
+                        if (Input.GetMouseButtonDown(0))
+                            executer.Trigger();
 
-                    if (Input.GetKeyDown(KeyCode.E))
-                        Interaction();
+                        if (Input.GetKeyDown(KeyCode.E))
+                        {
+                            Interaction();
+                        }
+                    }
+                    else
+                    {
+                        if (Input.GetMouseButtonDown(0))
+                            StartCoroutine(ItemUsingDelay(utilItem.aniNum));
+
+                        if (Input.GetKeyDown(KeyCode.E))
+                        {
+                            ChangeState(PlayerAniState.Put);
+                        }
+                    }
+
+
                 }
             }
 
@@ -302,7 +350,7 @@ public class PlayerController : Photon.PunBehaviour
             Vector3 addVelocity = targetDirection * accSpeed * Time.fixedDeltaTime;
             float resultMag = (Velocity + addVelocity).magnitude;
 
-            if (resultMag < maxSpeed || resultMag < Velocity.magnitude)
+            if (resultMag < maxSpeed * maxSpeedFactor || resultMag < Velocity.magnitude)
             {
                 Velocity += addVelocity;
             }
@@ -345,6 +393,8 @@ public class PlayerController : Photon.PunBehaviour
     [PunRPC]
     public void Pushed(Vector3 force)
     {
+        if (isUnbeatable) return;
+
         rb.velocity = Vector3.zero;
         rb.AddForce(force, ForceMode.Impulse);
         ChangeState(PlayerAniState.KnockBack);
@@ -456,9 +506,15 @@ public class PlayerController : Photon.PunBehaviour
     public void Spotlight()
     {
         CancelInvoke();
+        StopAllCoroutines();
+
+        if(photonView.isMine && isGrab && state != PlayerAniState.Put)
+        {
+            PutUtilItem();
+        }
 
         // 발 밑에 땅이 있으면
-        if (Physics.Raycast(transform.position, Vector3.down, 6.0f, groundMask, QueryTriggerInteraction.Ignore))
+        if (Physics.Raycast(transform.position + Vector3.up * 0.05f, Vector3.down, 3.0f, groundMask, QueryTriggerInteraction.Ignore))
         {
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
@@ -584,6 +640,10 @@ public class PlayerController : Photon.PunBehaviour
             case PlayerAniState.KnockBack:
                 inputAxis = Vector2.zero;
                 knockbackElapsedTime = 0.0f;
+                if (isGrab)
+                {
+                    isConsumeable = false;
+                }
                 break;
             case PlayerAniState.Stun:
                 stunEfx.SetActive(true);
@@ -591,6 +651,10 @@ public class PlayerController : Photon.PunBehaviour
                 FMODUnity.RuntimeManager.PlayOneShot(stunSound);
                 PlayVoiceSound("Stun");
                 Invoke("StunRecovery", stunTime);
+                if(isGrab)
+                {
+                    PutUtilItem();
+                }
                 break;
             case PlayerAniState.Fall:
                 anim.SetInteger("AniNum", (int)PlayerAniState.Fall);
@@ -598,6 +662,10 @@ public class PlayerController : Photon.PunBehaviour
                 anim.SetFloat("MoveY", 0);
                 inputAxis = Vector2.zero;
                 isFalling = true;
+                if (isGrab)
+                {
+                    PutUtilItem(true);
+                }
                 break;
         }
     }
@@ -626,15 +694,24 @@ public class PlayerController : Photon.PunBehaviour
                 else
                     executer.CheckFireworkChanged();
                 break;
+
             case PlayerAniState.KnockBack:
 
                 break;
+            case PlayerAniState.Put:
+                PutUtilItem();
+                break;
+
             case PlayerAniState.Stun:
                 stunEfx.SetActive(false);
                 isStun = false;
                 break;
+
             case PlayerAniState.Fall:
                 isFalling = false;
+                break;
+            case PlayerAniState.Emotion:
+                anim.SetInteger("SubAniNum", 0);
                 break;
         }
     }
@@ -701,6 +778,13 @@ public class PlayerController : Photon.PunBehaviour
             case "Play Start Sound":
                 FMODUnity.RuntimeManager.PlayOneShot(executer.curFirework.startSound);
                 break;
+
+            case "Lift End":
+                ChangeState(PlayerAniState.Idle);
+                break;
+            case "Put End":
+                ChangeState(PlayerAniState.Idle);
+                break;
         }
     }
 
@@ -766,9 +850,63 @@ public class PlayerController : Photon.PunBehaviour
         }
     }
 
-    public void LiftUtilItem(ItemBoxUtil itemBox)
+    [PunRPC]
+    private void LiftUtilItem(int poolIndex, int index)
     {
-        utilItem = itemBox;
+        if(index == -1)
+        {
+            Debug.LogError("인덱스 오류");
+            return;
+        }
+        utilItem = GameManagerPhoton._instance.itemManager.itemBoxPool[poolIndex][index] as ItemBoxUtil;
+        isGrab = true;
+        anim.SetInteger("SubAniNum", 1);
         ChangeState(PlayerAniState.Lift);
+    }
+
+    [PunRPC]
+    private void PutUtilItem(bool remove = false)
+    {
+        isGrab = false;
+        utilItem.photonView.RPC("ResetTarget", PhotonTargets.All, null);
+        if (remove)
+        {
+            utilItem.photonView.RPC("SetActiveItemBox", PhotonTargets.All, false);
+        }
+        utilItem = null;
+        anim.SetInteger("SubAniNum", 0);
+    }
+
+    public IEnumerator ItemUsingDelay(int subAniNum)
+    {
+        float elapsedTime = 0.0f;
+        float delayTime = (utilItem.item as UtilItem).delayTime;
+        bool wait = true;
+
+        isConsumeable = true;
+        anim.SetInteger("SubAniNum", subAniNum);
+        ChangeState(PlayerAniState.Consume);
+        while(wait)
+        {
+            if(Input.GetMouseButtonUp(0) || !isConsumeable)
+            {
+                anim.SetInteger("SubAniNum", 1);
+                wait = false;
+            }
+            else
+            {
+                elapsedTime += Time.deltaTime;
+                if (elapsedTime >= delayTime)
+                {
+                    wait = false;
+                    utilItem.Use(this);
+                }
+                else
+                {
+                    yield return null;
+                }
+            }
+        }
+        ChangeState(PlayerAniState.Idle);
     }
 }

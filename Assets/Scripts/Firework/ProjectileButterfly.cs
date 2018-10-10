@@ -59,6 +59,8 @@ public class ProjectileButterfly : BaseProjectile
 
         Collider[] effectedObjects = Physics.OverlapSphere(transform.position, hitRadius, dynamicObjMask);
 
+        int totalDamage = Mathf.RoundToInt(damage * GameManagerPhoton._instance.GetPlayerByOwnerId(photonView.ownerId).GetComponent<FireworkExecuter>().damageFactor);
+
         for (int i = 0; i < effectedObjects.Length; i++)
         {
             Vector3 direction = Vector3.Scale(effectedObjects[i].transform.position - transform.position, new Vector3(1, 0, 1)).normalized;
@@ -68,7 +70,7 @@ public class ProjectileButterfly : BaseProjectile
 
             if (effectedObjects[i].CompareTag("Player"))
             {
-                objPhotonView.RPC("DamageShake", objPhotonView.owner, 4, photonView.ownerId);
+                objPhotonView.RPC("DamageShake", objPhotonView.owner, totalDamage, 4, photonView.ownerId);
                 Vector3 efxPos = effectedObjects[i].GetComponent<CapsuleCollider>().ClosestPointOnBounds(transform.position);
                 PhotonNetwork.Instantiate("Prefabs/Effect_base_Hit_fx", efxPos, Quaternion.identity, 0);
 

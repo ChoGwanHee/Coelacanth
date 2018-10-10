@@ -14,11 +14,7 @@ public class MapFacilityWaterCannon : BaseMapFacility
 
     public override void Activate()
     {
-        for (int i = 0; i < waterCannons.Length; i++)
-        {
-            waterCannons[i].StopAllCoroutines();
-            waterCannons[i].StartCoroutine(waterCannons[i].Splash());
-        }
+        photonView.RPC("RunCannon", PhotonTargets.All, null);
     }
 
     public override void Deactivate()
@@ -26,6 +22,16 @@ public class MapFacilityWaterCannon : BaseMapFacility
         for (int i = 0; i < waterCannons.Length; i++)
         {
             waterCannons[i].Initialize();
+        }
+    }
+
+    [PunRPC]
+    private void RunCannon()
+    {
+        for (int i = 0; i < waterCannons.Length; i++)
+        {
+            waterCannons[i].StopAllCoroutines();
+            waterCannons[i].StartCoroutine(waterCannons[i].Splash());
         }
     }
 }

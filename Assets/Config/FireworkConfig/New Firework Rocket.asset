@@ -16,7 +16,7 @@ MonoBehaviour:
   atType: 1
   damage: 70
   capacity: 2
-  gainScore: 50
+  gainScore: 100
   hitForce: 14
   hitRadius: 3
   lifetime: 3

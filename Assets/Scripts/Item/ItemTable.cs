@@ -9,6 +9,7 @@ public class ItemTable : ScriptableObject {
     public struct ItemElement
     {
         public BaseItem item;
+        public GameObject itemBoxRef;
         public float chance;
     }
 

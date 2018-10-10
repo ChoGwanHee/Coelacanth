@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,6 +27,8 @@ public class MapFacilityTasangyeonhwa : BaseMapFacility
     private int activatedTasang = -1;
     private int owner = -1;
 
+    public Light directional;
+
     private void Start()
     {
         for (int i = 0; i < tasangs.Length; i++)
@@ -38,9 +39,7 @@ public class MapFacilityTasangyeonhwa : BaseMapFacility
 
     public override void Activate()
     {
-        activatedTasang = UnityEngine.Random.Range(0, tasangs.Length);
-
-        tasangs[activatedTasang].SetState(TasangyeonhwaScript.TasangState.Appear);
+        photonView.RPC("AppearTasang", PhotonTargets.All, Random.Range(0, tasangs.Length));
     }
 
     public override void Deactivate()
@@ -71,28 +70,46 @@ public class MapFacilityTasangyeonhwa : BaseMapFacility
     }
 
     [PunRPC]
+    private void AppearTasang(int tasangNum)
+    {
+        activatedTasang = tasangNum;
+        tasangs[activatedTasang].SetState(TasangyeonhwaScript.TasangState.Appear);
+    }
+
+    [PunRPC]
     public void RequestFire(int requestId)
     {
         if(owner == -1)
         {
             owner = requestId;
 
-            StartCoroutine(FireProcess());
+            photonView.RPC("Run", PhotonTargets.All, null);
         }
+    }
+
+    [PunRPC]
+    private void Run()
+    {
+        StartCoroutine(FireProcess());
     }
 
     private IEnumerator FireProcess()
     {
         // 발사
         tasangs[activatedTasang].SetState(TasangyeonhwaScript.TasangState.Fire);
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSeconds(2.7f);
+
+        // 하늘에 빛
+        StartCoroutine(LightProcess());
+        GameManagerPhoton._instance.cameraController.Shake(1.5f, 0.5f);
+        yield return new WaitForSeconds(2.0f);
 
         // 하늘에서 떨어지기 시작
         if (PhotonNetwork.isMasterClient)
         {
             StartCoroutine(BombingProcess());
         }
-        yield return new WaitForSeconds(7.0f);
+        yield return new WaitForSeconds(3.0f);
 
         // 사라짐
         tasangs[activatedTasang].SetState(TasangyeonhwaScript.TasangState.Hide);
@@ -113,6 +130,16 @@ public class MapFacilityTasangyeonhwa : BaseMapFacility
             
             yield return new WaitForSeconds(fallingInterval);
         }
+    }
+
+    private IEnumerator LightProcess()
+    {
+        for(float f=1.8f; f>0.6f; f -= 0.02f)
+        {
+            directional.intensity = f;
+            yield return null;
+        }
+        directional.intensity = 0.6f;
     }
 
     private Vector3 GetRandomHitPos()

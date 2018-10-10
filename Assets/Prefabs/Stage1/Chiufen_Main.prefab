@@ -721,7 +721,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4581511338707122}
   - component: {fileID: 65858244025064306}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2107,9 +2107,12 @@ MonoBehaviour:
   thrustForce: 3.8
   blockForce: 13
   duration: 2.6
+  shakePower: 2
+  shakeDuration: 0.3
   hitEffect_ref: {fileID: 1225241528977946, guid: 8ab7350990e836045adb28ec3b12b745,
     type: 2}
   hitRangeEffect: {fileID: 1223102424007550}
+  soundActive: 1
   metalQuakeSound: event:/SFX_Stage1/Object/Trigger/SFX_WaterPipeQuake
   waterFireSound: event:/SFX_Stage1/Object/Trigger/SFX_WaterCannon
 --- !u!114 &114268745706420484

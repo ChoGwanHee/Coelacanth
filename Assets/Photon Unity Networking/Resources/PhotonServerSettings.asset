@@ -77,4 +77,15 @@ MonoBehaviour:
   - ActivateTasang
   - RequestActivation
   - RequestFire
+  - SetTargetPlayer
+  - ResetTarget
+  - RequestLift
+  - AppearTasang
+  - Run
+  - RunCannon
+  - LiftUtilItem
+  - PutUtilItem
+  - ApplyBuff
+  - RemoveBuff
+  - SetPosition
   DisableAutoOpenWizard: 1

@@ -34,10 +34,7 @@ public class MapManager : Photon.PunBehaviour
     /// </summary>
     public void StartMapFacilities()
     {
-        if (PhotonNetwork.isMasterClient)
-        {
-            StartCoroutine(LoopMapFacilities());
-        }
+        StartCoroutine(LoopMapFacilities());
     }
 
     /// <summary>
@@ -65,7 +62,7 @@ public class MapManager : Photon.PunBehaviour
             {
                 if (mapFacilities[i].CheckTime())
                 {
-                    photonView.RPC("MapFacilityActivate", PhotonTargets.All, i);
+                    MapFacilityActivate(i);
                 }
             }
 
@@ -77,7 +74,6 @@ public class MapManager : Photon.PunBehaviour
     /// 개별적인 맵 시설을 작동시킵니다.
     /// </summary>
     /// <param name="index"></param>
-    [PunRPC]
     private void MapFacilityActivate(int index)
     {
         mapFacilities[index].Activate();

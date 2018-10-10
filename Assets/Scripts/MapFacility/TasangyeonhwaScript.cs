@@ -10,7 +10,6 @@ public class TasangyeonhwaScript : Photon.PunBehaviour, IInteractable {
         Appear,
         Fire
     }
-
     
     public GameObject boxCover;
     public GameObject boxBody;
@@ -21,7 +20,9 @@ public class TasangyeonhwaScript : Photon.PunBehaviour, IInteractable {
     public float boomPower = 13.0f;
 
     public ParticleSystem boomEfx;
+    public ParticleSystem boomEfx2;
     public GameObject dragon;
+    public Renderer dragonRenderer;
 
 
     /// <summary>
@@ -53,24 +54,21 @@ public class TasangyeonhwaScript : Photon.PunBehaviour, IInteractable {
         layerMask = LayerMask.GetMask("DynamicObject", "Item");
 
         boomEfx.Stop(true);
+        boomEfx2.Stop(true);
         SetState(TasangState.Hide);
     }
+    
 
     public void Boom()
     {
         boxCover.SetActive(false);
         flyCover.SetActive(true);
         coverRb.useGravity = true;
-        coverRb.velocity = new Vector3(0.0f, boomPower, 0.0f);
-        coverRb.angularVelocity = new Vector3(Random.Range(0.0f, 0.6f), Random.Range(0.0f, 0.6f), Random.Range(0.0f, 0.6f));
+        coverRb.velocity = new Vector3(Random.Range(-0.1f, 0.1f), boomPower, Random.Range(-0.1f, 0.1f));
+        coverRb.angularVelocity = new Vector3(Random.Range(-0.6f, 0.6f), Random.Range(-0.6f, 0.6f), Random.Range(-0.6f, 0.6f));
         boomEfx.Play(true);
-        dragon.GetComponent<Renderer>().enabled = true;
+        dragonRenderer.enabled = true;
         col.enabled = true;
-    }
-
-    private void HideBoxMesh()
-    {
-        boxBody.SetActive(false);
     }
 
     public void SetState(TasangState stateNum)
@@ -83,10 +81,9 @@ public class TasangyeonhwaScript : Photon.PunBehaviour, IInteractable {
                     mat[i].SetFloat("_slider", 0.5f);
                 }
                 animator.SetBool("IsAppear", false);
-                coverRb.useGravity = false;
                 flyCover.transform.localPosition = Vector3.zero;
                 flyCover.transform.localEulerAngles = new Vector3(-90.0f, 0f);
-                dragon.GetComponent<Renderer>().enabled = false;
+                dragonRenderer.enabled = false;
                 dragon.SetActive(false);
                 col.enabled = false;
                 break;
@@ -100,9 +97,16 @@ public class TasangyeonhwaScript : Photon.PunBehaviour, IInteractable {
         }
     }
 
+    private void HideBoxMesh()
+    {
+        boxBody.SetActive(false);
+    }
+
     public void FireEffect()
     {
         Instantiate(tasangUp, firePos.position, Quaternion.identity);
+        dragon.GetComponent<Animator>().SetTrigger("Fire");
+        boomEfx2.Play(true);
     }
     
     public IEnumerator AppearBox(float appearTime)
@@ -157,6 +161,6 @@ public class TasangyeonhwaScript : Photon.PunBehaviour, IInteractable {
 
     public void Interact(PlayerController pc)
     {
-        parentFacility.RequestFire(pc.photonView.ownerId);
+        parentFacility.photonView.RPC("RequestFire", PhotonTargets.MasterClient, pc.photonView.ownerId);
     }
 }

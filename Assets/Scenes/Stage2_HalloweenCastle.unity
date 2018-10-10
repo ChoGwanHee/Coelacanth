@@ -3168,20 +3168,18 @@ MonoBehaviour:
   active: 0
   itemTables:
   - {fileID: 11400000, guid: fa36ef94d8838824f81809381e28699a, type: 2}
-  itemBoxReferences:
-  - {fileID: 114323342915110890, guid: b9f8adb5218c2c34b99595432a11d68f, type: 2}
-  - {fileID: 114972835791626174, guid: 9223746e10a39c24c999399d8e6ee20d, type: 2}
-  - {fileID: 114329537359505448, guid: 0158f7091c6e1d54996ae789f3811d8b, type: 2}
-  - {fileID: 114516985051169316, guid: 8de2750bf97be174f813cd2ad286ab34, type: 2}
-  - {fileID: 114946308585283126, guid: 23da4c39481c56e4c842edcd6f12d70d, type: 2}
-  poolExtraRate: 1
+  curBoxCount: 
   regenTime: 2
   maxBoxCount: 10
   startBoxCount: 6
-  curBoxCount: 0
+  poolExtraRate: 1
   itemRegenPos:
   - {fileID: 192302945}
   - {fileID: 288878569}
+  utilRegenTime: 20
+  maxUtilBoxCount: 2
+  curUtilBoxCount: 0
+  utilItemRegenPos: []
 --- !u!114 &727165464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6309,6 +6307,10 @@ Prefab:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 1a49e0cd7efab8a45a765b01460ef9cd, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9500000, guid: 1a49e0cd7efab8a45a765b01460ef9cd, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: 1a49e0cd7efab8a45a765b01460ef9cd, type: 3}
@@ -6334,7 +6336,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: 1a49e0cd7efab8a45a765b01460ef9cd, type: 3}
+  m_Mesh: {fileID: 4300000, guid: d5c31a29e21fbe14f9adb0c77fdda7ed, type: 3}
 --- !u!1 &1074440035
 GameObject:
   m_ObjectHideFlags: 0

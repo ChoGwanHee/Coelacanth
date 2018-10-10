@@ -6,9 +6,6 @@ public class ItemBoxFirework : BaseItemBox {
 
     [FMODUnity.EventRef]
     public string getSound;
-    [FMODUnity.EventRef]
-    public string spawnSound;
-    
 
     private void OnTriggerEnter(Collider other)
     {
@@ -21,7 +18,7 @@ public class ItemBoxFirework : BaseItemBox {
 
             FireworkExecuter executer = other.GetComponent<FireworkExecuter>();
 
-            if(executer != null)
+            if (executer != null)
             {
                 executer.photonView.RPC("ChangeFirework", PhotonTargets.All, tableIndex, itemIndex);
             }
@@ -31,25 +28,17 @@ public class ItemBoxFirework : BaseItemBox {
             }
 
             photonView.RPC("SetActiveItemBox", PhotonTargets.All, false);
-            GameManagerPhoton._instance.itemManager.curBoxCount--;
         }
     }
 
     [PunRPC]
-    public void SetActiveItemBox(bool active)
+    public override void SetActiveItemBox(bool active)
     {
-        if (active)
+        base.SetActiveItemBox(active);
+        if (!active)
         {
-            gameObject.SetActive(true);
-            alive = true;
-            FMODUnity.RuntimeManager.PlayOneShot(spawnSound);
-        }
-        else
-        {
-            alive = false;
-            transform.position = new Vector3(0f, 0f, -20f);
-            gameObject.SetActive(false);
             FMODUnity.RuntimeManager.PlayOneShot(getSound);
         }
     }
+
 }

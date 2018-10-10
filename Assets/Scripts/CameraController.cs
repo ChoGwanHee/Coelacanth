@@ -22,6 +22,7 @@ public class CameraController : Photon.PunBehaviour {
     public float fastSmoothMoveTime = 0.2f;
     public float fastMoveDistance = 5.0f;
     public float baseAddOffset = 6.0f;
+    
 
     public float minPixel = 150.0f;
     public float maxPixel = 300.0f;
@@ -42,6 +43,7 @@ public class CameraController : Photon.PunBehaviour {
     public float zoomZFactor = 1.5f;
     public float minZoomDistance = 20.0f;
     public float maxZoomDistance = 30.0f;
+    public float defaultZoomDistance = -20.0f;
 
     private float targetZoomDistance;
     private float distanceVelocity;
@@ -85,6 +87,7 @@ public class CameraController : Photon.PunBehaviour {
         targetXAngle = originXAngle;
 
         halfScreenSize = new Vector3(Screen.width * 0.5f, Screen.height * 0.5f);
+        ChangeMode(CameraMode.PersonalView2);
     }
 
     private void OnDisable()
@@ -119,6 +122,7 @@ public class CameraController : Photon.PunBehaviour {
             case CameraMode.PersonalView2:
                 CalculateCenter3();
                 SmoothMovement();
+                SmoothZoom();
                 break;
         }
     }
@@ -146,7 +150,7 @@ public class CameraController : Photon.PunBehaviour {
                 break;
             case CameraMode.PersonalView2:
                 targetXAngle = originXAngle;
-                targetZoomDistance = originZoomDistance;
+                targetZoomDistance = defaultZoomDistance;
                 ppb.profile = originProfile;
                 break;
         }

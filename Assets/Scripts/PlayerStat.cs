@@ -115,6 +115,10 @@ public class PlayerStat : Photon.PunBehaviour
 
     
     private PlayerController pc;
+    public PlayerController PC
+    {
+        get { return pc; }
+    }
 
 
     private void Awake()
@@ -177,10 +181,11 @@ public class PlayerStat : Photon.PunBehaviour
     /// 플레이어에게 피해를 줍니다.
     /// </summary>
     /// <param name="dmg">피해량</param>
+    /// <param name="attackerIndex">공격자</param>
     [PunRPC]
     public void Damage(int dmg, int attackerIndex)
     {
-        if (!onStage || pc.isStun) return;
+        if (!onStage || pc.isStun || pc.isUnbeatable) return;
 
         if (curHP - dmg <= 0)
         {
@@ -197,14 +202,20 @@ public class PlayerStat : Photon.PunBehaviour
             SetAttacker(attackerIndex);
     }
 
+    /// <summary>
+    /// 플레이어에게 피해를 주고 화면을 흔듭니다.
+    /// </summary>
+    /// <param name="damage">피해량</param>
+    /// <param name="shakeEventNum">카메라 쉐이크 이벤트 넘버</param>
+    /// <param name="attackerIndex">공격자</param>
     [PunRPC]
-    public void DamageShake(int damageEventNum, int attackerIndex)
+    public void DamageShake(int damage, int shakeEventNum, int attackerIndex)
     {
-        if (!onStage || pc.isStun) return;
+        if (!onStage || pc.isStun || pc.isUnbeatable) return;
 
-        DamageShakeEvent de = GameManagerPhoton._instance.damageShakeEvents[damageEventNum];
+        ShakeEvent se = GameManagerPhoton._instance.damageShakeEvents[shakeEventNum];
 
-        if (curHP - de.Damage <= 0)
+        if (curHP - damage <= 0)
         {
             curHP = 0;
             if (pc != null)
@@ -212,14 +223,14 @@ public class PlayerStat : Photon.PunBehaviour
         }
         else
         {
-            curHP -= de.Damage;
+            curHP -= damage;
         }
 
         if (attackerIndex != -1)
             SetAttacker(attackerIndex);
 
         // 카메라 쉐이크
-        GameManagerPhoton._instance.cameraController.Shake(de.Amplitude, de.Duration);
+        GameManagerPhoton._instance.cameraController.Shake(se.Amplitude, se.Duration);
     }
 
     /// <summary>
@@ -271,12 +282,16 @@ public class PlayerStat : Photon.PunBehaviour
         else
         {
             // 사망자 점수 감산
+            pc.isUnbeatable = false;
             AddScore(-50);
         }
     }
 
     public void AddScore(int score)
     {
+        if(pc.isUnbeatable && score <= 0)
+            return;
+
         if(Score + score < 0)
         {
             Score = 0;

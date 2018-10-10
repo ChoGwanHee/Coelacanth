@@ -24,6 +24,15 @@ public enum FireworkType
     Sparkling
 }
 
+public enum BuffType
+{
+    Unbeatable,
+    Slow,
+    HotSauce,
+    Cocktail,
+    Max
+}
+
 public enum GameState {
     Wait,
     Playing,

@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd8e105e4fe25c54fb9551f735abbde5, type: 3}
+  m_Name: Firework Item Table
+  m_EditorClassIdentifier: 
+  itemList:
+  - item: {fileID: 11400000, guid: 3786f765ddb2946419e4f7c5f880d562, type: 2}
+    itemBoxRef: {fileID: 0}
+    chance: 0
+  - item: {fileID: 11400000, guid: 883a9de1f18bd774e884c785ff4aa552, type: 2}
+    itemBoxRef: {fileID: 1945092959173784, guid: 23da4c39481c56e4c842edcd6f12d70d,
+      type: 2}
+    chance: 0.228
+  - item: {fileID: 11400000, guid: 19b73b0e0e6d235419b1e908701b39e8, type: 2}
+    itemBoxRef: {fileID: 1916589784450730, guid: 9223746e10a39c24c999399d8e6ee20d,
+      type: 2}
+    chance: 0.158
+  - item: {fileID: 11400000, guid: d011cdcd1a1a1724b8223642914f1b34, type: 2}
+    itemBoxRef: {fileID: 1465318478932314, guid: 8de2750bf97be174f813cd2ad286ab34,
+      type: 2}
+    chance: 0.158
+  - item: {fileID: 11400000, guid: 024670bbf04d3c346887462395ef319c, type: 2}
+    itemBoxRef: {fileID: 1830186259731308, guid: b9f8adb5218c2c34b99595432a11d68f,
+      type: 2}
+    chance: 0.228
+  - item: {fileID: 11400000, guid: 9e67b5ed85af4924cad540101bf67b76, type: 2}
+    itemBoxRef: {fileID: 1599992906205782, guid: 0158f7091c6e1d54996ae789f3811d8b,
+      type: 2}
+    chance: 0.228

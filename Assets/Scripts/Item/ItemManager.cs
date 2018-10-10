@@ -8,10 +8,21 @@ public class ItemManager : Photon.PunBehaviour
     public bool active = false;
 
     public ItemTable[] itemTables;
-    public BaseItemBox[] itemBoxReferences;
     public BaseItemBox[][] itemBoxPool;
     private int[] lastIndex;
+    [HideInInspector]
+    [SerializeField]
+    public int[] curBoxCount;
+
+
+    [Header("Firework")]
+    public float regenTime = 5.0f;
+    private bool regenTimerEnable = true;
+    private float elapsedTime = 0f;
+    public int maxBoxCount = 10;
+    public int startBoxCount = 6;
     
+
     /// <summary>
     /// 아이템 박스 종류당 여분 비율 (maxBoxCount * poolExtraRate = 여분 개수)
     /// </summary>
@@ -23,21 +34,30 @@ public class ItemManager : Photon.PunBehaviour
     /// </summary>
     private int poolExtraAmount;
 
-    public float regenTime = 5.0f;
-    private bool regenTimerEnable = true;
-    private float elapsedTime = 0f;
-    public int maxBoxCount = 10;
-    public int startBoxCount = 6;
-    [SerializeField]
-    public int curBoxCount = 0;
-
     public Transform[] itemRegenPos;
+
+
+    [Header("Util")]
+
+    public float utilRegenTime = 20.0f;
+    private bool utilRegenTimerEnable = true;
+    private float utilElapsedTime = 0f;
+    public int maxUtilBoxCount = 2;
+    public int curUtilBoxCount = 0;
+    public Transform[] utilItemRegenPos;
+
 
 
     private void Start()
     {
+        curBoxCount = new int[itemTables.Length];
+
         Initialize();
 
+        if (PhotonNetwork.isMasterClient)
+        {
+            RegenItemBox(1);
+        }
     }
 
     private void Update()
@@ -48,7 +68,7 @@ public class ItemManager : Photon.PunBehaviour
         {
             elapsedTime += Time.deltaTime;
 
-            if (curBoxCount >= maxBoxCount)
+            if (curBoxCount[0] >= maxBoxCount)
             {
                 regenTimerEnable = false;
             }
@@ -58,13 +78,35 @@ public class ItemManager : Photon.PunBehaviour
                 elapsedTime = 0f;
                 RegenItemBox(0);
             }
-
         }
         else
         {
-            if(curBoxCount < maxBoxCount)
+            if(curBoxCount[0] < maxBoxCount)
             {
                 regenTimerEnable = true;
+            }
+        }
+
+        if (utilRegenTimerEnable)
+        {
+            utilElapsedTime += Time.deltaTime;
+
+            if (curBoxCount[1] >= maxUtilBoxCount)
+            {
+                utilRegenTimerEnable = false;
+            }
+
+            if (utilElapsedTime >= utilRegenTime)
+            {
+                utilElapsedTime = 0f;
+                RegenItemBox(1);
+            }
+        }
+        else
+        {
+            if (curBoxCount[1] < maxUtilBoxCount)
+            {
+                utilRegenTimerEnable = true;
             }
         }
     }
@@ -73,11 +115,11 @@ public class ItemManager : Photon.PunBehaviour
     {
         if(stream.isWriting)
         {
-            stream.SendNext(curBoxCount);
+            stream.SendNext(curBoxCount[0]);
         }
         else
         {
-            this.curBoxCount = (int)stream.ReceiveNext();
+            this.curBoxCount[0] = (int)stream.ReceiveNext();
         }
     }
 
@@ -90,9 +132,7 @@ public class ItemManager : Photon.PunBehaviour
         {
             new GameObject("ItemBoxes");
         }
-
-        // 이후부터 마스터만 실행
-        if (!PhotonNetwork.isMasterClient) return;
+        
 
         InitItemBoxPool();
     }
@@ -102,7 +142,7 @@ public class ItemManager : Photon.PunBehaviour
     /// </summary>
     private void InitItemBoxPool()
     {
-        if (itemBoxReferences.Length > 1)
+        if (itemTables[0].itemList.Length > 1)
         {
             poolExtraAmount = Mathf.CeilToInt(maxBoxCount * poolExtraRate);
         }
@@ -131,10 +171,34 @@ public class ItemManager : Photon.PunBehaviour
             itemBoxPool = null;
         }
 
-        itemBoxPool = new BaseItemBox[itemBoxReferences.Length][];
+        int totalBoxRefCount = 0;
+        for (int i = 0; i < itemTables.Length; i++)
+        {
+            totalBoxRefCount += itemTables[i].itemList.Length;
+        }
+
+        int itemTableIndex = 0;
+
+        itemBoxPool = new BaseItemBox[totalBoxRefCount][];
         for(int i=0; i<itemBoxPool.Length; i++)
         {
-            itemBoxPool[i] = new BaseItemBox[poolExtraAmount];
+            int startIndex = 0;
+            for (int j=0; j<itemTableIndex; j++)
+            {
+                startIndex += itemTables[j].itemList.Length;
+            }
+            int itemBoxRefIndex = i - startIndex;
+
+            if(itemBoxRefIndex >= itemTables[itemTableIndex].itemList.Length)
+            {
+                itemTableIndex++;
+                itemBoxRefIndex = 0;
+            }
+
+            if(itemTables[itemTableIndex].itemList[itemBoxRefIndex].itemBoxRef != null)
+            {
+                itemBoxPool[i] = new BaseItemBox[poolExtraAmount];
+            }
         }
 
         if (lastIndex == null)
@@ -145,17 +209,26 @@ public class ItemManager : Photon.PunBehaviour
             lastIndex[i] = 0;
         }
 
+        if (!PhotonNetwork.isMasterClient)
+            return;
 
         string folderPath = "Prefabs/ItemBox/";
 
-        for (int i = 0; i < itemBoxReferences.Length; i++)
+        int poolIndex = 0;
+        for(int i=0; i<itemTables.Length; i++)
         {
-            string path = folderPath + itemBoxReferences[i].name;
-            object[] refIndex = new object[1] { i };
-
-            for (int j = 0; j < poolExtraAmount; j++)
+            for(int j=0; j<itemTables[i].itemList.Length; j++)
             {
-                PhotonNetwork.Instantiate(path, Vector3.zero, Quaternion.identity, 0, refIndex);
+                if (itemTables[i].itemList[j].itemBoxRef != null)
+                {
+                    string path = folderPath + itemTables[i].itemList[j].itemBoxRef.name;
+                    object[] data = new object[3] { i, j, poolIndex };
+                    for (int k = 0; k < poolExtraAmount; k++)
+                    {
+                        PhotonNetwork.Instantiate(path, Vector3.zero, Quaternion.identity, 0, data);
+                    }
+                }
+                poolIndex++;
             }
         }
     }
@@ -166,8 +239,8 @@ public class ItemManager : Photon.PunBehaviour
     /// <param name="itemBox">추가할 아이템 박스</param>
     public void AddItemBox(BaseItemBox itemBox)
     {
-        int refIndex = (int)itemBox.photonView.instantiationData[0];
-        itemBoxPool[refIndex][lastIndex[refIndex]++] = itemBox;
+        itemBoxPool[itemBox.poolIndex][lastIndex[itemBox.poolIndex]++] = itemBox;
+        
     }
 
     /// <summary>
@@ -191,20 +264,6 @@ public class ItemManager : Photon.PunBehaviour
         return itemTables[tableIndex].RandomChoose();
     }
 
-    private int TableIndexToPoolIndex(int tableIndex, int itemIndex)
-    {
-        for(int i=0;i<itemBoxPool.Length; i++)
-        {
-            if (itemBoxPool[i][0].tableIndex == tableIndex 
-                && itemBoxPool[i][0].itemIndex == itemIndex)
-            {
-                return i;
-            }
-        }
-        Debug.LogError("아이템 박스 풀에서 찾을 수 없습니다.");
-        return -1;
-    }
-
     /// <summary>
     /// 겜 시작시 아이템 박스 생성
     /// </summary>
@@ -221,39 +280,15 @@ public class ItemManager : Photon.PunBehaviour
     /// </summary>
     public void RegenItemBox(int tableIndex)
     {
-        Vector3 regenPos;
-        RaycastHit hit1, hit2;
-        bool retry1, retry2;
-        int randomIndex;
-        int randomItemBox = TableIndexToPoolIndex(tableIndex, GetRandomItemIndex(tableIndex));
-        int count = 0;
-
-        do
-        {
-            do
-            {
-                randomIndex = Random.Range(0, itemRegenPos.Length/2) * 2;
-
-                regenPos = GetRandomPos(itemRegenPos[randomIndex].position, itemRegenPos[randomIndex + 1].position);
-                regenPos.y += 6.0f;
-
-                retry1 = Physics.Raycast(regenPos, Vector3.down, out hit1, 6.1f, LayerMask.GetMask("Ground"), QueryTriggerInteraction.Ignore);
-
-                if (++count > 10000)
-                {
-                    Debug.LogError("비정상적인 연산입니다. 아이템 생성을 비활성화 합니다.");
-                    active = false;
-                    return;
-                }
-            }
-            while (!retry1);
-
-            retry2 = Physics.SphereCast(regenPos, 1.0f, Vector3.down, out hit2, 6.1f, LayerMask.GetMask("DynamicObject", "StaticObject", "Item"));
-
-        } while (retry2);
-
-
+        int startIndex = 0;
+        int randomItemBox = 0;
         int selectIndex = -1;
+
+        for (int i = 0; i < tableIndex; i++)
+        {
+            startIndex += itemTables[i].itemList.Length;
+        }
+        randomItemBox = startIndex + GetRandomItemIndex(tableIndex);
 
         for (int i = 0; i < itemBoxPool[randomItemBox].Length; i++)
         {
@@ -270,9 +305,12 @@ public class ItemManager : Photon.PunBehaviour
             return;
         }
 
-        itemBoxPool[randomItemBox][selectIndex].transform.position = hit1.point + Vector3.up * itemBoxPool[randomItemBox][selectIndex].regenHeight;
+        Vector3 finalPos = GetRegenPos(tableIndex) + Vector3.up * itemBoxPool[randomItemBox][selectIndex].regenHeight;
+
+        //itemBoxPool[randomItemBox][selectIndex].transform.position = finalPos;
+        itemBoxPool[randomItemBox][selectIndex].photonView.RPC("SetPosition", PhotonTargets.All, finalPos);
         itemBoxPool[randomItemBox][selectIndex].photonView.RPC("SetActiveItemBox", PhotonTargets.All, true);
-        curBoxCount++;
+        curBoxCount[tableIndex]++;
     }
 
     /// <summary>
@@ -286,10 +324,87 @@ public class ItemManager : Photon.PunBehaviour
         // 아이템 박스들 비활성화
         for (int i = 0; i < itemBoxPool.Length; i++)
         {
+            if (itemBoxPool[i] == null) continue;
+
             for (int j = 0; j < itemBoxPool[i].Length; j++)
             {
+
                 itemBoxPool[i][j].gameObject.SetActive(false);
             }
+        }
+    }
+
+    private Vector3 GetRegenPos(int type)
+    {
+        if(type == 0)
+        {
+            Vector3 regenPos;
+            RaycastHit hit1, hit2;
+            bool retry1, retry2;
+            int count = 0;
+
+            do
+            {
+                do
+                {
+                    int regenIndex = Random.Range(0, itemRegenPos.Length / 2) * 2;
+
+                    regenPos = GetRandomPosOnSquare(itemRegenPos[regenIndex].position, itemRegenPos[regenIndex + 1].position);
+                    regenPos.y += 6.0f;
+
+                    retry1 = Physics.Raycast(regenPos, Vector3.down, out hit1, 6.1f, LayerMask.GetMask("Ground"), QueryTriggerInteraction.Ignore);
+
+                    if (++count > 10000)
+                    {
+                        Debug.LogError("비정상적인 연산입니다. 아이템 생성을 비활성화 합니다.");
+                        active = false;
+                        return Vector3.zero;
+                    }
+                }
+                while (!retry1);
+
+                retry2 = Physics.SphereCast(regenPos, 1.0f, Vector3.down, out hit2, 6.1f, LayerMask.GetMask("DynamicObject", "StaticObject", "Item"));
+
+            } while (retry2);
+
+            return hit1.point;
+        }
+        else if(type == 1)
+        {
+            Vector3 regenPos = Vector3.zero;
+            int index;
+            bool retry = false;
+            List<int> regenable = new List<int>();
+            for (int i = 0; i < utilItemRegenPos.Length; i++)
+            {
+                regenable.Add(i);
+            }
+
+            for (int i = 0; i < utilItemRegenPos.Length; i++)
+            {
+                index = Random.Range(0, regenable.Count);
+                regenPos = utilItemRegenPos[regenable[index]].position;
+
+                Collider[] cols = Physics.OverlapSphere(regenPos, 3.0f, LayerMask.GetMask("Item"));
+                for(int j=0; j<cols.Length; j++)
+                {
+                    if (cols[j].GetComponent<ItemBoxUtil>() != null)
+                    {
+                        retry = true;
+                        break;
+                    }
+                }
+                if (!retry)
+                    break;
+                regenable.Remove(index);
+            }
+
+            return regenPos;
+        }
+        else
+        {
+            Debug.LogError("존재하지 않는 랜덤 위치 타입 입니다.");
+            return Vector3.zero;
         }
     }
 
@@ -299,7 +414,7 @@ public class ItemManager : Photon.PunBehaviour
     /// <param name="pos1">첫 번째 기준</param>
     /// <param name="pos2">두 번째 기준</param>
     /// <returns>랜덤 위치</returns>
-    private Vector3 GetRandomPos(Vector3 pos1, Vector3 pos2)
+    private Vector3 GetRandomPosOnSquare(Vector3 pos1, Vector3 pos2)
     {
         Vector3 minPos = Vector3.zero;
         Vector3 maxPos = Vector3.zero;
