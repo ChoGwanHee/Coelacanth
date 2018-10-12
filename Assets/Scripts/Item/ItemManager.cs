@@ -13,13 +13,13 @@ public class ItemManager : Photon.PunBehaviour
     [HideInInspector]
     [SerializeField]
     public int[] curBoxCount;
+    public int[] maxBoxCount;
 
 
     [Header("Firework")]
     public float regenTime = 5.0f;
     private bool regenTimerEnable = true;
     private float elapsedTime = 0f;
-    public int maxBoxCount = 10;
     public int startBoxCount = 6;
     
 
@@ -29,11 +29,6 @@ public class ItemManager : Photon.PunBehaviour
     [Range(0, 1)]
     public float poolExtraRate = 1.0f;
 
-    /// <summary>
-    /// 아이템 박스 종류당 여분 개수
-    /// </summary>
-    private int poolExtraAmount;
-
     public Transform[] itemRegenPos;
 
 
@@ -42,8 +37,7 @@ public class ItemManager : Photon.PunBehaviour
     public float utilRegenTime = 20.0f;
     private bool utilRegenTimerEnable = true;
     private float utilElapsedTime = 0f;
-    public int maxUtilBoxCount = 2;
-    public int curUtilBoxCount = 0;
+    public int utilStartBoxCount = 1;
     public Transform[] utilItemRegenPos;
 
 
@@ -53,11 +47,6 @@ public class ItemManager : Photon.PunBehaviour
         curBoxCount = new int[itemTables.Length];
 
         Initialize();
-
-        if (PhotonNetwork.isMasterClient)
-        {
-            RegenItemBox(1);
-        }
     }
 
     private void Update()
@@ -68,7 +57,7 @@ public class ItemManager : Photon.PunBehaviour
         {
             elapsedTime += Time.deltaTime;
 
-            if (curBoxCount[0] >= maxBoxCount)
+            if (curBoxCount[0] >= maxBoxCount[0])
             {
                 regenTimerEnable = false;
             }
@@ -81,7 +70,7 @@ public class ItemManager : Photon.PunBehaviour
         }
         else
         {
-            if(curBoxCount[0] < maxBoxCount)
+            if(curBoxCount[0] < maxBoxCount[0])
             {
                 regenTimerEnable = true;
             }
@@ -91,7 +80,7 @@ public class ItemManager : Photon.PunBehaviour
         {
             utilElapsedTime += Time.deltaTime;
 
-            if (curBoxCount[1] >= maxUtilBoxCount)
+            if (curBoxCount[1] >= maxBoxCount[1])
             {
                 utilRegenTimerEnable = false;
             }
@@ -104,7 +93,7 @@ public class ItemManager : Photon.PunBehaviour
         }
         else
         {
-            if (curBoxCount[1] < maxUtilBoxCount)
+            if (curBoxCount[1] < maxBoxCount[1])
             {
                 utilRegenTimerEnable = true;
             }
@@ -132,7 +121,6 @@ public class ItemManager : Photon.PunBehaviour
         {
             new GameObject("ItemBoxes");
         }
-        
 
         InitItemBoxPool();
     }
@@ -142,15 +130,6 @@ public class ItemManager : Photon.PunBehaviour
     /// </summary>
     private void InitItemBoxPool()
     {
-        if (itemTables[0].itemList.Length > 1)
-        {
-            poolExtraAmount = Mathf.CeilToInt(maxBoxCount * poolExtraRate);
-        }
-        else
-        {
-            poolExtraAmount = maxBoxCount;
-        }
-
         if (itemBoxPool != null)
         {
             for (int i = 0; i < itemBoxPool.Length; i++)
@@ -178,6 +157,7 @@ public class ItemManager : Photon.PunBehaviour
         }
 
         int itemTableIndex = 0;
+        int poolExtraAmount = CalcExtraAmount(0);
 
         itemBoxPool = new BaseItemBox[totalBoxRefCount][];
         for(int i=0; i<itemBoxPool.Length; i++)
@@ -189,13 +169,16 @@ public class ItemManager : Photon.PunBehaviour
             }
             int itemBoxRefIndex = i - startIndex;
 
-            if(itemBoxRefIndex >= itemTables[itemTableIndex].itemList.Length)
+
+            if (itemBoxRefIndex >= itemTables[itemTableIndex].itemList.Length)
             {
                 itemTableIndex++;
                 itemBoxRefIndex = 0;
+
+                poolExtraAmount = CalcExtraAmount(itemTableIndex);
             }
 
-            if(itemTables[itemTableIndex].itemList[itemBoxRefIndex].itemBoxRef != null)
+            if (itemTables[itemTableIndex].itemList[itemBoxRefIndex].itemBoxRef != null)
             {
                 itemBoxPool[i] = new BaseItemBox[poolExtraAmount];
             }
@@ -217,7 +200,9 @@ public class ItemManager : Photon.PunBehaviour
         int poolIndex = 0;
         for(int i=0; i<itemTables.Length; i++)
         {
-            for(int j=0; j<itemTables[i].itemList.Length; j++)
+            poolExtraAmount = CalcExtraAmount(i);
+
+            for (int j=0; j<itemTables[i].itemList.Length; j++)
             {
                 if (itemTables[i].itemList[j].itemBoxRef != null)
                 {
@@ -240,7 +225,6 @@ public class ItemManager : Photon.PunBehaviour
     public void AddItemBox(BaseItemBox itemBox)
     {
         itemBoxPool[itemBox.poolIndex][lastIndex[itemBox.poolIndex]++] = itemBox;
-        
     }
 
     /// <summary>
@@ -265,13 +249,35 @@ public class ItemManager : Photon.PunBehaviour
     }
 
     /// <summary>
+    /// 아이템 박스의 여분을 계산합니다.
+    /// </summary>
+    /// <param name="tableIndex">테이블 인덱스</param>
+    /// <returns></returns>
+    private int CalcExtraAmount(int tableIndex)
+    {
+        if (itemTables[tableIndex].itemList.Length > 1)
+        {
+            return Mathf.CeilToInt(maxBoxCount[tableIndex] * poolExtraRate);
+        }
+        else
+        {
+            return maxBoxCount[tableIndex];
+        }
+    }
+
+    /// <summary>
     /// 겜 시작시 아이템 박스 생성
     /// </summary>
-    public void FirstRegen()
+    public void GameStartRegen()
     {
-        for (int i = 0; i <= startBoxCount; i++)
+        for (int i = 0; i < startBoxCount; i++)
         {
             RegenItemBox(0);
+        }
+
+        for(int i=0;i<utilStartBoxCount; i++)
+        {
+            RegenItemBox(1);
         }
     }
 
@@ -307,7 +313,6 @@ public class ItemManager : Photon.PunBehaviour
 
         Vector3 finalPos = GetRegenPos(tableIndex) + Vector3.up * itemBoxPool[randomItemBox][selectIndex].regenHeight;
 
-        //itemBoxPool[randomItemBox][selectIndex].transform.position = finalPos;
         itemBoxPool[randomItemBox][selectIndex].photonView.RPC("SetPosition", PhotonTargets.All, finalPos);
         itemBoxPool[randomItemBox][selectIndex].photonView.RPC("SetActiveItemBox", PhotonTargets.All, true);
         curBoxCount[tableIndex]++;

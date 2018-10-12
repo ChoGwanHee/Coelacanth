@@ -20,6 +20,7 @@ public class UIManager : MonoBehaviour {
     public UIAmmoGauge gauge;
     public UIAmmoCount ammoCounter;
     public UITimer timer;
+    public UIEButton eButton;
     public Animator counterAnim;
 
     public Sprite[] illusts;

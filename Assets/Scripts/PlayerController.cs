@@ -143,6 +143,12 @@ public class PlayerController : Photon.PunBehaviour
     private float interactionCheckRadius = 1.0f;
 
     /// <summary>
+    /// 상호작용이 가능하다는 UI를 나타내기 위해 체크하는 시간 간격
+    /// </summary>
+    private float interactionCheckTime = 0.2f;
+    
+
+    /// <summary>
     /// 아이템을 들고 있는지 여부
     /// </summary>
     private bool isGrab = false;
@@ -230,6 +236,8 @@ public class PlayerController : Photon.PunBehaviour
         }
 
         TurnToScreen();
+
+        StartCoroutine(CheckInteractionIndicator());
     }
 
     private void Update()
@@ -527,6 +535,9 @@ public class PlayerController : Photon.PunBehaviour
             Respawn();
         }
         isControlable = false;
+        inputAxis = Vector2.zero;
+        anim.SetFloat("MoveX", 0);
+        anim.SetFloat("MoveY", 0);
 
         TurnToScreen();
     }
@@ -617,6 +628,7 @@ public class PlayerController : Photon.PunBehaviour
     /// <param name="newState">새로운 애니메이션 상태</param>
     public void ChangeState(PlayerAniState newState)
     {
+        if (state == newState) return;
         StateExit(state);
         state = newState;
         StateEnter(state);
@@ -868,13 +880,16 @@ public class PlayerController : Photon.PunBehaviour
     private void PutUtilItem(bool remove = false)
     {
         isGrab = false;
+        anim.SetInteger("SubAniNum", 0);
+
+        if (utilItem == null) return;
+
         utilItem.photonView.RPC("ResetTarget", PhotonTargets.All, null);
         if (remove)
         {
             utilItem.photonView.RPC("SetActiveItemBox", PhotonTargets.All, false);
         }
         utilItem = null;
-        anim.SetInteger("SubAniNum", 0);
     }
 
     public IEnumerator ItemUsingDelay(int subAniNum)
@@ -908,5 +923,45 @@ public class PlayerController : Photon.PunBehaviour
             }
         }
         ChangeState(PlayerAniState.Idle);
+    }
+
+    public IEnumerator CheckInteractionIndicator()
+    {
+        bool isDisplay = false;
+        bool existAround;
+
+        while (true)
+        {
+            existAround = false;
+
+            if (state == PlayerAniState.Idle)
+            {
+                Collider[] cols = Physics.OverlapSphere(transform.position, interactionCheckRadius, LayerMask.GetMask("InteractionObject"));
+                
+                for (int i = 0; i < cols.Length; i++)
+                {
+                    IInteractable obj = cols[i].GetComponent<IInteractable>();
+
+                    if (obj != null)
+                    {
+                        if (!isDisplay)
+                        {
+                            isDisplay = true;
+                            UIManager._instance.eButton.SetActivate(true, cols[i].transform);
+                        }
+                        existAround = true;
+                        break;
+                    }
+                }
+            }
+            
+            if (!existAround && isDisplay)
+            {
+                isDisplay = false;
+                UIManager._instance.eButton.SetActivate(false);
+            }
+            yield return new WaitForSeconds(interactionCheckTime);
+        }
+        
     }
 }
