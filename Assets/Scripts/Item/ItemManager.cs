@@ -117,10 +117,7 @@ public class ItemManager : Photon.PunBehaviour
     /// </summary>
     public void Initialize()
     {
-        if (GameObject.Find("ItemBoxes") == null)
-        {
-            new GameObject("ItemBoxes");
-        }
+        
 
         InitItemBoxPool();
     }
@@ -140,7 +137,7 @@ public class ItemManager : Photon.PunBehaviour
                     {
                         if (itemBoxPool[i][j] != null)
                         {
-                            PhotonNetwork.Destroy(itemBoxPool[i][j].gameObject);
+                            Destroy(itemBoxPool[i][j].gameObject);
                             itemBoxPool[i][j] = null;
                         }
                     }
@@ -192,10 +189,11 @@ public class ItemManager : Photon.PunBehaviour
             lastIndex[i] = 0;
         }
 
-        if (!PhotonNetwork.isMasterClient)
-            return;
-
-        string folderPath = "Prefabs/ItemBox/";
+        GameObject parent = GameObject.Find("ItemBoxes");
+        if (parent == null)
+        {
+            parent = new GameObject("ItemBoxes");
+        }
 
         int poolIndex = 0;
         for(int i=0; i<itemTables.Length; i++)
@@ -206,11 +204,19 @@ public class ItemManager : Photon.PunBehaviour
             {
                 if (itemTables[i].itemList[j].itemBoxRef != null)
                 {
-                    string path = folderPath + itemTables[i].itemList[j].itemBoxRef.name;
-                    object[] data = new object[3] { i, j, poolIndex };
                     for (int k = 0; k < poolExtraAmount; k++)
                     {
-                        PhotonNetwork.Instantiate(path, Vector3.zero, Quaternion.identity, 0, data);
+                        BaseItemBox itemBox = Instantiate(itemTables[i].itemList[j].itemBoxRef, Vector3.zero, Quaternion.identity, parent.transform).GetComponent<BaseItemBox>();
+
+                        if(itemBox != null)
+                        {
+                            itemBox.tableIndex = i;
+                            itemBox.itemIndex = j;
+                            itemBox.poolIndex1 = poolIndex;
+                            itemBox.poolIndex2 = k;
+
+                            itemBoxPool[poolIndex][k] = itemBox;
+                        }
                     }
                 }
                 poolIndex++;
@@ -218,13 +224,53 @@ public class ItemManager : Photon.PunBehaviour
         }
     }
 
-    /// <summary>
-    /// 아이템 박스 풀에 아이템 박스를 추가합니다.
-    /// </summary>
-    /// <param name="itemBox">추가할 아이템 박스</param>
-    public void AddItemBox(BaseItemBox itemBox)
+    [PunRPC]
+    public void ActivateItemBox(int firstIndex, int secondIndex, Vector3 movePos)
     {
-        itemBoxPool[itemBox.poolIndex][lastIndex[itemBox.poolIndex]++] = itemBox;
+        BaseItemBox itemBox = itemBoxPool[firstIndex][secondIndex];
+
+        itemBox.transform.position = movePos;
+        itemBox.gameObject.SetActive(true);
+        itemBox.alive = true;
+        FMODUnity.RuntimeManager.PlayOneShot(itemBox.spawnSound);
+    }
+
+    [PunRPC]
+    public void DeactivateItemBox(int firstIndex, int secondIndex)
+    {
+        BaseItemBox itemBox = itemBoxPool[firstIndex][secondIndex];
+
+        itemBox.alive = false;
+        itemBox.transform.position = new Vector3(0f, 0f, -20f);
+        itemBox.gameObject.SetActive(false);
+        curBoxCount[itemBox.tableIndex]--;
+    }
+
+    [PunRPC]
+    public void RequestLift(int firstIndex, int secondIndex, int requestId)
+    {
+        ItemBoxUtil itemBox = itemBoxPool[firstIndex][secondIndex] as ItemBoxUtil;
+
+        if (itemBox.owner == -1)
+        {
+            itemBox.owner = requestId;
+
+            PhotonView pv = GameManagerPhoton._instance.GetPlayerByOwnerId(requestId).photonView;
+            pv.RPC("LiftUtilItem", pv.owner, itemBox.poolIndex1, itemBox.poolIndex2);
+            photonView.RPC("SetItemBoxFollower", PhotonTargets.All, firstIndex, secondIndex, pv.ownerId);
+        }
+    }
+
+    [PunRPC]
+    public void SetItemBoxFollower(int firstIndex, int secondIndex, int ownerId)
+    {
+        (itemBoxPool[firstIndex][secondIndex] as ItemBoxUtil).SetTargetPlayer(ownerId);
+    }
+
+    [PunRPC]
+    public void RemoveItemBoxFollower(int firstIndex, int secondIndex)
+    {
+        (itemBoxPool[firstIndex][secondIndex] as ItemBoxUtil).ResetTarget();
     }
 
     /// <summary>
@@ -312,9 +358,8 @@ public class ItemManager : Photon.PunBehaviour
         }
 
         Vector3 finalPos = GetRegenPos(tableIndex) + Vector3.up * itemBoxPool[randomItemBox][selectIndex].regenHeight;
-
-        itemBoxPool[randomItemBox][selectIndex].photonView.RPC("SetPosition", PhotonTargets.All, finalPos);
-        itemBoxPool[randomItemBox][selectIndex].photonView.RPC("SetActiveItemBox", PhotonTargets.All, true);
+        
+        photonView.RPC("ActivateItemBox", PhotonTargets.All, randomItemBox, selectIndex, finalPos);
         curBoxCount[tableIndex]++;
     }
 

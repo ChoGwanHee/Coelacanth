@@ -11,10 +11,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59acb7febdb43a146a7fd4a72f3fae66, type: 3}
   m_Name: New Item Hot Sauce
   m_EditorClassIdentifier: 
-  delayTime: 1
+  delayTime: 2
   damage: 50
   duration: 5
   addSpeed: 0.3
   gainScore: 60
-  hitForce: 13
-  hitRadius: 3
+  hitForce: 18
+  hitRadius: 3.5

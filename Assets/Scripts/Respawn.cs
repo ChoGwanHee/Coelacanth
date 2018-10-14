@@ -36,6 +36,7 @@ public class Respawn : Photon.PunBehaviour
     private bool respawning = false;
 
     private Rigidbody rb;
+    private Renderer objectRenderer;
 
 
     void Start()
@@ -44,6 +45,7 @@ public class Respawn : Photon.PunBehaviour
         originPos.y += 3.0f;
         originQuaternion = transform.rotation;
         rb = GetComponent<Rigidbody>();
+        objectRenderer = GetComponent<Renderer>();
     }
 
     void Update()
@@ -64,6 +66,7 @@ public class Respawn : Photon.PunBehaviour
         {
             if (transform.position.y < -10)
             {
+                photonView.RPC("HideObject", PhotonTargets.All, null);
                 respawning = true;
                 elapsedTime = 0f;
             }
@@ -81,11 +84,23 @@ public class Respawn : Photon.PunBehaviour
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         respawning = false;
+        objectRenderer.enabled = true;
 
         // 하위 오브젝트 리스폰
         for (int i = 0; i < subObjects.Length; i++)
         {
             subObjects[i].Respawn();
         }
+    }
+
+    /// <summary>
+    /// 오브젝트를 숨깁니다.
+    /// </summary>
+    [PunRPC]
+    private void HideObject()
+    {
+        objectRenderer.enabled = false;
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
     }
 }

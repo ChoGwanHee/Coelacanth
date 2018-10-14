@@ -5,6 +5,8 @@ using UnityEngine;
 public class BuffController : Photon.PunBehaviour
 {
     public Coroutine[] coroutines = new Coroutine[(int)BuffType.Max];
+    public Buff[] buffs = new Buff[(int)BuffType.Max];
+    public UtilItem[] referenceItem;
 
     /// <summary>
     /// 무적 이펙트
@@ -58,6 +60,13 @@ public class BuffController : Photon.PunBehaviour
                 playerMats[index++] = renderers[i].materials[j];
             }
         }
+
+
+        /*buffs[0] = new BuffUnbeatable(referenceItem[0] as ItemStarFruit);
+        buffs[1] = new BuffSlow();
+        buffs[2] = new BuffHotSauce();
+        buffs[3] = new BuffCocktail();*/
+        
     }
 
     [PunRPC]
@@ -117,6 +126,26 @@ public class BuffController : Photon.PunBehaviour
         coroutines[index] = StartCoroutine(coroutine);
     }
 
+    public void RemoveAllBuff()
+    {
+        StopAllCoroutines();
+        for(int i=0; i<(int)BuffType.Max; i++)
+        {
+            if (i == (int)BuffType.HotSauce) continue;
+            RemoveBuff(i);
+        }
+
+        Color color = new Color(1f, 1f, 1f);
+        for (int i = 0; i < playerMats.Length; i++)
+        {
+            if (playerMats[i] == null) break;
+            playerMats[i].SetColor("_Color", color);
+        }
+
+        pc.maxSpeedFactor = 1.0f;
+        pc.Executer.damageFactor = 1.0f;
+    }
+
     private IEnumerator HotSauceCount()
     {
         float duration = 5.0f;
@@ -152,16 +181,17 @@ public class BuffController : Photon.PunBehaviour
             color.g = curColorValue;
             color.b = curColorValue;
 
-            for (int i = 0; i < playerMats.Length; i++)
-            {
-                if (playerMats[i] == null) break;
-                playerMats[i].SetColor("_Color", color);
-            }
+            SetCharacterColor(color);
 
             yield return null;
         }
         color.g = 1f;
         color.b = 1f;
+        SetCharacterColor(color);
+    }
+
+    public void SetCharacterColor(Color color)
+    {
         for (int i = 0; i < playerMats.Length; i++)
         {
             if (playerMats[i] == null) break;

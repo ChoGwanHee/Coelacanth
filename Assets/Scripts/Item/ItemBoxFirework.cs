@@ -2,14 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemBoxFirework : BaseItemBox {
+public class ItemBoxFirework : BaseItemBox
+{
+    private bool isMaster;
 
-    [FMODUnity.EventRef]
-    public string getSound;
+    protected override void Start()
+    {
+        base.Start();
+        isMaster = PhotonNetwork.isMasterClient;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!photonView.isMine) return;
+        if (!isMaster) return;
 
         if (other.CompareTag("Player"))
         {
@@ -27,17 +32,7 @@ public class ItemBoxFirework : BaseItemBox {
                 Debug.LogError("Executer가 null 입니다");
             }
 
-            photonView.RPC("SetActiveItemBox", PhotonTargets.All, false);
-        }
-    }
-
-    [PunRPC]
-    public override void SetActiveItemBox(bool active)
-    {
-        base.SetActiveItemBox(active);
-        if (!active)
-        {
-            FMODUnity.RuntimeManager.PlayOneShot(getSound);
+            GameManagerPhoton._instance.photonView.RPC("DeactivateItemBox", PhotonTargets.All, poolIndex1, poolIndex2);
         }
     }
 

@@ -8,7 +8,7 @@ public class DynamicObject : Photon.PunBehaviour
     /// <summary>
     /// 위치 동기화 여부
     /// </summary>
-    public bool syncObject = false;
+    public bool syncObject = true;
 
     private Rigidbody rb;
 

@@ -22,14 +22,14 @@ public class ItemCocktail : UtilItem
 
         bc.photonView.RPC("ApplyBuff", PhotonTargets.All, (int)BuffType.Cocktail);
         bc.PC.maxSpeedFactor += addSpeed;
-        bc.GetComponent<FireworkExecuter>().damageFactor += addDamage;
+        bc.PC.Executer.damageFactor += addDamage;
         while (elapsedTime < duration)
         {
             elapsedTime += Time.deltaTime;
             yield return null;
         }
         bc.PC.maxSpeedFactor -= addSpeed;
-        bc.GetComponent<FireworkExecuter>().damageFactor -= addDamage;
+        bc.PC.Executer.damageFactor -= addDamage;
         bc.photonView.RPC("RemoveBuff", PhotonTargets.All, (int)BuffType.Cocktail);
     }
 }

@@ -88,4 +88,10 @@ MonoBehaviour:
   - ApplyBuff
   - RemoveBuff
   - SetPosition
+  - DeactivateItemBox
+  - ActivateItemBox
+  - RemoveItemBoxFollower
+  - SetItemBoxFollower
+  - HideObject
+  - SetStunEfx
   DisableAutoOpenWizard: 1

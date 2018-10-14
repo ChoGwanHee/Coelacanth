@@ -358,8 +358,8 @@ public class GameManagerPhoton : Photon.PunBehaviour
                     MapManager._instance.StartMapFacilities();
                     itemManager.active = true;
                     StartCoroutine(GameLoop());
+                    itemManager.GameStartRegen();
                 }
-                itemManager.GameStartRegen();
                 SetPlayerActive(true);
 
                 break;

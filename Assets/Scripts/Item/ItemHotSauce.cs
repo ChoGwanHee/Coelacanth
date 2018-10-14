@@ -17,7 +17,6 @@ public class ItemHotSauce : UtilItem
     {
         bc.Stat.AddScore(gainScore);
         bc.SetBuff(BuffType.HotSauce, Process(bc));
-        
     }
 
     private IEnumerator Process(BuffController bc)

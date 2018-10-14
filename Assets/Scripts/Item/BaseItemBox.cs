@@ -3,7 +3,7 @@
 /// <summary>
 /// 기본 아이템 박스 클래스
 /// </summary>
-public abstract class BaseItemBox : Photon.PunBehaviour
+public abstract class BaseItemBox : MonoBehaviour
 {
     public BaseItem item;
     
@@ -26,53 +26,24 @@ public abstract class BaseItemBox : Photon.PunBehaviour
     public int itemIndex;
 
     /// <summary>
-    /// 아이템 매니저에 등록되어 있는 아이템 박스의 아이템풀 인덱스
+    /// 아이템 박스의 아이템풀 인덱스 1
     /// </summary>
-    public int poolIndex;
-    
+    public int poolIndex1;
+
+    /// <summary>
+    /// 아이템 박스의 아이템풀 인덱스 2
+    /// </summary>
+    public int poolIndex2;
 
     /// <summary>
     /// 활성화 여부
     /// </summary>
     public bool alive;
 
+
     protected virtual void Start()
     {
-        InitIndex();
-        transform.SetParent(GameObject.Find("ItemBoxes").transform);
-        GameManagerPhoton._instance.itemManager.AddItemBox(this);
         gameObject.SetActive(false);
     }
-
-    protected void InitIndex()
-    {
-        object[] data = photonView.instantiationData;
-        tableIndex = (int)data[0];
-        itemIndex = (int)data[1];
-        poolIndex = (int)data[2];
-    }
-
-    [PunRPC]
-    public virtual void SetActiveItemBox(bool active)
-    {
-        if (active)
-        {
-            gameObject.SetActive(true);
-            alive = true;
-            FMODUnity.RuntimeManager.PlayOneShot(spawnSound);
-        }
-        else
-        {
-            alive = false;
-            transform.position = new Vector3(0f, 0f, -20f);
-            GameManagerPhoton._instance.itemManager.curBoxCount[tableIndex]--;
-            gameObject.SetActive(false);
-        }
-    }
-
-    [PunRPC]
-    public void SetPosition(Vector3 pos)
-    {
-        transform.position = pos;
-    }
+ 
 }

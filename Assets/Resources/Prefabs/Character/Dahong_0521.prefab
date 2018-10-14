@@ -5477,6 +5477,7 @@ MonoBehaviour:
   replaceable: 1
   charging: 0
   damageFactor: 1
+  getSound: event:/SFX_Stage1/Item/WeaponBox/SFX_Normalbox
 --- !u!114 &114257096733089344
 MonoBehaviour:
   m_ObjectHideFlags: 1

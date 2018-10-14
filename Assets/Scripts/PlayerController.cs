@@ -205,6 +205,10 @@ public class PlayerController : Photon.PunBehaviour
         get { return bc; }
     }
     private FireworkExecuter executer;
+    public FireworkExecuter Executer
+    {
+        get { return executer; }
+    }
     private Rigidbody rb;
     private CapsuleCollider col;
     private Animator anim;
@@ -233,11 +237,10 @@ public class PlayerController : Photon.PunBehaviour
         if (photonView.isMine)
         {
             ring.SetActive(true);
+            StartCoroutine(CheckInteractionIndicator());
         }
 
         TurnToScreen();
-
-        StartCoroutine(CheckInteractionIndicator());
     }
 
     private void Update()
@@ -439,6 +442,7 @@ public class PlayerController : Photon.PunBehaviour
         col.enabled = false;
         stat.onStage = false;
         stat.KillScoring();
+        bc.RemoveAllBuff();
 
         // 보내는 정보   = 정보 : 플레이어 : 상태 : 라이프차감
         // 받는 정보      = 정보 : 플레이어 : 상태 : 보유라이프
@@ -480,6 +484,23 @@ public class PlayerController : Photon.PunBehaviour
     }
 
     /// <summary>
+    /// 기절 이펙트를 설정합니다.
+    /// </summary>
+    /// <param name="active">활성화 여부</param>
+    [PunRPC]
+    private void SetStunEfx(bool active)
+    {
+        if (active)
+        {
+            stunEfx.SetActive(true);
+        }
+        else
+        {
+            stunEfx.SetActive(false);
+        }
+    }
+
+    /// <summary>
     /// 기절에서 회복 했을 때
     /// </summary>
     private void StunRecovery()
@@ -515,6 +536,7 @@ public class PlayerController : Photon.PunBehaviour
     {
         CancelInvoke();
         StopAllCoroutines();
+        bc.RemoveAllBuff();
 
         if(photonView.isMine && isGrab && state != PlayerAniState.Put)
         {
@@ -658,13 +680,14 @@ public class PlayerController : Photon.PunBehaviour
                 }
                 break;
             case PlayerAniState.Stun:
-                stunEfx.SetActive(true);
+                photonView.RPC("SetStunEfx", PhotonTargets.All, true);
                 isStun = true;
                 FMODUnity.RuntimeManager.PlayOneShot(stunSound);
                 PlayVoiceSound("Stun");
                 Invoke("StunRecovery", stunTime);
                 if(isGrab)
                 {
+                    isConsumeable = false;
                     PutUtilItem();
                 }
                 break;
@@ -715,7 +738,7 @@ public class PlayerController : Photon.PunBehaviour
                 break;
 
             case PlayerAniState.Stun:
-                stunEfx.SetActive(false);
+                photonView.RPC("SetStunEfx", PhotonTargets.All, false);
                 isStun = false;
                 break;
 
@@ -854,7 +877,7 @@ public class PlayerController : Photon.PunBehaviour
         {
             IInteractable obj = cols[i].GetComponent<IInteractable>();
 
-            if (obj != null)
+            if (obj != null && obj.IsInteractable())
             {
                 obj.Interact(this);
                 return;
@@ -863,14 +886,14 @@ public class PlayerController : Photon.PunBehaviour
     }
 
     [PunRPC]
-    private void LiftUtilItem(int poolIndex, int index)
+    private void LiftUtilItem(int index1, int index2)
     {
-        if(index == -1)
+        if(index2 == -1)
         {
             Debug.LogError("인덱스 오류");
             return;
         }
-        utilItem = GameManagerPhoton._instance.itemManager.itemBoxPool[poolIndex][index] as ItemBoxUtil;
+        utilItem = GameManagerPhoton._instance.itemManager.itemBoxPool[index1][index2] as ItemBoxUtil;
         isGrab = true;
         anim.SetInteger("SubAniNum", 1);
         ChangeState(PlayerAniState.Lift);
@@ -884,10 +907,10 @@ public class PlayerController : Photon.PunBehaviour
 
         if (utilItem == null) return;
 
-        utilItem.photonView.RPC("ResetTarget", PhotonTargets.All, null);
+        GameManagerPhoton._instance.photonView.RPC("RemoveItemBoxFollower", PhotonTargets.All, utilItem.poolIndex1, utilItem.poolIndex2);
         if (remove)
         {
-            utilItem.photonView.RPC("SetActiveItemBox", PhotonTargets.All, false);
+            GameManagerPhoton._instance.photonView.RPC("DeactivateItemBox", PhotonTargets.All, utilItem.poolIndex1, utilItem.poolIndex2);
         }
         utilItem = null;
     }
@@ -942,7 +965,7 @@ public class PlayerController : Photon.PunBehaviour
                 {
                     IInteractable obj = cols[i].GetComponent<IInteractable>();
 
-                    if (obj != null)
+                    if (obj != null && obj.IsInteractable())
                     {
                         if (!isDisplay)
                         {

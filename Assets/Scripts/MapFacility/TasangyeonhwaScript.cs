@@ -35,6 +35,7 @@ public class TasangyeonhwaScript : Photon.PunBehaviour, IInteractable {
     /// </summary>
     public Transform firePos;
 
+    private bool available = false;
     private int layerMask;
     private Animator animator;
     private Collider col;
@@ -69,6 +70,7 @@ public class TasangyeonhwaScript : Photon.PunBehaviour, IInteractable {
         boomEfx.Play(true);
         dragonRenderer.enabled = true;
         col.enabled = true;
+        available = true;
     }
 
     public void SetState(TasangState stateNum)
@@ -76,6 +78,7 @@ public class TasangyeonhwaScript : Photon.PunBehaviour, IInteractable {
         switch (stateNum)
         {
             case TasangState.Hide:
+                available = false;
                 for (int i = 0; i < mat.Length; i++)
                 {
                     mat[i].SetFloat("_slider", 0.5f);
@@ -92,6 +95,7 @@ public class TasangyeonhwaScript : Photon.PunBehaviour, IInteractable {
                 StartCoroutine(AppearBox(1.0f));
                 break;
             case TasangState.Fire:
+                available = false;
                 FireEffect();
                 break;
         }
@@ -161,6 +165,15 @@ public class TasangyeonhwaScript : Photon.PunBehaviour, IInteractable {
 
     public void Interact(PlayerController pc)
     {
-        parentFacility.photonView.RPC("RequestFire", PhotonTargets.MasterClient, pc.photonView.ownerId);
+        if(available)
+            parentFacility.photonView.RPC("RequestFire", PhotonTargets.MasterClient, pc.photonView.ownerId);
+    }
+
+    public bool IsInteractable()
+    {
+        if (available)
+            return true;
+        else
+            return false;
     }
 }

@@ -24,6 +24,13 @@ public class FireworkExecuter : Photon.PunBehaviour {
     /// </summary>
     public float damageFactor = 1.0f;
 
+    /// <summary>
+    /// 아이템을 획득할 때 출력되는 사운드
+    /// </summary>
+    [FMODUnity.EventRef]
+    public string getSound;
+
+
     public delegate void OnFireworkChangedDelegate(Firework newFirework);
     public delegate void OnFireworkAmmoChangedDelegate(int num);
 
@@ -159,9 +166,10 @@ public class FireworkExecuter : Photon.PunBehaviour {
     [PunRPC]
     public void ChangeFirework(int tableIndex, int itemIndex)
     {
-        //newFirework = GameManagerPhoton._instance.itemManager.GetFireworkItem(tableIndex, itemIndex);
         newFirework = GameManagerPhoton._instance.itemManager.GetItem(tableIndex, itemIndex) as Firework;
         CheckFireworkChanged();
+        if(tableIndex != 0 && itemIndex != 0)
+            PlayGetSound();
     }
 
     /// <summary>
@@ -182,5 +190,12 @@ public class FireworkExecuter : Photon.PunBehaviour {
             ServerManager.Send(string.Format("WEAPONCHANGE:{0}:{1}:{2}", true, curFirework.GetType(), photonView.owner));
             Debug.Log(" 무기교체:" + curFirework.GetType() + "\n교체자:" + photonView.owner);
         }
+    }
+
+    private void PlayGetSound()
+    {
+        if (!photonView.isMine) return;
+
+        FMODUnity.RuntimeManager.PlayOneShot(getSound);
     }
 }

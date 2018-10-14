@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15da0d1da810b3545a444abd6802f37d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncObject: 0
+  syncObject: 1
 --- !u!114 &114821992101945570
 MonoBehaviour:
   m_ObjectHideFlags: 1

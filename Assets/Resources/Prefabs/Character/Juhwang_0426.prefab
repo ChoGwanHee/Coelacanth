@@ -4441,6 +4441,8 @@ MonoBehaviour:
   ammo: 0
   replaceable: 1
   charging: 0
+  damageFactor: 1
+  getSound: event:/SFX_Stage1/Item/WeaponBox/SFX_Normalbox
 --- !u!114 &114298608526500658
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4545,6 +4547,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eaa8a47015df2d489757a0317f2fff7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  utilItem: {fileID: 0}
   stunSound: event:/SFX_Stage1/Character/Sound/SFX_Stun
   walkingSound: event:/SFX_Stage1/Character/Sound/SFX_Foot
   fallingSound: event:/SFX_Stage1/Character/Sound/SFX_Fall
@@ -4552,10 +4555,13 @@ MonoBehaviour:
   photonMove: 1
   isControlable: 0
   isStun: 0
+  isUnbeatable: 0
   accSpeed: 28
   maxSpeed: 6
+  maxSpeedFactor: 1
   respawnTime: 6
   stunTime: 3
+  knockbackTime: 0.2
   weaponPoint: {fileID: 0}
   handObjectSet: {fileID: 0}
   ring: {fileID: 1433471974510610}

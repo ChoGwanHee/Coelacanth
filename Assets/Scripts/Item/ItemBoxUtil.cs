@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,8 +8,8 @@ public class ItemBoxUtil : BaseItemBox, IInteractable
     public Transform target;
     public Vector3 offset;
     public int aniNum;
+    public int owner = -1;
     protected Vector3 currentVelocity;
-    protected int owner = -1;
     protected Collider col;
 
     protected override void Start()
@@ -19,7 +20,12 @@ public class ItemBoxUtil : BaseItemBox, IInteractable
 
     public void Interact(PlayerController pc)
     {
-        photonView.RPC("RequestLift", PhotonTargets.MasterClient, pc.photonView.ownerId);
+        GameManagerPhoton._instance.photonView.RPC("RequestLift", PhotonTargets.MasterClient, poolIndex1, poolIndex2, pc.photonView.ownerId);
+    }
+
+    public bool IsInteractable()
+    {
+        return true;
     }
 
     public virtual void Use(PlayerController pc)
@@ -27,24 +33,10 @@ public class ItemBoxUtil : BaseItemBox, IInteractable
         (item as UtilItem).Execute(pc.BC);
         
         pc.photonView.RPC("PutUtilItem", pc.photonView.owner, false);
-        photonView.RPC("SetActiveItemBox", PhotonTargets.All, false);
+        GameManagerPhoton._instance.photonView.RPC("DeactivateItemBox", PhotonTargets.All, poolIndex1, poolIndex2);
     }
 
-    [PunRPC]
-    public void RequestLift(int requestId)
-    {
-        if (owner == -1)
-        {
-            owner = requestId;
-
-            PhotonView pv = GameManagerPhoton._instance.GetPlayerByOwnerId(requestId).photonView;
-            pv.RPC("LiftUtilItem", pv.owner, poolIndex, GetIndex());
-            photonView.RPC("SetTargetPlayer", PhotonTargets.All, pv.ownerId);
-        }
-    }
-
-    [PunRPC]
-    protected void SetTargetPlayer(int ownerId)
+    public void SetTargetPlayer(int ownerId)
     {
         PlayerController pc = GameManagerPhoton._instance.GetPlayerByOwnerId(ownerId).PC;
 
@@ -54,8 +46,7 @@ public class ItemBoxUtil : BaseItemBox, IInteractable
         StartCoroutine(Move());
     }
 
-    [PunRPC]
-    protected void ResetTarget()
+    public void ResetTarget()
     {
         owner = -1;
         col.enabled = true;
@@ -76,9 +67,9 @@ public class ItemBoxUtil : BaseItemBox, IInteractable
     {
         BaseItemBox[][] itemBoxPool = GameManagerPhoton._instance.itemManager.itemBoxPool;
 
-        for (int i=0; i< itemBoxPool[poolIndex].Length; i++)
+        for (int i=0; i< itemBoxPool[poolIndex1].Length; i++)
         {
-            if(itemBoxPool[poolIndex][i] == this)
+            if(itemBoxPool[poolIndex1][i] == this)
             {
                 return i;
             }
@@ -87,4 +78,6 @@ public class ItemBoxUtil : BaseItemBox, IInteractable
         Debug.LogError("풀에 오브젝트가 없음");
         return -1;
     }
+
+    
 }
