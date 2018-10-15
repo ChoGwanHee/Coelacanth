@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BuffHotSauce : Buff
 {
-    ItemHotSauce item;
-    
+    private ItemHotSauce item;
+    private float curColorValue = 1.0f;
+    private float changeValue = 0.01f;
+    private Color color = new Color(1f, 1f, 1f);
+    private bool isDown = true;
+
 
     public BuffHotSauce(ItemHotSauce item)
     {
@@ -14,22 +15,95 @@ public class BuffHotSauce : Buff
         duration = item.duration;
     }
 
-    public override void OnStartBuff(BuffController bc)
+    protected override void OnStartBuff(BuffController bc)
     {
-        if (active)
-        {
-            elapsedTime = 0f;
-            return;
-        }
         bc.buffEfx.Play(true);
+        bc.PC.maxSpeedFactor += item.addSpeed;
+
+        curColorValue = 1.0f;
+        changeValue = 0.01f;
+        color = new Color(1f, 1f, 1f);
+        isDown = true;
     }
 
-    public override void OnEndBuff(BuffController bc)
+    protected override void OnEndBuff(BuffController bc)
     {
+        bc.onUpdateBuff -= OnUpdateBuff;
+        bc.PC.maxSpeedFactor -= item.addSpeed;
+
+        color.g = 1f;
+        color.b = 1f;
+        bc.SetCharacterColor(color);
     }
 
     public override void OnUpdateBuff(BuffController bc)
     {
-        base.OnUpdateBuff(bc);
+        elapsedTime += Time.deltaTime;
+
+        if (elapsedTime >= duration)
+        {
+            if(bc.photonView.isMine)
+                Explosion(bc);
+            GameObject.Instantiate(bc.hotSauceBoomEfx_ref, bc.transform.position, Quaternion.identity);
+            OnEndBuff(bc);
+            active = false;
+            return;
+        }
+
+        // 캐릭터 색깔 변경
+        if (isDown)
+        {
+            curColorValue -= changeValue;
+            if (curColorValue <= 0f)
+            {
+                curColorValue = 0f;
+                isDown = false;
+            }
+        }
+        else
+        {
+            curColorValue += changeValue;
+            if (curColorValue >= 1f)
+            {
+                curColorValue = 1f;
+                isDown = true;
+            }
+        }
+        changeValue += 0.001f;
+        color.g = curColorValue;
+        color.b = curColorValue;
+
+        bc.SetCharacterColor(color);
+    }
+
+    /// <summary>
+    /// 폭발하여 일정 반경 안의 물체를 밀어내고 피해를 줍니다.
+    /// </summary>
+    private void Explosion(BuffController bc)
+    {
+        bc.GetComponent<Collider>().enabled = false;
+
+        Collider[] effectedObjects = Physics.OverlapSphere(bc.transform.position, item.hitRadius, LayerMask.GetMask("DynamicObject"));
+
+        int totalDamage = Mathf.RoundToInt(item.damage * bc.GetComponent<FireworkExecuter>().damageFactor);
+
+        for (int i = 0; i < effectedObjects.Length; i++)
+        {
+            Vector3 direction = Vector3.Scale(effectedObjects[i].transform.position - bc.transform.position, new Vector3(1, 0, 1)).normalized;
+
+            PhotonView objPhotonView = effectedObjects[i].GetComponent<PhotonView>();
+            objPhotonView.RPC("Pushed", PhotonTargets.All, (direction * item.hitForce));
+
+            if (effectedObjects[i].CompareTag("Player"))
+            {
+                objPhotonView.RPC("DamageShake", objPhotonView.owner, totalDamage, 6, bc.photonView.ownerId);
+                Vector3 efxPos = effectedObjects[i].GetComponent<CapsuleCollider>().ClosestPointOnBounds(bc.transform.position);
+                PhotonNetwork.Instantiate("Prefabs/Effect_base_Hit_fx", efxPos, Quaternion.identity, 0);
+
+                effectedObjects[i].GetComponent<PlayerController>().Pushed(direction * item.hitForce * 0.5f);
+            }
+        }
+        bc.GetComponent<Collider>().enabled = true;
+        bc.photonView.RPC("Damage", bc.photonView.owner, bc.Stat.maxHP, -1);
     }
 }

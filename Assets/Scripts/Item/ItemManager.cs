@@ -15,31 +15,29 @@ public class ItemManager : Photon.PunBehaviour
     public int[] curBoxCount;
     public int[] maxBoxCount;
 
-
-    [Header("Firework")]
-    public float regenTime = 5.0f;
-    private bool regenTimerEnable = true;
-    private float elapsedTime = 0f;
-    public int startBoxCount = 6;
-    
-
     /// <summary>
     /// 아이템 박스 종류당 여분 비율 (maxBoxCount * poolExtraRate = 여분 개수)
     /// </summary>
     [Range(0, 1)]
     public float poolExtraRate = 1.0f;
 
+
+    [Header("Firework")]
+    public float regenTime = 5.0f;
+    private bool regenTimerEnable = true;
+    private float elapsedTime = 0f;
+    public int startBoxCount = 6;
     public Transform[] itemRegenPos;
 
 
     [Header("Util")]
-
     public float utilRegenTime = 20.0f;
     private bool utilRegenTimerEnable = true;
     private float utilElapsedTime = 0f;
     public int utilStartBoxCount = 1;
     public Transform[] utilItemRegenPos;
 
+    public UtilItem[] buffUtilItemReference;
 
 
     private void Start()
@@ -117,8 +115,6 @@ public class ItemManager : Photon.PunBehaviour
     /// </summary>
     public void Initialize()
     {
-        
-
         InitItemBoxPool();
     }
 

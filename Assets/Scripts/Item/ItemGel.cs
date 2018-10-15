@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(menuName = "Item/Gel")]
 public class ItemGel : UtilItem
@@ -30,12 +28,13 @@ public class ItemGel : UtilItem
     /// </summary>
     public GameObject gel_ref;
 
+
     public override void Execute(BuffController bc)
     {
         RaycastHit hit;
         Vector3 installPos;
 
-        if (Physics.Raycast(bc.GetComponent<FireworkExecuter>().firePoint.position, Vector3.down, out hit, 10.0f, LayerMask.GetMask("Ground"), QueryTriggerInteraction.Ignore))
+        if (Physics.Raycast(bc.PC.Executer.firePoint.position, Vector3.down, out hit, 10.0f, LayerMask.GetMask("Ground"), QueryTriggerInteraction.Ignore))
         {
             installPos = hit.point;
         }
@@ -45,7 +44,7 @@ public class ItemGel : UtilItem
             return;
         }
 
-        object[] data = new object[4] { duration, lifetime, startDelay, subSpeed };
+        object[] data = new object[2] { lifetime, startDelay };
 
         PhotonNetwork.Instantiate("Prefabs/" + gel_ref.name, installPos, Quaternion.identity, 0, data);
     }

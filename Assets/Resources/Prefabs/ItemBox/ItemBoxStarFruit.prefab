@@ -150,7 +150,7 @@ MonoBehaviour:
   alive: 0
   target: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
-  aniNum: 0
+  aniNum: 3
   owner: -1
 --- !u!135 &135783376333879760
 SphereCollider:

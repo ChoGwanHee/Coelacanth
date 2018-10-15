@@ -27,71 +27,47 @@ MonoBehaviour:
   NetworkLogging: 1
   RunInBackground: 1
   RpcList:
+  - ActivateItemBox
+  - AppearTasang
+  - ApplyBuff
+  - Break
+  - ChangeFirework
   - Chat
   - ColorRpc
   - Damage
-  - DestroyProjectile
+  - DamageShake
+  - DeactivateItemBox
   - DestroyRpc
   - DoJump
   - Fall
-  - Fire
   - Flash
+  - HideObject
   - InstantiateRpc
+  - LiftUtilItem
   - Marco
   - PickupItemInit
+  - PlayEndSound
   - Polo
   - PunPickup
   - PunPickupSimple
   - PunRespawn
   - Pushed
+  - PutUtilItem
+  - RemoteCreatePlayer
+  - RemoveBuff
+  - RemoveItemBoxFollower
+  - RequestFire
   - RequestForPickupItems
   - RequestForPickupTimes
-  - TaggedPlayer
-  - SetValues
-  - SetPrams
-  - TakeItem
-  - ChangeFirework
-  - DisableItemBox
-  - SetActiveItemBox
-  - Teleport
-  - PlayStartSound
-  - ChangeAmmo
-  - ChangeAmmoUI
-  - SetHeartUI
-  - SetOtherHeartUI
-  - Break
-  - RespawnObject
-  - StartWaterBlast
-  - PlayEndSound
-  - GameStart
-  - GameStarting
-  - RunGameEvent
-  - Spotlight
-  - AllowCreatePlayer
-  - RemoteCreatePlayer
-  - DamageShake
-  - MapFacilityActivate
-  - MapFacility
-  - StopMapFacilities
-  - Test
-  - ActivateTasang
-  - RequestActivation
-  - RequestFire
-  - SetTargetPlayer
-  - ResetTarget
   - RequestLift
-  - AppearTasang
+  - RespawnObject
   - Run
   - RunCannon
-  - LiftUtilItem
-  - PutUtilItem
-  - ApplyBuff
-  - RemoveBuff
-  - SetPosition
-  - DeactivateItemBox
-  - ActivateItemBox
-  - RemoveItemBoxFollower
+  - RunGameEvent
   - SetItemBoxFollower
-  - HideObject
   - SetStunEfx
+  - Spotlight
+  - StopMapFacilities
+  - TaggedPlayer
+  - Teleport
   DisableAutoOpenWizard: 1

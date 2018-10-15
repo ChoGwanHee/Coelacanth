@@ -1,35 +1,44 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public abstract class Buff {
 
-    public bool active;
-    public float duration;
-    public float elapsedTime;
+    protected bool active;
+    protected float duration;
+    protected float elapsedTime;
 
 
-    public abstract void OnStartBuff(BuffController bc);
+    public virtual void StartBuff(BuffController bc)
+    {
+        elapsedTime = 0;
+        if (!active)
+        {
+            OnStartBuff(bc);
+            bc.onUpdateBuff += OnUpdateBuff;
+            active = true;
+        }
+    }
 
-    public abstract void OnEndBuff(BuffController bc);
-
-    public virtual void OnStopBuff(BuffController bc)
+    public virtual void StopBuff(BuffController bc)
     {
         if (active)
+        {
             OnEndBuff(bc);
+            active = false;
+        }
     }
+
+    protected abstract void OnStartBuff(BuffController bc);
+    protected abstract void OnEndBuff(BuffController bc);
+    
 
     public virtual void OnUpdateBuff(BuffController bc)
     {
-        if (!active) return;
-
         elapsedTime += Time.deltaTime;
 
         if(elapsedTime >= duration)
         {
-            elapsedTime = 0f;
-            active = false;
             OnEndBuff(bc);
+            active = false;
         }
     }
     

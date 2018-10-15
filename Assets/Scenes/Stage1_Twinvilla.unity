@@ -4251,8 +4251,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 555cfefab8f56ab4fbbc7ec01a899e79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonData:
+  - useAnimator: 1
+    sprite: {fileID: 21300000, guid: a63f16ee66ed26c4a99ad15123d7f172, type: 3}
+    isWorldCoord: 1
+    offset: {x: 0, y: 2, z: 0}
+  - useAnimator: 0
+    sprite: {fileID: 21300000, guid: 7c98cd0f9d697ce41b065f61909be0da, type: 3}
+    isWorldCoord: 1
+    offset: {x: 0, y: 0.3, z: 0}
   target: {fileID: 0}
-  offset: {x: 0, y: 2, z: 0}
+  offset: {x: 0, y: 0, z: 0}
 --- !u!95 &78496840
 Animator:
   serializedVersion: 3
@@ -9150,6 +9159,15 @@ Prefab:
     - target: {fileID: 1230947510565474, guid: 50bd150ae1a548c47a0627597251996f, type: 2}
       propertyPath: m_Name
       value: Gift_Boom (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1963929694235858, guid: 50bd150ae1a548c47a0627597251996f, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 137903930484954908, guid: 50bd150ae1a548c47a0627597251996f,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 50bd150ae1a548c47a0627597251996f, type: 2}
@@ -33965,9 +33983,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ac823acd7e73fbf4bb9229b5953feb39, type: 2}
   curBoxCount: 
   maxBoxCount: 0a00000002000000
+  poolExtraRate: 1
   regenTime: 2
   startBoxCount: 6
-  poolExtraRate: 1
   itemRegenPos:
   - {fileID: 2087178967}
   - {fileID: 973283366}
@@ -33978,6 +33996,11 @@ MonoBehaviour:
   utilItemRegenPos:
   - {fileID: 642062077}
   - {fileID: 1591379181}
+  buffUtilItemReference:
+  - {fileID: 11400000, guid: 451963e09238cb54c91acf5f99282d72, type: 2}
+  - {fileID: 11400000, guid: 43539fea201b9584990de150ea18b715, type: 2}
+  - {fileID: 11400000, guid: 7fe4498f5debd844d84f5a91f89c80d6, type: 2}
+  - {fileID: 11400000, guid: 1c9beb4185da3a947b6f290ec5afe0a5, type: 2}
 --- !u!114 &1531924275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36439,6 +36462,35 @@ Prefab:
     - target: {fileID: 4332163738628470, guid: 50bd150ae1a548c47a0627597251996f, type: 2}
       propertyPath: m_RootOrder
       value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 1963929694235858, guid: 50bd150ae1a548c47a0627597251996f, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 137903930484954908, guid: 50bd150ae1a548c47a0627597251996f,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4179887019663382, guid: 50bd150ae1a548c47a0627597251996f, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0.98966587
+      objectReference: {fileID: 0}
+    - target: {fileID: 4179887019663382, guid: 50bd150ae1a548c47a0627597251996f, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.1433928
+      objectReference: {fileID: 0}
+    - target: {fileID: 4179887019663382, guid: 50bd150ae1a548c47a0627597251996f, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 12.339455
+      objectReference: {fileID: 0}
+    - target: {fileID: 4179887019663382, guid: 50bd150ae1a548c47a0627597251996f, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 3.0265546
+      objectReference: {fileID: 0}
+    - target: {fileID: 4179887019663382, guid: 50bd150ae1a548c47a0627597251996f, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 163.51201
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 50bd150ae1a548c47a0627597251996f, type: 2}

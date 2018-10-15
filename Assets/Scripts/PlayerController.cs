@@ -219,7 +219,7 @@ public class PlayerController : Photon.PunBehaviour
 
     int groundMask;
 
-    void Start () {
+    void Awake () {
         rb = GetComponent<Rigidbody>();
         col = GetComponent<CapsuleCollider>();
         cam = Camera.main;
@@ -699,6 +699,7 @@ public class PlayerController : Photon.PunBehaviour
                 isFalling = true;
                 if (isGrab)
                 {
+                    isConsumeable = false;
                     PutUtilItem(true);
                 }
                 break;
@@ -959,7 +960,7 @@ public class PlayerController : Photon.PunBehaviour
 
             if (state == PlayerAniState.Idle)
             {
-                Collider[] cols = Physics.OverlapSphere(transform.position, interactionCheckRadius, LayerMask.GetMask("InteractionObject"));
+                Collider[] cols = Physics.OverlapSphere(transform.position, interactionCheckRadius, LayerMask.GetMask("InteractionObject", "Item"));
                 
                 for (int i = 0; i < cols.Length; i++)
                 {
@@ -970,7 +971,7 @@ public class PlayerController : Photon.PunBehaviour
                         if (!isDisplay)
                         {
                             isDisplay = true;
-                            UIManager._instance.eButton.SetActivate(true, cols[i].transform);
+                            UIManager._instance.eButton.SetActivate(true, cols[i].transform, obj.GetButtonType());
                         }
                         existAround = true;
                         break;

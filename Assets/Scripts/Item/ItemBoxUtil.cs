@@ -28,6 +28,11 @@ public class ItemBoxUtil : BaseItemBox, IInteractable
         return true;
     }
 
+    public int GetButtonType()
+    {
+        return 1;
+    }
+
     public virtual void Use(PlayerController pc)
     {
         (item as UtilItem).Execute(pc.BC);

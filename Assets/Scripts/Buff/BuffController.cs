@@ -1,12 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BuffController : Photon.PunBehaviour
 {
-    public Coroutine[] coroutines = new Coroutine[(int)BuffType.Max];
     public Buff[] buffs = new Buff[(int)BuffType.Max];
-    public UtilItem[] referenceItem;
+    
 
     /// <summary>
     /// 무적 이펙트
@@ -23,13 +20,21 @@ public class BuffController : Photon.PunBehaviour
     /// </summary>
     public ParticleSystem slowEfx;
 
+    /// <summary>
+    /// 좋은 효과 아이템 섭취 시 이펙트
+    /// </summary>
     public ParticleSystem buffEfx;
+
+    /// <summary>
+    /// 나쁜 효과 아이템 섭취 시 이펙트
+    /// </summary>
     public ParticleSystem debuffEfx;
 
     /// <summary>
-    /// 핫소스 폭발 이펙트 레퍼런스
+    /// 핫소스 폭발 이펙트
     /// </summary>
     public GameObject hotSauceBoomEfx_ref;
+
 
     public Renderer[] renderers;
     private Material[] playerMats;
@@ -47,6 +52,10 @@ public class BuffController : Photon.PunBehaviour
     }
 
 
+    public delegate void OnUpdateBuffDelegate(BuffController bc);
+    public OnUpdateBuffDelegate onUpdateBuff;
+
+
     private void Start()
     {
         pc = GetComponent<PlayerController>();
@@ -61,133 +70,40 @@ public class BuffController : Photon.PunBehaviour
             }
         }
 
+        UtilItem[] reference = GameManagerPhoton._instance.itemManager.buffUtilItemReference;
 
-        /*buffs[0] = new BuffUnbeatable(referenceItem[0] as ItemStarFruit);
-        buffs[1] = new BuffSlow();
-        buffs[2] = new BuffHotSauce();
-        buffs[3] = new BuffCocktail();*/
-        
+        buffs[0] = new BuffUnbeatable(reference[0] as ItemStarFruit);
+        buffs[1] = new BuffSlow(reference[1] as ItemGel);
+        buffs[2] = new BuffHotSauce(reference[2] as ItemHotSauce);
+        buffs[3] = new BuffCocktail(reference[3] as ItemCocktail);
+    }
+
+    private void Update()
+    {
+        if(onUpdateBuff != null)
+        {
+            onUpdateBuff(this);
+        }
     }
 
     [PunRPC]
     public void ApplyBuff(int buffType)
     {
-        switch (buffType)
-        {
-            case (int)BuffType.Unbeatable:
-                buffEfx.Play(true);
-                pc.isUnbeatable = true;
-                shiedEfx.SetActive(true);
-                break;
-            case (int)BuffType.Slow:
-                debuffEfx.Play(true);
-                slowEfx.Play(true);
-                break;
-            case (int)BuffType.HotSauce:
-                buffEfx.Play(true);
-                StartCoroutine(HotSauceCount());
-                break;
-            case (int)BuffType.Cocktail:
-                buffEfx.Play(true);
-                upEfx.Play(true);
-                break;
-        }
+        buffs[buffType].StartBuff(this);
     }
 
     [PunRPC]
     public void RemoveBuff(int buffType)
     {
-        switch (buffType)
-        {
-            case (int)BuffType.Unbeatable:
-                pc.isUnbeatable = false;
-                shiedEfx.SetActive(false);
-                break;
-            case (int)BuffType.Slow:
-                slowEfx.Stop(true);
-                break;
-            case (int)BuffType.HotSauce:
-                Instantiate(hotSauceBoomEfx_ref, transform.position, Quaternion.identity);
-                break;
-            case (int)BuffType.Cocktail:
-                upEfx.Stop(true);
-                break;
-        }
-    }
-
-    public void SetBuff(BuffType buffType, IEnumerator coroutine)
-    {
-        int index = (int)buffType;
-        if(coroutines[index] != null)
-        {
-            StopCoroutine(coroutines[index]);
-            coroutines[index] = null;
-        }
-        coroutines[index] = StartCoroutine(coroutine);
+        buffs[buffType].StopBuff(this);
     }
 
     public void RemoveAllBuff()
     {
-        StopAllCoroutines();
-        for(int i=0; i<(int)BuffType.Max; i++)
+        for(int i=0; i< buffs.Length; i++)
         {
-            if (i == (int)BuffType.HotSauce) continue;
             RemoveBuff(i);
         }
-
-        Color color = new Color(1f, 1f, 1f);
-        for (int i = 0; i < playerMats.Length; i++)
-        {
-            if (playerMats[i] == null) break;
-            playerMats[i].SetColor("_Color", color);
-        }
-
-        pc.maxSpeedFactor = 1.0f;
-        pc.Executer.damageFactor = 1.0f;
-    }
-
-    private IEnumerator HotSauceCount()
-    {
-        float duration = 5.0f;
-        float elapsedTime = 0f;
-        float curColorValue = 1.0f;
-        float changeValue = 0.01f;
-        Color color = new Color(1f,1f,1f);
-        bool isDown = true;
-
-        while (elapsedTime < duration)
-        {
-            elapsedTime += Time.deltaTime;
-
-            if (isDown)
-            {
-                curColorValue -= changeValue;
-                if (curColorValue <= 0f)
-                {
-                    curColorValue = 0f;
-                    isDown = false;
-                }
-            }
-            else
-            {
-                curColorValue += changeValue;
-                if (curColorValue >= 1f)
-                {
-                    curColorValue = 1f;
-                    isDown = true;
-                }
-            }
-            changeValue += 0.001f;
-            color.g = curColorValue;
-            color.b = curColorValue;
-
-            SetCharacterColor(color);
-
-            yield return null;
-        }
-        color.g = 1f;
-        color.b = 1f;
-        SetCharacterColor(color);
     }
 
     public void SetCharacterColor(Color color)

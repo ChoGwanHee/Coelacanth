@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class BuffSlow : Buff
+﻿public class BuffSlow : Buff
 {
-    ItemGel item;
+    private ItemGel item;
 
 
     public BuffSlow(ItemGel item)
@@ -14,21 +9,17 @@ public class BuffSlow : Buff
         duration = item.duration;
     }
 
-    public override void OnStartBuff(BuffController bc)
+    protected override void OnStartBuff(BuffController bc)
     {
-        if (active)
-        {
-            elapsedTime = 0f;
-            return;
-        }
         bc.debuffEfx.Play(true);
         bc.slowEfx.Play(true);
-        active = true;
+        bc.PC.maxSpeedFactor -= item.subSpeed;
     }
 
-    public override void OnEndBuff(BuffController bc)
+    protected override void OnEndBuff(BuffController bc)
     {
+        bc.onUpdateBuff -= OnUpdateBuff;
         bc.slowEfx.Stop(true);
-        active = false;
+        bc.PC.maxSpeedFactor += item.subSpeed;
     }
 }

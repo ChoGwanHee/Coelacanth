@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class BuffCocktail : Buff
+﻿public class BuffCocktail : Buff
 {
-    ItemCocktail item;
+    private ItemCocktail item;
 
 
     public BuffCocktail(ItemCocktail item)
@@ -14,25 +9,19 @@ public class BuffCocktail : Buff
         duration = item.duration;
     }
 
-    public override void OnStartBuff(BuffController bc)
+    protected override void OnStartBuff(BuffController bc)
     {
-        if (active)
-        {
-            elapsedTime = 0f;
-            return;
-        }
         bc.buffEfx.Play(true);
         bc.upEfx.Play(true);
         bc.PC.maxSpeedFactor += item.addSpeed;
         bc.PC.Executer.damageFactor += item.addDamage;
-        active = true;
     }
 
-    public override void OnEndBuff(BuffController bc)
+    protected override void OnEndBuff(BuffController bc)
     {
+        bc.onUpdateBuff -= OnUpdateBuff;
         bc.upEfx.Stop(true);
         bc.PC.maxSpeedFactor -= item.addSpeed;
         bc.PC.Executer.damageFactor -= item.addDamage;
-        active = false;
     }
 }

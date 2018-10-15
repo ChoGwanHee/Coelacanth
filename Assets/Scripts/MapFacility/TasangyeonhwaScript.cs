@@ -176,4 +176,9 @@ public class TasangyeonhwaScript : Photon.PunBehaviour, IInteractable {
         else
             return false;
     }
+
+    public int GetButtonType()
+    {
+        return 0;
+    }
 }
