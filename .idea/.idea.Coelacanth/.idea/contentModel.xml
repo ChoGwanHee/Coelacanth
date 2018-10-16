@@ -1,23 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\Cho Gwan Hee\.Rider2018.1\system\resharper-host\local\Transient\ReSharperHost\v12\SolutionCaches\_Coelacanth.-1038561148.00" t="ExcludeRecursive" />
-    <e p="D:\Project Files\Coelacanth" t="IncludeRecursive">
+    <e p="C:\Users\Hanga\.Rider2018.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Hanga\.Rider2018.2\system\resharper-host\local\Transient\ReSharperHost\v182\SolutionCaches\_Coelacanth.-291840208.00" t="ExcludeRecursive" />
+    <e p="D:\Program Files\Develop\Coelacanth" t="IncludeRecursive">
       <e p="Assembly-CSharp-Editor-firstpass.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp-firstpass.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
-      <e p="Assets\7030 HDR Skies" t="Include">
-        <e p="Miscellaneous" t="Include">
-          <e p="BlendForBloom.shader" t="Include" />
-          <e p="BlurAndFlares.shader" t="Include" />
-          <e p="BrightPassFilter2.shader" t="Include" />
-          <e p="DemoBloom.cs" t="Include" />
-          <e p="LensFlareCreate.shader" t="Include" />
-          <e p="PassiveRotation.cs" t="Include" />
-          <e p="PostEffectsBase.cs" t="Include" />
-        </e>
-      </e>
       <e p="Assets\DynamicBone" t="Include">
         <e p="ReadMe.txt" t="Include" />
         <e p="Scripts" t="Include">
@@ -514,10 +504,21 @@
         </e>
       </e>
       <e p="Assets\Scripts" t="Include">
+        <e p="BalloonScript.cs" t="Include" />
         <e p="BaseInstallation.cs" t="Include" />
         <e p="BaseProjectile.cs" t="Include" />
+        <e p="Buff" t="Include">
+          <e p="Buff.cs" t="Include" />
+          <e p="BuffCocktail.cs" t="Include" />
+          <e p="BuffController.cs" t="Include" />
+          <e p="BuffHotSauce.cs" t="Include" />
+          <e p="BuffSlow.cs" t="Include" />
+          <e p="BuffUnbeatable.cs" t="Include" />
+        </e>
         <e p="CameraController.cs" t="Include" />
         <e p="CameraFacingBillboard.cs" t="Include" />
+        <e p="CharacterVoicePack.cs" t="Include" />
+        <e p="DebugTool.cs" t="Include" />
         <e p="DragController.cs" t="Include" />
         <e p="DynamicObject.cs" t="Include" />
         <e p="Editor" t="Include">
@@ -537,42 +538,79 @@
           <e p="ProjectileButterfly.cs" t="Include" />
           <e p="ProjectileRocket.cs" t="Include" />
           <e p="ProjectileRoman.cs" t="Include" />
+          <e p="ProjectileTasangyeonhwa.cs" t="Include" />
+          <e p="ProjectileTasanyeonhwaUp.cs" t="Include" />
         </e>
+        <e p="FireworkHandObjectSet.cs" t="Include" />
         <e p="GameManager.cs" t="Include" />
         <e p="GameManagerPhoton.cs" t="Include" />
+        <e p="GiftBoxScript.cs" t="Include" />
+        <e p="Interfaces.cs" t="Include" />
         <e p="Item" t="Include">
           <e p="BaseItem.cs" t="Include" />
-          <e p="FireworkItemTable.cs" t="Include" />
-          <e p="ItemFireworkBox.cs" t="Include" />
+          <e p="BaseItemBox.cs" t="Include" />
+          <e p="InstallationGel.cs" t="Include" />
+          <e p="ItemBoxFirework.cs" t="Include" />
+          <e p="ItemBoxUtil.cs" t="Include" />
+          <e p="ItemCake.cs" t="Include" />
+          <e p="ItemCocktail.cs" t="Include" />
+          <e p="ItemGel.cs" t="Include" />
+          <e p="ItemHotSauce.cs" t="Include" />
           <e p="ItemManager.cs" t="Include" />
+          <e p="ItemStarFruit.cs" t="Include" />
           <e p="ItemTable.cs" t="Include" />
+          <e p="UtilItem.cs" t="Include" />
         </e>
         <e p="Lobby.cs" t="Include" />
+        <e p="MapFacility" t="Include">
+          <e p="BaseMapFacility.cs" t="Include" />
+          <e p="MapFacilityTasangyeonhwa.cs" t="Include" />
+          <e p="MapFacilityWaterCannon.cs" t="Include" />
+          <e p="PipeBridgeScript.cs" t="Include" />
+          <e p="PortalScript.cs" t="Include" />
+          <e p="TasangyeonhwaScript.cs" t="Include" />
+          <e p="WaterCannonScript.cs" t="Include" />
+        </e>
         <e p="MapManager.cs" t="Include" />
         <e p="Network" t="Include">
-          <e p="ConnectServer.cs" t="Include" />
-          <e p="InstanceValue.cs" t="Include" />
+          <e p="Connected.cs" t="Include" />
+          <e p="Lobby" t="Include">
+            <e p="MeshCreator.cs" t="Include" />
+          </e>
           <e p="LobbyManager.cs" t="Include" />
+          <e p="MenuManager.cs" t="Include" />
           <e p="RoomManager.cs" t="Include" />
-          <e p="ServerManager.cs" t="Include" />
         </e>
-        <e p="PipeBridgeScript.cs" t="Include" />
+        <e p="PhotonChat.cs" t="Include" />
         <e p="PlayerController.cs" t="Include" />
         <e p="PlayerDummy.cs" t="Include" />
         <e p="PlayerStat.cs" t="Include" />
-        <e p="PortalScript.cs" t="Include" />
         <e p="Respawn.cs" t="Include" />
+        <e p="ShakeEvent.cs" t="Include" />
         <e p="SlidingRoofScript.cs" t="Include" />
         <e p="TableTopObject.cs" t="Include" />
-        <e p="TestBox.cs" t="Include" />
         <e p="TimedObjectDestructor.cs" t="Include" />
-        <e p="UIButterflyCharging.cs" t="Include" />
-        <e p="UIManager.cs" t="Include" />
-        <e p="UIStatus.cs" t="Include" />
-        <e p="UIStatusOther.cs" t="Include" />
-        <e p="WaterCannonScript.cs" t="Include" />
+        <e p="TitleController.cs" t="Include" />
+        <e p="TitleScene.cs" t="Include" />
+        <e p="UI" t="Include">
+          <e p="UIAmmoCount.cs" t="Include" />
+          <e p="UIAmmoGauge.cs" t="Include" />
+          <e p="UIButterflyCharging.cs" t="Include" />
+          <e p="UICount3Script.cs" t="Include" />
+          <e p="UIDebugButton.cs" t="Include" />
+          <e p="UIEButton.cs" t="Include" />
+          <e p="UIManager.cs" t="Include" />
+          <e p="UIResultEmotion.cs" t="Include" />
+          <e p="UIResultScoreBoard.cs" t="Include" />
+          <e p="UIScoreBoard.cs" t="Include" />
+          <e p="UIScoreBoardCell.cs" t="Include" />
+          <e p="UIStatus.cs" t="Include" />
+          <e p="UIStatusOther.cs" t="Include" />
+          <e p="UITimer.cs" t="Include" />
+        </e>
       </e>
       <e p="Assets\shader Forge_ Test" t="Include">
+        <e p="noise_test.shader" t="Include" />
         <e p="Water_test.shader" t="Include" />
       </e>
       <e p="Assets\ShaderForge" t="Include">
@@ -594,11 +632,31 @@
       </e>
       <e p="Assets\Shaders" t="Include">
         <e p="boombox.shader" t="Include" />
+        <e p="customlight_cellshader 1.shader" t="Include" />
+        <e p="customlight_cellshader 2.shader" t="Include" />
         <e p="customlight_cellshader.shader" t="Include" />
+        <e p="customlight_cellshader_d.shader" t="Include" />
         <e p="Dahong_shader.shader" t="Include" />
+        <e p="food.shader" t="Include" />
+        <e p="itembox_test.shader" t="Include" />
+        <e p="ItemBoxA.shader" t="Include" />
+        <e p="ItemOutline.shader" t="Include" />
         <e p="ob.shader" t="Include" />
         <e p="T2SideStandard.shader" t="Include" />
         <e p="table.shader" t="Include" />
+      </e>
+      <e p="Assets\skybox" t="Include">
+        <e p="7030 HDR Skies" t="Include">
+          <e p="Miscellaneous" t="Include">
+            <e p="BlendForBloom.shader" t="Include" />
+            <e p="BlurAndFlares.shader" t="Include" />
+            <e p="BrightPassFilter2.shader" t="Include" />
+            <e p="DemoBloom.cs" t="Include" />
+            <e p="LensFlareCreate.shader" t="Include" />
+            <e p="PassiveRotation.cs" t="Include" />
+            <e p="PostEffectsBase.cs" t="Include" />
+          </e>
+        </e>
       </e>
       <e p="Coelacanth.sln" t="IncludeFlat" />
       <e p="Library" t="ExcludeRecursive" />

@@ -17,7 +17,7 @@ public class MenuManager : MonoBehaviour
     // 닉네임 글자 수 제한 설정
     void Start()
     {
-        PlayButton.GetComponentInChildren<InputField>().characterLimit = 16;
+        PlayButton.GetComponentInChildren<InputField>().characterLimit = 8;
     }
 
     // 닉네임 설정 후, 게임 시작
@@ -43,6 +43,13 @@ public class MenuManager : MonoBehaviour
                 Debug.Log("특수문자 사용 불가");
             }
         }
+    }
+
+    public bool NickNameCheck()
+    {
+
+
+        return false;
     }
 
     // 특수문자 검출하는 정규표현식

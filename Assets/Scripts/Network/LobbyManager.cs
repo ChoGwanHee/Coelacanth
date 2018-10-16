@@ -19,12 +19,12 @@ public class LobbyManager : MonoBehaviour
         PhotonLobby.SetActive(false);
         NetworkManager.SetActive(false);
         Lobby = GetComponent<LobbyManager>();
-        Debug.Log("Lobby Object Disabled");
+        //Debug.Log("Lobby Object Disabled");
     }
 
     public void AvailablePhoton()
     {
-        Debug.Log("Lobby object Availabled");
+        //Debug.Log("Lobby object Availabled");
         NetworkManager.SetActive(true);
         Thread.Sleep(1000);
         PhotonLobby.SetActive(true);
