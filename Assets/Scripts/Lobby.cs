@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using ServerModule;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -24,8 +25,9 @@ public class Lobby : Photon.PunBehaviour {
     public override void OnJoinedLobby()
     {
         // 닉네임 설정
-        PhotonNetwork.playerName = "TestPlayer " + Random.Range(0, 20000);
-
+        int ownerID = Random.Range(0, 20000);
+        PhotonNetwork.playerName =  InstanceValue.Nickname + " " + ownerID;
+        ServerManager.Send(string.Format("NICKNAME:{0}:{1}:{2}", InstanceValue.Nickname, ownerID, InstanceValue.Nickname.Length));
         PhotonNetwork.JoinRandomRoom();
     }
 

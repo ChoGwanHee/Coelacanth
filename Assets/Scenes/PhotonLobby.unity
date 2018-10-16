@@ -603,6 +603,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 224362578502311876, guid: 74efdc5c56c6e17449a02f13b96dfedb,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 45
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 74efdc5c56c6e17449a02f13b96dfedb, type: 2}
   m_IsPrefabParent: 0

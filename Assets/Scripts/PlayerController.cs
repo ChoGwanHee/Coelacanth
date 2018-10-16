@@ -454,7 +454,10 @@ public class PlayerController : Photon.PunBehaviour
 
         Vector3 genPos = transform.position;
         GameObject.Instantiate(deadEfx_ref, genPos, Quaternion.identity);
-        ServerManager.Send(string.Format("FALL:{0}:{1}:{2}", InstanceValue.Nickname, PlayerAniState.Fall, respawnTime));
+        if (photonView.isMine)
+        {
+            ServerManager.Send(string.Format("FALL:{0}:{1}:{2}", InstanceValue.Nickname, PlayerAniState.Fall, respawnTime));
+        }
         PublicPlayVoiceSound("Falling");
         FMODUnity.RuntimeManager.PlayOneShot(fallingSound);
 
@@ -510,7 +513,11 @@ public class PlayerController : Photon.PunBehaviour
     {
         //stat.HPReset();
         stat.curHP = 60;
-        ServerManager.Send(string.Format("RECOVERY:{0}:{1}:{2}", InstanceValue.Nickname, InstanceValue.ID, 60));
+        if (photonView.isMine)
+        {
+            ServerManager.Send(string.Format("RECOVERY:{0}:{1}:{2}", InstanceValue.Nickname, InstanceValue.ID, 60));
+            
+        }
         ChangeState(PlayerAniState.Idle);
     }
 
