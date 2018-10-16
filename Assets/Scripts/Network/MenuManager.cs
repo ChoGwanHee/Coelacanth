@@ -33,8 +33,7 @@ public class MenuManager : MonoBehaviour
             if (NickNameRegexCheck(PlayButton.GetComponentInChildren<InputField>().text) == true)
             {
                 InstanceValue.Nickname = PlayButton.GetComponentInChildren<InputField>().text;
-                ServerManager.Send(string.Format("NICKNAME:{0}:{1}:{2}", 0, PlayButton.GetComponentInChildren<InputField>().text.Length, InstanceValue.Nickname));
-                Debug.Log("나의 닉네임 : " + InstanceValue.Nickname);
+                //ServerManager.Send(string.Format("NICKNAME:{0}:{1}:{2}", 0, PlayButton.GetComponentInChildren<InputField>().text.Length, InstanceValue.Nickname));
                 LobbyManager.Lobby.AvailablePhoton();
             }
             else
