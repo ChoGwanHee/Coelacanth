@@ -23,7 +23,7 @@ MonoBehaviour:
   - item: {fileID: 11400000, guid: 43539fea201b9584990de150ea18b715, type: 2}
     itemBoxRef: {fileID: 1423522739461498, guid: 9aff78ca658dba442b1e976f91f7fbed,
       type: 2}
-    chance: 5
+    chance: 0.2
   - item: {fileID: 11400000, guid: 7fe4498f5debd844d84f5a91f89c80d6, type: 2}
     itemBoxRef: {fileID: 1847574949844782, guid: c0bb1121e142de44190d5cbaeb481864,
       type: 2}
