@@ -85,7 +85,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1768166243061254}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.2, y: 9.75, z: 0}
+  m_LocalPosition: {x: 1.5, y: 9.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4074895152077152}
@@ -113,7 +113,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1950820711483148}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -14.5}
+  m_LocalPosition: {x: 0, y: 0, z: -27}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4668112741651116}
@@ -151,7 +151,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 35
+  field of view: 30
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -187,7 +187,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 35
+  field of view: 30
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -218,17 +218,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   mode: 3
-  smoothMoveTime: 0.6
+  smoothMoveTime: 0.5
   fastSmoothMoveTime: 0.2
   fastMoveDistance: 5
   baseAddOffset: 7
-  minPixel: 150
-  maxPixel: 300
+  minPixel: 160
+  maxPixel: 180
   smoothZoomTime: 0.9
   zoomXFactor: 1.5
   zoomZFactor: 1.6
   minZoomDistance: 18
   maxZoomDistance: 28
+  defaultZoomDistance: -20
   zoomProfile: {fileID: 11400000, guid: e2169f4b255a8d9419b1ad670bbb1ee4, type: 2}
 --- !u!114 &114936024297461308
 MonoBehaviour:

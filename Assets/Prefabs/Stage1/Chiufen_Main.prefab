@@ -2104,7 +2104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f9eaeabcd69caa42ae67c3c7238ba5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrustForce: 7
+  thrustForce: 10
   blockForce: 13
   duration: 2.6
   shakePower: 2

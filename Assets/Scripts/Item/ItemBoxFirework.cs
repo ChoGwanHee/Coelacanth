@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ItemBoxFirework : BaseItemBox
 {
     private bool isMaster;
+
 
     protected override void Start()
     {

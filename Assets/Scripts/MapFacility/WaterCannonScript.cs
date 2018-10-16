@@ -83,7 +83,7 @@ public class WaterCannonScript : MonoBehaviour {
                 if (effectedObjects[i].CompareTag("Player"))
                 {
                     PlayerController pc = effectedObjects[i].GetComponent<PlayerController>();
-                    pc.Pushed(force * 3);
+                    pc.Pushed(force * 2);
 
                     // 플레이어가 피격 되었을 때 점수 감산
                     pc.Stat.AddScore(-10);
@@ -104,8 +104,8 @@ public class WaterCannonScript : MonoBehaviour {
 
         Vector3 centerPos = transform.TransformPoint(new Vector3(0f, 0f, 10f));
         Vector3 extents = new Vector3(10.0f, 0.65f, 0.65f);
-        Vector3 upDirection = (Vector3.forward + transform.TransformDirection(Vector3.forward) * 0.3f) * blockForce;
-        Vector3 downDirection = (Vector3.back + transform.TransformDirection(Vector3.forward) * 0.3f) * blockForce;
+        Vector3 upDirection = Vector3.forward * blockForce;
+        Vector3 downDirection = Vector3.back * blockForce;
         float tickTime = GameManagerPhoton._instance.GameTick;
         float tickElapsedTime = tickTime;
 

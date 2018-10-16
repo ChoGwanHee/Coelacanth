@@ -10,6 +10,7 @@ public class ItemManager : Photon.PunBehaviour
     public ItemTable[] itemTables;
     public BaseItemBox[][] itemBoxPool;
     private int[] lastIndex;
+    public GameObject itemBoxPoolParent;
     [HideInInspector]
     [SerializeField]
     public int[] curBoxCount;
@@ -185,10 +186,10 @@ public class ItemManager : Photon.PunBehaviour
             lastIndex[i] = 0;
         }
 
-        GameObject parent = GameObject.Find("ItemBoxes");
-        if (parent == null)
+        itemBoxPoolParent = GameObject.Find("ItemBoxes");
+        if (itemBoxPoolParent == null)
         {
-            parent = new GameObject("ItemBoxes");
+            itemBoxPoolParent = new GameObject("ItemBoxes");
         }
 
         int poolIndex = 0;
@@ -202,7 +203,7 @@ public class ItemManager : Photon.PunBehaviour
                 {
                     for (int k = 0; k < poolExtraAmount; k++)
                     {
-                        BaseItemBox itemBox = Instantiate(itemTables[i].itemList[j].itemBoxRef, Vector3.zero, Quaternion.identity, parent.transform).GetComponent<BaseItemBox>();
+                        BaseItemBox itemBox = Instantiate(itemTables[i].itemList[j].itemBoxRef, Vector3.zero, Quaternion.identity, itemBoxPoolParent.transform).GetComponent<BaseItemBox>();
 
                         if(itemBox != null)
                         {
@@ -226,8 +227,7 @@ public class ItemManager : Photon.PunBehaviour
         BaseItemBox itemBox = itemBoxPool[firstIndex][secondIndex];
 
         itemBox.transform.position = movePos;
-        itemBox.gameObject.SetActive(true);
-        itemBox.alive = true;
+        itemBox.Activate();
         FMODUnity.RuntimeManager.PlayOneShot(itemBox.spawnSound);
     }
 
@@ -236,9 +236,7 @@ public class ItemManager : Photon.PunBehaviour
     {
         BaseItemBox itemBox = itemBoxPool[firstIndex][secondIndex];
 
-        itemBox.alive = false;
-        itemBox.transform.position = new Vector3(0f, 0f, -20f);
-        itemBox.gameObject.SetActive(false);
+        itemBox.Deactivate();
         curBoxCount[itemBox.tableIndex]--;
     }
 
@@ -264,9 +262,9 @@ public class ItemManager : Photon.PunBehaviour
     }
 
     [PunRPC]
-    public void RemoveItemBoxFollower(int firstIndex, int secondIndex)
+    public void RemoveItemBoxFollower(int firstIndex, int secondIndex, Vector3 fixPos)
     {
-        (itemBoxPool[firstIndex][secondIndex] as ItemBoxUtil).ResetTarget();
+        (itemBoxPool[firstIndex][secondIndex] as ItemBoxUtil).ResetTarget(fixPos);
     }
 
     /// <summary>
@@ -353,7 +351,7 @@ public class ItemManager : Photon.PunBehaviour
             return;
         }
 
-        Vector3 finalPos = GetRegenPos(tableIndex) + Vector3.up * itemBoxPool[randomItemBox][selectIndex].regenHeight;
+        Vector3 finalPos = GetRegenPos(0) + Vector3.up * itemBoxPool[randomItemBox][selectIndex].regenHeight;
         
         photonView.RPC("ActivateItemBox", PhotonTargets.All, randomItemBox, selectIndex, finalPos);
         curBoxCount[tableIndex]++;

@@ -21,7 +21,8 @@ GameObject:
   - component: {fileID: 4026093978256704}
   - component: {fileID: 33082243622413632}
   - component: {fileID: 23334693582304946}
-  m_Layer: 12
+  - component: {fileID: 65839535485477668}
+  m_Layer: 16
   m_Name: Item_Hotsauce
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,13 +53,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1311757270120960}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: -0.084952414, y: -0.7019851, z: -0.7019851, w: 0.084952414}
   m_LocalPosition: {x: 0, y: -0.239, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4645786970222008}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -166.20001}
 --- !u!4 &4645786970222008
 Transform:
   m_ObjectHideFlags: 1
@@ -66,7 +67,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1847574949844782}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.269, y: 5.494, z: 3.191}
+  m_LocalPosition: {x: 4.5283203, y: 5.67, z: 10.407991}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4026093978256704}
@@ -125,10 +126,22 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!65 &65839535485477668
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1311757270120960}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.33933726, y: 0.3490874, z: 1.0392693}
+  m_Center: {x: 0.000009819865, y: 0.00168822, z: 0.5191247}
 --- !u!114 &114749804765020094
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -148,8 +161,6 @@ MonoBehaviour:
   poolIndex1: 0
   poolIndex2: 0
   alive: 0
-  target: {fileID: 0}
-  offset: {x: 0.12, y: 0.2, z: 0.6}
   aniNum: 1
   owner: -1
 --- !u!135 &135869484642289416

@@ -153,8 +153,6 @@ public class PlayerController : Photon.PunBehaviour
     /// </summary>
     private bool isGrab = false;
 
-    private bool isConsumeable = true;
-
 
     // Turn
     private Ray mouseRay;
@@ -165,6 +163,11 @@ public class PlayerController : Photon.PunBehaviour
     /// 폭죽을 들 수 있는 손안의 본
     /// </summary>
     public Transform weaponPoint;
+
+    /// <summary>
+    /// 아이템을 들 수 있는 본
+    /// </summary>
+    public Transform itemPoint;
 
     /// <summary>
     /// 손에 붙일 수 있는 폭죽 프리팹 모음
@@ -674,10 +677,6 @@ public class PlayerController : Photon.PunBehaviour
             case PlayerAniState.KnockBack:
                 inputAxis = Vector2.zero;
                 knockbackElapsedTime = 0.0f;
-                if (isGrab)
-                {
-                    isConsumeable = false;
-                }
                 break;
             case PlayerAniState.Stun:
                 photonView.RPC("SetStunEfx", PhotonTargets.All, true);
@@ -687,7 +686,6 @@ public class PlayerController : Photon.PunBehaviour
                 Invoke("StunRecovery", stunTime);
                 if(isGrab)
                 {
-                    isConsumeable = false;
                     PutUtilItem();
                 }
                 break;
@@ -699,7 +697,6 @@ public class PlayerController : Photon.PunBehaviour
                 isFalling = true;
                 if (isGrab)
                 {
-                    isConsumeable = false;
                     PutUtilItem(true);
                 }
                 break;
@@ -873,6 +870,8 @@ public class PlayerController : Photon.PunBehaviour
     private void Interaction()
     {
         Collider[] cols = Physics.OverlapSphere(transform.position, interactionCheckRadius, LayerMask.GetMask("InteractionObject", "Item"));
+        IInteractable closestObj = null;
+        float closestSqrmag = 9999f;
 
         for(int i=0; i<cols.Length; i++)
         {
@@ -880,10 +879,17 @@ public class PlayerController : Photon.PunBehaviour
 
             if (obj != null && obj.IsInteractable())
             {
-                obj.Interact(this);
-                return;
+                float curSqrmag = (cols[i].transform.position - transform.position).sqrMagnitude;
+                if (closestSqrmag > curSqrmag)
+                {
+                    closestObj = obj;
+                    closestSqrmag = curSqrmag;
+                }
             }
         }
+
+        if(closestObj != null)
+            closestObj.Interact(this);
     }
 
     [PunRPC]
@@ -908,11 +914,12 @@ public class PlayerController : Photon.PunBehaviour
 
         if (utilItem == null) return;
 
-        GameManagerPhoton._instance.photonView.RPC("RemoveItemBoxFollower", PhotonTargets.All, utilItem.poolIndex1, utilItem.poolIndex2);
+        GameManagerPhoton._instance.photonView.RPC("RemoveItemBoxFollower", PhotonTargets.All, utilItem.poolIndex1, utilItem.poolIndex2, utilItem.transform.position);
         if (remove)
         {
             GameManagerPhoton._instance.photonView.RPC("DeactivateItemBox", PhotonTargets.All, utilItem.poolIndex1, utilItem.poolIndex2);
         }
+        
         utilItem = null;
     }
 
@@ -922,14 +929,14 @@ public class PlayerController : Photon.PunBehaviour
         float delayTime = (utilItem.item as UtilItem).delayTime;
         bool wait = true;
 
-        isConsumeable = true;
         anim.SetInteger("SubAniNum", subAniNum);
         ChangeState(PlayerAniState.Consume);
         while(wait)
         {
-            if(Input.GetMouseButtonUp(0) || !isConsumeable)
+            if(Input.GetMouseButtonUp(0) || state != PlayerAniState.Consume)
             {
-                anim.SetInteger("SubAniNum", 1);
+                if(isGrab)
+                    anim.SetInteger("SubAniNum", 1);
                 wait = false;
             }
             else
@@ -951,38 +958,63 @@ public class PlayerController : Photon.PunBehaviour
 
     public IEnumerator CheckInteractionIndicator()
     {
-        bool isDisplay = false;
-        bool existAround;
+        IInteractable closestObj = null;
+        ItemBoxUtil outlinedObj = null;
 
         while (true)
         {
-            existAround = false;
+            closestObj = null;
 
-            if (state == PlayerAniState.Idle)
+            if (state == PlayerAniState.Idle && !isGrab)
             {
                 Collider[] cols = Physics.OverlapSphere(transform.position, interactionCheckRadius, LayerMask.GetMask("InteractionObject", "Item"));
-                
+                float closestSqrmag = 9999f;
+                int closestIndex = -1;
+
                 for (int i = 0; i < cols.Length; i++)
                 {
                     IInteractable obj = cols[i].GetComponent<IInteractable>();
 
                     if (obj != null && obj.IsInteractable())
                     {
-                        if (!isDisplay)
+                        float curSqrmag = (cols[i].transform.position - transform.position).sqrMagnitude;
+                        if (closestSqrmag > curSqrmag)
                         {
-                            isDisplay = true;
-                            UIManager._instance.eButton.SetActivate(true, cols[i].transform, obj.GetButtonType());
+                            closestObj = obj;
+                            closestIndex = i;
+                            closestSqrmag = curSqrmag;
                         }
-                        existAround = true;
-                        break;
                     }
+                }
+
+                if(closestObj != null)
+                {
+                    UIManager._instance.eButton.SetActivate(true, cols[closestIndex].transform, closestObj.GetButtonType());
+
+                    if(outlinedObj != null)
+                    {
+                        outlinedObj.SetOutline(false);
+                    }
+
+                    ItemBoxUtil itemBox = cols[closestIndex].GetComponent<ItemBoxUtil>();
+                    if (itemBox != null)
+                    {
+                        outlinedObj = itemBox;
+                        outlinedObj.SetOutline(true);
+                    }
+                    
                 }
             }
             
-            if (!existAround && isDisplay)
+            if (closestObj == null)
             {
-                isDisplay = false;
                 UIManager._instance.eButton.SetActivate(false);
+
+                if(outlinedObj != null)
+                {
+                    outlinedObj.SetOutline(false);
+                    outlinedObj = null;
+                }
             }
             yield return new WaitForSeconds(interactionCheckTime);
         }

@@ -39,7 +39,8 @@ GameObject:
   - component: {fileID: 4272866469538460}
   - component: {fileID: 33302356775759892}
   - component: {fileID: 23362476230354716}
-  m_Layer: 12
+  - component: {fileID: 65960761350196944}
+  m_Layer: 16
   m_Name: Item_Cakepiece
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66,7 +67,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1200319710891264}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.124, y: 5.68, z: 2.893}
+  m_LocalPosition: {x: 4.0612125, y: 6.2, z: 2.9574547}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4272866469538460}
@@ -125,10 +126,22 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!65 &65960761350196944
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1593910506558714}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.76126647, y: 0.8510066, z: 0.69019353}
+  m_Center: {x: -0.03858667, y: -0.07491333, z: 0.34509236}
 --- !u!114 &114877274280482356
 MonoBehaviour:
   m_ObjectHideFlags: 1

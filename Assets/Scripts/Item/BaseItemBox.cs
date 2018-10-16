@@ -45,5 +45,20 @@ public abstract class BaseItemBox : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
+
+    public virtual void Activate()
+    {
+        gameObject.SetActive(true);
+        alive = true;
+    }
+
+    public virtual void Deactivate()
+    {
+        StopAllCoroutines();
+        alive = false;
+        transform.position = new Vector3(0f, 0f, -20f);
+        transform.rotation = Quaternion.identity;
+        gameObject.SetActive(false);
+    }
  
 }
