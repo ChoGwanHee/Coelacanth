@@ -17,7 +17,7 @@ public class MenuManager : MonoBehaviour
     // 닉네임 글자 수 제한 설정
     void Start()
     {
-        PlayButton.GetComponentInChildren<InputField>().characterLimit = 16;
+        PlayButton.GetComponentInChildren<InputField>().characterLimit = 8;
     }
 
     // 닉네임 설정 후, 게임 시작
@@ -33,8 +33,7 @@ public class MenuManager : MonoBehaviour
             if (NickNameRegexCheck(PlayButton.GetComponentInChildren<InputField>().text) == true)
             {
                 InstanceValue.Nickname = PlayButton.GetComponentInChildren<InputField>().text;
-                ServerManager.Send(string.Format("NICKNAME:{0}:{1}:{2}", 0, PlayButton.GetComponentInChildren<InputField>().text.Length, InstanceValue.Nickname));
-                Debug.Log("나의 닉네임 : " + InstanceValue.Nickname);
+                //ServerManager.Send(string.Format("NICKNAME:{0}:{1}:{2}", 0, PlayButton.GetComponentInChildren<InputField>().text.Length, InstanceValue.Nickname));
                 LobbyManager.Lobby.AvailablePhoton();
             }
             else
@@ -43,6 +42,13 @@ public class MenuManager : MonoBehaviour
                 Debug.Log("특수문자 사용 불가");
             }
         }
+    }
+
+    public bool NickNameCheck()
+    {
+
+
+        return false;
     }
 
     // 특수문자 검출하는 정규표현식

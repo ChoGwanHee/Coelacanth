@@ -449,12 +449,15 @@ public class PlayerController : Photon.PunBehaviour
 
         // 보내는 정보   = 정보 : 플레이어 : 상태 : 라이프차감
         // 받는 정보      = 정보 : 플레이어 : 상태 : 보유라이프
-        ServerManager.Send(string.Format("FALL:{0}:{1}:{2}", true, PlayerAniState.Fall, respawnTime));
         Invoke("Respawn", respawnTime);
         executer.ChangeFirework(0, 0);
 
         Vector3 genPos = transform.position;
         GameObject.Instantiate(deadEfx_ref, genPos, Quaternion.identity);
+        if (photonView.isMine)
+        {
+            ServerManager.Send(string.Format("FALL:{0}:{1}:{2}", InstanceValue.Nickname, PlayerAniState.Fall, respawnTime));
+        }
         PublicPlayVoiceSound("Falling");
         FMODUnity.RuntimeManager.PlayOneShot(fallingSound);
 
@@ -510,6 +513,11 @@ public class PlayerController : Photon.PunBehaviour
     {
         //stat.HPReset();
         stat.curHP = 60;
+        if (photonView.isMine)
+        {
+            ServerManager.Send(string.Format("RECOVERY:{0}:{1}:{2}", InstanceValue.Nickname, InstanceValue.ID, 60));
+            
+        }
         ChangeState(PlayerAniState.Idle);
     }
 

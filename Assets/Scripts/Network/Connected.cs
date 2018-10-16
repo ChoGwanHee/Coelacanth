@@ -10,13 +10,12 @@ public class Connected : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(this);
-        Debug.Log("초기화");
         ServerManager.Initialized();
     }
 
     private void Start()
     {
-        StartConnectServer("127.0.0.1", 2020);
+        StartConnectServer("45.112.165.82", 12800);
     }
 
     void NicknameWriteLine()
@@ -26,7 +25,6 @@ public class Connected : MonoBehaviour
 
     private void StartConnectServer(string _address, int _port)
     {
-        Debug.Log("서버 접속 시도");
         ServerManager.Disconnect();
 
         try
@@ -77,7 +75,7 @@ public class Connected : MonoBehaviour
     {
         if (InstanceValue.TCP != null && InstanceValue.TCP.Connected)
         {
-            ServerManager.Send(string.Format("DISCONNECT"));
+            ServerManager.Send(string.Format("DISCONNECT:{0}", InstanceValue.Nickname));
             Thread.Sleep(500);
             InstanceValue.TCP.Close();
         }
