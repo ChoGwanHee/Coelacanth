@@ -24,10 +24,10 @@ public class Lobby : Photon.PunBehaviour {
 
     public override void OnJoinedLobby()
     {
+        Debug.Log("OnJoinedLobby");
         // 닉네임 설정
-        int ownerID = Random.Range(0, 20000);
-        PhotonNetwork.playerName =  InstanceValue.Nickname + " " + ownerID;
-        ServerManager.Send(string.Format("NICKNAME:{0}:{1}:{2}", InstanceValue.Nickname, ownerID, InstanceValue.Nickname.Length));
+        PhotonNetwork.playerName =  InstanceValue.Nickname + " " + InstanceValue.ID;
+        ServerManager.Send(string.Format("NICKNAME:{0}:{1}", InstanceValue.Nickname, InstanceValue.ID));
         PhotonNetwork.JoinRandomRoom();
     }
 
@@ -54,7 +54,7 @@ public class Lobby : Photon.PunBehaviour {
     IEnumerator LoadGameScene()
     {
         // 게임씬을 완벽하게 로딩 후 씬을 변경한다
-        AsyncOperation oper = SceneManager.LoadSceneAsync(2);
+        AsyncOperation oper = SceneManager.LoadSceneAsync(1);
 
         yield return oper; // 로딩이 완료될때까지 대기 한다
     }

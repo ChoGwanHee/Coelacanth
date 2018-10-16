@@ -569,7 +569,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
     private IEnumerator LoadTitleScene()
     {
         // 타이틀씬을 완벽하게 로딩 후 씬을 변경한다
-        AsyncOperation oper = SceneManager.LoadSceneAsync("Title");
+        AsyncOperation oper = SceneManager.LoadSceneAsync(0);
 
         yield return oper; // 로딩이 완료될때까지 대기 한다
     }

@@ -33,6 +33,8 @@ public class MenuManager : MonoBehaviour
             if (NickNameRegexCheck(PlayButton.GetComponentInChildren<InputField>().text) == true)
             {
                 InstanceValue.Nickname = PlayButton.GetComponentInChildren<InputField>().text;
+                int ownerID = Random.Range(0, 20000);
+                InstanceValue.ID = ownerID;
                 //ServerManager.Send(string.Format("NICKNAME:{0}:{1}:{2}", 0, PlayButton.GetComponentInChildren<InputField>().text.Length, InstanceValue.Nickname));
                 LobbyManager.Lobby.AvailablePhoton();
             }
