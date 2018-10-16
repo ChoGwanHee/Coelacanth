@@ -1,18 +1,17 @@
 fileFormatVersion: 2
-guid: 595bf91cc96ffbe43b117690ff0f35fd
-timeCreated: 1537630054
+guid: bae344e8435f81b429dd345c2e3c8d9b
+timeCreated: 1539722527
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: 'Material #492'
-    2100002: 'Material #490'
+    2100000: 'Material #869'
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Object015
-    4300002: Object031
+    4300000: Object018
+    4300002: Object005
     9500000: //RootNode
   externalObjects: {}
   materials:
@@ -69,7 +68,7 @@ ModelImporter:
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
-  importAnimation: 0
+  importAnimation: 1
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2

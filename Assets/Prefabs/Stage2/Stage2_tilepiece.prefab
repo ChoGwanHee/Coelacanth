@@ -21,7 +21,10 @@ GameObject:
   - component: {fileID: 4141686123732122}
   - component: {fileID: 33754586197636710}
   - component: {fileID: 23763459302663366}
+  - component: {fileID: 95586260217519272}
   - component: {fileID: 65915767296985660}
+  - component: {fileID: 54571044674800680}
+  - component: {fileID: 114639851687905462}
   m_Layer: 8
   m_Name: Stage2_tilepiece
   m_TagString: Untagged
@@ -83,6 +86,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1216384944752644}
   m_Mesh: {fileID: 4300000, guid: d419a8b523359eb4f98a28204237fc53, type: 3}
+--- !u!54 &54571044674800680
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1216384944752644}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &65915767296985660
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -95,3 +113,31 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.4748821, y: 2.4748833, z: 0.750001}
   m_Center: {x: -0.00000054004795, y: 0.00000042083815, z: -0.37494364}
+--- !u!95 &95586260217519272
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1216384944752644}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 124e15021f14f73409062df67d96b84c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114639851687905462
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1216384944752644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a27fe2f3d616934ba214d84f567ec45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

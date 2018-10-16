@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4067162351712322}
   - component: {fileID: 33903876970945796}
   - component: {fileID: 23887244779310956}
+  - component: {fileID: 135203567026591996}
   m_Layer: 0
   m_Name: Stage2_Object_Pumpkin
   m_TagString: Untagged
@@ -82,3 +83,15 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1781432550487538}
   m_Mesh: {fileID: 4300000, guid: 1258777787612c648995e7409004d6c5, type: 3}
+--- !u!135 &135203567026591996
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1781432550487538}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.0124584
+  m_Center: {x: -0.00000059604645, y: -0.0000011920929, z: 0.9671562}

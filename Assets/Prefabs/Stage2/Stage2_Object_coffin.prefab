@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4541227620240352}
   - component: {fileID: 33498759701829696}
   - component: {fileID: 23537436200369432}
+  - component: {fileID: 65908381504668954}
   m_Layer: 0
   m_Name: Stage2_Object_coffin
   m_TagString: Untagged
@@ -82,3 +83,15 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1607421554223714}
   m_Mesh: {fileID: 4300000, guid: 07852ec3ca7d79448996b15fdebeffe9, type: 3}
+--- !u!65 &65908381504668954
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1607421554223714}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.2393847, y: 0.90455806, z: 2.175008}
+  m_Center: {x: 0.0000012218952, y: -0.0000012218952, z: 1.0888249}

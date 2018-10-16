@@ -16,9 +16,9 @@ public class Connected : MonoBehaviour
     private void Start()
     {
         // 서비스
-        //StartConnectServer("45.112.165.82", 12800);
+        StartConnectServer("45.112.165.82", 12800);
         // 개발
-        StartConnectServer("127.0.0.1", 12800);
+        //StartConnectServer("127.0.0.1", 12800);
     }
 
     void NicknameWriteLine()
