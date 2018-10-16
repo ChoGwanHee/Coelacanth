@@ -15,7 +15,10 @@ public class Connected : MonoBehaviour
 
     private void Start()
     {
-        StartConnectServer("45.112.165.82", 12800);
+        // 서비스
+        //StartConnectServer("45.112.165.82", 12800);
+        // 개발
+        StartConnectServer("127.0.0.1", 12800);
     }
 
     void NicknameWriteLine()
@@ -75,7 +78,7 @@ public class Connected : MonoBehaviour
     {
         if (InstanceValue.TCP != null && InstanceValue.TCP.Connected)
         {
-            ServerManager.Send(string.Format("DISCONNECT:{0}", InstanceValue.Nickname));
+            ServerManager.Send(string.Format("DISCONNECT:{0}:{1}", InstanceValue.Nickname, InstanceValue.ID));
             Thread.Sleep(500);
             InstanceValue.TCP.Close();
         }
