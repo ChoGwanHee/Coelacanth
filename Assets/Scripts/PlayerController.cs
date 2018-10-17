@@ -528,7 +528,7 @@ public class PlayerController : Photon.PunBehaviour
     {
         if (photonView.isMine)
         {
-            GameManagerPhoton._instance.RespawnPlayer(transform);
+            GameManagerPhoton._instance.RespawnPlayer(transform, GameManagerPhoton._instance.itemManager.GetRegenPos(0));
         }
         stat.HPReset();
         stat.onStage = true;

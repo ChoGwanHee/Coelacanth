@@ -378,7 +378,7 @@ public class ItemManager : Photon.PunBehaviour
         }
     }
 
-    private Vector3 GetRegenPos(int type)
+    public Vector3 GetRegenPos(int type)
     {
         if(type == 0)
         {

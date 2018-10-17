@@ -1,9 +1,6 @@
 ﻿using UnityEngine;
 
-/// <summary>
-/// 다이나믹 오브젝트를 리스폰할 때 사용하는 스크립트
-/// </summary>
-public class Respawn : Photon.PunBehaviour
+public class HalloweenRespawn : Photon.PunBehaviour
 {
     /// <summary>
     /// 리스폰 대기 시간
@@ -38,6 +35,8 @@ public class Respawn : Photon.PunBehaviour
     private Rigidbody rb;
     private Renderer objectRenderer;
 
+    private bool isOnGround = true;
+
 
     void Start()
     {
@@ -50,7 +49,7 @@ public class Respawn : Photon.PunBehaviour
 
     void Update()
     {
-        if (!photonView.isMine) return;
+        if (!photonView.isMine || !isOnGround) return;
 
         if (respawning)
         {
@@ -79,20 +78,24 @@ public class Respawn : Photon.PunBehaviour
     [PunRPC]
     private void RespawnObject()
     {
-        transform.position = originPos;
-        transform.rotation = originQuaternion;
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
-        respawning = false;
-        objectRenderer.enabled = true;
-
-        // 하위 오브젝트 리스폰
-        for (int i = 0; i < subObjects.Length; i++)
+        isOnGround = CheckOnGround();
+        if (isOnGround)
         {
-            subObjects[i].Respawn();
+            transform.position = originPos;
+            transform.rotation = originQuaternion;
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            respawning = false;
+            objectRenderer.enabled = true;
+
+            // 하위 오브젝트 리스폰
+            for (int i = 0; i < subObjects.Length; i++)
+            {
+                subObjects[i].Respawn();
+            }
         }
     }
-        
+
     /// <summary>
     /// 오브젝트를 숨깁니다.
     /// </summary>
@@ -102,5 +105,17 @@ public class Respawn : Photon.PunBehaviour
         objectRenderer.enabled = false;
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
+    }
+
+    private bool CheckOnGround()
+    {
+        if(Physics.Raycast(originPos, Vector3.down,  5.0f, LayerMask.GetMask("Ground"), QueryTriggerInteraction.Ignore))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

@@ -22,9 +22,9 @@ GameObject:
   - component: {fileID: 33903876970945796}
   - component: {fileID: 23887244779310956}
   - component: {fileID: 135203567026591996}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Stage2_Object_Pumpkin
-  m_TagString: Untagged
+  m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -89,7 +89,7 @@ SphereCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1781432550487538}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: cb8b67437aceb584bbe9c7851c260574, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2

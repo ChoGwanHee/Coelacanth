@@ -27,10 +27,10 @@ GameObject:
   - component: {fileID: 114684294380338354}
   - component: {fileID: 114538101140948938}
   - component: {fileID: 114658383451480984}
-  - component: {fileID: 114439862908944050}
+  - component: {fileID: 114830751589622954}
   m_Layer: 9
   m_Name: Stage2_Object_table
-  m_TagString: Untagged
+  m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,7 +110,7 @@ MeshCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1085863055317132}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: cb8b67437aceb584bbe9c7851c260574, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -118,19 +118,6 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 878e73f36eca5ff4b8ecdd2e72ba1288, type: 3}
---- !u!114 &114439862908944050
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1085863055317132}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67d9ffba42ba4de4d8ab239ce0f0ba7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  respawnTime: 2
-  subObjects: []
 --- !u!114 &114538101140948938
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -248,3 +235,16 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
+--- !u!114 &114830751589622954
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1085863055317132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7aa5e6d67ad01542aba1887fc08eeb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  respawnTime: 2
+  subObjects: []

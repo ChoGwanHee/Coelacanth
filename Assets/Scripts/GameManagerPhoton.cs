@@ -302,13 +302,15 @@ public class GameManagerPhoton : Photon.PunBehaviour
     /// 플레이어를 리스폰 위치로 이동 시킵니다.
     /// </summary>
     /// <param name="playerTF">이동시킬 플레이어</param>
-    public void RespawnPlayer(Transform playerTF)
+    public void RespawnPlayer(Transform playerTF, Vector3 setPos)
     {
-        int random = Random.Range(0, 4);
+        /*int random = Random.Range(0, 4);
         Vector3 pos = playerGenPos[random].position;
-        pos.y += 0.5f;
+        pos.y += 0.5f;*/
 
-        playerTF.position = pos;
+        setPos.y += 0.1f;
+
+        playerTF.position = setPos;
     }
 
     /// <summary>
