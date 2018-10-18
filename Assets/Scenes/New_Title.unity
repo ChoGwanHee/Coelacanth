@@ -12526,6 +12526,32 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: PlayGame
       objectReference: {fileID: 0}
+    - target: {fileID: 224130591563673466, guid: 74efdc5c56c6e17449a02f13b96dfedb,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 156
+      objectReference: {fileID: 0}
+    - target: {fileID: 224130591563673466, guid: 74efdc5c56c6e17449a02f13b96dfedb,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 38
+      objectReference: {fileID: 0}
+    - target: {fileID: 114359937422590310, guid: 74efdc5c56c6e17449a02f13b96dfedb,
+        type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 954746d370bc8934299c8c8267543f4f,
+        type: 3}
+    - target: {fileID: 114723193297716880, guid: 74efdc5c56c6e17449a02f13b96dfedb,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114359937422590310, guid: 74efdc5c56c6e17449a02f13b96dfedb,
+        type: 2}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 74efdc5c56c6e17449a02f13b96dfedb, type: 2}
   m_IsPrefabParent: 0
