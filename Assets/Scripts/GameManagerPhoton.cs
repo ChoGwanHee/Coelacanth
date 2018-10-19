@@ -275,6 +275,10 @@ public class GameManagerPhoton : Photon.PunBehaviour
         {
             bool allReady = true;
 
+            GetPlayerByOwnerId(ownerId).PC.isUnbeatable = isReady;
+
+            // ready UI 처리
+            GetPlayerByOwnerId(ownerId).onReadyChanged(isReady);
 
             for (int i = 0; i < playerEnter.Length; i++)
             {
@@ -305,11 +309,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
             
         }
 
-        GetPlayerByOwnerId(ownerId).PC.isUnbeatable = isReady;
-
-
-        // ready UI 처리
-        GetPlayerByOwnerId(ownerId).onReadyChanged(isReady);
+        
     }
 
     /// <summary>

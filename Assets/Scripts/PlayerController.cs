@@ -266,25 +266,22 @@ public class PlayerController : Photon.PunBehaviour
                             Interaction();
                         }
 
-                        if (Input.GetKey(KeyCode.LeftShift))
+                        if (Input.GetKeyDown(KeyCode.Alpha1))
                         {
-                            if (Input.GetKeyDown(KeyCode.Alpha1))
-                            {
-                                anim.SetInteger("SubAniNum", 0);
-                                ChangeState(PlayerAniState.Emotion);
-                            }
-                            else if (Input.GetKeyDown(KeyCode.Alpha2))
-                            {
-                                anim.SetInteger("SubAniNum", 1);
-                                ChangeState(PlayerAniState.Emotion);
-                            }
-                            else if (Input.GetKeyDown(KeyCode.Alpha3))
-                            {
-                                anim.SetInteger("SubAniNum", 2);
-                                ChangeState(PlayerAniState.Emotion);
-                            }
-                            
+                            anim.SetInteger("SubAniNum", 0);
+                            ChangeState(PlayerAniState.Emotion);
                         }
+                        else if (Input.GetKeyDown(KeyCode.Alpha2))
+                        {
+                            anim.SetInteger("SubAniNum", 1);
+                            ChangeState(PlayerAniState.Emotion);
+                        }
+                        else if (Input.GetKeyDown(KeyCode.Alpha3))
+                        {
+                            anim.SetInteger("SubAniNum", 2);
+                            ChangeState(PlayerAniState.Emotion);
+                        }
+
                     }
                     else
                     {
