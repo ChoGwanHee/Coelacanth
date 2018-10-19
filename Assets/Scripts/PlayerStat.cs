@@ -17,6 +17,11 @@ public class PlayerStat : Photon.PunBehaviour
     public bool alive = true;
 
     /// <summary>
+    /// 점수변경 잠금
+    /// </summary>
+    public bool scoreLock = true;
+
+    /// <summary>
     /// 플레이어의 닉네임
     /// </summary>
     public string nickname;
@@ -289,7 +294,7 @@ public class PlayerStat : Photon.PunBehaviour
 
     public void AddScore(int score)
     {
-        if(pc.isUnbeatable && score <= 0)
+        if(scoreLock || pc.isUnbeatable && score <= 0)
             return;
 
         if(Score + score < 0)

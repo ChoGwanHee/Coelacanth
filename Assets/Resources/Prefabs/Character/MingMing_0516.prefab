@@ -3912,7 +3912,7 @@ MonoBehaviour:
   fallingSound: event:/SFX_Stage1/Character/Sound/SFX_Fall
   characterVoice: {fileID: 11400000, guid: 35bbc6b57363946458c27d9be599f7ac, type: 2}
   photonMove: 1
-  isControlable: 0
+  isControlable: 1
   isStun: 0
   isUnbeatable: 0
   accSpeed: 28

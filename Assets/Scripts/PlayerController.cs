@@ -265,6 +265,26 @@ public class PlayerController : Photon.PunBehaviour
                         {
                             Interaction();
                         }
+
+                        if (Input.GetKey(KeyCode.LeftShift))
+                        {
+                            if (Input.GetKeyDown(KeyCode.Alpha1))
+                            {
+                                anim.SetInteger("SubAniNum", 0);
+                                ChangeState(PlayerAniState.Emotion);
+                            }
+                            else if (Input.GetKeyDown(KeyCode.Alpha2))
+                            {
+                                anim.SetInteger("SubAniNum", 1);
+                                ChangeState(PlayerAniState.Emotion);
+                            }
+                            else if (Input.GetKeyDown(KeyCode.Alpha3))
+                            {
+                                anim.SetInteger("SubAniNum", 2);
+                                ChangeState(PlayerAniState.Emotion);
+                            }
+                            
+                        }
                     }
                     else
                     {
@@ -450,7 +470,6 @@ public class PlayerController : Photon.PunBehaviour
         // 보내는 정보   = 정보 : 플레이어 : 상태 : 라이프차감
         // 받는 정보      = 정보 : 플레이어 : 상태 : 보유라이프
         Invoke("Respawn", respawnTime);
-        executer.ChangeFirework(0, 0);
 
         Vector3 genPos = transform.position;
         GameObject.Instantiate(deadEfx_ref, genPos, Quaternion.identity);
@@ -524,12 +543,13 @@ public class PlayerController : Photon.PunBehaviour
     /// <summary>
     /// 캐릭터를 리스폰합니다.
     /// </summary>
-    private void Respawn()
+    public void Respawn()
     {
         if (photonView.isMine)
         {
             GameManagerPhoton._instance.RespawnPlayer(transform, GameManagerPhoton._instance.itemManager.GetRegenPos(0));
         }
+        executer.ChangeFirework(0, 0);
         stat.HPReset();
         stat.onStage = true;
         if(GameManagerPhoton._instance.IsPlaying)
@@ -790,6 +810,16 @@ public class PlayerController : Photon.PunBehaviour
                 }
                 break;
             case PlayerAniState.Stun:
+                break;
+            case PlayerAniState.Emotion:
+                if(isControlable && !isStun)
+                {
+                    GetInput();
+                    if(inputAxis.sqrMagnitude > 0)
+                    {
+                        ChangeState(PlayerAniState.Idle);
+                    }
+                }
                 break;
         }
     }

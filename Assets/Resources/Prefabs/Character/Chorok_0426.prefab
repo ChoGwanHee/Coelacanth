@@ -4598,6 +4598,7 @@ MonoBehaviour:
   stunTime: 3
   knockbackTime: 0.2
   weaponPoint: {fileID: 0}
+  itemPoint: {fileID: 0}
   handObjectSet: {fileID: 0}
   ring: {fileID: 1331525902487740}
   stunEfx: {fileID: 1624249424073126}

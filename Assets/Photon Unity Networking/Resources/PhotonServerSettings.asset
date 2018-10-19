@@ -71,4 +71,5 @@ MonoBehaviour:
   - TaggedPlayer
   - Teleport
   - FallTile
+  - SetPlayerReady
   DisableAutoOpenWizard: 1

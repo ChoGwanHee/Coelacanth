@@ -4553,7 +4553,7 @@ MonoBehaviour:
   fallingSound: event:/SFX_Stage1/Character/Sound/SFX_Fall
   characterVoice: {fileID: 11400000, guid: 5406938f66ba1ad4b8ffe1b60e1d3d41, type: 2}
   photonMove: 1
-  isControlable: 0
+  isControlable: 1
   isStun: 0
   isUnbeatable: 0
   accSpeed: 28
@@ -4563,6 +4563,7 @@ MonoBehaviour:
   stunTime: 3
   knockbackTime: 0.2
   weaponPoint: {fileID: 0}
+  itemPoint: {fileID: 0}
   handObjectSet: {fileID: 0}
   ring: {fileID: 1433471974510610}
   stunEfx: {fileID: 1487680090549838}

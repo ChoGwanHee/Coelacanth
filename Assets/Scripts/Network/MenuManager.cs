@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 public class MenuManager : MonoBehaviour
 {
     public GameObject PlayButton;
+    public InputField nicknameField;
 
     void Awake()
     {
@@ -17,30 +18,30 @@ public class MenuManager : MonoBehaviour
     // 닉네임 글자 수 제한 설정
     void Start()
     {
-        PlayButton.GetComponentInChildren<InputField>().characterLimit = 8;
+        nicknameField.characterLimit = 8;
     }
 
     // 닉네임 설정 후, 게임 시작
     public void PlayGame()
     {
-        if (PlayButton.GetComponentInChildren<InputField>().text.Length <= 0)
+        if (nicknameField.text.Length <= 0)
         {
-            ServerManager.Send(string.Format("NICKERROR:{0}:{1}:{2}", 1, PlayButton.GetComponentInChildren<InputField>().text.Length, PlayButton.GetComponentInChildren<InputField>().text));
-            Debug.Log(PlayButton.GetComponentInChildren<InputField>().text.Length + " : 닉네임 입력 필요");
+            ServerManager.Send(string.Format("NICKERROR:{0}:{1}:{2}", 1, nicknameField.text.Length, nicknameField.text));
+            Debug.Log(nicknameField.text.Length + " : 닉네임 입력 필요");
         }
         else
         {
-            if (NickNameRegexCheck(PlayButton.GetComponentInChildren<InputField>().text) == true)
+            if (NickNameRegexCheck(nicknameField.text) == true)
             {
-                InstanceValue.Nickname = PlayButton.GetComponentInChildren<InputField>().text;
+                InstanceValue.Nickname = nicknameField.text;
                 int ownerID = Random.Range(0, 20000);
                 InstanceValue.ID = ownerID;
-                //ServerManager.Send(string.Format("NICKNAME:{0}:{1}:{2}", 0, PlayButton.GetComponentInChildren<InputField>().text.Length, InstanceValue.Nickname));
+                //ServerManager.Send(string.Format("NICKNAME:{0}:{1}:{2}", 0, nicknameField.text.Length, InstanceValue.Nickname));
                 LobbyManager.Lobby.AvailablePhoton();
             }
             else
             {
-                ServerManager.Send(string.Format("NICKERROR:{0}:{1}:{2}", 2, PlayButton.GetComponentInChildren<InputField>().text.Length, PlayButton.GetComponentInChildren<InputField>().text));
+                ServerManager.Send(string.Format("NICKERROR:{0}:{1}:{2}", 2, nicknameField.text.Length, nicknameField.text));
                 Debug.Log("특수문자 사용 불가");
             }
         }

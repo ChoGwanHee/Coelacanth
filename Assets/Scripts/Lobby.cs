@@ -8,7 +8,7 @@ public class Lobby : Photon.PunBehaviour {
     private void Start()
     {
         // 게임 버전
-        PhotonNetwork.ConnectUsingSettings("0.8.1");
+        PhotonNetwork.ConnectUsingSettings("0.8.2");
     }
 
     public void OnPhotonRandomJoinFailed()

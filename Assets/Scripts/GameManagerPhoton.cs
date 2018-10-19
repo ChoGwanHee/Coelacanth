@@ -38,6 +38,8 @@ public class GameManagerPhoton : Photon.PunBehaviour
     /// </summary>
     public Transform[] playerGenPos = null;
 
+    private bool[] playerReady = null;
+
     /// <summary>
     /// 커서 이미지
     /// </summary>
@@ -158,6 +160,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
         Cursor.SetCursor(cursorTex, new Vector2(0, 0), CursorMode.ForceSoftware);
 
         playerEnter = new int[(PhotonNetwork.room.MaxPlayers)];
+        playerReady = new bool[(PhotonNetwork.room.MaxPlayers)];
 
         PhotonNetwork.isMessageQueueRunning = true;
         
@@ -165,10 +168,15 @@ public class GameManagerPhoton : Photon.PunBehaviour
         {
             CreatePlayer(0, playerGenPos[0].position);
             
-            playerEnter[0] = photonView.ownerId;
+            playerEnter[0] = PhotonNetwork.player.ID;
             for (int i = 1; i < playerEnter.Length; i++)
             {
                 playerEnter[i] = -1;
+            }
+
+            for(int i=0; i<playerReady.Length; i++)
+            {
+                playerReady[i] = false;
             }
         }
 
@@ -180,6 +188,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
 
         resultBGMEvent = FMODUnity.RuntimeManager.CreateInstance(resultBGM);
 
+        StartCoroutine(ReadyPrcess());
     }
 
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -220,6 +229,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
                 if(playerEnter[i] == otherPlayer.ID)
                 {
                     playerEnter[i] = -1;
+                    playerReady[i] = false;
                     break;
                 }
             }
@@ -230,6 +240,73 @@ public class GameManagerPhoton : Photon.PunBehaviour
     {
         Debug.Log("플레이어 퇴장:" + PhotonNetwork.player.NickName);
         
+    }
+
+    private IEnumerator ReadyPrcess()
+    {
+        bool localPlayerReady = false;
+
+        while (!isPlaying)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                localPlayerReady = !localPlayerReady;
+                if (localPlayerReady)
+                {
+                    GetPlayerByOwnerId(PhotonNetwork.player.ID).PC.ChangeState(PlayerAniState.Ready);
+                }
+                else
+                {
+                    GetPlayerByOwnerId(PhotonNetwork.player.ID).PC.ChangeState(PlayerAniState.Idle);
+                }
+                GetPlayerByOwnerId(PhotonNetwork.player.ID).IsControlable = !localPlayerReady;
+                photonView.RPC("SetPlayerReady", PhotonTargets.All, PhotonNetwork.player.ID, localPlayerReady);
+            }
+            yield return null;
+        }
+    }
+
+    [PunRPC]
+    private void SetPlayerReady(int ownerId, bool isReady)
+    {
+        if(PhotonNetwork.isMasterClient)
+        {
+            bool allReady = true;
+
+
+            for (int i = 0; i < playerEnter.Length; i++)
+            {
+                if (playerEnter[i] == ownerId)
+                {
+                    playerReady[i] = isReady;
+                }
+            }
+
+            // 모든 플레이어가 레디 했는지 체크
+            for(int i=0; i<playerReady.Length; i++)
+            {
+                if (!playerReady[i])
+                {
+                    allReady = false;
+                    break;
+                }
+            }
+            if(allReady)
+            {
+                GameStartRequest();
+            }
+
+            for(int i=0;i < playerReady.Length; i++)
+            {
+                Debug.Log(i + ":" + playerEnter[i] + ", " + playerReady[i]);
+            }
+            
+        }
+
+        GetPlayerByOwnerId(ownerId).PC.isUnbeatable = isReady;
+
+        
+        // ready UI 처리
     }
 
     /// <summary>
@@ -363,6 +440,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
                     itemManager.GameStartRegen();
                 }
                 SetPlayerActive(true);
+                SetScoreLock(false);
 
                 break;
             case GameState.Result:
@@ -376,6 +454,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
                 }
                 isPlaying = false;
                 SetPlayerActive(false);
+                SetScoreLock(true);
                 break;
         }
     }
@@ -399,6 +478,11 @@ public class GameManagerPhoton : Photon.PunBehaviour
             case (int)GameEvent.GameStart:
                 if(PhotonNetwork.isMasterClient)
                     PhotonNetwork.room.IsOpen = false;
+                SetPlayerActive(false);
+                SetPlayerUnbeatable(false);
+                PlayerController myPlayer = GetPlayerByOwnerId(PhotonNetwork.player.ID).PC;
+                myPlayer.Respawn();
+                myPlayer.TurnToScreen();
                 StartCoroutine(GameCountProcess(true));
                 break;
             case (int)GameEvent.GameStop:
@@ -416,15 +500,24 @@ public class GameManagerPhoton : Photon.PunBehaviour
         yield return new WaitForSeconds(1.0f);
         UIManager._instance.counterAnim.SetInteger("Count", 1);
         yield return new WaitForSeconds(1.0f);
-        UIManager._instance.counterAnim.gameObject.SetActive(false);
-
         if (isStart)
         {
             ChangeState(GameState.Playing);
+            UIManager._instance.counterAnim.SetInteger("Count", 4);
+            yield return new WaitForSeconds(1.0f);
         }
         else
         {
             ChangeState(GameState.Result);
+        }
+        UIManager._instance.counterAnim.gameObject.SetActive(false);
+    }
+
+    private void SetScoreLock(bool isLock)
+    {
+        for (int i = 0; i < playerList.Count; i++)
+        {
+            playerList[i].scoreLock = isLock;
         }
     }
 
@@ -437,6 +530,14 @@ public class GameManagerPhoton : Photon.PunBehaviour
                 playerList[i].IsControlable = active;
                 break;
             }
+        }
+    }
+
+    private void SetPlayerUnbeatable(bool unbeatable)
+    {
+        for (int i = 0; i < playerList.Count; i++)
+        {
+            playerList[i].PC.isUnbeatable = unbeatable;
         }
     }
 
