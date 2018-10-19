@@ -35,6 +35,7 @@ public class UIScoreBoardCell : MonoBehaviour {
 
     public Text nicknameText;
     public Text scoreText;
+    public Text readyText;
 
     private Image picture;
 
@@ -96,6 +97,7 @@ public class UIScoreBoardCell : MonoBehaviour {
         refPlayer = refStat.gameObject.GetPhotonView().owner;
         if(nicknameText != null)
             nicknameText.text = stat.nickname;
+        refStat.onReadyChanged += ReadyChange;
     }
 
     public void SetPlayerPicture(Sprite newPicture)
@@ -109,5 +111,10 @@ public class UIScoreBoardCell : MonoBehaviour {
         {
             SetScore(refPlayer.GetScore());
         }
+    }
+
+    private void ReadyChange(bool isReady)
+    {
+        readyText.gameObject.SetActive(isReady);
     }
 }

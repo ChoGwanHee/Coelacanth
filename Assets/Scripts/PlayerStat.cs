@@ -112,11 +112,14 @@ public class PlayerStat : Photon.PunBehaviour
 
 
     public delegate void OnScoreChangedDelegate(int newScore);
+    public delegate void OnReadyChangedDelegate(bool isReady);
 
     /// <summary>
     /// 플레이어의 점수가 바뀌었을 때 호출되는 델리게이트
     /// </summary>
     public OnScoreChangedDelegate onScoreChanged;
+
+    public OnReadyChangedDelegate onReadyChanged;
 
     
     private PlayerController pc;

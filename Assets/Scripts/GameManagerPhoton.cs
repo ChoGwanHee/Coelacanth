@@ -130,6 +130,8 @@ public class GameManagerPhoton : Photon.PunBehaviour
     /// </summary>
     public GameObject[] backgroundFireworks;
 
+    public GameObject tempStartButton;
+
 
     [HideInInspector]
     public CameraController cameraController;
@@ -305,8 +307,9 @@ public class GameManagerPhoton : Photon.PunBehaviour
 
         GetPlayerByOwnerId(ownerId).PC.isUnbeatable = isReady;
 
-        
+
         // ready UI 처리
+        GetPlayerByOwnerId(ownerId).onReadyChanged(isReady);
     }
 
     /// <summary>
@@ -422,6 +425,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
         // 게임 시작
         isPlaying = true;
         photonView.RPC("RunGameEvent", PhotonTargets.AllBuffered, (int)GameEvent.GameStart);
+        tempStartButton.SetActive(false);
         return true;
     }
 
@@ -478,8 +482,15 @@ public class GameManagerPhoton : Photon.PunBehaviour
             case (int)GameEvent.GameStart:
                 if(PhotonNetwork.isMasterClient)
                     PhotonNetwork.room.IsOpen = false;
+
                 SetPlayerActive(false);
                 SetPlayerUnbeatable(false);
+                // 모든 플레이어의 레디 UI 비활성화
+                for (int i = 0; i < playerList.Count; i++)
+                {
+                    playerList[i].onReadyChanged(false);
+                }
+
                 PlayerController myPlayer = GetPlayerByOwnerId(PhotonNetwork.player.ID).PC;
                 myPlayer.Respawn();
                 myPlayer.TurnToScreen();
