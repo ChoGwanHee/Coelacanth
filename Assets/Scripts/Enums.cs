@@ -11,7 +11,8 @@ public enum PlayerAniState
     Stun,
     Fall,
     Emotion,
-    Ready
+    Ready,
+    Finish
 }
 
 public enum FireworkType

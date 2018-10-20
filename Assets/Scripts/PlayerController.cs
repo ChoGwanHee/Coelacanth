@@ -549,7 +549,7 @@ public class PlayerController : Photon.PunBehaviour
         executer.ChangeFirework(0, 0);
         stat.HPReset();
         stat.onStage = true;
-        if(GameManagerPhoton._instance.IsPlaying)
+        if(GameManagerPhoton._instance.currentState == GameState.Playing)
             isControlable = true;
         rb.WakeUp();
         rb.useGravity = true;
@@ -590,6 +590,7 @@ public class PlayerController : Photon.PunBehaviour
         anim.SetFloat("MoveY", 0);
 
         TurnToScreen();
+        ChangeState(PlayerAniState.Finish);
     }
 
     /// <summary>
@@ -850,7 +851,12 @@ public class PlayerController : Photon.PunBehaviour
             case "Lift End":
                 ChangeState(PlayerAniState.Idle);
                 break;
+
             case "Put End":
+                ChangeState(PlayerAniState.Idle);
+                break;
+
+            case "Finish End":
                 ChangeState(PlayerAniState.Idle);
                 break;
         }
