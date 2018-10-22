@@ -24,6 +24,8 @@ public class TasangyeonhwaScript : Photon.PunBehaviour, IInteractable {
     public GameObject dragon;
     public Renderer dragonRenderer;
 
+    public UIEButton eButton;
+
 
     /// <summary>
     /// 위로 올라가는 타상연화 폭죽
@@ -54,6 +56,9 @@ public class TasangyeonhwaScript : Photon.PunBehaviour, IInteractable {
         mat[1] = boxBody.GetComponent<Renderer>().material;
         layerMask = LayerMask.GetMask("DynamicObject", "Item");
 
+        
+        eButton.gameObject.SetActive(false);
+
         boomEfx.Stop(true);
         boomEfx2.Stop(true);
         SetState(TasangState.Hide);
@@ -71,6 +76,8 @@ public class TasangyeonhwaScript : Photon.PunBehaviour, IInteractable {
         dragonRenderer.enabled = true;
         col.enabled = true;
         available = true;
+        eButton.gameObject.SetActive(true);
+        eButton.SetActivate(true, transform);
     }
 
     public void SetState(TasangState stateNum)
@@ -88,6 +95,8 @@ public class TasangyeonhwaScript : Photon.PunBehaviour, IInteractable {
                 flyCover.transform.localEulerAngles = new Vector3(-90.0f, 0f);
                 dragonRenderer.enabled = false;
                 dragon.SetActive(false);
+                eButton.SetActivate(false);
+                eButton.gameObject.SetActive(false);
                 col.enabled = false;
                 break;
             case TasangState.Appear:
@@ -97,6 +106,8 @@ public class TasangyeonhwaScript : Photon.PunBehaviour, IInteractable {
             case TasangState.Fire:
                 available = false;
                 FireEffect();
+                eButton.SetActivate(false);
+                eButton.gameObject.SetActive(false);
                 break;
         }
     }

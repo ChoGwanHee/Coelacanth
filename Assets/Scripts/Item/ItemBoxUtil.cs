@@ -41,7 +41,7 @@ public class ItemBoxUtil : BaseItemBox, IInteractable
 
     public int GetButtonType()
     {
-        return 1;
+        return 0;
     }
 
     public virtual void Use(PlayerController pc)

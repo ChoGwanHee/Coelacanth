@@ -6,11 +6,11 @@ public class SlidingRoofScript : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        /*if (collision.gameObject.CompareTag("Player"))
         {
             PlayerController pc = collision.gameObject.GetComponent<PlayerController>();
 
             pc.isControlable = false;
-        }
+        }*/
     }
 }

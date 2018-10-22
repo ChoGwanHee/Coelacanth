@@ -109,8 +109,8 @@ public class FireworkButterfly : Firework
         {
             ProjectileButterfly bullet = PhotonNetwork.Instantiate("Prefabs/" + projectile_ref.name, executer.firePoint.position, executer.transform.rotation, 0).GetComponent<ProjectileButterfly>();
 
-            bullet.damage = damage;
-            bullet.hitForce = hitForce;
+            bullet.damage = Mathf.RoundToInt(damage * executer.damageFactor);
+            bullet.hitForce = hitForce * executer.forceFactor;
             bullet.hitRadius = hitRadius;
             bullet.lifetime = lifetime;
             bullet.SetSpeed(projectileSpeed);

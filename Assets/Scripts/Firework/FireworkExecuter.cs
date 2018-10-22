@@ -25,6 +25,11 @@ public class FireworkExecuter : Photon.PunBehaviour {
     public float damageFactor = 1.0f;
 
     /// <summary>
+    /// 넉백력 계수
+    /// </summary>
+    public float forceFactor = 1.0f;
+
+    /// <summary>
     /// 아이템을 획득할 때 출력되는 사운드
     /// </summary>
     [FMODUnity.EventRef]

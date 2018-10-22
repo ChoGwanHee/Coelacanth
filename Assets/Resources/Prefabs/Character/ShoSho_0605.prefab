@@ -197,6 +197,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1128082124635266
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4096408474379348}
+  m_Layer: 9
+  m_Name: LeftHand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
 --- !u!1 &1129624939769682
 GameObject:
   m_ObjectHideFlags: 1
@@ -2397,6 +2412,19 @@ Transform:
   m_Father: {fileID: 4994888806021646}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4096408474379348
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1128082124635266}
+  m_LocalRotation: {x: -0.7252216, y: 0.68663555, z: 0.011045399, w: 0.04963148}
+  m_LocalPosition: {x: -0.068, y: 0.086, z: -0.199}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4994888806021646}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: -175, y: -3, z: 87}
 --- !u!4 &4099722075251892
 Transform:
   m_ObjectHideFlags: 1
@@ -2866,7 +2894,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1364994432728768}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.9, z: 10}
+  m_LocalPosition: {x: 2, y: 5, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4503791317520686}
@@ -4185,6 +4213,7 @@ Transform:
   - {fileID: 4235484316412328}
   - {fileID: 4744322520147930}
   - {fileID: 4563206758526630}
+  - {fileID: 4096408474379348}
   m_Father: {fileID: 4621547585382640}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4370,12 +4399,15 @@ MonoBehaviour:
   accSpeed: 28
   maxSpeed: 6
   maxSpeedFactor: 1
-  respawnTime: 6
+  respawnTime: 5
   stunTime: 3
   knockbackTime: 0.2
   weaponPoint: {fileID: 4435973490465260}
   itemPoint: {fileID: 4782829901513342}
+  leftHandPoint: {fileID: 4096408474379348}
   handObjectSet: {fileID: 11400000, guid: 424711bbec56411468c3bce4a195f078, type: 2}
+  readySign_ref: {fileID: 1331026879288872, guid: 18c4c0d8efcd87843ba994b441c3eaa2,
+    type: 2}
   ring: {fileID: 1964965822689806}
   stunEfx: {fileID: 1693028208456688}
   deadEfx_ref: {fileID: 1956332014287468, guid: 19cb9b16b9a133648a19812957506c97,
@@ -4977,6 +5009,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onStage: 1
   alive: 1
+  scoreLock: 1
+  isReady: 0
   nickname: "\uC1FC\uC1FC"
   maxHP: 100
   curHP: 0

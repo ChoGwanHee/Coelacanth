@@ -128,6 +128,11 @@ public class PlayerController : Photon.PunBehaviour
     public float stunTime = 2.0f;
 
     /// <summary>
+    /// 넉백 여부
+    /// </summary>
+    private bool isKnockback;
+
+    /// <summary>
     /// 넉백 시간
     /// </summary>
     public float knockbackTime = 0.2f;
@@ -170,6 +175,11 @@ public class PlayerController : Photon.PunBehaviour
     public Transform itemPoint;
 
     /// <summary>
+    /// 레디 간판을 들 수 있는 본
+    /// </summary>
+    public Transform leftHandPoint;
+
+    /// <summary>
     /// 손에 붙일 수 있는 폭죽 프리팹 모음
     /// </summary>
     public FireworkHandObjectSet handObjectSet;
@@ -178,6 +188,16 @@ public class PlayerController : Photon.PunBehaviour
     /// 손에 붙어 있는 오브젝트
     /// </summary>
     private GameObject attachedHandObject;
+
+    /// <summary>
+    /// 레디 간판 오브젝트
+    /// </summary>
+    private GameObject readySign;
+
+    /// <summary>
+    /// 레디 간판 오브젝트 레퍼런스
+    /// </summary>
+    public GameObject readySign_ref;
 
 
     /// <summary>
@@ -232,6 +252,8 @@ public class PlayerController : Photon.PunBehaviour
         anim = GetComponent<Animator>();
         groundMask = LayerMask.GetMask("Ground");
 
+        readySign = Instantiate(readySign_ref, leftHandPoint);
+
         if (MapManager._instance != null)
             fallingHeight = MapManager._instance.fallingHeight;
         else
@@ -252,7 +274,7 @@ public class PlayerController : Photon.PunBehaviour
 
         if (!photonMove || photonView.isMine)
         {
-            if (isControlable && !isStun)
+            if (isControlable && !isStun && !UIManager._instance.uiControl)
             {
                 if (state == PlayerAniState.Idle)
                 {
@@ -294,10 +316,10 @@ public class PlayerController : Photon.PunBehaviour
                         }
                     }
 
-
                 }
             }
 
+            CheckKnockBack();
             ApplyAnimatorParams();
         }
         
@@ -321,6 +343,13 @@ public class PlayerController : Photon.PunBehaviour
         }
         
 	}
+
+    public void StartInit()
+    {
+        isControlable = false;
+        Respawn();
+        TurnToScreen();
+    }
 
     /// <summary>
     /// 사용자의 방향 입력을 받아 Vector2에 저장하고 방향 벡터를 만들어 저장합니다.
@@ -375,6 +404,8 @@ public class PlayerController : Photon.PunBehaviour
     /// </summary>
     void AddVelocity()
     {
+        if (isKnockback) return;
+
         // 입력값이 있다
         if (inputAxis.sqrMagnitude > 0)
         {
@@ -428,7 +459,19 @@ public class PlayerController : Photon.PunBehaviour
 
         rb.velocity = Vector3.zero;
         rb.AddForce(force, ForceMode.Impulse);
-        ChangeState(PlayerAniState.KnockBack);
+        isKnockback = true;
+        knockbackElapsedTime = 0f;
+        inputAxis = Vector2.zero;
+    }
+
+    private void CheckKnockBack()
+    {
+        knockbackElapsedTime += Time.deltaTime;
+
+        if(knockbackElapsedTime >= knockbackTime)
+        {
+            isKnockback = false;
+        }
     }
 
     /// <summary>
@@ -534,7 +577,8 @@ public class PlayerController : Photon.PunBehaviour
             ServerManager.Send(string.Format("RECOVERY:{0}:{1}:{2}", InstanceValue.Nickname, InstanceValue.ID, 60));
             
         }
-        ChangeState(PlayerAniState.Idle);
+        if(state != PlayerAniState.Ready)
+            ChangeState(PlayerAniState.Idle);
     }
 
     /// <summary>
@@ -549,11 +593,24 @@ public class PlayerController : Photon.PunBehaviour
         executer.ChangeFirework(0, 0);
         stat.HPReset();
         stat.onStage = true;
-        if(GameManagerPhoton._instance.currentState == GameState.Playing)
-            isControlable = true;
+        
         rb.WakeUp();
         rb.useGravity = true;
         col.enabled = true;
+
+        if (GameManagerPhoton._instance.currentState == GameState.Playing)
+        {
+            isControlable = true;
+        }
+        else
+        {
+            if (stat.isReady)
+            {
+                ChangeState(PlayerAniState.Ready);
+                return;
+            }
+        }
+
         ChangeState(PlayerAniState.Idle);
     }
 
@@ -700,10 +757,6 @@ public class PlayerController : Photon.PunBehaviour
                 break;
             case PlayerAniState.Attack:
                 break;
-            case PlayerAniState.KnockBack:
-                inputAxis = Vector2.zero;
-                knockbackElapsedTime = 0.0f;
-                break;
             case PlayerAniState.Stun:
                 photonView.RPC("SetStunEfx", PhotonTargets.All, true);
                 isStun = true;
@@ -753,10 +806,6 @@ public class PlayerController : Photon.PunBehaviour
                 else
                     executer.CheckFireworkChanged();
                 break;
-
-            case PlayerAniState.KnockBack:
-
-                break;
             case PlayerAniState.Put:
                 PutUtilItem();
                 break;
@@ -772,6 +821,10 @@ public class PlayerController : Photon.PunBehaviour
             case PlayerAniState.Emotion:
                 anim.SetInteger("SubAniNum", 0);
                 break;
+
+            case PlayerAniState.Ready:
+                //leftHandPoint.gameObject.SetActive(false);
+                break;
         }
     }
 
@@ -783,7 +836,7 @@ public class PlayerController : Photon.PunBehaviour
         switch (state)
         {
             case PlayerAniState.Idle:
-                if (isControlable && !isStun)
+                if (isControlable && !isStun && !UIManager._instance.uiControl)
                 {
                     GetInput();
                     AddVelocity();
@@ -791,20 +844,13 @@ public class PlayerController : Photon.PunBehaviour
                 }
                 break;
             case PlayerAniState.Attack:
-                if (isControlable && !isStun)
+                if (isControlable && !isStun && !UIManager._instance.uiControl)
                 {
                     GetInput();
                     if (executer.curFirework.fwType == FireworkType.Butterfly)
                     {
                         TurnToMouse();
                     }
-                }
-                break;
-            case PlayerAniState.KnockBack:
-                knockbackElapsedTime += Time.fixedDeltaTime;
-                if(knockbackElapsedTime >= knockbackTime)
-                {
-                    ChangeState(PlayerAniState.Idle);
                 }
                 break;
             case PlayerAniState.Stun:
@@ -836,7 +882,7 @@ public class PlayerController : Photon.PunBehaviour
                 break;
 
             case "Attack End":
-                if(!isStun && state != PlayerAniState.KnockBack)
+                if(!isStun && !stat.isReady)
                     ChangeState(PlayerAniState.Idle);
                 break;
 
@@ -858,6 +904,10 @@ public class PlayerController : Photon.PunBehaviour
 
             case "Finish End":
                 ChangeState(PlayerAniState.Idle);
+                break;
+
+            case "Ready Sign On":
+                leftHandPoint.gameObject.SetActive(true);
                 break;
         }
     }
@@ -974,7 +1024,7 @@ public class PlayerController : Photon.PunBehaviour
         ChangeState(PlayerAniState.Consume);
         while(wait)
         {
-            if(Input.GetMouseButtonUp(0) || state != PlayerAniState.Consume)
+            if(Input.GetMouseButtonUp(0) || state != PlayerAniState.Consume || isKnockback)
             {
                 if(isGrab)
                     anim.SetInteger("SubAniNum", 1);
@@ -1008,7 +1058,7 @@ public class PlayerController : Photon.PunBehaviour
 
             if (state == PlayerAniState.Idle && !isGrab)
             {
-                Collider[] cols = Physics.OverlapSphere(transform.position, interactionCheckRadius, LayerMask.GetMask("InteractionObject", "Item"));
+                Collider[] cols = Physics.OverlapSphere(transform.position, interactionCheckRadius, LayerMask.GetMask("Item"));
                 float closestSqrmag = 9999f;
                 int closestIndex = -1;
 
@@ -1030,7 +1080,7 @@ public class PlayerController : Photon.PunBehaviour
 
                 if(closestObj != null)
                 {
-                    UIManager._instance.eButton.SetActivate(true, cols[closestIndex].transform, closestObj.GetButtonType());
+                    UIManager._instance.eButton.SetActivate(true, cols[closestIndex].transform);
 
                     if(outlinedObj != null)
                     {

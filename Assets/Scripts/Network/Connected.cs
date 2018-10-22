@@ -7,10 +7,23 @@ using System.Threading;
 
 public class Connected : MonoBehaviour
 {
+    public static Connected _instance;
+
     private void Awake()
     {
-        DontDestroyOnLoad(this);
-        ServerManager.Initialized();
+        if(_instance == null)
+        {
+            _instance = this;
+
+            DontDestroyOnLoad(this);
+            ServerManager.Initialized();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        
     }
 
     private void Start()

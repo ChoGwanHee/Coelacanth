@@ -372,7 +372,6 @@ public class ItemManager : Photon.PunBehaviour
 
             for (int j = 0; j < itemBoxPool[i].Length; j++)
             {
-
                 itemBoxPool[i][j].gameObject.SetActive(false);
             }
         }

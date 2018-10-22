@@ -22,6 +22,11 @@ public class PlayerStat : Photon.PunBehaviour
     public bool scoreLock = true;
 
     /// <summary>
+    /// 플레이어가 준비중인지 여부
+    /// </summary>
+    public bool isReady = false;
+
+    /// <summary>
     /// 플레이어의 닉네임
     /// </summary>
     public string nickname;

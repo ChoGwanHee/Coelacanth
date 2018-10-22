@@ -7,10 +7,6 @@ public class MapFacilityWaterCannon : BaseMapFacility
 {
     public WaterCannonScript[] waterCannons;
 
-    private void Awake()
-    {
-        elapsedTime = 30.0f;
-    }
 
     public override void Activate()
     {

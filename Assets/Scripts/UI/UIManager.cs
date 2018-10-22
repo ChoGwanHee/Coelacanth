@@ -12,6 +12,12 @@ public class UIManager : MonoBehaviour {
         Result
     }
 
+    public bool uiControl = false;
+
+
+    // Ready
+    public GameObject readyInfo;
+
     // Game Play
     public GameObject gamePlayCanvas;
     public UIStatus userStatus;
@@ -22,6 +28,8 @@ public class UIManager : MonoBehaviour {
     public UITimer timer;
     public UIEButton eButton;
     public Animator counterAnim;
+
+    public GameObject escUI;
 
     public Sprite[] illusts;
 
@@ -51,6 +59,15 @@ public class UIManager : MonoBehaviour {
             chatEnable = !chatEnable;
             chatUI.SetActive(chatEnable);
         }
+
+        if (uiControl) return;
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            escUI.SetActive(true);
+            uiControl = true;
+        }
+        
     }
 
     /// <summary>
@@ -72,5 +89,8 @@ public class UIManager : MonoBehaviour {
         }
     }
 
-
+    public void TakeBackControl()
+    {
+        uiControl = false;
+    }
 }

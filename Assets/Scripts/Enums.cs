@@ -2,7 +2,6 @@
 public enum PlayerAniState
 {
     Idle,
-    KnockBack,
     MovableAttack,
     Attack,
     Lift,

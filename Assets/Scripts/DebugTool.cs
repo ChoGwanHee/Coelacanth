@@ -9,6 +9,7 @@ public class DebugTool : MonoBehaviour {
     public Text pingText;
 
     bool debugEnable = false;
+    bool bgmEnable = true;
 
     private void Update()
     {
@@ -52,6 +53,20 @@ public class DebugTool : MonoBehaviour {
         else if (Input.GetKeyDown(KeyCode.Alpha5))
         {
             SetFireworks(5);
+        }
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            if (bgmEnable)
+            {
+                GameManagerPhoton._instance.BGMEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                bgmEnable = false;
+            }
+            else
+            {
+                GameManagerPhoton._instance.BGMEvent.start();
+                bgmEnable = true;
+            }
         }
 
         pingText.text = "Ping: " + PhotonNetwork.GetPing().ToString();

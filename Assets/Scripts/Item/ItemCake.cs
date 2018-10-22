@@ -9,5 +9,6 @@ public class ItemCake : UtilItem
     public override void Execute(BuffController bc)
     {
         bc.Stat.AddScore(gainScore);
+        bc.buffEfx.Play(true);
     }
 }

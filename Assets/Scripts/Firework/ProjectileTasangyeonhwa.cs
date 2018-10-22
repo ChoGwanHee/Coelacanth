@@ -54,22 +54,28 @@ public class ProjectileTasangyeonhwa : BaseProjectile
         for (int i = 0; i < effectedObjects.Length; i++)
         {
             Vector3 direction = Vector3.Scale(effectedObjects[i].transform.position - transform.position, new Vector3(1, 0, 1)).normalized;
-
             PhotonView objPhotonView = effectedObjects[i].GetComponent<PhotonView>();
 
             if (effectedObjects[i].CompareTag("Player"))
             {
-                if (objPhotonView.ownerId != owner)
+                PlayerStat effectedPlayer = effectedObjects[i].GetComponent<PlayerStat>();
+
+                if (!effectedPlayer.PC.isUnbeatable)
                 {
-                    objPhotonView.RPC("Pushed", PhotonTargets.All, (direction * hitForce));
-                    objPhotonView.RPC("Damage", objPhotonView.owner, damage, -1);
-                    Vector3 efxPos = effectedObjects[i].GetComponent<CapsuleCollider>().ClosestPointOnBounds(transform.position);
-                    PhotonNetwork.Instantiate("Prefabs/Effect_base_Hit_fx", efxPos, Quaternion.identity, 0);
+                    if (objPhotonView.ownerId != owner)
+                    {
+                        objPhotonView.RPC("Pushed", objPhotonView.owner, (direction * hitForce));
+                        objPhotonView.RPC("Damage", objPhotonView.owner, damage, -1);
+                    }
                 }
+
+                // 피격 이펙트
+                Vector3 efxPos = effectedObjects[i].GetComponent<CapsuleCollider>().ClosestPointOnBounds(transform.position);
+                PhotonNetwork.Instantiate("Prefabs/Effect_base_Hit_fx", efxPos, Quaternion.identity, 0);
             }
             else
             {
-                objPhotonView.RPC("Pushed", PhotonTargets.All, (direction * hitForce));
+                objPhotonView.RPC("Pushed", PhotonTargets.MasterClient, (direction * hitForce));
             }
         }
         //photonView.RPC("PlayEndSound", PhotonTargets.All, null);

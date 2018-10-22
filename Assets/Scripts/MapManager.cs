@@ -25,10 +25,6 @@ public class MapManager : Photon.PunBehaviour
             Destroy(gameObject);
     }
 
-    private void Start()
-    {
-    }
-
     /// <summary>
     /// 맵 시설들의 작동을 시작합니다.
     /// </summary>

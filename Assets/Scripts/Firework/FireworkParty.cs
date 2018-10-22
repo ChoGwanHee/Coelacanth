@@ -37,8 +37,9 @@ public class FireworkParty : Firework {
         for (int i = 0; i <= step; i++)
         {
             curAngle = executer.transform.eulerAngles.y - hitAngle / 2 + stepAngleSize * curStep;
+            Vector3 finalForce = DirFromAngle(curAngle) * hitForce * executer.forceFactor;
 
-            if(curStep <= 0)
+            if (curStep <= 0)
             {
                 curStep = step / 2 + 1;
             }
@@ -56,18 +57,30 @@ public class FireworkParty : Firework {
             for (int j = 0; j < hits.Length; j++)
             {
                 PhotonView objPhotonView = hits[j].collider.GetComponent<PhotonView>();
-                objPhotonView.RPC("Pushed", PhotonTargets.All, (DirFromAngle(curAngle) * hitForce));
 
                 if (hits[j].collider.CompareTag("Player"))
                 {
-                    hits[j].collider.GetComponent<PlayerController>().Pushed(DirFromAngle(curAngle) * hitForce * 0.5f);
-                    objPhotonView.RPC("DamageShake", objPhotonView.owner, Mathf.RoundToInt(damage * executer.damageFactor), 5, executer.photonView.ownerId);
+                    PlayerStat effectedPlayer = hits[j].collider.GetComponent<PlayerStat>();
+
+                    if (!effectedPlayer.PC.isUnbeatable)
+                    {
+                        // 넉백
+                        effectedPlayer.PC.Pushed(finalForce * 0.5f);
+                        objPhotonView.RPC("Pushed", objPhotonView.owner, finalForce);
+                        objPhotonView.RPC("DamageShake", objPhotonView.owner, Mathf.RoundToInt(damage * executer.damageFactor), 5, executer.photonView.ownerId);
+
+                        // 점수 처리
+                        effectedPlayer.AddScore(-10);
+                        executer.Stat.AddScore(gainScore);
+                    }
+                        
+                    // 피격 이펙트
                     Vector3 efxPos = hits[j].collider.GetComponent<CapsuleCollider>().ClosestPointOnBounds(executer.firePoint.position);
                     PhotonNetwork.Instantiate("Prefabs/Effect_base_Hit_fx", efxPos, Quaternion.identity, 0);
-
-                    // 점수 처리
-                    hits[j].collider.GetComponent<PlayerStat>().AddScore(-10);
-                    executer.Stat.AddScore(gainScore);
+                }
+                else
+                {
+                    objPhotonView.RPC("Pushed", PhotonTargets.MasterClient, finalForce);
                 }
 
                 effectedObjects.Add(hits[j].collider);

@@ -100,7 +100,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
     /// </summary>
     [FMODUnity.EventRef]
     public string BGM;
-    FMOD.Studio.EventInstance BGMEvent;
+    public FMOD.Studio.EventInstance BGMEvent;
 
     /// <summary>
     /// 결과화면 배경음악
@@ -182,15 +182,21 @@ public class GameManagerPhoton : Photon.PunBehaviour
             }
         }
 
+        UIManager._instance.readyInfo.SetActive(true);
+
         // BGM
-        BGMEvent = FMODUnity.RuntimeManager.CreateInstance(BGM);
-        BGMEvent.start();
+        if (BGM.Length > 1)
+        {
+            BGMEvent = FMODUnity.RuntimeManager.CreateInstance(BGM);
+            BGMEvent.start();
+        }
+        
         //backgroundFireworkEvent = FMODUnity.RuntimeManager.CreateInstance(backgroundFirework);
         //backgroundFireworkEvent.start();
 
         resultBGMEvent = FMODUnity.RuntimeManager.CreateInstance(resultBGM);
 
-        StartCoroutine(ReadyPrcess());
+        StartCoroutine(ReadyProcess());
     }
 
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -244,7 +250,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
         
     }
 
-    private IEnumerator ReadyPrcess()
+    private IEnumerator ReadyProcess()
     {
         bool localPlayerReady = false;
 
@@ -271,14 +277,16 @@ public class GameManagerPhoton : Photon.PunBehaviour
     [PunRPC]
     private void SetPlayerReady(int ownerId, bool isReady)
     {
-        if(PhotonNetwork.isMasterClient)
+        PlayerStat player = GetPlayerByOwnerId(ownerId);
+        player.isReady = isReady;
+        player.PC.isUnbeatable = isReady;
+
+        // ready UI 처리
+        player.onReadyChanged(isReady);
+
+        if (PhotonNetwork.isMasterClient)
         {
             bool allReady = true;
-
-            GetPlayerByOwnerId(ownerId).PC.isUnbeatable = isReady;
-
-            // ready UI 처리
-            GetPlayerByOwnerId(ownerId).onReadyChanged(isReady);
 
             for (int i = 0; i < playerEnter.Length; i++)
             {
@@ -306,10 +314,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
             {
                 Debug.Log(i + ":" + playerEnter[i] + ", " + playerReady[i]);
             }
-            
         }
-
-        
     }
 
     /// <summary>
@@ -394,17 +399,6 @@ public class GameManagerPhoton : Photon.PunBehaviour
     }
 
     /// <summary>
-    /// 4명의 플레이어들이 모두 들어왔는지 확인합니다.
-    /// </summary>
-    public void CheckFull()
-    {
-        if(PhotonNetwork.room.PlayerCount >= startPlayerCount)
-        {
-            GameStartRequest();
-        }
-    }
-
-    /// <summary>
     /// 게임 시작을 요청합니다.
     /// </summary>
     /// <returns>성공 여부를 반환합니다.</returns>
@@ -443,7 +437,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
                     StartCoroutine(GameLoop());
                     itemManager.GameStartRegen();
                 }
-                SetPlayerActive(true);
+                SetMyPlayerActive(true);
                 SetScoreLock(false);
 
                 break;
@@ -457,7 +451,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
                     photonView.RPC("Spotlight", PhotonTargets.All, focusedPlayerOwnerId);
                 }
                 isPlaying = false;
-                SetPlayerActive(false);
+                SetMyPlayerActive(false);
                 SetScoreLock(true);
                 break;
         }
@@ -483,17 +477,17 @@ public class GameManagerPhoton : Photon.PunBehaviour
                 if(PhotonNetwork.isMasterClient)
                     PhotonNetwork.room.IsOpen = false;
 
-                SetPlayerActive(false);
                 SetPlayerUnbeatable(false);
                 // 모든 플레이어의 레디 UI 비활성화
                 for (int i = 0; i < playerList.Count; i++)
                 {
                     playerList[i].onReadyChanged(false);
+                    playerList[i].isReady = false;
                 }
+                UIManager._instance.readyInfo.SetActive(false);
 
                 PlayerController myPlayer = GetPlayerByOwnerId(PhotonNetwork.player.ID).PC;
-                myPlayer.Respawn();
-                myPlayer.TurnToScreen();
+                myPlayer.StartInit();
                 StartCoroutine(GameCountProcess(true));
                 break;
             case (int)GameEvent.GameStop:
@@ -532,7 +526,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
         }
     }
 
-    private void SetPlayerActive(bool active)
+    private void SetMyPlayerActive(bool active)
     {
         for (int i = 0; i < playerList.Count; i++)
         {
@@ -668,6 +662,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
     {
         if(!isSceneMoving)
         {
+            Destroy(Connected._instance.gameObject);
             PhotonNetwork.player.SetScore(0);
             PhotonNetwork.Disconnect();
             StartCoroutine(LoadTitleScene());
@@ -677,7 +672,6 @@ public class GameManagerPhoton : Photon.PunBehaviour
         {
             Debug.LogWarning("이미 작동 중 입니다.");
         }
-        
     }
 
     private IEnumerator LoadTitleScene()

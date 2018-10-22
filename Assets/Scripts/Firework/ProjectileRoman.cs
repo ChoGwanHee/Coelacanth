@@ -32,42 +32,51 @@ public class ProjectileRoman : BaseProjectile
     {
         GetComponent<Collider>().enabled = false;
 
-        Collider[] effectedObjects = Physics.OverlapSphere(transform.position, hitRadius, dynamicObjMask);
-
-        int totalDamage = Mathf.RoundToInt(damage * GameManagerPhoton._instance.GetPlayerByOwnerId(photonView.ownerId).GetComponent<FireworkExecuter>().damageFactor);
+        Vector3 fixedPosition = transform.position - (rb.velocity.normalized * speed * Time.fixedDeltaTime);
+        Collider[] effectedObjects = Physics.OverlapSphere(fixedPosition, hitRadius, dynamicObjMask);
 
         for (int i = 0; i < effectedObjects.Length; i++)
         {
-            Vector3 direction = Vector3.Scale(effectedObjects[i].transform.position - transform.position, new Vector3(1, 0, 1)).normalized;
-
+            Vector3 direction = Vector3.Scale(effectedObjects[i].transform.position - fixedPosition, new Vector3(1, 0, 1)).normalized;
             PhotonView objPhotonView = effectedObjects[i].GetComponent<PhotonView>();
-            objPhotonView.RPC("Pushed", PhotonTargets.All, (direction * hitForce));
+            
 
             if (effectedObjects[i].CompareTag("Player"))
             {
-                objPhotonView.RPC("DamageShake", objPhotonView.owner, totalDamage, 1, photonView.ownerId);
-                Vector3 efxPos = effectedObjects[i].GetComponent<CapsuleCollider>().ClosestPointOnBounds(transform.position);
-                PhotonNetwork.Instantiate("Prefabs/Effect_base_Hit_fx", efxPos, Quaternion.identity, 0);
+                PlayerStat effectedPlayer = effectedObjects[i].GetComponent<PlayerStat>();
 
-                // 점수 처리
-                if (objPhotonView.ownerId == photonView.ownerId)
+                if (!effectedPlayer.PC.isUnbeatable)
                 {
-                    // 본인 피격
-                    effectedObjects[i].GetComponent<PlayerStat>().AddScore(-20);
+                    objPhotonView.RPC("Pushed", objPhotonView.owner, (direction * hitForce));
+                    objPhotonView.RPC("DamageShake", objPhotonView.owner, damage, 1, photonView.ownerId);
+
+                    if (objPhotonView.ownerId == photonView.ownerId)
+                    {
+                        // 본인 피격시 점수 처리
+                        effectedPlayer.AddScore(-20);
+                    }
+                    else
+                    {
+                        // 다른 사람 피격시 점수 처리
+                        effectedPlayer.PC.Pushed(direction * hitForce * 0.5f);
+                        effectedPlayer.AddScore(-10);
+                        GameManagerPhoton._instance.GetPlayerByOwnerId(photonView.ownerId).AddScore(gainScore);
+                    }
                 }
-                else
-                {
-                    // 다른 사람 피격
-                    effectedObjects[i].GetComponent<PlayerController>().Pushed(direction * hitForce * 0.5f);
-                    effectedObjects[i].GetComponent<PlayerStat>().AddScore(-10);
-                    GameManagerPhoton._instance.GetPlayerByOwnerId(photonView.ownerId).AddScore(gainScore);
-                }
+
+                // 피격 이펙트
+                Vector3 efxPos = effectedObjects[i].GetComponent<CapsuleCollider>().ClosestPointOnBounds(fixedPosition);
+                PhotonNetwork.Instantiate("Prefabs/Effect_base_Hit_fx", efxPos, Quaternion.identity, 0);
+            }
+            else
+            {
+                objPhotonView.RPC("Pushed", PhotonTargets.MasterClient, (direction * hitForce));
             }
         }
 
         photonView.RPC("PlayEndSound", PhotonTargets.All, null);
 
-        PhotonNetwork.Instantiate("Prefabs/Romang_Hit_fx", transform.position, transform.rotation, 0);
+        PhotonNetwork.Instantiate("Prefabs/Romang_Hit_fx", fixedPosition, transform.rotation, 0);
         PhotonNetwork.Destroy(gameObject);
     }
 }

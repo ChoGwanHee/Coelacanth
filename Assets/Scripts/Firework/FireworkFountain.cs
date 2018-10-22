@@ -30,8 +30,8 @@ public class FireworkFountain : Firework
         InstallationFountain fountain = PhotonNetwork.Instantiate("Prefabs/" + fountain_ref.name, installPos, Quaternion.identity, 0).GetComponent<InstallationFountain>();
 
         fountain.lifetime = lifetime;
-        fountain.damage = damage;
-        fountain.hitForce = hitForce;
+        fountain.damage = Mathf.RoundToInt(damage * executer.damageFactor);
+        fountain.hitForce = hitForce * executer.forceFactor;
         fountain.hitRadius = hitRadius;
         fountain.gainScore = gainScore;
         fountain.amplitude = amplitude;

@@ -6,15 +6,11 @@ public class TileScript : MonoBehaviour {
 
     private Rigidbody rb;
     private Collider col;
-    private Animator anim;
-
     
 
 	void Awake () {
         rb = GetComponent<Rigidbody>();
         col = GetComponent<Collider>();
-        anim = GetComponent<Animator>();
-
     }
     public void Fall()
     {

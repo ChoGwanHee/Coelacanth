@@ -28,6 +28,8 @@ public class UIEButton : MonoBehaviour {
     {
         animator = GetComponent<Animator>();
         image = GetComponent<Image>();
+
+        animator.enabled = false;
     }
 
     public void SetActivate(bool active, Transform newTarget = null, int buttonType = 0)
