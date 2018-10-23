@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +7,10 @@ public class MapFacilityWaterCannon : BaseMapFacility
 {
     public WaterCannonScript[] waterCannons;
 
+    public override void First()
+    {
+        
+    }
 
     public override void Activate()
     {

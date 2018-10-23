@@ -35,6 +35,17 @@ public class BuffController : Photon.PunBehaviour
     /// </summary>
     public GameObject hotSauceBoomEfx_ref;
 
+    [FMODUnity.EventRef]
+    public string hotSauceCountSound;
+
+    [FMODUnity.EventRef]
+    public string hotSauceBoomSound;
+
+    [FMODUnity.EventRef]
+    public string starfruitSound;
+
+    public FMOD.Studio.EventInstance buffDuringSound;
+
 
     public Renderer[] renderers;
     private Material[] playerMats;

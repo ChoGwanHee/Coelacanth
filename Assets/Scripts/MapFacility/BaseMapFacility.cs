@@ -19,6 +19,10 @@ public abstract class BaseMapFacility : Photon.MonoBehaviour
     /// </summary>
     protected float elapsedTime = 0.0f;
 
+    /// <summary>
+    /// 시설에 필요한 최초 동작을 실행시킵니다.
+    /// </summary>
+    public abstract void First();
 
     /// <summary>
     /// 시설을 작동시킵니다.

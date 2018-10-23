@@ -47,6 +47,8 @@ public class PlayerController : Photon.PunBehaviour
     /// </summary>
     public CharacterVoicePack characterVoice;
 
+    public int characterNum;
+
     
 
     // Move
@@ -121,6 +123,13 @@ public class PlayerController : Photon.PunBehaviour
     /// 플레이어 재생성 대기 시간
     /// </summary>
     public float respawnTime = 6.0f;
+
+    public GameObject respawnRocket_ref;
+
+    /// <summary>
+    /// 리스폰 예정인 위치
+    /// </summary>
+    private Vector3 respawnPosition = Vector3.zero;
 
     /// <summary>
     /// 플레이어 기절 시간
@@ -214,6 +223,9 @@ public class PlayerController : Photon.PunBehaviour
     /// 사망 이펙트
     /// </summary>
     public GameObject deadEfx_ref;
+
+
+    FMOD.Studio.EventInstance itemUsingSoundEvent;
 
 
     // 내부 컴포넌트
@@ -334,21 +346,35 @@ public class PlayerController : Photon.PunBehaviour
 
             if (!isFalling)
             {
-                CheckFalling();
+                // 스테이지 밖으로 떨어지고 있는지 체크합니다.
+                if (transform.position.y <= fallingHeight)
+                {
+                    ChangeState(PlayerAniState.Fall);
+                }
             }
             else
             {
-                CheckFall();
+                // 스테이지 밖으로 떨어졌는지 체크합니다.
+                if (transform.position.y < fallingHeight - 6.4f)
+                {
+                    photonView.RPC("Fall", PhotonTargets.All);
+                }
             }
         }
         
 	}
 
-    public void StartInit()
+    public void GameStartInit()
     {
+        if (photonView.isMine)
+        {
+            respawnPosition = GameManagerPhoton._instance.GetPlayerRegenPos(1);
+            respawnPosition.y += 0.1f;
+        }
         isControlable = false;
         Respawn();
         TurnToScreen();
+        Destroy(readySign);
     }
 
     /// <summary>
@@ -474,26 +500,10 @@ public class PlayerController : Photon.PunBehaviour
         }
     }
 
-    /// <summary>
-    /// 스테이지 밖으로 떨어지고 있는지 체크합니다.
-    /// </summary>
-    void CheckFalling()
+    [PunRPC]
+    public void Teleport(Vector3 pos)
     {
-        if(transform.position.y <= fallingHeight)
-        {
-            ChangeState(PlayerAniState.Fall);
-        }
-    }
-
-    /// <summary>
-    /// 스테이지 밖으로 떨어졌는지 체크합니다.
-    /// </summary>
-    void CheckFall()
-    {
-        if(transform.position.y < fallingHeight-6.4f)
-        {
-            photonView.RPC("Fall", PhotonTargets.All);
-        }
+        transform.position = pos;
     }
 
     /// <summary>
@@ -502,21 +512,17 @@ public class PlayerController : Photon.PunBehaviour
     [PunRPC]
     public void Fall()
     {
-        col.enabled = false;
-        stat.onStage = false;
-        stat.KillScoring();
-        bc.RemoveAllBuff();
-
-        // 보내는 정보   = 정보 : 플레이어 : 상태 : 라이프차감
-        // 받는 정보      = 정보 : 플레이어 : 상태 : 보유라이프
-        Invoke("Respawn", respawnTime);
-
-        Vector3 genPos = transform.position;
-        GameObject.Instantiate(deadEfx_ref, genPos, Quaternion.identity);
         if (photonView.isMine)
         {
             ServerManager.Send(string.Format("FALL:{0}:{1}:{2}", InstanceValue.Nickname, PlayerAniState.Fall, respawnTime));
+            respawnPosition = GameManagerPhoton._instance.GetPlayerRegenPos(1);
+            respawnPosition.y += 0.1f;
+            DisplayRespawn(respawnTime, respawnPosition, characterNum, true);
+            StartCoroutine(WaitRespawn(respawnTime));
         }
+
+        Vector3 genPos = transform.position;
+        GameObject.Instantiate(deadEfx_ref, genPos, Quaternion.identity);
         PublicPlayVoiceSound("Falling");
         FMODUnity.RuntimeManager.PlayOneShot(fallingSound);
 
@@ -524,16 +530,6 @@ public class PlayerController : Photon.PunBehaviour
             GameManagerPhoton._instance.cameraController.Shake(4, 0.5f);
 
         StandBy();
-    }
-
-    /// <summary>
-    /// 지정한 위치로 캐릭터를 순간 이동시킵니다.
-    /// </summary>
-    /// <param name="movePos">이동할 위치</param>
-    [PunRPC]
-    public void Teleport(Vector3 movePos)
-    {
-        transform.position = movePos;
     }
 
     /// <summary>
@@ -545,7 +541,84 @@ public class PlayerController : Photon.PunBehaviour
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         rb.Sleep();
+        col.enabled = false;
+        stat.onStage = false;
+        stat.KillScoring();
+        bc.RemoveAllBuff();
         transform.position = new Vector3(0f,0f,-20f);
+    }
+
+    /// <summary>
+    /// 캐릭터를 리스폰합니다.
+    /// </summary>
+    [PunRPC]
+    private void Respawn()
+    {
+        if (photonView.isMine)
+        {
+            ServerManager.Send(string.Format("RESPAWN:{0}:{1}:{2}", InstanceValue.Nickname, InstanceValue.ID, respawnPosition)); 
+            transform.position = respawnPosition;
+        }
+        executer.ChangeFirework(0, 0);
+        stat.HPReset();
+        stat.onStage = true;
+        
+        rb.WakeUp();
+        rb.useGravity = true;
+        col.enabled = true;
+
+        if (GameManagerPhoton._instance.currentState == GameState.Playing)
+        {
+            isControlable = true;
+        }
+        else
+        {
+            if (stat.isReady)
+            {
+                ChangeState(PlayerAniState.Ready);
+                return;
+            }
+        }
+
+        ChangeState(PlayerAniState.Idle);
+    }
+
+    [PunRPC]
+    private void DisplayRespawn(float remainTime, Vector3 pos, int chrNum, bool isMine)
+    {
+        UIManager._instance.respawnUI.SetRespawnCounter(remainTime, pos, chrNum, isMine);
+    }
+
+    private IEnumerator WaitRespawn(float remainTime)
+    {
+        bool otherVisible = false;
+        bool rocketSpawn = false;
+
+        while(remainTime > 0)
+        {
+            remainTime -= Time.deltaTime;
+
+            if(!otherVisible && remainTime <= 3f)
+            {
+                otherVisible = true;
+                photonView.RPC("DisplayRespawn", PhotonTargets.Others, remainTime, respawnPosition, characterNum, false);
+            }
+            if (!rocketSpawn && remainTime <= 1.0f)
+            {
+                rocketSpawn = true;
+                photonView.RPC("SpawnRespawnRocket", PhotonTargets.All, respawnPosition);
+            }
+
+            yield return null;
+        }
+        photonView.RPC("Respawn", PhotonTargets.All, null);
+    }
+
+    [PunRPC]
+    private void SpawnRespawnRocket(Vector3 pos)
+    {
+        pos.y = fallingHeight + 20.0f;
+        GameObject rocket = Instantiate(respawnRocket_ref, pos, Quaternion.identity);
     }
 
     /// <summary>
@@ -576,42 +649,8 @@ public class PlayerController : Photon.PunBehaviour
         {
             ServerManager.Send(string.Format("RECOVERY:{0}:{1}:{2}", InstanceValue.Nickname, InstanceValue.ID, 60));
         }
-        if(state != PlayerAniState.Ready)
+        if (state != PlayerAniState.Ready)
             ChangeState(PlayerAniState.Idle);
-    }
-
-    /// <summary>
-    /// 캐릭터를 리스폰합니다.
-    /// </summary>
-    public void Respawn()
-    {
-        if (photonView.isMine)
-        {
-            ServerManager.Send(string.Format("RESPAWN:{0}:{1}:{2}", InstanceValue.Nickname, InstanceValue.ID, GameManagerPhoton._instance.itemManager.GetRegenPos(0))); 
-            GameManagerPhoton._instance.RespawnPlayer(transform, GameManagerPhoton._instance.itemManager.GetRegenPos(0));
-        }
-        executer.ChangeFirework(0, 0);
-        stat.HPReset();
-        stat.onStage = true;
-        
-        rb.WakeUp();
-        rb.useGravity = true;
-        col.enabled = true;
-
-        if (GameManagerPhoton._instance.currentState == GameState.Playing)
-        {
-            isControlable = true;
-        }
-        else
-        {
-            if (stat.isReady)
-            {
-                ChangeState(PlayerAniState.Ready);
-                return;
-            }
-        }
-
-        ChangeState(PlayerAniState.Idle);
     }
 
     /// <summary>
@@ -1020,6 +1059,12 @@ public class PlayerController : Photon.PunBehaviour
         float delayTime = (utilItem.item as UtilItem).delayTime;
         bool wait = true;
 
+        if((utilItem.item as UtilItem).usingSound.Length > 1)
+        {
+            itemUsingSoundEvent = FMODUnity.RuntimeManager.CreateInstance((utilItem.item as UtilItem).usingSound);
+            itemUsingSoundEvent.start();
+        }
+
         anim.SetInteger("SubAniNum", subAniNum);
         ChangeState(PlayerAniState.Consume);
         while(wait)
@@ -1029,6 +1074,7 @@ public class PlayerController : Photon.PunBehaviour
                 if(isGrab)
                     anim.SetInteger("SubAniNum", 1);
                 wait = false;
+                itemUsingSoundEvent.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             }
             else
             {

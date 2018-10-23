@@ -4442,6 +4442,7 @@ MonoBehaviour:
   replaceable: 1
   charging: 0
   damageFactor: 1
+  forceFactor: 1
   getSound: event:/SFX_Stage1/Item/WeaponBox/SFX_Normalbox
 --- !u!114 &114298608526500658
 MonoBehaviour:
@@ -4560,11 +4561,15 @@ MonoBehaviour:
   maxSpeed: 6
   maxSpeedFactor: 1
   respawnTime: 6
+  respawnRocket_ref: {fileID: 1684968459749188, guid: 82f8e00ea4d33b042b4e3c5aeeb4ac04,
+    type: 2}
   stunTime: 3
   knockbackTime: 0.2
   weaponPoint: {fileID: 0}
   itemPoint: {fileID: 0}
+  leftHandPoint: {fileID: 0}
   handObjectSet: {fileID: 0}
+  readySign_ref: {fileID: 0}
   ring: {fileID: 1433471974510610}
   stunEfx: {fileID: 1487680090549838}
   deadEfx_ref: {fileID: 1956332014287468, guid: 19cb9b16b9a133648a19812957506c97,
@@ -4595,6 +4600,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onStage: 1
   alive: 1
+  scoreLock: 1
+  isReady: 0
   nickname: "\uC8FC\uC655"
   maxHP: 100
   curHP: 0

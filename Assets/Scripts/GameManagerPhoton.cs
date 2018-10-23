@@ -100,14 +100,12 @@ public class GameManagerPhoton : Photon.PunBehaviour
     /// </summary>
     [FMODUnity.EventRef]
     public string BGM;
-    public FMOD.Studio.EventInstance BGMEvent;
 
     /// <summary>
     /// 결과화면 배경음악
     /// </summary>
     [FMODUnity.EventRef]
     public string resultBGM;
-    FMOD.Studio.EventInstance resultBGMEvent;
 
     /// <summary>
     /// 배경에서 터지는 폭죽 사운드
@@ -115,6 +113,10 @@ public class GameManagerPhoton : Photon.PunBehaviour
     [FMODUnity.EventRef]
     public string backgroundFirework;
     FMOD.Studio.EventInstance backgroundFireworkEvent;
+
+
+    public bool backgroundFireworkSoundEnable;
+
 
 
     /// <summary>
@@ -184,17 +186,14 @@ public class GameManagerPhoton : Photon.PunBehaviour
 
         UIManager._instance.readyInfo.SetActive(true);
 
-        // BGM
-        if (BGM.Length > 1)
+        SoundManager._instance.SetBGM(BGM);
+
+        if (backgroundFireworkSoundEnable)
         {
-            BGMEvent = FMODUnity.RuntimeManager.CreateInstance(BGM);
-            BGMEvent.start();
+            backgroundFireworkEvent = FMODUnity.RuntimeManager.CreateInstance(backgroundFirework);
+            backgroundFireworkEvent.start();
         }
         
-        //backgroundFireworkEvent = FMODUnity.RuntimeManager.CreateInstance(backgroundFirework);
-        //backgroundFireworkEvent.start();
-
-        resultBGMEvent = FMODUnity.RuntimeManager.CreateInstance(resultBGM);
 
         StartCoroutine(ReadyProcess());
     }
@@ -248,6 +247,60 @@ public class GameManagerPhoton : Photon.PunBehaviour
     {
         Debug.Log("플레이어 퇴장:" + PhotonNetwork.player.NickName);
         
+    }
+
+    public Vector3 GetPlayerRegenPos(int type)
+    {
+        if(type == 0)
+        {
+            bool isExist = false;
+            bool isClose = false;
+
+            Vector2 genPos = Vector2.zero;
+            Vector2 objPos = Vector2.zero;
+
+            for (int i=0; i<playerGenPos.Length; i++)
+            {
+                if (!Physics.Raycast(playerGenPos[i].position + Vector3.up, Vector3.down, 1.2f, LayerMask.GetMask("Ground")))
+                {
+                    continue;
+                }
+
+                Collider[]  overlapped = Physics.OverlapSphere(playerGenPos[i].position, 3.0f, LayerMask.GetMask("DynamicObject"));
+
+                genPos.x = playerGenPos[i].position.x;
+                genPos.y = playerGenPos[i].position.z;
+
+                isExist = false;
+                isClose = false;
+
+                for (int j = 0; j < overlapped.Length; j++)
+                {
+                    if (overlapped[j].CompareTag("Player"))
+                    {
+                        isExist = true;
+                        break;
+                    }
+
+                    objPos.x = overlapped[j].transform.position.x;
+                    objPos.y = overlapped[j].transform.position.z;
+
+                    if ((objPos - genPos).sqrMagnitude < 0.5f * 0.5f)
+                    {
+                        isClose = true;
+                        break;
+                    }
+                }
+                if (isExist || isClose)
+                {
+                    continue;
+                }
+
+                return playerGenPos[i].position;
+            }
+        }
+        
+        return itemManager.GetRegenPos(0);
     }
 
     private IEnumerator ReadyProcess()
@@ -387,21 +440,6 @@ public class GameManagerPhoton : Photon.PunBehaviour
     }
 
     /// <summary>
-    /// 플레이어를 리스폰 위치로 이동 시킵니다.
-    /// </summary>
-    /// <param name="playerTF">이동시킬 플레이어</param>
-    public void RespawnPlayer(Transform playerTF, Vector3 setPos)
-    {
-        /*int random = Random.Range(0, 4);
-        Vector3 pos = playerGenPos[random].position;
-        pos.y += 0.5f;*/
-
-        setPos.y += 0.1f;
-
-        playerTF.position = setPos;
-    }
-
-    /// <summary>
     /// 게임 시작을 요청합니다.
     /// </summary>
     /// <returns>성공 여부를 반환합니다.</returns>
@@ -491,7 +529,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
                 UIManager._instance.readyInfo.SetActive(false);
 
                 PlayerController myPlayer = GetPlayerByOwnerId(PhotonNetwork.player.ID).PC;
-                myPlayer.StartInit();
+                myPlayer.GameStartInit();
                 StartCoroutine(GameCountProcess(true));
                 break;
             case (int)GameEvent.GameStop:
@@ -655,8 +693,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
         }
 
         // 배경음악 재생
-        BGMEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        resultBGMEvent.start();
+        SoundManager._instance.SetBGM(resultBGM);
 
         // 캐릭터 승리대사 재생
         focusedPlayer.PublicPlayVoiceSound("Victory");
@@ -666,11 +703,17 @@ public class GameManagerPhoton : Photon.PunBehaviour
     {
         if(!isSceneMoving)
         {
-            Destroy(Connected._instance.gameObject);
+            if(Connected._instance != null)
+                Destroy(Connected._instance.gameObject);
             PhotonNetwork.player.SetScore(0);
             PhotonNetwork.Disconnect();
             StartCoroutine(LoadTitleScene());
             isSceneMoving = true;
+
+            if (backgroundFireworkSoundEnable)
+            {
+                backgroundFireworkEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            }
         }
         else
         {

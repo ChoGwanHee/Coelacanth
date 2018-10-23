@@ -235,7 +235,7 @@ MonoBehaviour:
   amplitude: 0
   duration: 0
   duringSound: 
-  endSound: 
+  endSound: event:/SFX_Stage1/Object/Trigger/TaSang/SFX_TaSangExplosion
   hitRangeEfx_ref: {fileID: 1391890155659770, guid: 8c4e001bc63b2b24f910c0a3cb1eaa06,
     type: 2}
 --- !u!114 &114152669581411408

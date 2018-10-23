@@ -24,6 +24,9 @@ public class BuffHotSauce : Buff
         changeValue = 0.01f;
         color = new Color(1f, 1f, 1f);
         isDown = true;
+
+        bc.buffDuringSound = FMODUnity.RuntimeManager.CreateInstance(bc.hotSauceCountSound);
+        bc.buffDuringSound.start();
     }
 
     protected override void OnEndBuff(BuffController bc)
@@ -34,6 +37,8 @@ public class BuffHotSauce : Buff
         color.g = 1f;
         color.b = 1f;
         bc.SetCharacterColor(color);
+        bc.buffDuringSound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        FMODUnity.RuntimeManager.PlayOneShot(bc.hotSauceBoomSound);
     }
 
     public override void OnUpdateBuff(BuffController bc)

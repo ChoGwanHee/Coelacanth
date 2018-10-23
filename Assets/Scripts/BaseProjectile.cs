@@ -85,7 +85,7 @@ public abstract class BaseProjectile : Photon.PunBehaviour {
     /// 투사체의 속력을 설정합니다
     /// </summary>
     /// <param name="newSpeed">새로운 속력</param>
-    public void SetSpeed(float newSpeed)
+    public virtual void SetSpeed(float newSpeed)
     {
         speed = newSpeed;
         rb.velocity = transform.forward * speed;

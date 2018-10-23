@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 
 public class MenuManager : MonoBehaviour
 {
+    public Lobby lobby;
     public GameObject PlayButton;
     public InputField nicknameField;
 
@@ -37,7 +38,8 @@ public class MenuManager : MonoBehaviour
                 int ownerID = Random.Range(0, 20000);
                 InstanceValue.ID = ownerID;
                 //ServerManager.Send(string.Format("NICKNAME:{0}:{1}:{2}", 0, nicknameField.text.Length, InstanceValue.Nickname));
-                LobbyManager.Lobby.AvailablePhoton();
+                //LobbyManager.Lobby.AvailablePhoton();
+                lobby.ConnectToPhoton();
             }
             else
             {

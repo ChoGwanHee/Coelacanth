@@ -16,5 +16,6 @@ public class ItemHotSauce : UtilItem
     {
         bc.Stat.AddScore(gainScore);
         bc.photonView.RPC("ApplyBuff", PhotonTargets.All, (int)BuffType.HotSauce);
+        FMODUnity.RuntimeManager.PlayOneShot(useSound);
     }
 }

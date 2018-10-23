@@ -10,5 +10,6 @@ public class ItemCake : UtilItem
     {
         bc.Stat.AddScore(gainScore);
         bc.buffEfx.Play(true);
+        FMODUnity.RuntimeManager.PlayOneShot(useSound);
     }
 }

@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Name: New Item Gel
   m_EditorClassIdentifier: 
   delayTime: 0.6
+  usingSound: 
+  useSound: event:/SFX_Stage1/Item/Food/Jelly/SFX_JellySet
   duration: 3
   lifetime: 30
   startDelay: 1

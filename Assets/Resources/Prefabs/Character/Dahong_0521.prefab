@@ -5441,6 +5441,9 @@ MonoBehaviour:
   debuffEfx: {fileID: 198025340741135476}
   hotSauceBoomEfx_ref: {fileID: 1194225743401336, guid: 84826e82a7bf13743818a589a1edcaf2,
     type: 2}
+  hotSauceCountSound: event:/SFX_Stage1/Item/Food/HotSauce/SFX_HotSauceCount
+  hotSauceBoomSound: event:/SFX_Stage1/Item/Food/HotSauce/SFX_HotSauceBoom
+  starfruitSound: event:/SFX_Stage1/Item/Food/StarFruit/SFX_StarEffect
   renderers:
   - {fileID: 137469755710211968}
   - {fileID: 137012924001756832}
@@ -5535,6 +5538,7 @@ MonoBehaviour:
   replaceable: 1
   charging: 0
   damageFactor: 1
+  forceFactor: 1
   getSound: event:/SFX_Stage1/Item/WeaponBox/SFX_Normalbox
 --- !u!114 &114257096733089344
 MonoBehaviour:
@@ -6019,14 +6023,17 @@ MonoBehaviour:
   walkingSound: event:/SFX_Stage1/Character/Sound/SFX_Foot
   fallingSound: event:/SFX_Stage1/Character/Sound/SFX_Fall
   characterVoice: {fileID: 11400000, guid: 5406938f66ba1ad4b8ffe1b60e1d3d41, type: 2}
+  characterNum: 0
   photonMove: 1
   isControlable: 1
   isStun: 0
   isUnbeatable: 0
-  accSpeed: 28
+  accSpeed: 36
   maxSpeed: 6
   maxSpeedFactor: 1
   respawnTime: 5
+  respawnRocket_ref: {fileID: 1684968459749188, guid: 82f8e00ea4d33b042b4e3c5aeeb4ac04,
+    type: 2}
   stunTime: 3
   knockbackTime: 0.2
   weaponPoint: {fileID: 4511453276953496}

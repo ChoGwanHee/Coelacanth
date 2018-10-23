@@ -1,14 +1,15 @@
 ﻿using System.Collections;
 using ServerModule;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class Lobby : Photon.PunBehaviour {
-
+    
     private void Start()
     {
-        // 게임 버전
-        PhotonNetwork.ConnectUsingSettings("0.8.4");
+        
     }
 
     public void OnPhotonRandomJoinFailed()
@@ -19,6 +20,20 @@ public class Lobby : Photon.PunBehaviour {
         roomOptions.IsVisible = true;
         roomOptions.IsOpen = true;
         roomOptions.MaxPlayers = 4;
+
+        Hashtable table = new Hashtable();
+
+        if (DebugTool._instance.isSelect)
+        {
+            table["MapNum"] = DebugTool._instance.mapNum;
+        }
+        else
+        {
+            table["MapNum"] = Random.Range(0, (int)GameMap.Max);
+        }
+        
+        roomOptions.CustomRoomProperties = table;
+
         PhotonNetwork.CreateRoom(null, roomOptions, null);
     }
 
@@ -43,19 +58,36 @@ public class Lobby : Photon.PunBehaviour {
     {
         base.OnJoinedRoom();
         
+        if(PhotonNetwork.room != null)
+        {
+            Hashtable table = PhotonNetwork.room.CustomProperties;
+            GameMap map = (GameMap)table["MapNum"];
+            Debug.Log("map: " + map);
 
-        PhotonNetwork.isMessageQueueRunning = false;
+            PhotonNetwork.isMessageQueueRunning = false;
 
-        StartCoroutine(LoadGameScene());
+            StartCoroutine(LoadGameScene(map));
+        }
+        else
+        {
+            Debug.LogError("룸 정보를 가져올 수 없습니다.");
+        }
 
         Debug.Log("OnJoinedRoom");
     }
 
-    IEnumerator LoadGameScene()
+    public void ConnectToPhoton()
+    {
+        // 게임 버전
+        PhotonNetwork.ConnectUsingSettings("0.8.6");
+    }
+
+    IEnumerator LoadGameScene(GameMap map)
     {
         // 게임씬을 완벽하게 로딩 후 씬을 변경한다
-        AsyncOperation oper = SceneManager.LoadSceneAsync(1);
+        AsyncOperation oper = SceneManager.LoadSceneAsync((int)map+1);
 
         yield return oper; // 로딩이 완료될때까지 대기 한다
     }
+    
 }

@@ -13,5 +13,6 @@ public class ItemCocktail : UtilItem
     {
         bc.Stat.AddScore(gainScore);
         bc.photonView.RPC("ApplyBuff", PhotonTargets.All, (int)BuffType.Cocktail);
+        FMODUnity.RuntimeManager.PlayOneShot(useSound);
     }
 }

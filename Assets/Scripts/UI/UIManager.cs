@@ -27,6 +27,7 @@ public class UIManager : MonoBehaviour {
     public UIAmmoCount ammoCounter;
     public UITimer timer;
     public UIEButton eButton;
+    public UIRespawn respawnUI;
     public Animator counterAnim;
 
     public GameObject escUI;
