@@ -545,6 +545,7 @@
         <e p="GameManager.cs" t="Include" />
         <e p="GameManagerPhoton.cs" t="Include" />
         <e p="GiftBoxScript.cs" t="Include" />
+        <e p="HalloweenRespawn.cs" t="Include" />
         <e p="Interfaces.cs" t="Include" />
         <e p="Item" t="Include">
           <e p="BaseItem.cs" t="Include" />
@@ -565,6 +566,7 @@
         <e p="MapFacility" t="Include">
           <e p="BaseMapFacility.cs" t="Include" />
           <e p="MapFacilityTasangyeonhwa.cs" t="Include" />
+          <e p="MapFacilityTileFalling.cs" t="Include" />
           <e p="MapFacilityWaterCannon.cs" t="Include" />
           <e p="PipeBridgeScript.cs" t="Include" />
           <e p="PortalScript.cs" t="Include" />
@@ -585,10 +587,12 @@
         <e p="PlayerController.cs" t="Include" />
         <e p="PlayerDummy.cs" t="Include" />
         <e p="PlayerStat.cs" t="Include" />
+        <e p="ProjectileRespawnRocket.cs" t="Include" />
         <e p="Respawn.cs" t="Include" />
         <e p="ShakeEvent.cs" t="Include" />
         <e p="SlidingRoofScript.cs" t="Include" />
         <e p="TableTopObject.cs" t="Include" />
+        <e p="TileScript.cs" t="Include" />
         <e p="TimedObjectDestructor.cs" t="Include" />
         <e p="TitleController.cs" t="Include" />
         <e p="TitleScene.cs" t="Include" />

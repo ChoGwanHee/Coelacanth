@@ -91,7 +91,7 @@ public class Connected : MonoBehaviour
     {
         if (InstanceValue.TCP != null && InstanceValue.TCP.Connected)
         {
-            ServerManager.Send(string.Format("DISCONNECT:{0}:{1}", InstanceValue.Nickname, InstanceValue.ID));
+            ServerManager.Send(string.Format("DISCONNECT:{0}:{1}:{2}", InstanceValue.Nickname, InstanceValue.ID, "나갔어"));
             Thread.Sleep(500);
             InstanceValue.TCP.Close();
         }

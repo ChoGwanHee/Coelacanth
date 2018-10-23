@@ -967,7 +967,7 @@ public class PlayerController : Photon.PunBehaviour
         for(int i=0; i<cols.Length; i++)
         {
             IInteractable obj = cols[i].GetComponent<IInteractable>();
-
+            ServerManager.Send(string.Format("ITEMBOX:{0}:{1}:{2}", InstanceValue.Nickname, InstanceValue.ID, obj));
             if (obj != null && obj.IsInteractable())
             {
                 float curSqrmag = (cols[i].transform.position - transform.position).sqrMagnitude;

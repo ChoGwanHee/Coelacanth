@@ -194,7 +194,7 @@ public class FireworkExecuter : Photon.PunBehaviour {
 
             if (photonView.isMine)
             {
-                ServerManager.Send(string.Format("WEAPONCHANGE:{0}:{1}:{2}", InstanceValue.Nickname, curFirework.GetType(), photonView.owner));
+                ServerManager.Send(string.Format("WEAPONCHANGE:{0}:{1}:{2}:{3}", InstanceValue.Nickname, InstanceValue.ID, curFirework.GetType(), photonView.owner));
                 Debug.Log(" 무기교체:" + curFirework.GetType() + "\n교체자:" + photonView.owner + ":" + photonView.ownerId);
             }
         }

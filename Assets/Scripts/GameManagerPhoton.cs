@@ -253,7 +253,8 @@ public class GameManagerPhoton : Photon.PunBehaviour
     private IEnumerator ReadyProcess()
     {
         bool localPlayerReady = false;
-
+        
+        
         while (!isPlaying)
         {
             if (Input.GetKeyDown(KeyCode.Space))
@@ -268,6 +269,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
                     GetPlayerByOwnerId(PhotonNetwork.player.ID).PC.ChangeState(PlayerAniState.Idle);
                 }
                 GetPlayerByOwnerId(PhotonNetwork.player.ID).IsControlable = !localPlayerReady;
+                ServerManager.Send(string.Format("READY:{0}:{1}:{2}", InstanceValue.Nickname, InstanceValue.ID, localPlayerReady));
                 photonView.RPC("SetPlayerReady", PhotonTargets.All, PhotonNetwork.player.ID, localPlayerReady);
             }
             yield return null;
@@ -311,7 +313,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
             }
 
             for(int i=0;i < playerReady.Length; i++)
-            {
+            {       
                 Debug.Log(i + ":" + playerEnter[i] + ", " + playerReady[i]);
             }
         }
@@ -418,6 +420,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
 
         // 게임 시작
         isPlaying = true;
+        ServerManager.Send(string.Format("START:{0}:{1}:{2}:{3}", InstanceValue.Nickname, InstanceValue.ID, isPlaying, InstanceValue.Room));
         photonView.RPC("RunGameEvent", PhotonTargets.AllBuffered, (int)GameEvent.GameStart);
         tempStartButton.SetActive(false);
         return true;
