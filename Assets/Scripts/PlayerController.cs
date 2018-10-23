@@ -575,7 +575,6 @@ public class PlayerController : Photon.PunBehaviour
         if (photonView.isMine)
         {
             ServerManager.Send(string.Format("RECOVERY:{0}:{1}:{2}", InstanceValue.Nickname, InstanceValue.ID, 60));
-            
         }
         if(state != PlayerAniState.Ready)
             ChangeState(PlayerAniState.Idle);
@@ -588,6 +587,7 @@ public class PlayerController : Photon.PunBehaviour
     {
         if (photonView.isMine)
         {
+            ServerManager.Send(string.Format("RESPAWN:{0}:{1}:{2}", InstanceValue.Nickname, InstanceValue.ID, GameManagerPhoton._instance.itemManager.GetRegenPos(0))); 
             GameManagerPhoton._instance.RespawnPlayer(transform, GameManagerPhoton._instance.itemManager.GetRegenPos(0));
         }
         executer.ChangeFirework(0, 0);

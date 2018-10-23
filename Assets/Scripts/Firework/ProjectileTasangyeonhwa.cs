@@ -66,6 +66,7 @@ public class ProjectileTasangyeonhwa : BaseProjectile
                     {
                         objPhotonView.RPC("Pushed", objPhotonView.owner, (direction * hitForce));
                         objPhotonView.RPC("Damage", objPhotonView.owner, damage, -1);
+                        // 타상연화
                     }
                 }
 
