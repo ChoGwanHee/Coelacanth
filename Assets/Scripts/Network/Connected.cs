@@ -22,14 +22,21 @@ public class Connected : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
         
     }
 
     private void Start()
     {
+        string ip = ConfigManager.ReadValue(0);
+
+        if(ip == null)
+        {
+            // default IP
+            ip = "45.112.165.82";
+        }
+
         // 서비스
-        StartConnectServer("45.112.165.82", 12800);
+        StartConnectServer(ip, 12800);
         // 개발
         //StartConnectServer("127.0.0.1", 12800);
     }

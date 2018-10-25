@@ -10,5 +10,6 @@ public class ItemStarFruit : UtilItem
     {
         bc.photonView.RPC("ApplyBuff", PhotonTargets.All, (int)BuffType.Unbeatable);
         FMODUnity.RuntimeManager.PlayOneShot(useSound);
+        UIManager._instance.buffInfoUI.DisplayBuffInfo(1, bc.transform);
     }
 }

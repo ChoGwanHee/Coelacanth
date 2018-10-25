@@ -8,7 +8,6 @@ using System.Text.RegularExpressions;
 
 public class MenuManager : MonoBehaviour
 {
-    public Lobby lobby;
     public GameObject PlayButton;
     public InputField nicknameField;
 
@@ -34,6 +33,8 @@ public class MenuManager : MonoBehaviour
         {
             if (NickNameRegexCheck(nicknameField.text) == true)
             {
+                PlayButton.GetComponent<Button>().interactable = false;
+                nicknameField.readOnly = true;
                 InstanceValue.Nickname = nicknameField.text;
                 int ownerID = Random.Range(0, 20000);
                 InstanceValue.ID = ownerID;

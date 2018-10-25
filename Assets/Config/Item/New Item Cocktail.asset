@@ -16,5 +16,6 @@ MonoBehaviour:
   useSound: event:/SFX_Stage1/Item/Food/Same/SFX_EatEnd123
   duration: 10
   addSpeed: 0.2
-  addDamage: 0.3
+  addDamage: 0.5
+  addForce: 0.5
   gainScore: 40

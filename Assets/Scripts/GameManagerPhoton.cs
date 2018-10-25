@@ -529,6 +529,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
                 UIManager._instance.readyInfo.SetActive(false);
 
                 PlayerController myPlayer = GetPlayerByOwnerId(PhotonNetwork.player.ID).PC;
+                UIManager._instance.respawnUI.Init();
                 myPlayer.GameStartInit();
                 StartCoroutine(GameCountProcess(true));
                 break;

@@ -17,4 +17,13 @@ public class UIRespawn : MonoBehaviour {
             }
         }
     }
+
+    public void Init()
+    {
+        for (int i = 0; i < counters.Length; i++)
+        {
+            if(counters[i].alive)
+                counters[i].Disable();
+        }
+    }
 }

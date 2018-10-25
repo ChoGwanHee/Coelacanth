@@ -1,11 +1,15 @@
-﻿using System.Collections;
-using ServerModule;
+﻿using ServerModule;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
-public class Lobby : Photon.PunBehaviour {
+public class PhotonConnection : Photon.PunBehaviour {
 
+    private void Start()
+    {
+        ConnectToPhoton();
+    }
 
     public void OnPhotonRandomJoinFailed()
     {
@@ -36,7 +40,7 @@ public class Lobby : Photon.PunBehaviour {
     {
         Debug.Log("OnJoinedLobby");
         // 닉네임 설정
-        PhotonNetwork.playerName =  InstanceValue.Nickname + " " + InstanceValue.ID;
+        PhotonNetwork.playerName =  InstanceValue.Nickname;
         ServerManager.Send(string.Format("NICKNAME:{0}:{1}", InstanceValue.Nickname, InstanceValue.ID));
         PhotonNetwork.JoinRandomRoom();
     }
@@ -80,7 +84,7 @@ public class Lobby : Photon.PunBehaviour {
     IEnumerator LoadGameScene(GameMap map)
     {
         // 게임씬을 완벽하게 로딩 후 씬을 변경한다
-        AsyncOperation oper = SceneManager.LoadSceneAsync((int)map+1);
+        AsyncOperation oper = SceneManager.LoadSceneAsync((int)map+2);
 
         yield return oper; // 로딩이 완료될때까지 대기 한다
     }

@@ -1,11 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
+﻿using ExitGames.Client.Photon;
 using ExitGames.Client.Photon.Chat;
-using ExitGames.Client.Photon;
-using System;
+using System.Collections;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class PhotonChat : MonoBehaviour, IChatClientListener
 {
@@ -38,7 +35,7 @@ public class PhotonChat : MonoBehaviour, IChatClientListener
             return;
         }
 
-        UserName = "Test";
+        UserName = PhotonNetwork.player.NickName;
         Connect();
 
         Show(false);

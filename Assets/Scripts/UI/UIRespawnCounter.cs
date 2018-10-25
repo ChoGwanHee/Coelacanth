@@ -24,6 +24,14 @@ public class UIRespawnCounter : MonoBehaviour {
 
         StartCoroutine(Count(remainTime));
     }
+
+    public void Disable()
+    {
+        StopAllCoroutines();
+        alive = false;
+        transform.position = new Vector3(0f, 0f, -20f);
+        gameObject.SetActive(false);
+    }
 	
 	private IEnumerator Count(float time)
     {
@@ -38,4 +46,6 @@ public class UIRespawnCounter : MonoBehaviour {
         transform.position = new Vector3(0f, 0f, -20f);
         gameObject.SetActive(false);
     }
+
+
 }

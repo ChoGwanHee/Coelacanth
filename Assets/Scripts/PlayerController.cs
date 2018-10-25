@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using ServerModule;
 
@@ -130,6 +129,13 @@ public class PlayerController : Photon.PunBehaviour
     /// 리스폰 예정인 위치
     /// </summary>
     private Vector3 respawnPosition = Vector3.zero;
+
+    /// <summary>
+    /// 리스폰 무적 시간
+    /// </summary>
+    public float respawnUnbeatableTime = 3.0f;
+
+    private Coroutine respawnWaitCoroutine;
 
     /// <summary>
     /// 플레이어 기절 시간
@@ -372,6 +378,8 @@ public class PlayerController : Photon.PunBehaviour
             respawnPosition.y += 0.1f;
         }
         isControlable = false;
+        if(respawnWaitCoroutine != null)
+            StopCoroutine(respawnWaitCoroutine);
         Respawn();
         TurnToScreen();
         Destroy(readySign);
@@ -518,7 +526,7 @@ public class PlayerController : Photon.PunBehaviour
             respawnPosition = GameManagerPhoton._instance.GetPlayerRegenPos(1);
             respawnPosition.y += 0.1f;
             DisplayRespawn(respawnTime, respawnPosition, characterNum, true);
-            StartCoroutine(WaitRespawn(respawnTime));
+            respawnWaitCoroutine = StartCoroutine(WaitRespawn(respawnTime));
         }
 
         Vector3 genPos = transform.position;
@@ -562,6 +570,8 @@ public class PlayerController : Photon.PunBehaviour
         executer.ChangeFirework(0, 0);
         stat.HPReset();
         stat.onStage = true;
+        isUnbeatable = true;
+        Invoke("DisableRespawnUnbeatable", respawnUnbeatableTime);
         
         rb.WakeUp();
         rb.useGravity = true;
@@ -620,6 +630,12 @@ public class PlayerController : Photon.PunBehaviour
         pos.y = fallingHeight + 20.0f;
         GameObject rocket = Instantiate(respawnRocket_ref, pos, Quaternion.identity);
     }
+
+    private void DisableRespawnUnbeatable()
+    {
+        isUnbeatable = false;
+        Debug.Log("무적 끝");
+    } 
 
     /// <summary>
     /// 기절 이펙트를 설정합니다.
@@ -1034,6 +1050,11 @@ public class PlayerController : Photon.PunBehaviour
         isGrab = true;
         anim.SetInteger("SubAniNum", 1);
         ChangeState(PlayerAniState.Lift);
+
+        if (photonView.isMine)
+        {
+            UIManager._instance.mouseHoldUI.SetActive(true);
+        }
     }
 
     [PunRPC]
@@ -1051,6 +1072,11 @@ public class PlayerController : Photon.PunBehaviour
         }
         
         utilItem = null;
+
+        if (photonView.isMine)
+        {
+            UIManager._instance.mouseHoldUI.SetActive(false);
+        }
     }
 
     public IEnumerator ItemUsingDelay(int subAniNum)

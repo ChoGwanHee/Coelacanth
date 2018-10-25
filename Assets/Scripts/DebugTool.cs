@@ -22,6 +22,8 @@ public class DebugTool : MonoBehaviour {
     public Text pingText;
 
     public bool debugEnable = false;
+
+    private bool debugAllow = false;
     
 
 
@@ -35,6 +37,8 @@ public class DebugTool : MonoBehaviour {
         {
             Destroy(gameObject);
         }
+
+        debugAllow = ConfigManager.ReadBool(1);
     }
 
     private void Update()
@@ -43,55 +47,64 @@ public class DebugTool : MonoBehaviour {
             if(debugEnable)
             {
                 debugEnable = false;
-                debugText.gameObject.SetActive(false);
                 pingText.gameObject.SetActive(false);
 
                 if (mapSelectUI != null && mapSelectUI.activeSelf)
                     mapSelectUI.SetActive(false);
 
-                Debug.Log("Debug Mode Disable");
+                if (debugAllow)
+                {
+                    debugText.gameObject.SetActive(false);
+                    Debug.Log("Debug Mode Disable");
+                }
             }
             else
             {
                 debugEnable = true;
-                debugText.gameObject.SetActive(true);
                 pingText.gameObject.SetActive(true);
-                Debug.Log("Debug Mode Enable");
+
+                if (debugAllow)
+                {
+                    debugText.gameObject.SetActive(true);
+                    Debug.Log("Debug Mode Enable");
+                }
             }
-            
         }
 
         if (!debugEnable)
             return;
 
-        if (isGameScene)
+        if (debugAllow)
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
+            if (isGameScene)
             {
-                SetFireworks(1);
+                if (Input.GetKeyDown(KeyCode.Alpha1))
+                {
+                    SetFireworks(1);
+                }
+                else if (Input.GetKeyDown(KeyCode.Alpha2))
+                {
+                    SetFireworks(2);
+                }
+                else if (Input.GetKeyDown(KeyCode.Alpha3))
+                {
+                    SetFireworks(3);
+                }
+                else if (Input.GetKeyDown(KeyCode.Alpha4))
+                {
+                    SetFireworks(4);
+                }
+                else if (Input.GetKeyDown(KeyCode.Alpha5))
+                {
+                    SetFireworks(5);
+                }
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha2))
+            else
             {
-                SetFireworks(2);
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha3))
-            {
-                SetFireworks(3);
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha4))
-            {
-                SetFireworks(4);
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha5))
-            {
-                SetFireworks(5);
-            }
-        }
-        else
-        {
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                mapSelectUI.SetActive(!mapSelectUI.activeSelf);
+                if (Input.GetKeyDown(KeyCode.S))
+                {
+                    mapSelectUI.SetActive(!mapSelectUI.activeSelf);
+                }
             }
         }
 
@@ -110,7 +123,7 @@ public class DebugTool : MonoBehaviour {
         if(selectedMap == 0)
         {
             isSelect = false;
-            Debug.Log("Select Map: random");
+            Debug.Log("Select Map: Random");
         }
         else
         {

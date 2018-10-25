@@ -1,0 +1,3 @@
+server_ip:45.112.165.82
+debug_enable:true
+allow_direct_start:true
