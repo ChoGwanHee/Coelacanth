@@ -4588,11 +4588,12 @@ MonoBehaviour:
   walkingSound: event:/SFX/Character/Sound/SFX_Foot
   fallingSound: 
   characterVoice: {fileID: 0}
+  characterNum: 0
   photonMove: 1
   isControlable: 1
   isStun: 0
   isUnbeatable: 0
-  accSpeed: 28
+  accSpeed: 36
   maxSpeed: 6
   maxSpeedFactor: 1
   respawnTime: 6

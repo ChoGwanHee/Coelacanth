@@ -28,5 +28,6 @@ public class LobbyManager : MonoBehaviour
         NetworkManager.SetActive(true);
         Thread.Sleep(1000);
         PhotonLobby.SetActive(true);
+        PhotonLobby.GetComponent<Lobby>().ConnectToPhoton();
     }
 }

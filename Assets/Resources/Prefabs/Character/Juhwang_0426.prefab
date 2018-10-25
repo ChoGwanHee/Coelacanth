@@ -4553,11 +4553,12 @@ MonoBehaviour:
   walkingSound: event:/SFX_Stage1/Character/Sound/SFX_Foot
   fallingSound: event:/SFX_Stage1/Character/Sound/SFX_Fall
   characterVoice: {fileID: 11400000, guid: 5406938f66ba1ad4b8ffe1b60e1d3d41, type: 2}
+  characterNum: 0
   photonMove: 1
   isControlable: 1
   isStun: 0
   isUnbeatable: 0
-  accSpeed: 28
+  accSpeed: 36
   maxSpeed: 6
   maxSpeedFactor: 1
   respawnTime: 6

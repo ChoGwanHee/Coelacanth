@@ -4397,7 +4397,7 @@ MonoBehaviour:
   isControlable: 1
   isStun: 0
   isUnbeatable: 0
-  accSpeed: 28
+  accSpeed: 36
   maxSpeed: 6
   maxSpeedFactor: 1
   respawnTime: 5
@@ -5352,7 +5352,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: f1154673f5796f6448013db06e398d14, type: 2}
+  - {fileID: 2100000, guid: 32abf466dc1d74a47812503f45dc7e6a, type: 2}
   - {fileID: 2100000, guid: f1154673f5796f6448013db06e398d14, type: 2}
   - {fileID: 2100000, guid: f1154673f5796f6448013db06e398d14, type: 2}
   m_StaticBatchInfo:

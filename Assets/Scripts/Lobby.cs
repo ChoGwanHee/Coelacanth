@@ -1,16 +1,11 @@
 ﻿using System.Collections;
 using ServerModule;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class Lobby : Photon.PunBehaviour {
-    
-    private void Start()
-    {
-        
-    }
+
 
     public void OnPhotonRandomJoinFailed()
     {
