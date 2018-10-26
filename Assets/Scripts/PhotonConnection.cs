@@ -22,9 +22,9 @@ public class PhotonConnection : Photon.PunBehaviour {
 
         Hashtable table = new Hashtable();
 
-        if (DebugTool._instance.isSelect)
+        if (SceneDataManager._instance.isSelect)
         {
-            table["MapNum"] = DebugTool._instance.mapNum;
+            table["MapNum"] = SceneDataManager._instance.mapNum;
         }
         else
         {
@@ -84,7 +84,7 @@ public class PhotonConnection : Photon.PunBehaviour {
     IEnumerator LoadGameScene(GameMap map)
     {
         var ConvertToInt32_StageData = (int)map + 2;
-        ServerManager.Send(string.format("STAGE:{0}:{1}:{2}", InstanceValue.Room, ConvertToInt32_StageData, false));        // 게임씬을 완벽하게 로딩 후 씬을 변경한다.
+        ServerManager.Send(string.Format("STAGE:{0}:{1}:{2}", InstanceValue.Room, ConvertToInt32_StageData, false));        // 게임씬을 완벽하게 로딩 후 씬을 변경한다.
         AsyncOperation oper = SceneManager.LoadSceneAsync(ConvertToInt32_StageData);
 
 
