@@ -22,15 +22,16 @@ public class PhotonConnection : Photon.PunBehaviour {
 
         Hashtable table = new Hashtable();
 
-        if (DebugTool._instance.isSelect)
+        if (SceneDataManager._instance.isSelect)
         {
-            table["MapNum"] = DebugTool._instance.mapNum;
+            table["MapNum"] = SceneDataManager._instance.mapNum;
         }
         else
         {
             table["MapNum"] = Random.Range(0, (int)GameMap.Max);
         }
-        
+
+
         roomOptions.CustomRoomProperties = table;
 
         PhotonNetwork.CreateRoom(null, roomOptions, null);

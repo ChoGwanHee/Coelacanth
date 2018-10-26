@@ -555,6 +555,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &89148092
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 89148094}
+  - component: {fileID: 89148093}
+  m_Layer: 0
+  m_Name: SceneDataManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &89148093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 89148092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b08feaa0e6763444bfabddc27f68e10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapNum: 0
+  isSelect: 0
+--- !u!4 &89148094
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 89148092}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &110637220
 GameObject:
   m_ObjectHideFlags: 0
@@ -8839,8 +8881,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGameScene: 0
   mapSelectUI: {fileID: 254253754}
-  isSelect: 0
-  mapNum: 0
   debugText: {fileID: 1686759856}
   pingText: {fileID: 283100669}
   debugEnable: 0
@@ -9598,7 +9638,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1796611209}
+      - m_Target: {fileID: 89148093}
         m_MethodName: SelectMap
         m_Mode: 0
         m_Arguments:

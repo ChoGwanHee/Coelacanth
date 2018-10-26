@@ -13,9 +13,6 @@ public class DebugTool : MonoBehaviour {
     // 타이틀
     public GameObject mapSelectUI;
 
-    public bool isSelect = false;
-    public int mapNum = 0;
-
 
     // 게임 씬
     public Text debugText;
@@ -117,20 +114,5 @@ public class DebugTool : MonoBehaviour {
 
         executer.photonView.RPC("ChangeFirework", PhotonTargets.All, 0, fireworkNum);
     }
-
-    public void SelectMap(int selectedMap)
-    {
-        if(selectedMap == 0)
-        {
-            isSelect = false;
-            Debug.Log("Select Map: Random");
-        }
-        else
-        {
-            isSelect = true;
-            mapNum = selectedMap - 1;
-            Debug.LogFormat("Select Map:{0}", (GameMap)mapNum);
-        }
-        
-    }
+    
 }
