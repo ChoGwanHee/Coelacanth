@@ -22,16 +22,15 @@ public class PhotonConnection : Photon.PunBehaviour {
 
         Hashtable table = new Hashtable();
 
-        if (SceneDataManager._instance.isSelect)
+        if (DebugTool._instance.isSelect)
         {
-            table["MapNum"] = SceneDataManager._instance.mapNum;
+            table["MapNum"] = DebugTool._instance.mapNum;
         }
         else
         {
             table["MapNum"] = Random.Range(0, (int)GameMap.Max);
         }
-
-
+        
         roomOptions.CustomRoomProperties = table;
 
         PhotonNetwork.CreateRoom(null, roomOptions, null);
@@ -84,8 +83,10 @@ public class PhotonConnection : Photon.PunBehaviour {
 
     IEnumerator LoadGameScene(GameMap map)
     {
-        // 게임씬을 완벽하게 로딩 후 씬을 변경한다
-        AsyncOperation oper = SceneManager.LoadSceneAsync((int)map+2);
+        var ConvertToInt32_StageData = (int)map + 2;
+        ServerManager.Send(string.format("STAGE:{0}:{1}:{2}", InstanceValue.Room, ConvertToInt32_StageData, false));        // 게임씬을 완벽하게 로딩 후 씬을 변경한다.
+        AsyncOperation oper = SceneManager.LoadSceneAsync(ConvertToInt32_StageData);
+
 
         yield return oper; // 로딩이 완료될때까지 대기 한다
     }
