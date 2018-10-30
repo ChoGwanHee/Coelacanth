@@ -29,8 +29,10 @@ public class Connected : MonoBehaviour
     private void Start()
     {
         // 서비스
-        StartConnectServer("45.112.165.82", 12800);
-        // 개발
+        //StartConnectServer("45.112.165.82", 12800);
+        // 포크 개발
+        StartConnectServer("192.168.0.10", 12800);
+        // 로컬 개발
         //StartConnectServer("127.0.0.1", 12800);
     }
 
