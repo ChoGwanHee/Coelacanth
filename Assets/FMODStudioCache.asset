@@ -106,7 +106,7 @@ MonoBehaviour:
   - {fileID: 114851380655252274}
   MasterBankRef: {fileID: 114905961727286504}
   StringsBankRef: {fileID: 114714423258559060}
-  stringsBankWriteTime: 636765274442016015
+  stringsBankWriteTime: 636759516815355345
   cacheVersion: 2
 --- !u!114 &114005138640717492
 MonoBehaviour:
@@ -130,6 +130,21 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 500
+--- !u!114 &114006724418701600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Volume
+  Min: 0
+  Max: 100
+  Default: 100
 --- !u!114 &114006733908801262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,6 +321,21 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 10000
+--- !u!114 &114087569373585822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Volume
+  Min: 0
+  Max: 100
+  Default: 100
 --- !u!114 &114095374543165240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -391,7 +421,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: 114694402972965060}
+  - {fileID: 114006724418701600}
   MinDistance: 0
   MaxDistance: 0
   Length: 4623
@@ -608,6 +638,21 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 524
+--- !u!114 &114225989516368398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Volume
+  Min: 0
+  Max: 100
+  Default: 100
 --- !u!114 &114229345214599528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -781,7 +826,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114935148117953196}
+  - {fileID: 114087569373585822}
   MinDistance: 0
   MaxDistance: 0
   Length: 1600
@@ -973,7 +1018,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: C:\Users\user\Documents\Develop\Coelacanth\HeyParty_FMOD\Build\Desktop\Stage_1.bank
-  lastModified: 636765274442226872
+  lastModified: 636759516820232303
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -1104,6 +1149,21 @@ MonoBehaviour:
   Min: 0
   Max: 100
   Default: 100
+--- !u!114 &114387976827487736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Volume
+  Min: 0
+  Max: 100
+  Default: 100
 --- !u!114 &114424171606458614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1153,7 +1213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: C:\Users\user\Documents\Develop\Coelacanth\HeyParty_FMOD\Build\Desktop\Stage_2.bank
-  lastModified: 636765274442367795
+  lastModified: 636759516820830703
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -1171,7 +1231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: C:\Users\user\Documents\Develop\Coelacanth\HeyParty_FMOD\Build\Desktop\Lobby.bank
-  lastModified: 636765274441950786
+  lastModified: 636759516816542175
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -1417,7 +1477,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: C:\Users\user\Documents\Develop\Coelacanth\HeyParty_FMOD\Build\Desktop\Title.bank
-  lastModified: 636765274442627950
+  lastModified: 636759516821548780
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -1619,7 +1679,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: HeyParty_FMOD\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636765274442016015
+  lastModified: 636759516815355345
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -1674,7 +1734,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: C:\Users\user\Documents\Develop\Coelacanth\HeyParty_FMOD\Build\Desktop\Item.bank
-  lastModified: 636765274441950786
+  lastModified: 636759516815814117
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -1809,7 +1869,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114361156503286962}
+  - {fileID: 114387976827487736}
   MinDistance: 0
   MaxDistance: 0
   Length: 85368
@@ -1898,7 +1958,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114626672457605266}
+  - {fileID: 114225989516368398}
   MinDistance: 0
   MaxDistance: 0
   Length: 97880
@@ -2137,7 +2197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: C:\Users\user\Documents\Develop\Coelacanth\HeyParty_FMOD\Build\Desktop\Master
     Bank.bank
-  lastModified: 636765274441950786
+  lastModified: 636759516815275550
   LoadResult: 0
   FileSizes:
   - Name: Desktop

@@ -9712,7 +9712,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BGM: event:/BGM/Title/BGM_Title
-  backgroundFirework: 
+  backgroundFirework: event:/Ambient/Fireworks/AMT_BackBoom
 --- !u!4 &2103291323
 Transform:
   m_ObjectHideFlags: 0

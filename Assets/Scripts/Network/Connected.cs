@@ -27,13 +27,18 @@ public class Connected : MonoBehaviour
 
     private void Start()
     {
+        // Service
+        // server_ip:45.112.165.82
+        // Fork
+        // server_ip:192.168.0.10
+        // Local
+        // server_ip:127.0.0.1
         string ip = ConfigManager.ReadValue(0);
 
         if(ip == null)
         {
             // default IP
-            //ip = "45.112.165.82";
-            ip = "192.168.0.10";
+            ip = "45.112.165.82";
         }
         StartConnectServer(ip, 12800);
     }
