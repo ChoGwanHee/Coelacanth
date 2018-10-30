@@ -8880,7 +8880,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGameScene: 0
-  mapSelectUI: {fileID: 254253754}
+  mapSelectUI: {fileID: 0}
   debugText: {fileID: 1686759856}
   pingText: {fileID: 283100669}
   debugEnable: 0
@@ -9712,7 +9712,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BGM: event:/BGM/Title/BGM_Title
-  backgroundFirework: event:/Ambient/Fireworks/AMT_BackBoom
+  backgroundFirework: 
 --- !u!4 &2103291323
 Transform:
   m_ObjectHideFlags: 0

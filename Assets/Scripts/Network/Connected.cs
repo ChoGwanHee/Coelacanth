@@ -32,20 +32,10 @@ public class Connected : MonoBehaviour
         if(ip == null)
         {
             // default IP
-            ip = "45.112.165.82";
+            //ip = "45.112.165.82";
+            ip = "192.168.0.10";
         }
-
-        // 서비스
-<<<<<<< HEAD
-        //StartConnectServer("45.112.165.82", 12800);
-        // 포크 개발
-        StartConnectServer("192.168.0.10", 12800);
-        // 로컬 개발
-=======
         StartConnectServer(ip, 12800);
-        // 개발
->>>>>>> 672e82507a27ae979e0ab9cb5e5cbd0f31f56a39
-        //StartConnectServer("127.0.0.1", 12800);
     }
 
     void NicknameWriteLine()
