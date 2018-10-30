@@ -80,7 +80,7 @@ public class FireworkParty : Firework {
                 }
                 else
                 {
-                    objPhotonView.RPC("Pushed", PhotonTargets.MasterClient, finalForce);
+                    objPhotonView.RPC("Pushed", PhotonTargets.All, finalForce);
                 }
 
                 effectedObjects.Add(hits[j].collider);

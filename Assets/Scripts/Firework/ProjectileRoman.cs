@@ -70,7 +70,7 @@ public class ProjectileRoman : BaseProjectile
             }
             else
             {
-                objPhotonView.RPC("Pushed", PhotonTargets.MasterClient, (direction * hitForce));
+                objPhotonView.RPC("Pushed", PhotonTargets.All, (direction * hitForce));
             }
         }
 

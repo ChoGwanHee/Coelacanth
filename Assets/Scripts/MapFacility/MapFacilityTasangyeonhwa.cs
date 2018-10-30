@@ -25,6 +25,10 @@ public class MapFacilityTasangyeonhwa : BaseMapFacility
 
     public Transform[] hitRange;
 
+
+    [FMODUnity.EventRef]
+    public string bigBoomSound;
+
     private int activatedTasang = -1;
     private int owner = -1;
 
@@ -36,6 +40,11 @@ public class MapFacilityTasangyeonhwa : BaseMapFacility
         {
             tasangs[i].parentFacility = this;
         }
+    }
+
+    public override void First()
+    {
+        
     }
 
     public override void Activate()
@@ -103,6 +112,7 @@ public class MapFacilityTasangyeonhwa : BaseMapFacility
         // 하늘에 빛
         StartCoroutine(LightProcess());
         GameManagerPhoton._instance.cameraController.Shake(1.5f, 0.5f);
+        FMODUnity.RuntimeManager.PlayOneShot(bigBoomSound);
         yield return new WaitForSeconds(2.0f);
 
         // 하늘에서 떨어지기 시작
@@ -110,6 +120,10 @@ public class MapFacilityTasangyeonhwa : BaseMapFacility
         {
             StartCoroutine(BombingProcess());
         }
+
+        yield return new WaitForSeconds(1.5f);
+        GameManagerPhoton._instance.cameraController.Shake(0.2f, fallingAmount * fallingInterval);
+
         yield return new WaitForSeconds(3.0f);
 
         // 사라짐

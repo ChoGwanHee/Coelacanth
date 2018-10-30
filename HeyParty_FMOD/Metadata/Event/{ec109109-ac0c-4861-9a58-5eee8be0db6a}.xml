@@ -384,6 +384,7 @@
         <relationship name="effects">
             <destination>{6f18b750-c9cf-427d-b877-c2238e5f169c}</destination>
             <destination>{a4bb6d79-aebe-42f4-8044-d3677916d663}</destination>
+            <destination>{61a01c8b-a1b5-4416-bccc-12c10f5960be}</destination>
         </relationship>
     </object>
     <object class="MixerBusPanner" id="{7fc7edf6-cc0a-4841-b5c7-e8456dd406f3}"/>
@@ -429,6 +430,7 @@
     <object class="MixerBusEffectChain" id="{f4a2e6c5-521b-4c9d-ae9d-893d7345a3c1}">
         <relationship name="effects">
             <destination>{72976ab4-ece0-4fa0-a85d-49b5d372da14}</destination>
+            <destination>{27536dac-dbde-4cef-9988-5a5dd384808f}</destination>
         </relationship>
     </object>
     <object class="MixerBusPanner" id="{e22beafe-1826-47a7-825f-72e7bd1915a4}"/>
@@ -452,7 +454,7 @@
     </object>
     <object class="AutomationPoint" id="{0e347f6b-f9df-4b96-984a-5a5f6e11238f}">
         <property name="position">
-            <value>0.20000000000000004</value>
+            <value>0.25</value>
         </property>
         <property name="value">
             <value>1</value>
@@ -463,7 +465,7 @@
     </object>
     <object class="AutomationPoint" id="{4a90f347-7917-421d-a994-59b3ba2e1345}">
         <property name="position">
-            <value>0.41712018140589591</value>
+            <value>0.41712018140589568</value>
         </property>
         <property name="value">
             <value>0</value>
@@ -494,6 +496,23 @@
             <destination>{c28991ff-126a-4002-bdd7-27ca53cf5616}</destination>
         </relationship>
     </object>
+    <object class="SFXReverbEffect" id="{61a01c8b-a1b5-4416-bccc-12c10f5960be}">
+        <property name="decayTime">
+            <value>1400</value>
+        </property>
+        <property name="lateDelay">
+            <value>36</value>
+        </property>
+        <property name="wetLevel">
+            <value>-18.5</value>
+        </property>
+        <property name="dryLevel">
+            <value>-15.5</value>
+        </property>
+        <relationship name="modulators">
+            <destination>{f76fe3d8-8247-496f-9a49-f8cf72397062}</destination>
+        </relationship>
+    </object>
     <object class="AutomationPoint" id="{70aa2f1f-81d9-40b9-994f-ebfff6e92e74}">
         <property name="position">
             <value>0.45000000000000001</value>
@@ -514,6 +533,17 @@
         </property>
     </object>
     <object class="MixerBusFader" id="{72976ab4-ece0-4fa0-a85d-49b5d372da14}"/>
+    <object class="SFXReverbEffect" id="{27536dac-dbde-4cef-9988-5a5dd384808f}">
+        <property name="decayTime">
+            <value>1900</value>
+        </property>
+        <property name="wetLevel">
+            <value>-17</value>
+        </property>
+        <relationship name="modulators">
+            <destination>{52f43c98-b3c8-4ade-8b80-7f61be198703}</destination>
+        </relationship>
+    </object>
     <object class="AutomationPoint" id="{d6d78eae-b999-4f9f-9de6-1378d7260013}">
         <property name="position">
             <value>0</value>
@@ -527,7 +557,7 @@
             <value>100</value>
         </property>
         <property name="value">
-            <value>0</value>
+            <value>-1</value>
         </property>
     </object>
     <object class="Automator" id="{c28991ff-126a-4002-bdd7-27ca53cf5616}">
@@ -537,6 +567,22 @@
         <relationship name="automationCurves">
             <destination>{7c7ebcfd-74f7-406e-ad22-3627b3099e25}</destination>
         </relationship>
+    </object>
+    <object class="RandomizerModulator" id="{f76fe3d8-8247-496f-9a49-f8cf72397062}">
+        <property name="nameOfPropertyBeingModulated">
+            <value>decayTime</value>
+        </property>
+        <property name="amount">
+            <value>20</value>
+        </property>
+    </object>
+    <object class="RandomizerModulator" id="{52f43c98-b3c8-4ade-8b80-7f61be198703}">
+        <property name="nameOfPropertyBeingModulated">
+            <value>decayTime</value>
+        </property>
+        <property name="amount">
+            <value>15.5</value>
+        </property>
     </object>
     <object class="AutomationCurve" id="{7c7ebcfd-74f7-406e-ad22-3627b3099e25}">
         <relationship name="parameter">

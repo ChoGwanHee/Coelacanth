@@ -72,4 +72,8 @@ MonoBehaviour:
   - Teleport
   - FallTile
   - SetPlayerReady
+  - DisplayRespawn
+  - Respawn
+  - SpawnRespawnRocket
+  - PlayStepSound
   DisableAutoOpenWizard: 1

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using ServerModule;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 /// <summary>
@@ -148,6 +149,11 @@ public class PlayerStat : Photon.PunBehaviour
         if (GetComponent<PlayerDummy>()) return;
 
         UIScoreBoard scoreBoard = UIManager._instance.scoreBoard;
+
+
+        // 닉네임 받아오기
+        nickname = photonView.owner.NickName;
+        
 
         if (photonView.isMine)
         {

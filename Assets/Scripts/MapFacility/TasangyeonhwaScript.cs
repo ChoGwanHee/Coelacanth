@@ -37,6 +37,15 @@ public class TasangyeonhwaScript : Photon.PunBehaviour, IInteractable {
     /// </summary>
     public Transform firePos;
 
+    /// <summary>
+    /// 선물상자가 폭발할 때 재생되는 사운드
+    /// </summary>
+    [FMODUnity.EventRef]
+    public string boomSound;
+
+    [FMODUnity.EventRef]
+    public string fireSound;
+
     private bool available = false;
     private int layerMask;
     private Animator animator;
@@ -78,6 +87,7 @@ public class TasangyeonhwaScript : Photon.PunBehaviour, IInteractable {
         available = true;
         eButton.gameObject.SetActive(true);
         eButton.SetActivate(true, transform);
+        FMODUnity.RuntimeManager.PlayOneShot(boomSound);
     }
 
     public void SetState(TasangState stateNum)
@@ -122,6 +132,7 @@ public class TasangyeonhwaScript : Photon.PunBehaviour, IInteractable {
         Instantiate(tasangUp, firePos.position, Quaternion.identity);
         dragon.GetComponent<Animator>().SetTrigger("Fire");
         boomEfx2.Play(true);
+        FMODUnity.RuntimeManager.PlayOneShot(fireSound);
     }
     
     public IEnumerator AppearBox(float appearTime)

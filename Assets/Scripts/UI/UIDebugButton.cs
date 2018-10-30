@@ -6,7 +6,7 @@ public class UIDebugButton : MonoBehaviour {
 
     private void Start()
     {
-        if(!PhotonNetwork.isMasterClient)
+        if(!PhotonNetwork.isMasterClient || !ConfigManager.ReadBool(2))
         {
             gameObject.SetActive(false);
         }

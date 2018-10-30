@@ -3,6 +3,7 @@
 public class ProjectileTasangyeonhwa : BaseProjectile
 {
     public GameObject hitRangeEfx_ref;
+    
 
     private float elapsedTime = 0.0f;
 
@@ -20,6 +21,7 @@ public class ProjectileTasangyeonhwa : BaseProjectile
 
         if(photonView.isMine)
             DisplayHitRange();
+
     }
 
     protected override void Update()
@@ -76,10 +78,10 @@ public class ProjectileTasangyeonhwa : BaseProjectile
             }
             else
             {
-                objPhotonView.RPC("Pushed", PhotonTargets.MasterClient, (direction * hitForce));
+                objPhotonView.RPC("Pushed", PhotonTargets.All, (direction * hitForce));
             }
         }
-        //photonView.RPC("PlayEndSound", PhotonTargets.All, null);
+        photonView.RPC("PlayEndSound", PhotonTargets.All, null);
 
         PhotonNetwork.Instantiate("Prefabs/Tasang_Hit_fx", transform.position, transform.rotation, 0);
         PhotonNetwork.Destroy(hitRangeEfx);

@@ -5,6 +5,7 @@ using UnityEngine;
 public class MapFacilityTileFalling : BaseMapFacility {
 
     public TileScript[] tiles;
+    public int firstFallCount = 3;
 
     private List<TileScript> activeTileList = new List<TileScript>();
 
@@ -14,10 +15,17 @@ public class MapFacilityTileFalling : BaseMapFacility {
         Init();
     }
 
+    public override void First()
+    {
+        for (int i = 0; i < firstFallCount; i++)
+        {
+            FallRandomTile();
+        }
+    }
+
     public override void Activate()
     {
         FallRandomTile();
-
     }
 
     public override void Deactivate()
@@ -32,7 +40,7 @@ public class MapFacilityTileFalling : BaseMapFacility {
     [PunRPC]
     private void FallTile(int index)
     {
-        tiles[index].Fall();
+        tiles[index].TileShake();
     }
 
     private void FallRandomTile()

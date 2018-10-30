@@ -33,10 +33,12 @@ public class MenuManager : MonoBehaviour
         {
             if (NickNameRegexCheck(nicknameField.text) == true)
             {
+                PlayButton.GetComponent<Button>().interactable = false;
+                nicknameField.readOnly = true;
                 InstanceValue.Nickname = nicknameField.text;
                 int ownerID = Random.Range(0, 20000);
                 InstanceValue.ID = ownerID;
-                //ServerManager.Send(string.Format("NICKNAME:{0}:{1}:{2}", 0, nicknameField.text.Length, InstanceValue.Nickname));
+                ServerManager.Send(string.Format("NICKNAME:{0}:{1}:{2}", 0, nicknameField.text.Length, InstanceValue.Nickname));
                 LobbyManager.Lobby.AvailablePhoton();
             }
             else

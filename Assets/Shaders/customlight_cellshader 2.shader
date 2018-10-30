@@ -26,8 +26,8 @@
 		void surf(Input IN, inout SurfaceOutput o) {
 
 			fixed4 c = tex2D(_MainTex, IN.uv_MainTex) * _Color;
-			o.Albedo = c.rgb*3;
-			o.Emission = c.rgb*1-0.1;
+			o.Albedo = c.rgb*1.5-0.05;
+			o.Emission = c.rgb;
 			o.Alpha = c.a;
 
 

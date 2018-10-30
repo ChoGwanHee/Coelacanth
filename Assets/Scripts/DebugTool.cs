@@ -5,11 +5,38 @@ using UnityEngine.UI;
 
 public class DebugTool : MonoBehaviour {
 
+    public static DebugTool _instance;
+
+    public bool isGameScene = false;
+
+
+    // 타이틀
+    public GameObject mapSelectUI;
+
+
+    // 게임 씬
     public Text debugText;
     public Text pingText;
 
-    bool debugEnable = false;
-    bool bgmEnable = true;
+    public bool debugEnable = false;
+
+    private bool debugAllow = false;
+    
+
+
+    private void Awake()
+    {
+        if (_instance == null)
+        {
+            _instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        debugAllow = ConfigManager.ReadBool(1);
+    }
 
     private void Update()
     {
@@ -17,55 +44,64 @@ public class DebugTool : MonoBehaviour {
             if(debugEnable)
             {
                 debugEnable = false;
-                debugText.gameObject.SetActive(false);
                 pingText.gameObject.SetActive(false);
-                Debug.Log("Debug Mode Disable");
+
+                if (mapSelectUI != null && mapSelectUI.activeSelf)
+                    mapSelectUI.SetActive(false);
+
+                if (debugAllow)
+                {
+                    debugText.gameObject.SetActive(false);
+                    Debug.Log("Debug Mode Disable");
+                }
             }
             else
             {
                 debugEnable = true;
-                debugText.gameObject.SetActive(true);
                 pingText.gameObject.SetActive(true);
-                Debug.Log("Debug Mode Enable");
+
+                if (debugAllow)
+                {
+                    debugText.gameObject.SetActive(true);
+                    Debug.Log("Debug Mode Enable");
+                }
             }
-            
         }
 
         if (!debugEnable)
             return;
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (debugAllow)
         {
-            SetFireworks(1);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            SetFireworks(2);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            SetFireworks(3);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            SetFireworks(4);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            SetFireworks(5);
-        }
-
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            if (bgmEnable)
+            if (isGameScene)
             {
-                GameManagerPhoton._instance.BGMEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-                bgmEnable = false;
+                if (Input.GetKeyDown(KeyCode.Alpha1))
+                {
+                    SetFireworks(1);
+                }
+                else if (Input.GetKeyDown(KeyCode.Alpha2))
+                {
+                    SetFireworks(2);
+                }
+                else if (Input.GetKeyDown(KeyCode.Alpha3))
+                {
+                    SetFireworks(3);
+                }
+                else if (Input.GetKeyDown(KeyCode.Alpha4))
+                {
+                    SetFireworks(4);
+                }
+                else if (Input.GetKeyDown(KeyCode.Alpha5))
+                {
+                    SetFireworks(5);
+                }
             }
             else
             {
-                GameManagerPhoton._instance.BGMEvent.start();
-                bgmEnable = true;
+                if (Input.GetKeyDown(KeyCode.S))
+                {
+                    mapSelectUI.SetActive(!mapSelectUI.activeSelf);
+                }
             }
         }
 
@@ -78,4 +114,5 @@ public class DebugTool : MonoBehaviour {
 
         executer.photonView.RPC("ChangeFirework", PhotonTargets.All, 0, fireworkNum);
     }
+    
 }

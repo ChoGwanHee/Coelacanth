@@ -224,7 +224,7 @@ MonoBehaviour:
   baseAddOffset: 7
   minPixel: 160
   maxPixel: 180
-  smoothZoomTime: 0.9
+  smoothZoomTime: 0.3
   zoomXFactor: 1.5
   zoomZFactor: 1.6
   minZoomDistance: 18

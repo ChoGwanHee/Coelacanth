@@ -3,6 +3,12 @@ using UnityEngine;
 
 public class InstallationGel : BaseInstallation
 {
+    /// <summary>
+    /// 밟았을 때 사운드
+    /// </summary>
+    [FMODUnity.EventRef]
+    public string stepSound;
+
     private float startDelay;
 
     private bool enable = false;
@@ -23,6 +29,8 @@ public class InstallationGel : BaseInstallation
         {
             BuffController bc = other.GetComponent<BuffController>();
             bc.photonView.RPC("ApplyBuff", PhotonTargets.All, (int)BuffType.Slow);
+            photonView.RPC("PlayStepSound", PhotonTargets.All, null);
+            UIManager._instance.buffInfoUI.DisplayBuffInfo(2, bc.transform);
             PhotonNetwork.Destroy(gameObject);
         }
     }
@@ -40,6 +48,12 @@ public class InstallationGel : BaseInstallation
         yield return new WaitForSeconds(lifetime);
 
         PhotonNetwork.Destroy(gameObject);
+    }
+
+    [PunRPC]
+    private void PlayStepSound()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(stepSound);
     }
 
 }

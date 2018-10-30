@@ -2212,7 +2212,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1722346911302046}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: 5, z: 10}
+  m_LocalPosition: {x: 3.2441788, y: 4.8530345, z: 2.5816922}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4682257735435230}
@@ -3301,14 +3301,18 @@ MonoBehaviour:
   walkingSound: event:/SFX_Stage1/Character/Sound/SFX_Foot
   fallingSound: event:/SFX_Stage1/Character/Sound/SFX_Fall
   characterVoice: {fileID: 11400000, guid: d3417688f912b1b4a81983fdb4aafdf8, type: 2}
+  characterNum: 3
   photonMove: 1
   isControlable: 1
   isStun: 0
   isUnbeatable: 0
-  accSpeed: 28
+  accSpeed: 36
   maxSpeed: 6
   maxSpeedFactor: 1
   respawnTime: 5
+  respawnRocket_ref: {fileID: 1684968459749188, guid: 82f8e00ea4d33b042b4e3c5aeeb4ac04,
+    type: 2}
+  respawnUnbeatableTime: 3
   stunTime: 3
   knockbackTime: 0.2
   weaponPoint: {fileID: 4146434416028852}
@@ -3367,6 +3371,9 @@ MonoBehaviour:
   debuffEfx: {fileID: 198742503065129206}
   hotSauceBoomEfx_ref: {fileID: 1194225743401336, guid: 84826e82a7bf13743818a589a1edcaf2,
     type: 2}
+  hotSauceCountSound: event:/SFX_Stage1/Item/Food/HotSauce/SFX_HotSauceCount
+  hotSauceBoomSound: event:/SFX_Stage1/Item/Food/HotSauce/SFX_HotSauceBoom
+  starfruitSound: event:/SFX_Stage1/Item/Food/StarFruit/SFX_StarEffect
   renderers:
   - {fileID: 137339388618672028}
   - {fileID: 137247361771726920}
@@ -3458,6 +3465,7 @@ MonoBehaviour:
   replaceable: 1
   charging: 0
   damageFactor: 1
+  forceFactor: 1
   getSound: event:/SFX_Stage1/Item/WeaponBox/SFX_Normalbox
 --- !u!114 &114678830856435576
 MonoBehaviour:
@@ -3486,7 +3494,7 @@ MonoBehaviour:
     SynchronizeType: 2
     Name: MoveX
   - Type: 1
-    SynchronizeType: 2
+    SynchronizeType: 0
     Name: MoveY
   - Type: 4
     SynchronizeType: 1

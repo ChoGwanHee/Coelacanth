@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Hashtable = ExitGames.Client.Photon.Hashtable;
+﻿using UnityEngine;
 
 public class UIManager : MonoBehaviour {
     public static UIManager _instance;
@@ -27,12 +24,13 @@ public class UIManager : MonoBehaviour {
     public UIAmmoCount ammoCounter;
     public UITimer timer;
     public UIEButton eButton;
+    public UIRespawn respawnUI;
+    public UIBuffInfo buffInfoUI;
     public Animator counterAnim;
 
     public GameObject escUI;
-
-    public Sprite[] illusts;
-
+    public GameObject mouseHoldUI;
+    public GameObject controlKeyInfoUI;
 
     // Result
     public GameObject resultCanvas;
@@ -54,6 +52,15 @@ public class UIManager : MonoBehaviour {
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            controlKeyInfoUI.SetActive(true);
+        }
+        if (Input.GetKeyUp(KeyCode.F1))
+        {
+            controlKeyInfoUI.SetActive(false);
+        }
+
         if (Input.GetKeyDown(KeyCode.Minus))
         {
             chatEnable = !chatEnable;

@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Name: New Item Star Fruit
   m_EditorClassIdentifier: 
   delayTime: 2
+  usingSound: event:/SFX_Stage1/Item/Food/StarFruit/SFX_EatStar
+  useSound: event:/SFX_Stage1/Item/Food/Same/SFX_EatEnd123
   duration: 5
-  barrierEfx_ref: {fileID: 0}

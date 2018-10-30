@@ -5,23 +5,31 @@ using UnityEngine.SceneManagement;
 
 public class TitleScene : MonoBehaviour {
 
-    // 시작 버튼
-    public void StartButton()
+    /// <summary>
+    /// 게임 배경음악
+    /// </summary>
+    [FMODUnity.EventRef]
+    public string BGM;
+
+    /// <summary>
+    /// 배경에서 터지는 폭죽 사운드
+    /// </summary>
+    [FMODUnity.EventRef]
+    public string backgroundFirework;
+    FMOD.Studio.EventInstance backgroundFireworkEvent;
+
+
+    private void Start()
     {
-        StartCoroutine(LoadLobbyScene());
+        // BGM
+        SoundManager._instance.SetBGM(BGM);
+
+        backgroundFireworkEvent = FMODUnity.RuntimeManager.CreateInstance(backgroundFirework);
+        backgroundFireworkEvent.start();
     }
 
-    private IEnumerator LoadLobbyScene()
+    private void OnDestroy()
     {
-        // 게임씬을 완벽하게 로딩 후 씬을 변경한다
-        AsyncOperation oper = SceneManager.LoadSceneAsync("PhotonLobby");
-
-        yield return oper; // 로딩이 완료될때까지 대기 한다
-    }
-
-    // 종료 버튼
-    public void ExitButton()
-    {
-        Application.Quit();
+        backgroundFireworkEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 }

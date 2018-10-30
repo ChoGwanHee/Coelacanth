@@ -30,6 +30,10 @@ public class MapManager : Photon.PunBehaviour
     /// </summary>
     public void StartMapFacilities()
     {
+        for(int i=0; i<mapFacilities.Length; i++)
+        {
+            mapFacilities[i].First();
+        }
         StartCoroutine(LoopMapFacilities());
     }
 

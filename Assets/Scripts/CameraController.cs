@@ -150,7 +150,7 @@ public class CameraController : Photon.PunBehaviour {
                 break;
             case CameraMode.PersonalView2:
                 targetXAngle = originXAngle;
-                targetZoomDistance = defaultZoomDistance;
+                
                 ppb.profile = originProfile;
                 break;
         }
@@ -275,10 +275,12 @@ public class CameraController : Photon.PunBehaviour {
             {
                 targetPosition = target.position + toMouseDirection * (mouseVec.magnitude * 0.01f);
             }
+            targetZoomDistance = defaultZoomDistance;
         }
         else
         {
             targetPosition = originPosition;
+            targetZoomDistance = originZoomDistance;
         }
 
     }

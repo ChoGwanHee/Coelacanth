@@ -1,11 +1,10 @@
-﻿using UnityEngine;
-using System;
-using System.IO;
-using System.Threading;
+﻿using System.Threading;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LobbyManager : MonoBehaviour
 {
-    public GameObject PhotonLobby, NetworkManager;
+    public GameObject NetworkManager;
 
     private static LobbyManager _lobby;
     public static LobbyManager Lobby
@@ -16,7 +15,6 @@ public class LobbyManager : MonoBehaviour
 
     void Start()
     {
-        PhotonLobby.SetActive(false);
         NetworkManager.SetActive(false);
         Lobby = GetComponent<LobbyManager>();
         //Debug.Log("Lobby Object Disabled");
@@ -27,6 +25,6 @@ public class LobbyManager : MonoBehaviour
         //Debug.Log("Lobby object Availabled");
         NetworkManager.SetActive(true);
         Thread.Sleep(1000);
-        PhotonLobby.SetActive(true);
+        SceneManager.LoadScene(1);
     }
 }

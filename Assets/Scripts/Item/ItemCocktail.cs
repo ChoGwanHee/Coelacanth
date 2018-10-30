@@ -6,6 +6,7 @@ public class ItemCocktail : UtilItem
     public float duration;
     public float addSpeed;
     public float addDamage;
+    public float addForce;
     public int gainScore;
 
 
@@ -13,5 +14,7 @@ public class ItemCocktail : UtilItem
     {
         bc.Stat.AddScore(gainScore);
         bc.photonView.RPC("ApplyBuff", PhotonTargets.All, (int)BuffType.Cocktail);
+        FMODUnity.RuntimeManager.PlayOneShot(useSound);
+        UIManager._instance.buffInfoUI.DisplayBuffInfo(4, bc.transform);
     }
 }

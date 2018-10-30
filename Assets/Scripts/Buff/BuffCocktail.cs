@@ -15,6 +15,7 @@
         bc.upEfx.Play(true);
         bc.PC.maxSpeedFactor += item.addSpeed;
         bc.PC.Executer.damageFactor += item.addDamage;
+        bc.PC.Executer.forceFactor += item.addForce;
     }
 
     protected override void OnEndBuff(BuffController bc)
@@ -23,5 +24,6 @@
         bc.upEfx.Stop(true);
         bc.PC.maxSpeedFactor -= item.addSpeed;
         bc.PC.Executer.damageFactor -= item.addDamage;
+        bc.PC.Executer.forceFactor -= item.addForce;
     }
 }

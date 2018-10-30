@@ -45,3 +45,10 @@ public enum GameEvent
     GameStart,
     GameStop
 }
+
+public enum GameMap
+{
+    Twinvilla,
+    HalloweenCastle,
+    Max
+}

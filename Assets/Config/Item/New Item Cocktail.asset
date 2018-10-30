@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Name: New Item Cocktail
   m_EditorClassIdentifier: 
   delayTime: 2
+  usingSound: event:/SFX_Stage1/Item/Food/Drink/SFX_Drink
+  useSound: event:/SFX_Stage1/Item/Food/Same/SFX_EatEnd123
   duration: 10
   addSpeed: 0.2
-  addDamage: 0.3
+  addDamage: 0.5
+  addForce: 0.5
   gainScore: 40

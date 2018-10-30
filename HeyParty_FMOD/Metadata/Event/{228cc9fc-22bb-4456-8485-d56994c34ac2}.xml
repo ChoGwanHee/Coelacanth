@@ -96,7 +96,7 @@
             <value>true</value>
         </property>
         <property name="triggerProbability">
-            <value>55.5</value>
+            <value>76</value>
         </property>
         <property name="length">
             <value>0.58981859410430837</value>

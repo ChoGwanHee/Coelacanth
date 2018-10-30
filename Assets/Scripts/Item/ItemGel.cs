@@ -47,5 +47,7 @@ public class ItemGel : UtilItem
         object[] data = new object[2] { lifetime, startDelay };
 
         PhotonNetwork.Instantiate("Prefabs/" + gel_ref.name, installPos, Quaternion.identity, 0, data);
+
+        FMODUnity.RuntimeManager.PlayOneShot(useSound);
     }
 }

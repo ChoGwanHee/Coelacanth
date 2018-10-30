@@ -1008,6 +1008,8 @@ MonoBehaviour:
   eButton: {fileID: 114049840767366460}
   tasangUp: {fileID: 1967153146783960, guid: a88a8133390d86f4990c9987b2fc32f8, type: 2}
   firePos: {fileID: 4097652813153954}
+  boomSound: event:/SFX_Stage1/Object/Trigger/TaSang/SFX_TaSangBox
+  fireSound: event:/SFX_Stage1/Object/Trigger/TaSang/SFX_TaSangFire
   parentFacility: {fileID: 0}
 --- !u!114 &114984165609384110
 MonoBehaviour:

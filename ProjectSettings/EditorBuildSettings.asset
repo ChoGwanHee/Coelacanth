@@ -15,8 +15,11 @@ EditorBuildSettings:
     path: Assets/Scenes/New_Title.unity
     guid: e2daf3b52f6c14748994aa30e8aa89a5
   - enabled: 1
+    path: Assets/Scenes/Loading.unity
+    guid: 354aa7950d2bb414381891aee69c135f
+  - enabled: 1
     path: Assets/Scenes/Stage1_Twinvilla.unity
     guid: 3bc2c30dc48f5b447a9d4127b8532203
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Stage2_HalloweenCastle.unity
     guid: 7d47bcdfe6ab17149b166649f2f4cdfe
