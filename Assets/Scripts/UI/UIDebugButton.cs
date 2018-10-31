@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using ServerModule;
 using UnityEngine;
 
 public class UIDebugButton : MonoBehaviour {
@@ -16,6 +17,8 @@ public class UIDebugButton : MonoBehaviour {
     {
         if (GameManagerPhoton._instance.GameStartRequest())
         {
+            Debug.Log("GAME START");
+            ServerManager.Send(string.Format("BTNSTART:{0}:{1}", InstanceValue.Room, true));
             gameObject.SetActive(false);
         }
         
