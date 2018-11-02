@@ -2555,7 +2555,6 @@ MonoBehaviour:
   userStatus: {fileID: 1590974667}
   chargingUI: {fileID: 1125865767}
   scoreBoard: {fileID: 1864383174}
-  gauge: {fileID: 0}
   ammoCounter: {fileID: 46987294}
   timer: {fileID: 265880599}
   eButton: {fileID: 1273405659}
@@ -2805,7 +2804,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1334015551}
         m_MethodName: StartLoadTitleScene
         m_Mode: 1
         m_Arguments:
