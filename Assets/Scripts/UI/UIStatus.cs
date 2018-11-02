@@ -10,7 +10,7 @@ public class UIStatus : MonoBehaviour {
     //public Image ringImg;
     public Image weapon;
     //public Transform countDisplay;
-    public Sprite[] numbers;
+    //public Sprite[] numbers;
 
 
     private Animator anim;

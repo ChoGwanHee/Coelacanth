@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class DebugTool : MonoBehaviour {
@@ -110,7 +108,7 @@ public class DebugTool : MonoBehaviour {
 
     private void SetFireworks(int fireworkNum)
     {
-        FireworkExecuter executer = GameManagerPhoton._instance.GetPlayerByOwnerId(PhotonNetwork.player.ID).GetComponent<FireworkExecuter>();
+        FireworkExecuter executer = GameManagerPhoton._instance.GetPlayerByOwnerId(PhotonNetwork.player.ID).PC.Executer;
 
         executer.photonView.RPC("ChangeFirework", PhotonTargets.All, 0, fireworkNum);
     }

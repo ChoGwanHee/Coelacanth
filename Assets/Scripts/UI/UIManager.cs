@@ -20,7 +20,6 @@ public class UIManager : MonoBehaviour {
     public UIStatus userStatus;
     public UIButterflyCharging chargingUI;
     public UIScoreBoard scoreBoard;
-    public UIAmmoGauge gauge;
     public UIAmmoCount ammoCounter;
     public UITimer timer;
     public UIEButton eButton;

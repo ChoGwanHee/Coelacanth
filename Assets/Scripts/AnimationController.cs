@@ -1,6 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+
+/*
+ * 영상 찍는 용으로 만든 클래스입니다. 게임에서 전혀 사용하지 않습니다.
+ */
 
 public class AnimationController : MonoBehaviour {
 

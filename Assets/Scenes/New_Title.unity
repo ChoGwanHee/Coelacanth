@@ -4759,6 +4759,7 @@ GameObject:
   - component: {fileID: 254253755}
   - component: {fileID: 254253757}
   - component: {fileID: 254253756}
+  - component: {fileID: 254253758}
   m_Layer: 5
   m_Name: MapSelector
   m_TagString: Untagged
@@ -4819,6 +4820,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 254253754}
+--- !u!114 &254253758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 254253754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c67b5c6bc85e3149b9758e2c0e32a54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &266985548
 GameObject:
   m_ObjectHideFlags: 0
@@ -8880,7 +8892,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGameScene: 0
-  mapSelectUI: {fileID: 0}
+  mapSelectUI: {fileID: 254253754}
   debugText: {fileID: 1686759856}
   pingText: {fileID: 283100669}
   debugEnable: 0
@@ -9638,7 +9650,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 89148093}
+      - m_Target: {fileID: 254253758}
         m_MethodName: SelectMap
         m_Mode: 0
         m_Arguments:

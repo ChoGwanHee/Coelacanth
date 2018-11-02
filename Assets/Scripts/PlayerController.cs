@@ -628,7 +628,7 @@ public class PlayerController : Photon.PunBehaviour
     private void SpawnRespawnRocket(Vector3 pos)
     {
         pos.y = fallingHeight + 20.0f;
-        GameObject rocket = Instantiate(respawnRocket_ref, pos, Quaternion.identity);
+        Instantiate(respawnRocket_ref, pos, Quaternion.identity);
     }
 
     private void DisableRespawnUnbeatable()
@@ -854,13 +854,13 @@ public class PlayerController : Photon.PunBehaviour
                     anim.SetBool("Charging", false);
                     UIManager._instance.chargingUI.SetActivate(false);
                 }
-
                 executer.replaceable = true;
                 if (executer.newFirework == null)
                     executer.CheckRunOutAmmo();
                 else
                     executer.CheckFireworkChanged();
                 break;
+
             case PlayerAniState.Put:
                 PutUtilItem();
                 break;
@@ -873,12 +873,9 @@ public class PlayerController : Photon.PunBehaviour
             case PlayerAniState.Fall:
                 isFalling = false;
                 break;
+
             case PlayerAniState.Emotion:
                 anim.SetInteger("SubAniNum", 0);
-                break;
-
-            case PlayerAniState.Ready:
-                //leftHandPoint.gameObject.SetActive(false);
                 break;
         }
     }
@@ -959,10 +956,6 @@ public class PlayerController : Photon.PunBehaviour
 
             case "Finish End":
                 ChangeState(PlayerAniState.Idle);
-                break;
-
-            case "Ready Sign On":
-                leftHandPoint.gameObject.SetActive(true);
                 break;
         }
     }

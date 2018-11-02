@@ -7,7 +7,7 @@ public class UIAmmoCount : MonoBehaviour {
 
     public Vector3 offset = new Vector3(20, -20, 0);
 
-    public Text amountText;
+    private Text amountText;
 
     private void Awake()
     {
