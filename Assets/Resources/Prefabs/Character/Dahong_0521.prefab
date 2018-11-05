@@ -6036,7 +6036,10 @@ MonoBehaviour:
     type: 2}
   respawnUnbeatableTime: 3
   stunTime: 3
+<<<<<<< HEAD
+=======
   knockbackTime: 0.2
+>>>>>>> ChaJinMin
   weaponPoint: {fileID: 4511453276953496}
   itemPoint: {fileID: 4621808378783954}
   leftHandPoint: {fileID: 4269175790417340}

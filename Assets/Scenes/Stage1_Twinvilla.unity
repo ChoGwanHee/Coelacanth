@@ -4170,7 +4170,11 @@ Transform:
   - {fileID: 129251492}
   - {fileID: 421454963}
   m_Father: {fileID: 0}
+<<<<<<< HEAD
   m_RootOrder: 28
+=======
+  m_RootOrder: 25
+>>>>>>> bc7a0eeefa8889f6510bc81d6b1dea8e97de3398
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &78496835
 GameObject:
@@ -4816,7 +4820,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4125754150871148, guid: 7d790ec0a0b9310489aadc775a4ea6db, type: 2}
       propertyPath: m_RootOrder
+<<<<<<< HEAD
       value: 21
+=======
+<<<<<<< HEAD:Assets/Scenes/twinvilla.unity
+      value: 20
+=======
+      value: 19
+>>>>>>> ChaJinMin:Assets/Scenes/Stage1_Twinvilla.unity
+>>>>>>> bc7a0eeefa8889f6510bc81d6b1dea8e97de3398
       objectReference: {fileID: 0}
     - target: {fileID: 1819248786855518, guid: 7d790ec0a0b9310489aadc775a4ea6db, type: 2}
       propertyPath: m_Name
@@ -11613,7 +11625,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+<<<<<<< HEAD
   m_RootOrder: 31
+=======
+  m_RootOrder: 28
+>>>>>>> bc7a0eeefa8889f6510bc81d6b1dea8e97de3398
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &390224204
 GameObject:
@@ -15288,7 +15304,11 @@ Transform:
   - {fileID: 730893132}
   - {fileID: 562270218}
   m_Father: {fileID: 0}
+<<<<<<< HEAD
   m_RootOrder: 30
+=======
+  m_RootOrder: 27
+>>>>>>> bc7a0eeefa8889f6510bc81d6b1dea8e97de3398
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &418724966
 GameObject:
@@ -19267,7 +19287,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4587186375879006, guid: df9865eed80ff324393733592bc292d7, type: 2}
       propertyPath: m_RootOrder
+<<<<<<< HEAD:Assets/Scenes/twinvilla.unity
+      value: 15
+=======
       value: 14
+>>>>>>> ChaJinMin:Assets/Scenes/Stage1_Twinvilla.unity
       objectReference: {fileID: 0}
     - target: {fileID: 1031884102575232, guid: df9865eed80ff324393733592bc292d7, type: 2}
       propertyPath: m_Name
@@ -19377,6 +19401,8 @@ Prefab:
       propertyPath: soundActive
       value: 0
       objectReference: {fileID: 0}
+<<<<<<< HEAD:Assets/Scenes/twinvilla.unity
+=======
     - target: {fileID: 4818935373751054, guid: df9865eed80ff324393733592bc292d7, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0.16
@@ -19385,6 +19411,7 @@ Prefab:
       propertyPath: m_LocalScale.y
       value: 0.835
       objectReference: {fileID: 0}
+>>>>>>> ChaJinMin:Assets/Scenes/Stage1_Twinvilla.unity
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: df9865eed80ff324393733592bc292d7, type: 2}
   m_IsPrefabParent: 0
@@ -20934,7 +20961,11 @@ Transform:
   - {fileID: 88503920}
   - {fileID: 914422226}
   m_Father: {fileID: 0}
+<<<<<<< HEAD
   m_RootOrder: 29
+=======
+  m_RootOrder: 26
+>>>>>>> bc7a0eeefa8889f6510bc81d6b1dea8e97de3398
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &607507783
 GameObject:
@@ -21764,7 +21795,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4125754150871148, guid: 7d790ec0a0b9310489aadc775a4ea6db, type: 2}
       propertyPath: m_RootOrder
+<<<<<<< HEAD
       value: 20
+=======
+<<<<<<< HEAD:Assets/Scenes/twinvilla.unity
+      value: 19
+=======
+      value: 18
+>>>>>>> ChaJinMin:Assets/Scenes/Stage1_Twinvilla.unity
+>>>>>>> bc7a0eeefa8889f6510bc81d6b1dea8e97de3398
       objectReference: {fileID: 0}
     - target: {fileID: 4125754150871148, guid: 7d790ec0a0b9310489aadc775a4ea6db, type: 2}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -22273,7 +22312,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4125754150871148, guid: 7d790ec0a0b9310489aadc775a4ea6db, type: 2}
       propertyPath: m_RootOrder
+<<<<<<< HEAD
       value: 22
+=======
+<<<<<<< HEAD:Assets/Scenes/twinvilla.unity
+      value: 21
+=======
+      value: 20
+>>>>>>> ChaJinMin:Assets/Scenes/Stage1_Twinvilla.unity
+>>>>>>> bc7a0eeefa8889f6510bc81d6b1dea8e97de3398
       objectReference: {fileID: 0}
     - target: {fileID: 4125754150871148, guid: 7d790ec0a0b9310489aadc775a4ea6db, type: 2}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -22310,6 +22357,68 @@ GameObject:
   m_PrefabParentObject: {fileID: 1819248786855518, guid: 7d790ec0a0b9310489aadc775a4ea6db,
     type: 2}
   m_PrefabInternal: {fileID: 687192019}
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD:Assets/Scenes/twinvilla.unity
+=======
+--- !u!1001 &699433848
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4723761075440234, guid: d83163ba377fd5d4aac05e9f24af63f1, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0.87
+      objectReference: {fileID: 0}
+    - target: {fileID: 4723761075440234, guid: d83163ba377fd5d4aac05e9f24af63f1, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -3.79
+      objectReference: {fileID: 0}
+    - target: {fileID: 4723761075440234, guid: d83163ba377fd5d4aac05e9f24af63f1, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 5.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 4723761075440234, guid: d83163ba377fd5d4aac05e9f24af63f1, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4723761075440234, guid: d83163ba377fd5d4aac05e9f24af63f1, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4723761075440234, guid: d83163ba377fd5d4aac05e9f24af63f1, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4723761075440234, guid: d83163ba377fd5d4aac05e9f24af63f1, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4723761075440234, guid: d83163ba377fd5d4aac05e9f24af63f1, type: 2}
+      propertyPath: m_RootOrder
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 1088252689244236, guid: d83163ba377fd5d4aac05e9f24af63f1, type: 2}
+      propertyPath: m_Name
+      value: Jiufen_Duel_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4723761075440234, guid: d83163ba377fd5d4aac05e9f24af63f1, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -180
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: d83163ba377fd5d4aac05e9f24af63f1, type: 2}
+  m_IsPrefabParent: 0
+--- !u!114 &699433849 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114717519296977954, guid: d83163ba377fd5d4aac05e9f24af63f1,
+    type: 2}
+  m_PrefabInternal: {fileID: 699433848}
+  m_Script: {fileID: 11500000, guid: 2e9b00c5c236b7b46a0a0e057cca6a48, type: 3}
+>>>>>>> ChaJinMin:Assets/Scenes/Stage1_Twinvilla.unity
+>>>>>>> bc7a0eeefa8889f6510bc81d6b1dea8e97de3398
 --- !u!1 &702801342
 GameObject:
   m_ObjectHideFlags: 0
@@ -24795,7 +24904,15 @@ Transform:
   m_Children:
   - {fileID: 976871233}
   m_Father: {fileID: 0}
+<<<<<<< HEAD
   m_RootOrder: 25
+=======
+<<<<<<< HEAD:Assets/Scenes/twinvilla.unity
+  m_RootOrder: 17
+=======
+  m_RootOrder: 23
+>>>>>>> ChaJinMin:Assets/Scenes/Stage1_Twinvilla.unity
+>>>>>>> bc7a0eeefa8889f6510bc81d6b1dea8e97de3398
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!23 &902553011
 MeshRenderer:
@@ -30375,7 +30492,11 @@ Transform:
   - {fileID: 1545141335}
   - {fileID: 1677243922}
   m_Father: {fileID: 0}
+<<<<<<< HEAD
   m_RootOrder: 27
+=======
+  m_RootOrder: 24
+>>>>>>> bc7a0eeefa8889f6510bc81d6b1dea8e97de3398
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1097531494
 GameObject:
@@ -33392,7 +33513,15 @@ Transform:
   - {fileID: 1450068486}
   - {fileID: 1722405215}
   m_Father: {fileID: 0}
+<<<<<<< HEAD
   m_RootOrder: 26
+=======
+<<<<<<< HEAD:Assets/Scenes/twinvilla.unity
+  m_RootOrder: 18
+=======
+  m_RootOrder: 24
+>>>>>>> ChaJinMin:Assets/Scenes/Stage1_Twinvilla.unity
+>>>>>>> bc7a0eeefa8889f6510bc81d6b1dea8e97de3398
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1341981475
 GameObject:
@@ -35674,7 +35803,11 @@ MonoBehaviour:
   currentState: 0
   playTime: 120
   startPlayerCount: 4
+<<<<<<< HEAD:Assets/Scenes/twinvilla.unity
+  damageEvents:
+=======
   damageShakeEvents:
+>>>>>>> ChaJinMin:Assets/Scenes/Stage1_Twinvilla.unity
   - {fileID: 11400000, guid: 96b081a6f7554564d977c7d3829c306c, type: 2}
   - {fileID: 11400000, guid: 9bd2a3735f1bb0345b369ea69bd7d1c3, type: 2}
   - {fileID: 11400000, guid: ba6ffe48cde59b64bb0a171c5881e047, type: 2}
@@ -35718,13 +35851,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a3bec99b95008941835bc1fb14dd389, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD:Assets/Scenes/twinvilla.unity
+  fireworkItemTables:
+  - {fileID: 11400000, guid: b7236bcff37349c418e0c7f7d22581cb, type: 2}
+  itemBoxPool: []
+  itemBoxReferences:
+  - {fileID: 114903379295803134, guid: 0b7aafb6661afe049ba29997204330ec, type: 2}
+=======
   active: 0
   itemTables:
   - {fileID: 11400000, guid: fa36ef94d8838824f81809381e28699a, type: 2}
+<<<<<<< HEAD
   - {fileID: 11400000, guid: ac823acd7e73fbf4bb9229b5953feb39, type: 2}
   itemBoxPoolParent: {fileID: 0}
   curBoxCount: 
   maxBoxCount: 0a00000003000000
+=======
+  itemBoxReferences:
+  - {fileID: 114972835791626174, guid: 9223746e10a39c24c999399d8e6ee20d, type: 2}
+  - {fileID: 114323342915110890, guid: b9f8adb5218c2c34b99595432a11d68f, type: 2}
+  - {fileID: 114329537359505448, guid: 0158f7091c6e1d54996ae789f3811d8b, type: 2}
+  - {fileID: 114516985051169316, guid: 8de2750bf97be174f813cd2ad286ab34, type: 2}
+  - {fileID: 114946308585283126, guid: 23da4c39481c56e4c842edcd6f12d70d, type: 2}
+>>>>>>> ChaJinMin:Assets/Scenes/Stage1_Twinvilla.unity
+>>>>>>> bc7a0eeefa8889f6510bc81d6b1dea8e97de3398
   poolExtraRate: 1
   regenTime: 2
   startBoxCount: 6
@@ -37684,7 +37834,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4587186375879006, guid: df9865eed80ff324393733592bc292d7, type: 2}
       propertyPath: m_RootOrder
+<<<<<<< HEAD:Assets/Scenes/twinvilla.unity
+      value: 14
+=======
       value: 13
+>>>>>>> ChaJinMin:Assets/Scenes/Stage1_Twinvilla.unity
       objectReference: {fileID: 0}
     - target: {fileID: 114584861766371990, guid: df9865eed80ff324393733592bc292d7,
         type: 2}
@@ -38382,7 +38536,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+<<<<<<< HEAD
   m_RootOrder: 32
+=======
+  m_RootOrder: 29
+>>>>>>> bc7a0eeefa8889f6510bc81d6b1dea8e97de3398
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1763137198
 Prefab:
@@ -38445,9 +38603,18 @@ Prefab:
       propertyPath: m_LocalPosition.z
       value: 6.2
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 4332163738628470, guid: 50bd150ae1a548c47a0627597251996f, type: 2}
       propertyPath: m_LocalRotation.x
       value: 0
+=======
+<<<<<<< HEAD:Assets/Scenes/twinvilla.unity
+=======
+    - target: {fileID: 20205165553383924, guid: 4465ba950529457438ae7c886ba2f26b,
+        type: 2}
+      propertyPath: field of view
+      value: 30
+>>>>>>> bc7a0eeefa8889f6510bc81d6b1dea8e97de3398
       objectReference: {fileID: 0}
     - target: {fileID: 4332163738628470, guid: 50bd150ae1a548c47a0627597251996f, type: 2}
       propertyPath: m_LocalRotation.y
@@ -38470,6 +38637,7 @@ Prefab:
       propertyPath: m_AnchoredPosition.x
       value: -100
       objectReference: {fileID: 0}
+>>>>>>> ChaJinMin:Assets/Scenes/Stage1_Twinvilla.unity
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 50bd150ae1a548c47a0627597251996f, type: 2}
   m_IsPrefabParent: 0
@@ -38681,6 +38849,14 @@ Prefab:
         type: 2}
       propertyPath: movePos
       value: 
+<<<<<<< HEAD:Assets/Scenes/twinvilla.unity
+      objectReference: {fileID: 1203997517}
+    - target: {fileID: 114673604973067104, guid: af07a2eeb055dac4f8704f52e347a60a,
+        type: 2}
+      propertyPath: teleportSound
+      value: event:/SFX_Stage1/Object/Trigger/SFX_Portal
+      objectReference: {fileID: 0}
+=======
       objectReference: {fileID: 0}
     - target: {fileID: 4164086480066828, guid: af07a2eeb055dac4f8704f52e347a60a, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -38695,6 +38871,7 @@ Prefab:
       propertyPath: connectedPortal
       value: 
       objectReference: {fileID: 2096532807}
+>>>>>>> ChaJinMin:Assets/Scenes/Stage1_Twinvilla.unity
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: af07a2eeb055dac4f8704f52e347a60a, type: 2}
   m_IsPrefabParent: 0
@@ -39607,7 +39784,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4894423957975820, guid: 2b3c083ed24403f4fad01ee099eff828, type: 2}
       propertyPath: m_RootOrder
+<<<<<<< HEAD
       value: 19
+=======
+      value: 16
+>>>>>>> bc7a0eeefa8889f6510bc81d6b1dea8e97de3398
       objectReference: {fileID: 0}
     - target: {fileID: 4894423957975820, guid: 2b3c083ed24403f4fad01ee099eff828, type: 2}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -40448,7 +40629,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4125754150871148, guid: 7d790ec0a0b9310489aadc775a4ea6db, type: 2}
       propertyPath: m_RootOrder
+<<<<<<< HEAD
       value: 24
+=======
+<<<<<<< HEAD:Assets/Scenes/twinvilla.unity
+      value: 23
+=======
+      value: 22
+>>>>>>> ChaJinMin:Assets/Scenes/Stage1_Twinvilla.unity
+>>>>>>> bc7a0eeefa8889f6510bc81d6b1dea8e97de3398
       objectReference: {fileID: 0}
     - target: {fileID: 4125754150871148, guid: 7d790ec0a0b9310489aadc775a4ea6db, type: 2}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -41241,6 +41430,8 @@ Transform:
   m_PrefabParentObject: {fileID: 4319227479462604, guid: 52b45b5d6b890b74bb6f56cff35fc47b,
     type: 2}
   m_PrefabInternal: {fileID: 39912427}
+<<<<<<< HEAD:Assets/Scenes/twinvilla.unity
+=======
 --- !u!1 &2044458435
 GameObject:
   m_ObjectHideFlags: 0
@@ -41286,6 +41477,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 33
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+>>>>>>> ChaJinMin:Assets/Scenes/Stage1_Twinvilla.unity
 --- !u!1001 &2059733923
 Prefab:
   m_ObjectHideFlags: 0
@@ -41328,7 +41520,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4125754150871148, guid: 7d790ec0a0b9310489aadc775a4ea6db, type: 2}
       propertyPath: m_RootOrder
+<<<<<<< HEAD
       value: 23
+=======
+<<<<<<< HEAD:Assets/Scenes/twinvilla.unity
+      value: 22
+=======
+      value: 21
+>>>>>>> ChaJinMin:Assets/Scenes/Stage1_Twinvilla.unity
+>>>>>>> bc7a0eeefa8889f6510bc81d6b1dea8e97de3398
       objectReference: {fileID: 0}
     - target: {fileID: 4125754150871148, guid: 7d790ec0a0b9310489aadc775a4ea6db, type: 2}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -41792,9 +41992,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114673604973067104, guid: af07a2eeb055dac4f8704f52e347a60a,
         type: 2}
+<<<<<<< HEAD:Assets/Scenes/twinvilla.unity
+      propertyPath: teleportSound
+      value: event:/SFX_Stage1/Object/Trigger/SFX_Portal
+      objectReference: {fileID: 0}
+=======
       propertyPath: connectedPortal
       value: 
       objectReference: {fileID: 1787525261}
+>>>>>>> ChaJinMin:Assets/Scenes/Stage1_Twinvilla.unity
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: af07a2eeb055dac4f8704f52e347a60a, type: 2}
   m_IsPrefabParent: 0

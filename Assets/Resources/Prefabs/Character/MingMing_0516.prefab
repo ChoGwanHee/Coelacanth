@@ -3983,6 +3983,7 @@ MonoBehaviour:
   maxHP: 100
   curHP: 0
   characterPicture: {fileID: 21300000, guid: 68b3e3b57261385438e68a590e1ab9d2, type: 3}
+<<<<<<< HEAD
 --- !u!114 &114151735777585394
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4009,7 +4010,13 @@ MonoBehaviour:
   - {fileID: 137976620079925950}
   - {fileID: 137555513715606224}
   - {fileID: 137850210711816958}
+=======
+<<<<<<< HEAD
+--- !u!114 &114188252553660150
+=======
+>>>>>>> bc7a0eeefa8889f6510bc81d6b1dea8e97de3398
 --- !u!114 &114167575821276580
+>>>>>>> ChaJinMin
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

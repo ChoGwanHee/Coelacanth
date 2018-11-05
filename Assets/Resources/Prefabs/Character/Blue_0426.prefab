@@ -4509,6 +4509,44 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
+<<<<<<< HEAD
+--- !u!114 &114434579278742606
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1795567098338256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 3
+    SynchronizeType: 1
+    Name: AniNum
+  - Type: 3
+    SynchronizeType: 1
+    Name: FireworkType
+  - Type: 1
+    SynchronizeType: 2
+    Name: MoveX
+  - Type: 1
+    SynchronizeType: 2
+    Name: MoveY
+  - Type: 4
+    SynchronizeType: 1
+    Name: Charging
+  - Type: 3
+    SynchronizeType: 0
+    Name: EmotionType
+  m_SynchronizeLayers:
+  - SynchronizeType: 0
+    LayerIndex: 0
+=======
+>>>>>>> ChaJinMin
 --- !u!114 &114438012414521160
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4576,6 +4614,8 @@ MonoBehaviour:
   stunEfx: {fileID: 1178661588538412}
   deadEfx_ref: {fileID: 1956332014287468, guid: 19cb9b16b9a133648a19812957506c97,
     type: 2}
+<<<<<<< HEAD
+=======
 --- !u!114 &114747873974437814
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4611,6 +4651,7 @@ MonoBehaviour:
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
+>>>>>>> ChaJinMin
 --- !u!114 &114806341782848788
 MonoBehaviour:
   m_ObjectHideFlags: 1
