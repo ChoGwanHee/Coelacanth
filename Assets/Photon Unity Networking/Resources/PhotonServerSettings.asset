@@ -11,11 +11,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f3758f8f58fdef43803eb9be1df0608, type: 3}
   m_Name: PhotonServerSettings
   m_EditorClassIdentifier: 
-  AppID: 
+  AppID: 0be53a27-9c66-46ab-a713-46e9e92dce9e
   VoiceAppID: 
   ChatAppID: 
-  HostType: 0
-  PreferredRegion: 0
+  HostType: 1
+  PreferredRegion: 9
   EnabledRegions: -1
   Protocol: 0
   ServerAddress: 
@@ -26,76 +26,5 @@ MonoBehaviour:
   PunLogging: 0
   NetworkLogging: 1
   RunInBackground: 1
-  RpcList:
-<<<<<<< HEAD
-  - ActivateItemBox
-  - AppearTasang
-  - ApplyBuff
-=======
->>>>>>> bc7a0eeefa8889f6510bc81d6b1dea8e97de3398
-  - Break
-  - ChangeFirework
-  - Chat
-  - ColorRpc
-  - Damage
-  - DamageShake
-<<<<<<< HEAD
-  - DeactivateItemBox
-=======
->>>>>>> bc7a0eeefa8889f6510bc81d6b1dea8e97de3398
-  - DestroyRpc
-  - DoJump
-  - Fall
-  - Flash
-  - HideObject
-  - InstantiateRpc
-<<<<<<< HEAD
-  - LiftUtilItem
-=======
-  - MapFacilityActivate
->>>>>>> bc7a0eeefa8889f6510bc81d6b1dea8e97de3398
-  - Marco
-  - PickupItemInit
-  - PlayEndSound
-  - Polo
-  - PunPickup
-  - PunPickupSimple
-  - PunRespawn
-  - Pushed
-<<<<<<< HEAD
-  - PutUtilItem
-  - RemoteCreatePlayer
-  - RemoveBuff
-  - RemoveItemBoxFollower
-  - RequestFire
-  - RequestForPickupItems
-  - RequestForPickupTimes
-  - RequestLift
-  - RespawnObject
-  - Run
-  - RunCannon
-  - RunGameEvent
-  - SetItemBoxFollower
-  - SetStunEfx
-=======
-  - RemoteCreatePlayer
-  - RequestForPickupItems
-  - RequestForPickupTimes
-  - RespawnObject
-  - RunGameEvent
-  - SetActiveItemBox
->>>>>>> bc7a0eeefa8889f6510bc81d6b1dea8e97de3398
-  - Spotlight
-  - StopMapFacilities
-  - TaggedPlayer
-  - Teleport
-<<<<<<< HEAD
-  - FallTile
-  - SetPlayerReady
-  - DisplayRespawn
-  - Respawn
-  - SpawnRespawnRocket
-  - PlayStepSound
-=======
->>>>>>> bc7a0eeefa8889f6510bc81d6b1dea8e97de3398
+  RpcList: []
   DisableAutoOpenWizard: 1
