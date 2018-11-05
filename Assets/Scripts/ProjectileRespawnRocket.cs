@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ServerModule;
 
 public class ProjectileRespawnRocket : BaseProjectile
 {
@@ -54,6 +55,7 @@ public class ProjectileRespawnRocket : BaseProjectile
                 {
                     objPhotonView.RPC("Pushed", objPhotonView.owner, (direction * hitForce));
                     objPhotonView.RPC("DamageShake", objPhotonView.owner, damage, 3, -1);
+                    
                 }
 
                 // 피격 이펙트
