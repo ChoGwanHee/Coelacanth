@@ -26,5 +26,54 @@ MonoBehaviour:
   PunLogging: 0
   NetworkLogging: 1
   RunInBackground: 1
-  RpcList: []
+  RpcList:
+  - ActivateItemBox
+  - AppearTasang
+  - ApplyBuff
+  - Break
+  - ChangeFirework
+  - Chat
+  - ColorRpc
+  - Damage
+  - DamageShake
+  - DeactivateItemBox
+  - DestroyRpc
+  - DisplayRespawn
+  - DoJump
+  - Fall
+  - FallTile
+  - Flash
+  - HideObject
+  - InstantiateRpc
+  - LiftUtilItem
+  - Marco
+  - PickupItemInit
+  - PlayEndSound
+  - PlayStepSound
+  - Polo
+  - PunPickup
+  - PunPickupSimple
+  - PunRespawn
+  - Pushed
+  - PutUtilItem
+  - RemoteCreatePlayer
+  - RemoveBuff
+  - RemoveItemBoxFollower
+  - RequestFire
+  - RequestForPickupItems
+  - RequestForPickupTimes
+  - RequestLift
+  - Respawn
+  - RespawnObject
+  - Run
+  - RunCannon
+  - RunGameEvent
+  - SetItemBoxFollower
+  - SetPlayerReady
+  - SetStunEfx
+  - SpawnRespawnRocket
+  - Spotlight
+  - StopMapFacilities
+  - TaggedPlayer
+  - Teleport
   DisableAutoOpenWizard: 1
