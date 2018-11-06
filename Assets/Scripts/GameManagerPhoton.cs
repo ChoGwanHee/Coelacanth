@@ -384,6 +384,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
             if (playerEnter[i] == -1)
             {
                 characterIndex = i;
+                // ID작업
                 playerEnter[i] = player.ID;
                 break;
             }

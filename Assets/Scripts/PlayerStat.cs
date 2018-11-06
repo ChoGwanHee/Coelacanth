@@ -316,7 +316,6 @@ public class PlayerStat : Photon.PunBehaviour
         if(Score + score < 0)
         {
             Score = 0;
-            ServerManager.Send(string.Format("SCORE:{0}:{1}:{2}", photonView.owner, photonView.ownerId, score));
         }
         else
         {
