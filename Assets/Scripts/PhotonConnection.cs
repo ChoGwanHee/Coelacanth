@@ -15,6 +15,23 @@ public class PhotonConnection : Photon.PunBehaviour {
     {
         Debug.Log("Can't join random room!");
 
+        CreateNewRoom();
+    }
+
+    public override void OnJoinedLobby()
+    {
+        Debug.Log("OnJoinedLobby");
+        // 닉네임 설정
+        PhotonNetwork.playerName = InstanceValue.Nickname;
+
+        if (SceneDataManager._instance.isCreateRoom)
+            CreateNewRoom();
+        else
+            PhotonNetwork.JoinRandomRoom();
+    }
+
+    public void CreateNewRoom()
+    {
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.IsVisible = true;
         roomOptions.IsOpen = true;
@@ -30,18 +47,10 @@ public class PhotonConnection : Photon.PunBehaviour {
         {
             table["MapNum"] = Random.Range(0, (int)GameMap.Max);
         }
-        
+
         roomOptions.CustomRoomProperties = table;
 
         PhotonNetwork.CreateRoom(null, roomOptions, null);
-    }
-
-    public override void OnJoinedLobby()
-    {
-        Debug.Log("OnJoinedLobby");
-        // 닉네임 설정
-        PhotonNetwork.playerName =  InstanceValue.Nickname;
-        PhotonNetwork.JoinRandomRoom();
     }
 
     // 방 생성 성공 이벤트(Photon 호출)

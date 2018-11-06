@@ -15,7 +15,7 @@ MonoBehaviour:
   usingSound: event:/SFX_Stage1/Item/Food/Drink/SFX_Drink
   useSound: event:/SFX_Stage1/Item/Food/Same/SFX_EatEnd123
   damage: 50
-  duration: 5
+  duration: 3.5
   addSpeed: 0.3
   gainScore: 60
   hitForce: 18

@@ -3,8 +3,7 @@
 public class BuffHotSauce : Buff
 {
     private ItemHotSauce item;
-    private float curColorValue = 1.0f;
-    private float changeValue = 0.01f;
+    private float curValue = 1.0f;
     private Color color = new Color(1f, 1f, 1f);
     private bool isDown = true;
 
@@ -20,8 +19,7 @@ public class BuffHotSauce : Buff
         bc.buffEfx.Play(true);
         bc.PC.maxSpeedFactor += item.addSpeed;
 
-        curColorValue = 1.0f;
-        changeValue = 0.01f;
+        curValue = 1.0f;
         color = new Color(1f, 1f, 1f);
         isDown = true;
 
@@ -56,25 +54,11 @@ public class BuffHotSauce : Buff
         }
 
         // 캐릭터 색깔 변경
-        if (isDown)
-        {
-            curColorValue -= changeValue;
-            if (curColorValue <= 0f)
-            {
-                curColorValue = 0f;
-                isDown = false;
-            }
-        }
-        else
-        {
-            curColorValue += changeValue;
-            if (curColorValue >= 1f)
-            {
-                curColorValue = 1f;
-                isDown = true;
-            }
-        }
-        changeValue += 0.001f;
+        float changeValue = elapsedTime / duration * 1.2f;
+        curValue += changeValue;
+
+        float curColorValue = (Mathf.Sin(curValue) + 1) * 0.5f;
+        
         color.g = curColorValue;
         color.b = curColorValue;
 

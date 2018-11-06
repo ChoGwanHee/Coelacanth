@@ -4,7 +4,7 @@ public class SceneDataManager : MonoBehaviour
 {
     public static SceneDataManager _instance;
 
-
+    public bool isCreateRoom = false;
     public int mapNum;
     public bool isSelect;
 
@@ -24,4 +24,8 @@ public class SceneDataManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    public void SetCreateRoomBool(bool active)
+    {
+        isCreateRoom = active;
+    }
 }
