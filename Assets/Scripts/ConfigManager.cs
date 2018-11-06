@@ -16,7 +16,7 @@ public class ConfigManager {
             {
                 line = sr.ReadLine();
 
-                if (line == null || i == lineNum)
+                if (string.IsNullOrEmpty(line) || i == lineNum)
                 {
                     break;
                 }
@@ -36,7 +36,7 @@ public class ConfigManager {
     {
         string source = ReadLine(lineNum);
 
-        if (source == null) return null;
+        if (string.IsNullOrEmpty(source)) return null;
 
         string[] values = source.Split(':');
 
@@ -47,7 +47,7 @@ public class ConfigManager {
     {
         string source = ReadLine(lineNum);
 
-        if (source == null)
+        if (string.IsNullOrEmpty(source))
         {
             Debug.LogError("데이터가 존재하지 않습니다.");
             return false;

@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 65661793449543020}
   m_Layer: 8
   m_Name: Side_Bridge
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 65157851314319878}
   m_Layer: 8
   m_Name: Side_Bridge (1)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295

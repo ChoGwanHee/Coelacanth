@@ -4583,7 +4583,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eaa8a47015df2d489757a0317f2fff7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  utilItem: {fileID: 0}
   stunSound: event:/SFX/Character/Sound/SFX_Stun
   walkingSound: event:/SFX/Character/Sound/SFX_Foot
   fallingSound: 
@@ -4602,6 +4601,9 @@ MonoBehaviour:
   respawnUnbeatableTime: 3
   stunTime: 3
   knockbackTime: 0.2
+  toleranceTime: 1
+  idlePM: {fileID: 13400000, guid: 36a9a346d8062904e80a3088189b33e3, type: 2}
+  fallingPM: {fileID: 13400000, guid: 03071f7798941ad4294dab0c5eb0fdb8, type: 2}
   weaponPoint: {fileID: 0}
   itemPoint: {fileID: 0}
   leftHandPoint: {fileID: 0}

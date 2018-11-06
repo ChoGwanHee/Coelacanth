@@ -77,7 +77,7 @@ public class PhotonConnection : Photon.PunBehaviour {
     public void ConnectToPhoton()
     {
         // 게임 버전
-        PhotonNetwork.ConnectUsingSettings("0.8.6");
+        PhotonNetwork.ConnectUsingSettings("0.8.7");
     }
 
     IEnumerator LoadGameScene(GameMap map)

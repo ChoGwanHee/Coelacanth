@@ -7651,7 +7651,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fce0c34300c2ff4469b53e70f41539d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fallingHeight: -1
+  fallingHeight: -0.5
   mapFacilities:
   - {fileID: 986175517}
 --- !u!4 &986175516

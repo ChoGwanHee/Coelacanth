@@ -310,7 +310,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
         
         while (!isPlaying)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetButtonDown("Ready"))
             {
                 localPlayerReady = !localPlayerReady;
                 if (localPlayerReady)

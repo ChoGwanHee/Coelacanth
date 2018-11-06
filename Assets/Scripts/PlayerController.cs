@@ -20,7 +20,7 @@ public class PlayerController : Photon.PunBehaviour
     /// <summary>
     /// 플레이어가 현재 가지고 있는 유틸 아이템
     /// </summary>
-    public ItemBoxUtil utilItem;
+    private ItemBoxUtil utilItem;
 
     /// <summary>
     /// 플레이어가 스턴에 걸렸을 때 재생되는 사운드
@@ -46,6 +46,9 @@ public class PlayerController : Photon.PunBehaviour
     /// </summary>
     public CharacterVoicePack characterVoice;
 
+    /// <summary>
+    /// 캐릭터 번호
+    /// </summary>
     public int characterNum;
 
     
@@ -135,6 +138,9 @@ public class PlayerController : Photon.PunBehaviour
     /// </summary>
     public float respawnUnbeatableTime = 3.0f;
 
+    /// <summary>
+    /// 리스폰 대기 코루틴
+    /// </summary>
     private Coroutine respawnWaitCoroutine;
 
     /// <summary>
@@ -156,6 +162,17 @@ public class PlayerController : Photon.PunBehaviour
     /// 넉백 시작 후 지난 시간
     /// </summary>
     private float knockbackElapsedTime = 0.0f;
+
+    /// <summary>
+    /// 발판 없어도 되는 시간
+    /// </summary>
+    public float toleranceTime = 1.0f;
+
+    /// <summary>
+    /// 발판 없이 지난 시간
+    /// </summary>
+    private float elapsedToleranceTime = 0.0f;
+
 
     /// <summary>
     /// 상호작용 가능한지 체크할 때 사용하는 반경
@@ -230,7 +247,9 @@ public class PlayerController : Photon.PunBehaviour
     /// </summary>
     public GameObject deadEfx_ref;
 
-
+    /// <summary>
+    /// 아이템 사용 중에 재생되는 사운드
+    /// </summary>
     FMOD.Studio.EventInstance itemUsingSoundEvent;
 
 
@@ -298,7 +317,7 @@ public class PlayerController : Photon.PunBehaviour
                 {
                     if (!isGrab)
                     {
-                        if (Input.GetMouseButtonDown(0))
+                        if (Input.GetButtonDown("Fire1"))
                             executer.Trigger();
 
                         if (Input.GetKeyDown(KeyCode.E))
@@ -325,7 +344,7 @@ public class PlayerController : Photon.PunBehaviour
                     }
                     else
                     {
-                        if (Input.GetMouseButtonDown(0))
+                        if (Input.GetButtonDown("Fire1"))
                             StartCoroutine(ItemUsingDelay(utilItem.aniNum));
 
                         if (Input.GetKeyDown(KeyCode.E))
@@ -337,7 +356,8 @@ public class PlayerController : Photon.PunBehaviour
                 }
             }
 
-            CheckKnockBack();
+            if(isKnockback)
+                CheckKnockBack();
             ApplyAnimatorParams();
         }
         
@@ -369,6 +389,21 @@ public class PlayerController : Photon.PunBehaviour
         }
         
 	}
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if(state == PlayerAniState.Fall)
+        {
+            if (collision.gameObject.CompareTag("Ground"))
+            {
+                for(int i=0; i<collision.contacts.Length; i++)
+                {
+                    Vector3 force = (rb.position - collision.contacts[i].point).normalized * 0.01f;
+                    rb.MovePosition(rb.position + force);
+                }
+            }
+        }
+    }
 
     public void GameStartInit()
     {
@@ -636,7 +671,6 @@ public class PlayerController : Photon.PunBehaviour
     private void DisableRespawnUnbeatable()
     {
         isUnbeatable = false;
-        Debug.Log("무적 끝");
     } 
 
     /// <summary>
@@ -705,6 +739,28 @@ public class PlayerController : Photon.PunBehaviour
 
         TurnToScreen();
         ChangeState(PlayerAniState.Finish);
+    }
+
+    /// <summary>
+    /// 땅 위에 있는지 체크
+    /// </summary>
+    private void CheckOnGround()
+    {
+        if (transform.position.y > fallingHeight + 1.0f) return;
+
+        if(Physics.Raycast(transform.position + Vector3.up * 0.05f, Vector3.down, 1.0f, groundMask, QueryTriggerInteraction.Ignore))
+        {
+            elapsedToleranceTime = 0.0f;
+        }
+        else
+        {
+            elapsedToleranceTime += Time.fixedDeltaTime;
+
+            if (elapsedToleranceTime >= toleranceTime)
+            {
+                ChangeState(PlayerAniState.Fall);
+            }
+        }
     }
 
     /// <summary>
@@ -835,6 +891,7 @@ public class PlayerController : Photon.PunBehaviour
                 {
                     PutUtilItem(true);
                 }
+                //col.material = fallingPM;
                 break;
         }
     }
@@ -874,6 +931,7 @@ public class PlayerController : Photon.PunBehaviour
 
             case PlayerAniState.Fall:
                 isFalling = false;
+                //col.material = idlePM;
                 break;
 
             case PlayerAniState.Emotion:
@@ -896,6 +954,7 @@ public class PlayerController : Photon.PunBehaviour
                     AddVelocity();
                     TurnToMouse();
                 }
+                CheckOnGround();
                 break;
             case PlayerAniState.Attack:
                 if (isControlable && !isStun && !UIManager._instance.uiControl)
@@ -1090,7 +1149,7 @@ public class PlayerController : Photon.PunBehaviour
         ChangeState(PlayerAniState.Consume);
         while(wait)
         {
-            if(Input.GetMouseButtonUp(0) || state != PlayerAniState.Consume || isKnockback)
+            if(Input.GetButtonUp("Fire1") || state != PlayerAniState.Consume || isKnockback)
             {
                 if(isGrab)
                     anim.SetInteger("SubAniNum", 1);
