@@ -41,7 +41,7 @@ public class Connected : MonoBehaviour
             ip = "45.112.165.82";
         }
         //StartConnectServer(ip, 12800);
-        StartConnectServer("127.0.0.1", 12800);
+        StartConnectServer("192.168.0.15", 12800);
         
     }
 
