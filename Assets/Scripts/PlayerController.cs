@@ -320,22 +320,22 @@ public class PlayerController : Photon.PunBehaviour
                         if (Input.GetButtonDown("Fire1"))
                             executer.Trigger();
 
-                        if (Input.GetKeyDown(KeyCode.E))
+                        if (Input.GetButtonDown("Interaction"))
                         {
                             Interaction();
                         }
 
-                        if (Input.GetKeyDown(KeyCode.Alpha1))
+                        if (Input.GetButtonDown("Emotion1"))
                         {
                             anim.SetInteger("SubAniNum", 0);
                             ChangeState(PlayerAniState.Emotion);
                         }
-                        else if (Input.GetKeyDown(KeyCode.Alpha2))
+                        else if (Input.GetButtonDown("Emotion2"))
                         {
                             anim.SetInteger("SubAniNum", 1);
                             ChangeState(PlayerAniState.Emotion);
                         }
-                        else if (Input.GetKeyDown(KeyCode.Alpha3))
+                        else if (Input.GetButtonDown("Emotion3"))
                         {
                             anim.SetInteger("SubAniNum", 2);
                             ChangeState(PlayerAniState.Emotion);
@@ -347,7 +347,7 @@ public class PlayerController : Photon.PunBehaviour
                         if (Input.GetButtonDown("Fire1"))
                             StartCoroutine(ItemUsingDelay(utilItem.aniNum));
 
-                        if (Input.GetKeyDown(KeyCode.E))
+                        if (Input.GetButtonDown("Interaction"))
                         {
                             ChangeState(PlayerAniState.Put);
                         }
@@ -891,7 +891,6 @@ public class PlayerController : Photon.PunBehaviour
                 {
                     PutUtilItem(true);
                 }
-                //col.material = fallingPM;
                 break;
         }
     }
@@ -931,7 +930,6 @@ public class PlayerController : Photon.PunBehaviour
 
             case PlayerAniState.Fall:
                 isFalling = false;
-                //col.material = idlePM;
                 break;
 
             case PlayerAniState.Emotion:
