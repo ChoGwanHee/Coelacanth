@@ -161,7 +161,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
         remainGameTime = playTime;
 
         // 커서 설정
-        Cursor.SetCursor(cursorTex, new Vector2(0, 0), CursorMode.ForceSoftware);
+        //Cursor.SetCursor(cursorTex, new Vector2(0, 0), CursorMode.ForceSoftware);
 
         playerEnter = new int[(PhotonNetwork.room.MaxPlayers)];
         playerReady = new bool[(PhotonNetwork.room.MaxPlayers)];
