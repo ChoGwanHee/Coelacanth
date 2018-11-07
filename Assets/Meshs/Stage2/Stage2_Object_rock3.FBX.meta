@@ -1,42 +1,20 @@
 fileFormatVersion: 2
-guid: 1c0b586a9cab03c4991504b1af312c4c
-timeCreated: 1541504052
+guid: 22f4ca22cdb920b4890a0a4777ffce26
+timeCreated: 1541517949
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: Bone001
-    100002: Bone002
-    100004: Bone003
-    100006: Bone004
-    100008: Bone005
-    100010: Bone006
-    100012: Bone007
-    100014: Bone008
-    100016: Dummy001
-    100018: Dummy002
-    100020: Object010
-    100022: //RootNode
-    400000: Bone001
-    400002: Bone002
-    400004: Bone003
-    400006: Bone004
-    400008: Bone005
-    400010: Bone006
-    400012: Bone007
-    400014: Bone008
-    400016: Dummy001
-    400018: Dummy002
-    400020: Object010
-    400022: //RootNode
-    2100000: 'Material #870'
-    4300000: Object010
-    7400000: Take 001
+    100000: //RootNode
+    400000: //RootNode
+    2100000: No Name
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Object002
     9500000: //RootNode
-    13700000: Object010
   externalObjects: {}
   materials:
-    importMaterials: 0
+    importMaterials: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -60,39 +38,11 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: Take 001
-      takeName: Take 001
-      firstFrame: 0
-      lastFrame: 85
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 10
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importVisibility: 1
