@@ -2,6 +2,7 @@
 using ExitGames.Client.Photon.Chat;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class PhotonChat : MonoBehaviour, IChatClientListener
@@ -25,6 +26,7 @@ public class PhotonChat : MonoBehaviour, IChatClientListener
 
     private bool followingNewChat = true;
     private bool showMinimal = true;
+    private bool inputFieldSelected = false;
 
 
     private void Start()
@@ -51,19 +53,24 @@ public class PhotonChat : MonoBehaviour, IChatClientListener
         
         if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
         {
-            if (inputFieldChat.isFocused)
-                return;
+            Debug.Log("Press Enter");
 
-            if (showMinimal)
-            {
-                Show(true);
-            }
-            else
+            if (inputFieldSelected)
             {
                 OnEnterSend();
             }
+            else
+            {
+                if (showMinimal)
+                {
+                    Show(true);
+                }
+                else
+                {
+                    inputFieldChat.Select();
+                }
+            }
         }
-
     }
 
     public void Connect()
@@ -166,13 +173,15 @@ public class PhotonChat : MonoBehaviour, IChatClientListener
     {
         if (string.IsNullOrEmpty(inputFieldChat.text))
         {
-            inputFieldChat.DeactivateInputField();
+            EventSystem.current.SetSelectedGameObject(null);
+            //inputFieldChat
             Show(false);
             return;
         }
         SendChatMessage(this.inputFieldChat.text);
         this.inputFieldChat.text = "";
-        this.inputFieldChat.ActivateInputField();
+        EventSystem.current.SetSelectedGameObject(inputFieldChat.gameObject, null);
+        inputFieldChat.OnPointerClick(new PointerEventData(EventSystem.current));
     }
 
     public void OnClickSend()
@@ -242,7 +251,31 @@ public class PhotonChat : MonoBehaviour, IChatClientListener
 
         if(isShow)
         {
-            inputFieldChat.ActivateInputField();
+            inputFieldChat.Select();
         }
+        else
+        {
+            inputFieldSelected = false;
+            UIManager._instance.TakeBackControl();
+        }
+    }
+
+    public void OnEndEdit()
+    {
+        Debug.Log("End Edit");
+    }
+
+    public void OnSelected()
+    {
+        Debug.Log("Selected");
+        inputFieldSelected = true;
+        UIManager._instance.TakeControl();
+    }
+
+    public void OnDeselected()
+    {
+        Debug.Log("Deselected");
+        inputFieldSelected = false;
+        UIManager._instance.TakeBackControl();
     }
 }

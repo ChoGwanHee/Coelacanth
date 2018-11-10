@@ -1,25 +1,42 @@
 fileFormatVersion: 2
-guid: 245d758714752584893ae98d942a4adc
-timeCreated: 1541504052
+guid: 7033b16a8a03a884388f8208828c6eb6
+timeCreated: 1541660589
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: Bone001
-    100002: //RootNode
-    100004: Object032
+    100002: Bone002
+    100004: Bone003
+    100006: Bone004
+    100008: Bone005
+    100010: Bone006
+    100012: Bone007
+    100014: Bone008
+    100016: Dummy001
+    100018: Dummy002
+    100020: Object010
+    100022: //RootNode
     400000: Bone001
-    400002: //RootNode
-    400004: Object032
-    2100000: 'Material #492'
-    2100002: 'Material #490'
-    4300000: Object032
+    400002: Bone002
+    400004: Bone003
+    400006: Bone004
+    400008: Bone005
+    400010: Bone006
+    400012: Bone007
+    400014: Bone008
+    400016: Dummy001
+    400018: Dummy002
+    400020: Object010
+    400022: //RootNode
+    2100000: 'Material #870'
+    4300000: Object010
     7400000: Take 001
     9500000: //RootNode
-    13700000: Object032
+    13700000: Object010
   externalObjects: {}
   materials:
-    importMaterials: 0
+    importMaterials: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -48,7 +65,7 @@ ModelImporter:
       name: Take 001
       takeName: Take 001
       firstFrame: 0
-      lastFrame: 60
+      lastFrame: 85
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

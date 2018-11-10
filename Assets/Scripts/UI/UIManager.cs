@@ -9,7 +9,12 @@ public class UIManager : MonoBehaviour {
         Result
     }
 
-    public bool uiControl = false;
+    public bool UIControl
+    {
+        get { return uiControl; }
+    }
+    private bool uiControl = false;
+    private int uiControlCount = 0;
 
 
     // Ready
@@ -66,14 +71,19 @@ public class UIManager : MonoBehaviour {
             chatUI.SetActive(chatEnable);
         }
 
-        if (uiControl) return;
-
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            escUI.SetActive(true);
-            uiControl = true;
+            if(escUI.activeSelf)
+            {
+                escUI.SetActive(false);
+                TakeBackControl();
+            }
+            else
+            {
+                escUI.SetActive(true);
+                TakeControl();
+            }
         }
-        
     }
 
     /// <summary>
@@ -95,8 +105,21 @@ public class UIManager : MonoBehaviour {
         }
     }
 
+    public void TakeControl()
+    {
+        uiControl = true;
+        uiControlCount++;
+        if (uiControlCount == 1)
+            GameManagerPhoton._instance.GetPlayerByOwnerId(PhotonNetwork.player.ID).PC.InitInput();
+    }
+
     public void TakeBackControl()
     {
-        uiControl = false;
+        if(uiControlCount >= 1)
+            uiControlCount--;
+
+        if (uiControlCount <= 0)
+            uiControl = false;
     }
+    
 }

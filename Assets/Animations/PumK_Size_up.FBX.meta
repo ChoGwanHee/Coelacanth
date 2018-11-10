@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: de613047efb3d5d458f968532f1c7c5a
-timeCreated: 1541504053
+guid: 63c4dcc721b91454abe0120f9f12b438
+timeCreated: 1541660589
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -36,7 +36,7 @@ ModelImporter:
     13700000: Object010
   externalObjects: {}
   materials:
-    importMaterials: 0
+    importMaterials: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1

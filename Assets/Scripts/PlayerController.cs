@@ -311,7 +311,7 @@ public class PlayerController : Photon.PunBehaviour
 
         if (!photonMove || photonView.isMine)
         {
-            if (isControlable && !isStun && !UIManager._instance.uiControl)
+            if (isControlable && !isStun && !UIManager._instance.UIControl)
             {
                 if (state == PlayerAniState.Idle)
                 {
@@ -431,6 +431,14 @@ public class PlayerController : Photon.PunBehaviour
         // 카메라의 방향이 Z축을 바라보게 고정이 되어 있어서 사용할 필요가 없음 나중에 바뀌면 이걸로 바꿔야 됨
         //targetDirection = (inputAxis.y * Vector3.Scale(cam.transform.forward, new Vector3(1, 0, 1)).normalized + inputAxis.x * cam.transform.right).normalized;
         targetDirection = (inputAxis.y * Vector3.forward + inputAxis.x * Vector3.right).normalized;
+    }
+
+    /// <summary>
+    /// 이동하는 데 필요한 변수를 초기화 합니다.
+    /// </summary>
+    public void InitInput()
+    {
+        inputAxis = Vector2.zero;
     }
 
     /// <summary>
@@ -946,7 +954,7 @@ public class PlayerController : Photon.PunBehaviour
         switch (state)
         {
             case PlayerAniState.Idle:
-                if (isControlable && !isStun && !UIManager._instance.uiControl)
+                if (isControlable && !isStun && !UIManager._instance.UIControl)
                 {
                     GetInput();
                     AddVelocity();
@@ -955,7 +963,7 @@ public class PlayerController : Photon.PunBehaviour
                 CheckOnGround();
                 break;
             case PlayerAniState.Attack:
-                if (isControlable && !isStun && !UIManager._instance.uiControl)
+                if (isControlable && !isStun && !UIManager._instance.UIControl)
                 {
                     GetInput();
                     if (executer.curFirework.fwType == FireworkType.Butterfly)

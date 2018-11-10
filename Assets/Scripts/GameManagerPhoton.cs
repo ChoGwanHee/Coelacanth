@@ -310,7 +310,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
         
         while (!isPlaying)
         {
-            if (Input.GetButtonDown("Ready"))
+            if (Input.GetButtonDown("Ready") && UIManager._instance.UIControl)
             {
                 localPlayerReady = !localPlayerReady;
                 if (localPlayerReady)
