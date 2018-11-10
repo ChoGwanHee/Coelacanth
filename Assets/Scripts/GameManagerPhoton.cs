@@ -660,6 +660,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
     [PunRPC]
     private void Spotlight(int spotlightOwnerId)
     {
+        ServerManager.Send(string.Format("WIN:{0}:{1}:{2}", InstanceValue.Nickname, InstanceValue.ID, InstanceValue.Score));
         PlayerController focusedPlayer = GetPlayerByOwnerId(spotlightOwnerId).GetComponent<PlayerController>();
 
         // 플레이어 업데이트

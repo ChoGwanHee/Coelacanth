@@ -319,7 +319,7 @@ public class PlayerStat : Photon.PunBehaviour
         }
         else
         {
-            ServerManager.Send(string.Format("SCORE:{0}:{1}:{2}", photonView.owner, photonView.ownerId, score));
+            ServerManager.Send(string.Format("SCORE:{0}:{1}:{2}", InstanceValue.Nickname, InstanceValue.ID, score));
             photonView.owner.AddScore(score);
         }
     }
