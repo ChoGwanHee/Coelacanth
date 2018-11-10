@@ -91,10 +91,12 @@ public class PhotonConnection : Photon.PunBehaviour {
 
     IEnumerator LoadGameScene(GameMap map)
     {
-        var ConvertToInt32_StageData = (int)map + 2;
+        //var ConvertToInt32_StageData = (int)map + 2;
+        var ConvertToInt32_StageData = 2;
         // 게임씬을 완벽하게 로딩 후 씬을 변경한다.
         ServerManager.Send(string.Format("JOINGAME:{0}:{1}:{2}:{3}", InstanceValue.Nickname, InstanceValue.ID, InstanceValue.Room, ConvertToInt32_StageData));
         Debug.Log(ServerManager.ParsePacketLogData());
+        Debug.Log(InstanceValue.Nickname + ":" + InstanceValue.ID + ":" + InstanceValue.Room + "정보를 가진 " + InstanceValue.Sequence + "번째 유저");
         AsyncOperation oper = SceneManager.LoadSceneAsync(ConvertToInt32_StageData);
 
 

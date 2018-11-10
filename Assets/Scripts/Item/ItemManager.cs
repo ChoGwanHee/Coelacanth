@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using ServerModule;
 using UnityEngine;
 
 [RequireComponent(typeof(PhotonView))]
@@ -225,6 +226,7 @@ public class ItemManager : Photon.PunBehaviour
     public void ActivateItemBox(int firstIndex, int secondIndex, Vector3 movePos)
     {
         BaseItemBox itemBox = itemBoxPool[firstIndex][secondIndex];
+        ServerManager.Send(string.Format("ITEMBOXCREATE:{0}:{1}:{2}", itemBoxPool[firstIndex][secondIndex].GetType(), movePos.x, movePos.z));
 
         itemBox.transform.position = movePos;
         itemBox.Activate();
@@ -235,7 +237,8 @@ public class ItemManager : Photon.PunBehaviour
     public void DeactivateItemBox(int firstIndex, int secondIndex)
     {
         BaseItemBox itemBox = itemBoxPool[firstIndex][secondIndex];
-
+        ServerManager.Send(string.Format("ITEMBOXDELETE:{0}:{1}:{2}", InstanceValue.Nickname, InstanceValue.ID, itemBoxPool[firstIndex][secondIndex].GetType()));
+        
         itemBox.Deactivate();
         curBoxCount[itemBox.tableIndex]--;
     }

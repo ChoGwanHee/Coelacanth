@@ -40,8 +40,8 @@ public class Connected : MonoBehaviour
             // default IP
             ip = "45.112.165.82";
         }
-        StartConnectServer(ip, 12800);
-        //StartConnectServer("192.168.0.15", 12800);
+        //StartConnectServer(ip, 12800);
+        StartConnectServer("192.168.0.15", 12800);
         
     }
 
