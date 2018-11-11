@@ -174,7 +174,6 @@ public class PhotonChat : MonoBehaviour, IChatClientListener
         if (string.IsNullOrEmpty(inputFieldChat.text))
         {
             EventSystem.current.SetSelectedGameObject(null);
-            //inputFieldChat
             Show(false);
             return;
         }

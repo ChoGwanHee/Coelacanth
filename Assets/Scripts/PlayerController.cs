@@ -396,11 +396,14 @@ public class PlayerController : Photon.PunBehaviour
         {
             if (collision.gameObject.CompareTag("Ground"))
             {
+                Vector3 force = Vector3.zero;
                 for(int i=0; i<collision.contacts.Length; i++)
                 {
-                    Vector3 force = (rb.position - collision.contacts[i].point).normalized * 0.01f;
-                    rb.MovePosition(rb.position + force);
+                    force += rb.position - collision.contacts[i].point;
                 }
+                force.Scale(new Vector3(1, 0, 1));
+                force.Normalize();
+                rb.MovePosition(rb.position + force * Time.fixedDeltaTime);
             }
         }
     }
@@ -743,7 +746,7 @@ public class PlayerController : Photon.PunBehaviour
         isControlable = false;
         inputAxis = Vector2.zero;
         anim.SetFloat("MoveX", 0);
-        anim.SetFloat("MoveY", 0);
+        //anim.SetFloat("MoveY", 0);
 
         TurnToScreen();
         ChangeState(PlayerAniState.Finish);
@@ -873,7 +876,7 @@ public class PlayerController : Photon.PunBehaviour
         {
             case PlayerAniState.Idle:
                 anim.SetFloat("MoveX", 0);
-                anim.SetFloat("MoveY", 0);
+                //anim.SetFloat("MoveY", 0);
                 inputAxis = Vector2.zero;
                 break;
             case PlayerAniState.Attack:
@@ -892,7 +895,7 @@ public class PlayerController : Photon.PunBehaviour
             case PlayerAniState.Fall:
                 anim.SetInteger("AniNum", (int)PlayerAniState.Fall);
                 anim.SetFloat("MoveX", 0);
-                anim.SetFloat("MoveY", 0);
+                //anim.SetFloat("MoveY", 0);
                 inputAxis = Vector2.zero;
                 isFalling = true;
                 if (isGrab)
