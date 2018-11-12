@@ -55,6 +55,12 @@ Builds/
 *.unitypackage
 *.exe
 
+# FMOD
+/Assets/FMODStudioCache.asset
+/Assets/FMODStudioCache.asset.meta
+fmod.log
+fmod_editor.log
+
 # Project specific
 /ProjectSettings/**
 /Assets/Resources/FMODStudioSettings.asset
