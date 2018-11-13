@@ -5,7 +5,6 @@ public class BuffHotSauce : Buff
     private ItemHotSauce item;
     private float curValue = 1.0f;
     private Color color = new Color(1f, 1f, 1f);
-    private bool isDown = true;
 
 
     public BuffHotSauce(ItemHotSauce item)
@@ -21,7 +20,6 @@ public class BuffHotSauce : Buff
 
         curValue = 1.0f;
         color = new Color(1f, 1f, 1f);
-        isDown = true;
 
         bc.buffDuringSound = FMODUnity.RuntimeManager.CreateInstance(bc.hotSauceCountSound);
         bc.buffDuringSound.start();

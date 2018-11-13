@@ -881,6 +881,11 @@ public class PlayerController : Photon.PunBehaviour
                 break;
             case PlayerAniState.Attack:
                 break;
+
+            case PlayerAniState.Consume:
+                UIManager._instance.itemUsingGauge.SetTarget(transform);
+                break;
+
             case PlayerAniState.Stun:
                 photonView.RPC("SetStunEfx", PhotonTargets.All, true);
                 isStun = true;
@@ -934,6 +939,10 @@ public class PlayerController : Photon.PunBehaviour
                 PutUtilItem();
                 break;
 
+            case PlayerAniState.Consume:
+                UIManager._instance.itemUsingGauge.SetTarget(null);
+                break;
+
             case PlayerAniState.Stun:
                 photonView.RPC("SetStunEfx", PhotonTargets.All, false);
                 isStun = false;
@@ -946,6 +955,7 @@ public class PlayerController : Photon.PunBehaviour
             case PlayerAniState.Emotion:
                 anim.SetInteger("SubAniNum", 0);
                 break;
+            
         }
     }
 
@@ -1168,6 +1178,8 @@ public class PlayerController : Photon.PunBehaviour
             else
             {
                 elapsedTime += Time.deltaTime;
+                float ratio = elapsedTime / delayTime;
+                UIManager._instance.itemUsingGauge.SetAmount(ratio);
                 if (elapsedTime >= delayTime)
                 {
                     wait = false;

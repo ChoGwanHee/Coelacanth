@@ -17,6 +17,9 @@ public class ItemManager : Photon.PunBehaviour
     public int[] curBoxCount;
     public int[] maxBoxCount;
 
+    public bool onGroundCheck = false;
+    public float checkInterval = 3.0f;
+
     /// <summary>
     /// 아이템 박스 종류당 여분 비율 (maxBoxCount * poolExtraRate = 여분 개수)
     /// </summary>
@@ -42,8 +45,13 @@ public class ItemManager : Photon.PunBehaviour
     public UtilItem[] buffUtilItemReference;
 
 
+
+    private int groundMask;
+
+
     private void Start()
     {
+        groundMask = LayerMask.GetMask("Ground");
         curBoxCount = new int[itemTables.Length];
 
         Initialize();
@@ -118,6 +126,9 @@ public class ItemManager : Photon.PunBehaviour
     public void Initialize()
     {
         InitItemBoxPool();
+
+        if (photonView.isMine && onGroundCheck)
+            StartCoroutine(CheckOnGround());
     }
 
     /// <summary>
@@ -241,6 +252,12 @@ public class ItemManager : Photon.PunBehaviour
         
         itemBox.Deactivate();
         curBoxCount[itemBox.tableIndex]--;
+    }
+
+    [PunRPC]
+    public void SetItemBoxPos(int firstIndex, int secondIndex, Vector3 movePos)
+    {
+        itemBoxPool[firstIndex][secondIndex].transform.position = movePos;
     }
 
     [PunRPC]
@@ -494,5 +511,32 @@ public class ItemManager : Photon.PunBehaviour
         result.y = pos1.y;
 
         return result;
+    }
+
+    private IEnumerator CheckOnGround()
+    {
+        while(onGroundCheck)
+        {
+            for (int i = 1; i < itemTables[0].itemList.Length; i++)
+            {
+                for (int j = 0; j < itemBoxPool[i].Length; j++)
+                {
+                    if (itemBoxPool[i][j] == null)
+                        break;
+                    if (!itemBoxPool[i][j].alive)
+                        continue;
+
+                    if (!Physics.Raycast(itemBoxPool[i][j].transform.position, Vector3.down, 2.0f, groundMask, QueryTriggerInteraction.Ignore))
+                    {
+                        Vector3 regenPos = GetRegenPos(0);
+                        regenPos.y += itemBoxPool[i][j].regenHeight;
+                        photonView.RPC("SetItemBoxPos", PhotonTargets.All, i, j, regenPos);
+                    }
+                }
+                yield return null;
+            }
+
+            yield return new WaitForSeconds(checkInterval);
+        }
     }
 }

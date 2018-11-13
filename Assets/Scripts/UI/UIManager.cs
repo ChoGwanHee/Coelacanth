@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System.Collections;
+
 
 public class UIManager : MonoBehaviour {
     public static UIManager _instance;
@@ -30,6 +32,7 @@ public class UIManager : MonoBehaviour {
     public UIEButton eButton;
     public UIRespawn respawnUI;
     public UIBuffInfo buffInfoUI;
+    public UIItemUsingGauge itemUsingGauge;
     public Animator counterAnim;
 
     public GameObject escUI;
@@ -40,6 +43,8 @@ public class UIManager : MonoBehaviour {
     public GameObject resultCanvas;
     public UIResultScoreBoard resultScoreBoard;
     public UIResultEmotion resultEmotion;
+    public GameObject exitButton;
+    public float exitButtonAppearTime;
 
     // Chat
     public GameObject chatUI;
@@ -101,6 +106,7 @@ public class UIManager : MonoBehaviour {
             case ScreenType.Result:
                 gamePlayCanvas.SetActive(false);
                 resultCanvas.SetActive(true);
+                StartCoroutine(AppearExitButton());
                 break;
         }
     }
@@ -122,4 +128,9 @@ public class UIManager : MonoBehaviour {
             uiControl = false;
     }
     
+    private IEnumerator AppearExitButton()
+    {
+        yield return new WaitForSeconds(exitButtonAppearTime);
+        exitButton.SetActive(true);
+    }
 }

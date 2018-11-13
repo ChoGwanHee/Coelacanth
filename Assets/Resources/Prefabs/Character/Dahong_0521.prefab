@@ -6037,8 +6037,6 @@ MonoBehaviour:
   stunTime: 3
   knockbackTime: 0.2
   toleranceTime: 1
-  idlePM: {fileID: 13400000, guid: 36a9a346d8062904e80a3088189b33e3, type: 2}
-  fallingPM: {fileID: 13400000, guid: 03071f7798941ad4294dab0c5eb0fdb8, type: 2}
   weaponPoint: {fileID: 4511453276953496}
   itemPoint: {fileID: 4621808378783954}
   leftHandPoint: {fileID: 4269175790417340}

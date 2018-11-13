@@ -76,4 +76,6 @@ MonoBehaviour:
   - Respawn
   - SpawnRespawnRocket
   - PlayStepSound
+  - StartPumpkinBomb
+  - SetItemBoxPos
   DisableAutoOpenWizard: 1
