@@ -502,7 +502,7 @@ public class PlayerController : Photon.PunBehaviour
         // 입력값이 있다
         if (inputAxis.sqrMagnitude > 0)
         {
-            //ServerManager.Send(string.Format("MOVE:{0}:{1}:{2}:{3}", InstanceValue.Nickname, InstanceValue.ID, rb.position.x, rb.position.z));
+            ServerManager.Send(string.Format("MOVE:{0}:{1}:{2}:{3}", InstanceValue.Nickname, InstanceValue.ID, rb.position.x, rb.position.z));
             Vector3 addVelocity = targetDirection * accSpeed * Time.fixedDeltaTime;
             float resultMag = (Velocity + addVelocity).magnitude;
 
@@ -524,7 +524,7 @@ public class PlayerController : Photon.PunBehaviour
             Vector3 toDir = Vector3.Scale(mouseHit.point - transform.position, new Vector3(1, 0, 1)).normalized;
 
             Quaternion targetRoation = Quaternion.LookRotation(toDir);
-            //ServerManager.Send(string.Format("ROTATE:{0}:{1}:{2}", InstanceValue.Nickname, InstanceValue.ID, transform.rotation.y));
+            ServerManager.Send(string.Format("ROTATE:{0}:{1}:{2}", InstanceValue.Nickname, InstanceValue.ID, transform.rotation.y));
             transform.rotation = targetRoation;
         }
     }
@@ -1144,7 +1144,7 @@ public class PlayerController : Photon.PunBehaviour
         for(int i=0; i<cols.Length; i++)
         {
             IInteractable obj = cols[i].GetComponent<IInteractable>();
-            //ServerManager.Send(string.Format("ITEMBOX:{0}:{1}:{2}", InstanceValue.Nickname, InstanceValue.ID, obj.ToString()));
+            ServerManager.Send(string.Format("ITEMBOX:{0}:{1}:{2}", InstanceValue.Nickname, InstanceValue.ID, obj.ToString()));
             if (obj != null && obj.IsInteractable())
             {
                 float curSqrmag = (cols[i].transform.position - transform.position).sqrMagnitude;
