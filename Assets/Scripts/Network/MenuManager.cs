@@ -11,6 +11,8 @@ public class MenuManager : MonoBehaviour
     public GameObject PlayButton;
     public InputField nicknameField;
 
+    private UIPopUp popUp;
+
     void Awake()
     {
     }
@@ -19,6 +21,8 @@ public class MenuManager : MonoBehaviour
     void Start()
     {
         nicknameField.characterLimit = 8;
+        popUp = Instantiate(SceneDataManager._instance.popUp, transform.parent).GetComponent<UIPopUp>();
+        popUp.gameObject.SetActive(false);
     }
 
     // 닉네임 설정 후, 게임 시작
@@ -27,6 +31,7 @@ public class MenuManager : MonoBehaviour
         if (nicknameField.text.Length <= 0)
         {
             Debug.Log(nicknameField.text.Length + " : 닉네임 입력 필요");
+            popUp.PopUp("닉네임 입력 필요");
         }
         else
         {
@@ -42,6 +47,7 @@ public class MenuManager : MonoBehaviour
             else
             {
                 Debug.Log("특수문자 사용 불가");
+                popUp.PopUp("허용되지 않은 글자가 포함되어 있습니다");
             }
         }
     }

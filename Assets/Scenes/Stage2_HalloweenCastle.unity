@@ -1432,6 +1432,7 @@ GameObject:
   - component: {fileID: 112329896}
   - component: {fileID: 112329895}
   - component: {fileID: 112329894}
+  - component: {fileID: 112329897}
   m_Layer: 5
   m_Name: ExitButton
   m_TagString: Untagged
@@ -1543,6 +1544,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 112329892}
+--- !u!114 &112329897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 112329892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fc31e422569a3d4a967d7be8afe1bb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseDownSound: event:/SFX_Stage1/UI/Button/SFX_MenuClick
+  mouseOverSound: event:/SFX_Stage1/UI/Button/SFX_BTNMouseOver
 --- !u!1001 &113729044
 Prefab:
   m_ObjectHideFlags: 0
@@ -2032,6 +2046,7 @@ GameObject:
   - component: {fileID: 180778146}
   - component: {fileID: 180778145}
   - component: {fileID: 180778144}
+  - component: {fileID: 180778148}
   m_Layer: 5
   m_Name: GameStartButton
   m_TagString: Untagged
@@ -2153,6 +2168,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 180778142}
+--- !u!114 &180778148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 180778142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fc31e422569a3d4a967d7be8afe1bb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseDownSound: event:/SFX_Stage1/UI/Button/SFX_MenuClick
+  mouseOverSound: event:/SFX_Stage1/UI/Button/SFX_BTNMouseOver
 --- !u!1 &180870855
 GameObject:
   m_ObjectHideFlags: 0
@@ -2446,6 +2474,7 @@ GameObject:
   m_Component:
   - component: {fileID: 200758220}
   - component: {fileID: 200758221}
+  - component: {fileID: 200758222}
   m_Layer: 0
   m_Name: Point light (2)
   m_TagString: Untagged
@@ -2502,6 +2531,18 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &200758222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 200758219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99d0621a94709af44b42189eaa89bb28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultChangeTime: 0.2
 --- !u!1001 &207232337
 Prefab:
   m_ObjectHideFlags: 0
@@ -2582,6 +2623,7 @@ GameObject:
   m_Component:
   - component: {fileID: 208995548}
   - component: {fileID: 208995549}
+  - component: {fileID: 208995550}
   m_Layer: 0
   m_Name: Point light (3)
   m_TagString: Untagged
@@ -2638,6 +2680,18 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &208995550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 208995547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99d0621a94709af44b42189eaa89bb28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultChangeTime: 0.2
 --- !u!1 &217280343
 GameObject:
   m_ObjectHideFlags: 0
@@ -2862,6 +2916,7 @@ GameObject:
   - component: {fileID: 237749205}
   - component: {fileID: 237749204}
   - component: {fileID: 237749203}
+  - component: {fileID: 237749206}
   m_Layer: 5
   m_Name: OkButton
   m_TagString: Untagged
@@ -2973,6 +3028,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 237749201}
+--- !u!114 &237749206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 237749201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fc31e422569a3d4a967d7be8afe1bb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseDownSound: event:/SFX_Stage1/UI/Button/SFX_MenuClick
+  mouseOverSound: event:/SFX_Stage1/UI/Button/SFX_BTNMouseOver
 --- !u!1 &272277057
 GameObject:
   m_ObjectHideFlags: 0
@@ -3717,6 +3785,7 @@ GameObject:
   - component: {fileID: 355815008}
   - component: {fileID: 355815007}
   - component: {fileID: 355815006}
+  - component: {fileID: 355815009}
   m_Layer: 5
   m_Name: CancelButton
   m_TagString: Untagged
@@ -3839,6 +3908,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 355815004}
+--- !u!114 &355815009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 355815004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fc31e422569a3d4a967d7be8afe1bb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseDownSound: event:/SFX_Stage1/UI/Button/SFX_MenuClick
+  mouseOverSound: event:/SFX_Stage1/UI/Button/SFX_BTNMouseOver
 --- !u!1001 &356711994
 Prefab:
   m_ObjectHideFlags: 0
@@ -7841,6 +7923,7 @@ GameObject:
   m_Component:
   - component: {fileID: 770125256}
   - component: {fileID: 770125257}
+  - component: {fileID: 770125258}
   m_Layer: 0
   m_Name: Point light (5)
   m_TagString: Untagged
@@ -7897,6 +7980,18 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &770125258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 770125255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99d0621a94709af44b42189eaa89bb28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultChangeTime: 0.2
 --- !u!1 &775216675
 GameObject:
   m_ObjectHideFlags: 0
@@ -9407,6 +9502,7 @@ GameObject:
   m_Component:
   - component: {fileID: 964234216}
   - component: {fileID: 964234217}
+  - component: {fileID: 964234218}
   m_Layer: 0
   m_Name: Point light (1)
   m_TagString: Untagged
@@ -9463,6 +9559,18 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &964234218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 964234215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99d0621a94709af44b42189eaa89bb28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultChangeTime: 0.2
 --- !u!1 &979172566
 GameObject:
   m_ObjectHideFlags: 0
@@ -13623,6 +13731,8 @@ MonoBehaviour:
   resultBGM: event:/BGM/Result/BGM_Result
   backgroundFirework: event:/Ambient/Fireworks/AMT_BackBoom
   backgroundFireworkSoundEnable: 0
+  readySound: event:/SFX_Stage1/UI/GameSound/SFX_Ready
+  unreadySound: event:/SFX_Stage1/UI/GameSound/SFX_UnReady
   playerList: []
   backgroundFireworks: []
   tempStartButton: {fileID: 180778142}
@@ -15126,6 +15236,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1497798930}
   - component: {fileID: 1497798931}
+  - component: {fileID: 1497798932}
   m_Layer: 0
   m_Name: Point light
   m_TagString: Untagged
@@ -15182,6 +15293,18 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &1497798932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1497798929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99d0621a94709af44b42189eaa89bb28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultChangeTime: 0.2
 --- !u!1001 &1506389827
 Prefab:
   m_ObjectHideFlags: 0
@@ -19902,6 +20025,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1976498411}
   - component: {fileID: 1976498412}
+  - component: {fileID: 1976498413}
   m_Layer: 0
   m_Name: Point light (4)
   m_TagString: Untagged
@@ -19958,6 +20082,18 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &1976498413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1976498410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99d0621a94709af44b42189eaa89bb28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultChangeTime: 0.2
 --- !u!1001 &1983442138
 Prefab:
   m_ObjectHideFlags: 0

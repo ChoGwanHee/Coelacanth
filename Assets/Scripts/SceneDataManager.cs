@@ -8,6 +8,8 @@ public class SceneDataManager : MonoBehaviour
     public int mapNum;
     public bool isSelect;
 
+    public GameObject popUp;
+
 
     private void Awake()
     {

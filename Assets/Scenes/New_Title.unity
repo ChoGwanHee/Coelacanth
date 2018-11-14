@@ -585,6 +585,7 @@ MonoBehaviour:
   isCreateRoom: 0
   mapNum: 0
   isSelect: 0
+  popUp: {fileID: 1717832465703500, guid: 1d2e762beba7a0245a836bb45fc2460a, type: 2}
 --- !u!4 &89148094
 Transform:
   m_ObjectHideFlags: 0
@@ -5448,6 +5449,24 @@ Transform:
   m_PrefabParentObject: {fileID: 4842528327352918, guid: 9b71292dee2a4d74f9daf60d56833d40,
     type: 2}
   m_PrefabInternal: {fileID: 439586471}
+--- !u!1 &503231454 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1561514126307954, guid: e84aea50cc42b65458f9cc27c9fa322f,
+    type: 2}
+  m_PrefabInternal: {fileID: 1245433880}
+--- !u!114 &503231455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 503231454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fc31e422569a3d4a967d7be8afe1bb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseDownSound: event:/SFX_Stage1/UI/Button/SFX_MenuClick
+  mouseOverSound: event:/SFX_Stage1/UI/Button/SFX_BTNMouseOver
 --- !u!1001 &559316093
 Prefab:
   m_ObjectHideFlags: 0
@@ -6382,6 +6401,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &778986930 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1886429155768978, guid: e84aea50cc42b65458f9cc27c9fa322f,
+    type: 2}
+  m_PrefabInternal: {fileID: 1245433880}
+--- !u!114 &778986931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 778986930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fc31e422569a3d4a967d7be8afe1bb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseDownSound: event:/SFX_Stage1/UI/Button/SFX_MenuClick
+  mouseOverSound: event:/SFX_Stage1/UI/Button/SFX_BTNMouseOver
 --- !u!1 &803589492
 GameObject:
   m_ObjectHideFlags: 0
@@ -8122,7 +8159,7 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1708594444}
     - target: {fileID: 114762973958381978, guid: e84aea50cc42b65458f9cc27c9fa322f,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -8148,6 +8185,11 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114532981488173240, guid: e84aea50cc42b65458f9cc27c9fa322f,
+        type: 2}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 240398674}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e84aea50cc42b65458f9cc27c9fa322f, type: 2}
   m_IsPrefabParent: 0

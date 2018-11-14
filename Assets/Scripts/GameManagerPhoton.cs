@@ -118,6 +118,13 @@ public class GameManagerPhoton : Photon.PunBehaviour
     public bool backgroundFireworkSoundEnable;
 
 
+    [FMODUnity.EventRef]
+    public string readySound;
+
+    [FMODUnity.EventRef]
+    public string unreadySound;
+
+
 
     /// <summary>
     /// 현재 존재하는 플레이어의 리스트
@@ -316,10 +323,12 @@ public class GameManagerPhoton : Photon.PunBehaviour
                 if (localPlayerReady)
                 {
                     GetPlayerByOwnerId(PhotonNetwork.player.ID).PC.ChangeState(PlayerAniState.Ready);
+                    FMODUnity.RuntimeManager.PlayOneShot(readySound);
                 }
                 else
                 {
                     GetPlayerByOwnerId(PhotonNetwork.player.ID).PC.ChangeState(PlayerAniState.Idle);
+                    FMODUnity.RuntimeManager.PlayOneShot(unreadySound);
                 }
                 GetPlayerByOwnerId(PhotonNetwork.player.ID).IsControlable = !localPlayerReady;
                 ServerManager.Send(string.Format("READY:{0}:{1}:{2}:{3}", InstanceValue.Nickname, InstanceValue.ID, InstanceValue.Room, localPlayerReady));

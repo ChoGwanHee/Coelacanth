@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SoundManager : MonoBehaviour {
     public static SoundManager _instance;
@@ -13,10 +11,12 @@ public class SoundManager : MonoBehaviour {
 
     bool bgmEnable = true;
 
+    private FMOD.ChannelGroup masterChannelGroup;
+
 
     private void Awake()
     {
-        if(_instance == null)
+        if (_instance == null)
         {
             _instance = this;
         }
@@ -29,10 +29,7 @@ public class SoundManager : MonoBehaviour {
     }
 
     private void Update()
-    {
-        if (!DebugTool._instance.debugEnable) return;
-
-            
+    {            
         if (Input.GetKeyDown(KeyCode.M))
         {
             if (bgmEnable)
@@ -61,6 +58,7 @@ public class SoundManager : MonoBehaviour {
         }
 
         BGMEvent = FMODUnity.RuntimeManager.CreateInstance(sound);
-        BGMEvent.start();
+        if(bgmEnable)
+            BGMEvent.start();
     }
 }
