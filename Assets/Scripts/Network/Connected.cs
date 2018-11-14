@@ -103,7 +103,7 @@ public class Connected : MonoBehaviour
         if (InstanceValue.TCP != null && InstanceValue.TCP.Connected)
         {
             ServerManager.Send(string.Format("DISCONNECT:{0}:{1}:{2}", InstanceValue.Nickname, InstanceValue.ID, InstanceValue.Room));
-            Thread.Sleep(500);
+            Thread.Sleep(100);
             InstanceValue.TCP.Close();
         }
         StopCoroutine(PacketProc());
