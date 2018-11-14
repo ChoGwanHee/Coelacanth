@@ -551,24 +551,25 @@ public class GameManagerPhoton : Photon.PunBehaviour
 
     private IEnumerator GameCountProcess(bool isStart)
     {
-        UIManager._instance.counterAnim.gameObject.SetActive(true);
-        UIManager._instance.counterAnim.SetInteger("Count", 3);
+        UIManager._instance.count3.isStart = isStart;
+        UIManager._instance.count3.gameObject.SetActive(true);
+        UIManager._instance.count3.Anim.SetInteger("Count", 3);
         yield return new WaitForSeconds(1.0f);
-        UIManager._instance.counterAnim.SetInteger("Count", 2);
+        UIManager._instance.count3.Anim.SetInteger("Count", 2);
         yield return new WaitForSeconds(1.0f);
-        UIManager._instance.counterAnim.SetInteger("Count", 1);
+        UIManager._instance.count3.Anim.SetInteger("Count", 1);
         yield return new WaitForSeconds(1.0f);
         if (isStart)
         {
             ChangeState(GameState.Playing);
-            UIManager._instance.counterAnim.SetInteger("Count", 4);
+            UIManager._instance.count3.Anim.SetInteger("Count", 4);
             yield return new WaitForSeconds(1.0f);
         }
         else
         {
             ChangeState(GameState.Result);
         }
-        UIManager._instance.counterAnim.gameObject.SetActive(false);
+        UIManager._instance.count3.gameObject.SetActive(false);
     }
 
     private void SetScoreLock(bool isLock)

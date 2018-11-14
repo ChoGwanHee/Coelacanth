@@ -33,7 +33,7 @@ public class UIManager : MonoBehaviour {
     public UIRespawn respawnUI;
     public UIBuffInfo buffInfoUI;
     public UIItemUsingGauge itemUsingGauge;
-    public Animator counterAnim;
+    public UICount3Script count3;
 
     public GameObject escUI;
     public GameObject mouseHoldUI;

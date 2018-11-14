@@ -10369,7 +10369,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e167144542adbd044bb144ac7c405cc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countSound: event:/SFX_Stage1/UI/InGameUI/SFX_StartCount
+  startCountSound: event:/SFX_Stage1/UI/InGameUI/SFX_StartCount
+  endCountSound: event:/SFX_Stage1/UI/InGameUI/SFX_EndCount
+  isStart: 0
 --- !u!1001 &264820373
 Prefab:
   m_ObjectHideFlags: 0
@@ -29361,7 +29363,7 @@ MonoBehaviour:
   respawnUI: {fileID: 1908221405}
   buffInfoUI: {fileID: 2084945096}
   itemUsingGauge: {fileID: 385222283}
-  counterAnim: {fileID: 253194985}
+  count3: {fileID: 253194986}
   escUI: {fileID: 1367052745}
   mouseHoldUI: {fileID: 173566212}
   controlKeyInfoUI: {fileID: 820022059}
