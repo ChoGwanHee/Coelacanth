@@ -272,6 +272,8 @@ public class PlayerController : Photon.PunBehaviour
     private Rigidbody rb;
     private CapsuleCollider col;
     private Animator anim;
+    public Renderer[] renderers;
+    private Material[] playerMats;
 
     // 외부 컴포넌트
     private Camera cam;
@@ -300,6 +302,17 @@ public class PlayerController : Photon.PunBehaviour
         {
             ring.SetActive(true);
             StartCoroutine(CheckInteractionIndicator());
+        }
+
+        // 렌더러랑 머테리얼 가져오기
+        int index = 0;
+        playerMats = new Material[renderers.Length * 2];
+        for (int i = 0; i < renderers.Length; i++)
+        {
+            for (int j = 0; j < renderers[i].materials.Length; j++)
+            {
+                playerMats[index++] = renderers[i].materials[j];
+            }
         }
 
         TurnToScreen();
@@ -418,7 +431,7 @@ public class PlayerController : Photon.PunBehaviour
         isControlable = false;
         if(respawnWaitCoroutine != null)
             StopCoroutine(respawnWaitCoroutine);
-        Respawn();
+        Respawn(false);
         TurnToScreen();
         Destroy(readySign);
     }
@@ -608,7 +621,7 @@ public class PlayerController : Photon.PunBehaviour
     /// 캐릭터를 리스폰합니다.
     /// </summary>
     [PunRPC]
-    private void Respawn()
+    private void Respawn(bool applyUnbeatable)
     {
         if (photonView.isMine)
         {
@@ -618,9 +631,11 @@ public class PlayerController : Photon.PunBehaviour
         executer.ChangeFirework(0, 0);
         stat.HPReset();
         stat.onStage = true;
-        isUnbeatable = true;
-        Invoke("DisableRespawnUnbeatable", respawnUnbeatableTime);
-        
+        if (applyUnbeatable)
+        {
+            isUnbeatable = true;
+            StartCoroutine(RespawnUnbeatableTimeProcess());
+        }
         rb.WakeUp();
         rb.useGravity = true;
         col.enabled = true;
@@ -669,7 +684,7 @@ public class PlayerController : Photon.PunBehaviour
 
             yield return null;
         }
-        photonView.RPC("Respawn", PhotonTargets.All, null);
+        photonView.RPC("Respawn", PhotonTargets.All, true);
     }
 
     [PunRPC]
@@ -679,10 +694,44 @@ public class PlayerController : Photon.PunBehaviour
         Instantiate(respawnRocket_ref, pos, Quaternion.identity);
     }
 
-    private void DisableRespawnUnbeatable()
+    private IEnumerator RespawnUnbeatableTimeProcess()
     {
+        float elapsedTime = 0.0f;
+        float colorChangeElapsedTime = 0.0f;
+        float colorChangeInterval = 0.25f;
+        bool dark = false;
+        Color defaultColor = new Color(1f, 1f, 1f);
+        Color darkColor = new Color(0.6f, 0.6f, 0.6f);
+
+        while (true)
+        {
+            elapsedTime += Time.deltaTime;
+            colorChangeElapsedTime += Time.deltaTime;
+
+            if (colorChangeElapsedTime >= colorChangeInterval)
+            {
+                dark = !dark;
+                if (dark)
+                {
+                    SetCharacterColor(darkColor);
+                }
+                else
+                {
+                    SetCharacterColor(defaultColor);
+                }
+                colorChangeElapsedTime = 0.0f;
+            }
+
+            if (elapsedTime >= respawnUnbeatableTime)
+            {
+                break;
+            }
+            yield return null;
+        }
+
+        SetCharacterColor(defaultColor);
         isUnbeatable = false;
-    } 
+    }
 
     /// <summary>
     /// 기절 이펙트를 설정합니다.
@@ -741,7 +790,7 @@ public class PlayerController : Photon.PunBehaviour
         else
         {
             // 즉시 리스폰
-            Respawn();
+            Respawn(false);
         }
         isControlable = false;
         inputAxis = Vector2.zero;
@@ -1257,5 +1306,14 @@ public class PlayerController : Photon.PunBehaviour
             yield return new WaitForSeconds(interactionCheckTime);
         }
         
+    }
+
+    public void SetCharacterColor(Color color)
+    {
+        for (int i = 0; i < playerMats.Length; i++)
+        {
+            if (playerMats[i] == null) break;
+            playerMats[i].SetColor("_Color", color);
+        }
     }
 }

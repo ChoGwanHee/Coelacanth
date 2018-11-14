@@ -5444,9 +5444,6 @@ MonoBehaviour:
   hotSauceCountSound: event:/SFX_Stage1/Item/Food/HotSauce/SFX_HotSauceCount
   hotSauceBoomSound: event:/SFX_Stage1/Item/Food/HotSauce/SFX_HotSauceBoom
   starfruitSound: event:/SFX_Stage1/Item/Food/StarFruit/SFX_StarEffect
-  renderers:
-  - {fileID: 137469755710211968}
-  - {fileID: 137012924001756832}
 --- !u!114 &114048259525612360
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6047,6 +6044,9 @@ MonoBehaviour:
   stunEfx: {fileID: 1774283831550312}
   deadEfx_ref: {fileID: 1956332014287468, guid: 19cb9b16b9a133648a19812957506c97,
     type: 2}
+  renderers:
+  - {fileID: 137469755710211968}
+  - {fileID: 137012924001756832}
 --- !u!114 &114523624749077686
 MonoBehaviour:
   m_ObjectHideFlags: 1

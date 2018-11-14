@@ -47,10 +47,6 @@ public class BuffController : Photon.PunBehaviour
     public FMOD.Studio.EventInstance buffDuringSound;
 
 
-    public Renderer[] renderers;
-    private Material[] playerMats;
-
-
     private PlayerController pc;
     public PlayerController PC
     {
@@ -71,15 +67,6 @@ public class BuffController : Photon.PunBehaviour
     {
         pc = GetComponent<PlayerController>();
         stat = pc.Stat;
-        int index = 0;
-        playerMats = new Material[renderers.Length * 2];
-        for (int i = 0; i < renderers.Length; i++)
-        {
-            for (int j = 0; j < renderers[i].materials.Length; j++)
-            {
-                playerMats[index++] = renderers[i].materials[j];
-            }
-        }
 
         UtilItem[] reference = GameManagerPhoton._instance.itemManager.buffUtilItemReference;
 
@@ -114,15 +101,6 @@ public class BuffController : Photon.PunBehaviour
         for(int i=0; i< buffs.Length; i++)
         {
             RemoveBuff(i);
-        }
-    }
-
-    public void SetCharacterColor(Color color)
-    {
-        for (int i = 0; i < playerMats.Length; i++)
-        {
-            if (playerMats[i] == null) break;
-            playerMats[i].SetColor("_Color", color);
         }
     }
 }

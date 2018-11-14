@@ -3954,8 +3954,6 @@ MonoBehaviour:
   stunTime: 3
   knockbackTime: 0.2
   toleranceTime: 1
-  idlePM: {fileID: 13400000, guid: 36a9a346d8062904e80a3088189b33e3, type: 2}
-  fallingPM: {fileID: 13400000, guid: 03071f7798941ad4294dab0c5eb0fdb8, type: 2}
   weaponPoint: {fileID: 4333748475462964}
   itemPoint: {fileID: 4385841499371094}
   leftHandPoint: {fileID: 4343035709094250}
@@ -3966,6 +3964,11 @@ MonoBehaviour:
   stunEfx: {fileID: 1515141067674368}
   deadEfx_ref: {fileID: 1956332014287468, guid: 19cb9b16b9a133648a19812957506c97,
     type: 2}
+  renderers:
+  - {fileID: 137868095610217236}
+  - {fileID: 137976620079925950}
+  - {fileID: 137555513715606224}
+  - {fileID: 137850210711816958}
 --- !u!114 &114127235740736316
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4006,11 +4009,6 @@ MonoBehaviour:
   hotSauceCountSound: event:/SFX_Stage1/Item/Food/HotSauce/SFX_HotSauceCount
   hotSauceBoomSound: event:/SFX_Stage1/Item/Food/HotSauce/SFX_HotSauceBoom
   starfruitSound: event:/SFX_Stage1/Item/Food/StarFruit/SFX_StarEffect
-  renderers:
-  - {fileID: 137868095610217236}
-  - {fileID: 137976620079925950}
-  - {fileID: 137555513715606224}
-  - {fileID: 137850210711816958}
 --- !u!114 &114167575821276580
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -32,7 +32,7 @@ public class BuffHotSauce : Buff
 
         color.g = 1f;
         color.b = 1f;
-        bc.SetCharacterColor(color);
+        bc.PC.SetCharacterColor(color);
         bc.buffDuringSound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         FMODUnity.RuntimeManager.PlayOneShot(bc.hotSauceBoomSound);
     }
@@ -60,7 +60,7 @@ public class BuffHotSauce : Buff
         color.g = curColorValue;
         color.b = curColorValue;
 
-        bc.SetCharacterColor(color);
+        bc.PC.SetCharacterColor(color);
     }
 
     /// <summary>
