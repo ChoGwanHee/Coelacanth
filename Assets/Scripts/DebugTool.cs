@@ -33,7 +33,7 @@ public class DebugTool : MonoBehaviour {
             Destroy(gameObject);
         }
 
-        debugAllow = ConfigManager.ReadBool(1);
+        ConfigManager.ReadBool("debug_enable", out debugAllow);
     }
 
     private void Update()

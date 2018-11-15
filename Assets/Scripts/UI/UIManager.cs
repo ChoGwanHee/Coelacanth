@@ -21,6 +21,7 @@ public class UIManager : MonoBehaviour {
 
     // Ready
     public GameObject readyInfo;
+    public GameObject waitingInfo;
 
     // Game Play
     public GameObject gamePlayCanvas;
@@ -34,6 +35,8 @@ public class UIManager : MonoBehaviour {
     public UIBuffInfo buffInfoUI;
     public UIItemUsingGauge itemUsingGauge;
     public UICount3Script count3;
+
+    public GameObject objectiveText;
 
     public GameObject escUI;
     public GameObject mouseHoldUI;

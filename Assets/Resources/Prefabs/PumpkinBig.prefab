@@ -418,7 +418,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dd86530e87d30f4485939b9b95e2ad8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isBig: 1
   stayTime: 1
   hitRadius: 2.49
   hitForce: 17
@@ -452,7 +451,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 0934b24de1473ec44b24f601d46a4151, type: 2}
+  - {fileID: 2100000, guid: 470bdd1f641ff704c8c23630677aa924, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

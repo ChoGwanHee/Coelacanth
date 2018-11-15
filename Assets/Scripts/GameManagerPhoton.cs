@@ -78,6 +78,8 @@ public class GameManagerPhoton : Photon.PunBehaviour
         get { return remainGameTime; }
     }
 
+    public float objectiveUIShowTime = 10.0f;
+
     /// <summary>
     /// 게임이 자동으로 시작되는 플레이어 숫자
     /// </summary>
@@ -192,6 +194,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
         }
 
         UIManager._instance.readyInfo.SetActive(true);
+        UIManager._instance.waitingInfo.SetActive(true);
 
         SoundManager._instance.SetBGM(BGM);
 
@@ -323,16 +326,22 @@ public class GameManagerPhoton : Photon.PunBehaviour
                 if (localPlayerReady)
                 {
                     GetPlayerByOwnerId(PhotonNetwork.player.ID).PC.ChangeState(PlayerAniState.Ready);
+                    UIManager._instance.readyInfo.SetActive(false);
                     FMODUnity.RuntimeManager.PlayOneShot(readySound);
                 }
                 else
                 {
                     GetPlayerByOwnerId(PhotonNetwork.player.ID).PC.ChangeState(PlayerAniState.Idle);
+                    UIManager._instance.readyInfo.SetActive(true);
                     FMODUnity.RuntimeManager.PlayOneShot(unreadySound);
                 }
                 GetPlayerByOwnerId(PhotonNetwork.player.ID).IsControlable = !localPlayerReady;
                 ServerManager.Send(string.Format("READY:{0}:{1}:{2}:{3}", InstanceValue.Nickname, InstanceValue.ID, InstanceValue.Room, localPlayerReady));
                 photonView.RPC("SetPlayerReady", PhotonTargets.All, PhotonNetwork.player.ID, localPlayerReady);
+            }
+            if(Input.GetKey(KeyCode.LeftAlt) && Input.GetKeyDown(KeyCode.S))
+            {
+                photonView.RPC("GameStartRequest", PhotonTargets.MasterClient, null);
             }
             yield return null;
         }
@@ -453,6 +462,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
     /// 게임 시작을 요청합니다.
     /// </summary>
     /// <returns>성공 여부를 반환합니다.</returns>
+    [PunRPC]
     public bool GameStartRequest()
     {
         if (!photonView.isMine)
@@ -471,7 +481,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
         isPlaying = true;
         ServerManager.Send(string.Format("START:{0}:{1}", InstanceValue.Room, isPlaying));
         photonView.RPC("RunGameEvent", PhotonTargets.AllBuffered, (int)GameEvent.GameStart);
-        tempStartButton.SetActive(false);
+        //tempStartButton.SetActive(false);
         return true;
     }
 
@@ -537,6 +547,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
                     playerList[i].isReady = false;
                 }
                 UIManager._instance.readyInfo.SetActive(false);
+                UIManager._instance.waitingInfo.SetActive(false);
 
                 PlayerController myPlayer = GetPlayerByOwnerId(PhotonNetwork.player.ID).PC;
                 UIManager._instance.respawnUI.Init();
@@ -561,6 +572,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
         yield return new WaitForSeconds(1.0f);
         if (isStart)
         {
+            StartCoroutine(ShowObjectiveUI());
             ChangeState(GameState.Playing);
             UIManager._instance.count3.Anim.SetInteger("Count", 4);
             yield return new WaitForSeconds(1.0f);
@@ -732,6 +744,13 @@ public class GameManagerPhoton : Photon.PunBehaviour
         {
             Debug.LogWarning("이미 작동 중 입니다.");
         }
+    }
+
+    private IEnumerator ShowObjectiveUI()
+    {
+        UIManager._instance.objectiveText.SetActive(true);
+        yield return new WaitForSeconds(objectiveUIShowTime);
+        UIManager._instance.objectiveText.SetActive(false);
     }
 
     private IEnumerator LoadTitleScene()

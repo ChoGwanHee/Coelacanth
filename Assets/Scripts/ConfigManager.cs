@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ConfigManager {
 
-	public static string ReadLine(int lineNum)
+    private static string ReadLine(int lineNum)
     {
         string line = null;
 
@@ -24,7 +24,7 @@ public class ConfigManager {
 
             sr.Close();
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             Debug.LogError("Exception: " + e.Message);
         }
@@ -41,6 +41,45 @@ public class ConfigManager {
         string[] values = source.Split(':');
 
         return values[1];
+    }
+
+    public static bool ReadValue(string key, out string value)
+    {
+        string source = null;
+        value = null;
+
+        try
+        {
+            StreamReader sr = new StreamReader(Application.dataPath + "\\config.txt");
+
+            while (true)
+            {
+                source = sr.ReadLine();
+
+                if (string.IsNullOrEmpty(source))
+                {
+                    break;
+                }
+
+                string[] values = source.Split(':');
+
+                if (values[0].Equals(key))
+                {
+                    value = values[1];
+                    sr.Close();
+                    return true;
+                }
+                
+            }
+
+            sr.Close();
+            return false;
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Exception: " + e.Message);
+            return false;
+        }
     }
 
     public static bool ReadBool(int lineNum)
@@ -64,4 +103,47 @@ public class ConfigManager {
             return false;
         }
     }
+
+    public static bool ReadBool(string key, out bool value)
+    {
+        string source = null;
+        value = false;
+
+        try
+        {
+            StreamReader sr = new StreamReader(Application.dataPath + "\\config.txt");
+
+            while (true)
+            {
+                source = sr.ReadLine();
+
+                if (string.IsNullOrEmpty(source))
+                {
+                    break;
+                }
+
+                string[] values = source.Split(':');
+
+                if (values[0].Equals(key))
+                {
+                    if(values[1] == "true")
+                    {
+                        value = true;
+                    }
+                    sr.Close();
+                    return true;
+                }
+            }
+
+            sr.Close();
+            return false;
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Exception: " + e.Message);
+            return false;
+        }
+    }
+
+
 }

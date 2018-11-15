@@ -78,4 +78,5 @@ MonoBehaviour:
   - PlayStepSound
   - StartPumpkinBomb
   - SetItemBoxPos
+  - GameStartRequest
   DisableAutoOpenWizard: 1

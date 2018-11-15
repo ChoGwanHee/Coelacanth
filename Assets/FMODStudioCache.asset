@@ -13,12 +13,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 114714423258559060}
-  - {fileID: 114525308257646830}
-  - {fileID: 114747575922090586}
-  - {fileID: 114816984789447454}
-  - {fileID: 114873654742773684}
-  - {fileID: 114088622354331190}
-  - {fileID: 114243498765681294}
+  - {fileID: 114841210522853372}
+  - {fileID: 114500449440300648}
+  - {fileID: 114351147300651912}
+  - {fileID: 114346525136709506}
+  - {fileID: 114026089195745004}
+  - {fileID: 114454126382209186}
   EditorEvents:
   - {fileID: 114607620722637612}
   - {fileID: 114916696082097552}
@@ -108,9 +108,9 @@ MonoBehaviour:
   - {fileID: 114129481923986766}
   - {fileID: 114870772878727964}
   - {fileID: 114020351153498734}
-  MasterBankRef: {fileID: 114816984789447454}
+  MasterBankRef: {fileID: 114351147300651912}
   StringsBankRef: {fileID: 114714423258559060}
-  stringsBankWriteTime: 636778087561095671
+  stringsBankWriteTime: 636771267052928945
   cacheVersion: 2
 --- !u!114 &114005138640717492
 MonoBehaviour:
@@ -126,7 +126,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Weapon/Shoot/SFX_RomanShot
   guid: 4c44019ca5764a44a256cad79029799b
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -163,7 +163,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Character/Voice/Attack/Rocket/SFX_Cuchen_Rocket
   guid: 513915f48fa190489e8e3d0d4ddfb92d
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -185,7 +185,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage2/Trigger/SFX_PumpkinGrow
   guid: c9ffcbd6450cc0419f049209295ae319
   Banks:
-  - {fileID: 114243498765681294}
+  - {fileID: 114454126382209186}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -211,6 +211,24 @@ MonoBehaviour:
   - Name: Desktop
     Value: 1791584
   Exists: 1
+--- !u!114 &114026089195745004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: D:\document\UnityProject\Coelacanth\HeyParty_FMOD\Build\Desktop\Lobby.bank
+  lastModified: 636771267054414976
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 23776
+  Exists: 1
 --- !u!114 &114028640119432100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,7 +243,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Character/Voice/Win/SFX_ShoSho_Win
   guid: ae3750c606b96a4999d0def9cf31227c
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -247,7 +265,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Weapon/Hit/SFX_RomanHit
   guid: 29dfaea71789944582685c4a6b4df7f7
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -269,7 +287,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Weapon/Shoot/SFX_PartyBoom
   guid: a1b5e55496bf9c4e937a479be190f1a1
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -324,7 +342,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Character/Voice/Attack/Rocket/SFX_Dahong_Rocket
   guid: 557dbdc11664564aa6c18f6605998022
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -332,6 +350,21 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 1955
+--- !u!114 &114049799545807988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Volume
+  Min: 0
+  Max: 100
+  Default: 100
 --- !u!114 &114050405189097808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,7 +379,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Item/Food/HotSauce/SFX_HotSauceBoom
   guid: 54ded65b1f22f24aa8d0512ee9c9d8c0
   Banks:
-  - {fileID: 114525308257646830}
+  - {fileID: 114841210522853372}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -383,7 +416,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Character/Voice/Attack/Party/SFX_Dahong_Party
   guid: 79a5f29a5c6e6c4db1c89ac48684b440
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -405,7 +438,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Weapon/Shoot/SFX_FountainShot
   guid: d862847e42821448bada2aeb3cff667e
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -445,7 +478,7 @@ MonoBehaviour:
   FileSizes:
   - Name: Desktop
     Value: 23776
-  Exists: 1
+  Exists: 0
 --- !u!114 &114091745253871778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -475,7 +508,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Weapon/Hit/SFX_RocketHit
   guid: ba700973782d414f945819d99162cc01
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -497,7 +530,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Character/Voice/Win/SFX_MinMin_Win
   guid: 0d765e3305f51c408b30abfb81f6a23d
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -519,7 +552,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Item/Food/Same/SFX_EatEnd123
   guid: bef5057881ddea4491909fbc5ffae312
   Banks:
-  - {fileID: 114525308257646830}
+  - {fileID: 114841210522853372}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -592,12 +625,12 @@ MonoBehaviour:
   Path: event:/BGM/Result/BGM_Result
   guid: 374c6c663fa3f9489908fad5d38f3d7c
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: 114901088173537518}
+  - {fileID: 114841345414639816}
   MinDistance: 0
   MaxDistance: 0
   Length: 4623
@@ -615,7 +648,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Weapon/Special/SFX_ButterCharge
   guid: 0feeaa2c40eb504eab8c9155e55a40b6
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -721,7 +754,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Character/Voice/Win/SFX_Cuchen_Win
   guid: 52039dd4e0b79242accec50221f48b43
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -743,7 +776,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage2/Trigger/SFX_PumpkinS_Boom
   guid: 1d1490dfda8b0e4787a9207c8d9b2588
   Banks:
-  - {fileID: 114243498765681294}
+  - {fileID: 114454126382209186}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -765,7 +798,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Weapon/Shoot/SFX_Punch
   guid: f88f1c6f37b31d46a184070977abe3db
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -787,7 +820,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Character/Voice/Fall/SFX_Dahong_Fall
   guid: 4ad00dfb1eab7049a3eeadb627c09760
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -860,7 +893,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/UI/InGameUI/SFX_StartCount
   guid: 31455d2541f64d4cb635c675e9c99919
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -882,7 +915,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Object/Trigger/SFX_Portal
   guid: 1d41e852353bab4d8e38d3995bddfab8
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1003,7 +1036,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Character/Voice/Hit/SFX_ShoSho_Hit
   guid: b6619ede48202e4d827980a6799ef8a0
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1025,7 +1058,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Character/Sound/SFX_Fall
   guid: d57ecbb7cf4792448452e583bc3f0870
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1047,7 +1080,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Character/Voice/Hit/SFX_MinMin_Hit
   guid: 9158ea7a008808479c6465aeb8524b2f
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1084,7 +1117,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Character/Voice/Fall/SFX_Cuchen_Fall
   guid: 79db189369b95c44a90e466d1912dc81
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1106,7 +1139,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Weapon/Shoot/SFX_RocketShot
   guid: f60f15176cea16448857c15eddcf3741
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1146,7 +1179,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Item/Food/Jelly/SFX_JellySet
   guid: 9eff85ad40223f49a95eea53c7a850d6
   Banks:
-  - {fileID: 114525308257646830}
+  - {fileID: 114841210522853372}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1168,7 +1201,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/UI/Button/SFX_BTNMouseOver
   guid: 6150c6cdd965a441ac4e344bc1f0829a
   Banks:
-  - {fileID: 114747575922090586}
+  - {fileID: 114500449440300648}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1205,7 +1238,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Character/Sound/SFX_Stun
   guid: 4af97909ff00a64d99979c76783f1d4a
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1230,7 +1263,22 @@ MonoBehaviour:
   FileSizes:
   - Name: Desktop
     Value: 1906176
-  Exists: 1
+  Exists: 0
+--- !u!114 &114245573204699324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Volume
+  Min: 0
+  Max: 100
+  Default: 100
 --- !u!114 &114255282891449908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1260,7 +1308,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Character/Voice/Attack/Fountain/SFX_MinMin_Fountain
   guid: d774e7639818534ba796054508c4a14c
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1282,7 +1330,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Object/Trigger/TaSang/SFX_TaSangBoom
   guid: 9663848704d71e4d81ac8aac5ae815d3
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -1304,12 +1352,12 @@ MonoBehaviour:
   Path: event:/Ambient/Fireworks/AMT_BackBoom
   guid: 099110ec0cac61489a585eee8be0db6a
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114814492100538810}
+  - {fileID: 114521897382572384}
   MinDistance: 0
   MaxDistance: 0
   Length: 1600
@@ -1327,7 +1375,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Object/Trigger/SFX_WaterCannon
   guid: 4e05dea63bab2c458d5e148603d16279
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1364,7 +1412,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Character/Voice/Fall/SFX_MinMin_Fall
   guid: 79aacb9587c4214fa0800a7dc58f2a35
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1386,7 +1434,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Object/Trigger/SFX_WaterPipeQuake
   guid: 716358df420fd24485f14e392c83f33a
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1426,7 +1474,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Character/Voice/Attack/Charge/SFX_Cuchen_Charge
   guid: f58de70cc5474447beb641128cf71fac
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1463,7 +1511,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Item/WeaponBox/SFX_Normalbox
   guid: af113f0989ef2145a5adf3ffa29676fb
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1485,7 +1533,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Weapon/Hit/SFX_ButterHit
   guid: 31f157b4f124a84d8fe5e58f16e5a19e
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1507,7 +1555,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Object/Trigger/TaSang/SFX_TaSangFire
   guid: 1819447b9222e14fa5f508b8cccde277
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -1529,7 +1577,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/UI/Button/SFX_MenuClick
   guid: 2b1f86191950654a92bd458d40bb4392
   Banks:
-  - {fileID: 114747575922090586}
+  - {fileID: 114500449440300648}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1621,7 +1669,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Character/Voice/Stun/SFX_Cuchen_Stun
   guid: ec999dde62b8524ca161b44be5a244b3
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1643,7 +1691,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/UI/InGameUI/SFX_EndCount
   guid: def82ccde2dfa6419d4086e47d7510f1
   Banks:
-  - {fileID: 114816984789447454}
+  - {fileID: 114351147300651912}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1665,7 +1713,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Item/Food/StarFruit/SFX_EatStar
   guid: dcec8dbd621f434381a92215a888bc8b
   Banks:
-  - {fileID: 114525308257646830}
+  - {fileID: 114841210522853372}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1673,6 +1721,24 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 2851
+--- !u!114 &114346525136709506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: D:\document\UnityProject\Coelacanth\HeyParty_FMOD\Build\Desktop\Stage_1.bank
+  lastModified: 636771267058838008
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 4793408
+  Exists: 1
 --- !u!114 &114348675576328820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1687,7 +1753,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Item/Food/HotSauce/SFX_HotSauceCount
   guid: ec61eb3f3fefd9429a5277cd73f758d8
   Banks:
-  - {fileID: 114525308257646830}
+  - {fileID: 114841210522853372}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1695,6 +1761,24 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 5000
+--- !u!114 &114351147300651912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: D:\document\UnityProject\Coelacanth\HeyParty_FMOD\Build\Desktop\Master Bank.bank
+  lastModified: 636771267052869107
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 26592
+  Exists: 1
 --- !u!114 &114353192438757290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1757,7 +1841,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Object/Trigger/TaSang/SFX_TaSangBox
   guid: 75b82577ed986541b9c1f764c01d6902
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1860,7 +1944,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Character/Voice/Fall/SFX_ShoSho_Fall
   guid: 870c1ede39d1d845b8427a7f46da4f34
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1898,6 +1982,24 @@ MonoBehaviour:
   Min: 0
   Max: 100
   Default: 100
+--- !u!114 &114454126382209186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: D:\document\UnityProject\Coelacanth\HeyParty_FMOD\Build\Desktop\Stage_2.bank
+  lastModified: 636771267060589656
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 1906176
+  Exists: 1
 --- !u!114 &114454393451987660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1979,6 +2081,24 @@ MonoBehaviour:
   - Name: Desktop
     Value: 23776
   Exists: 0
+--- !u!114 &114500449440300648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: D:\document\UnityProject\Coelacanth\HeyParty_FMOD\Build\Desktop\Title.bank
+  lastModified: 636771267061259390
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 3339488
+  Exists: 1
 --- !u!114 &114505935354760948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2066,6 +2186,21 @@ MonoBehaviour:
   - Name: Desktop
     Value: 3339488
   Exists: 1
+--- !u!114 &114521897382572384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Volume
+  Min: 0
+  Max: 100
+  Default: 100
 --- !u!114 &114523854888370150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2095,7 +2230,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Character/Voice/Attack/Rocket/SFX_MinMin_Rocket
   guid: 15a903de9fd4d349a516ffba91f45f58
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2120,7 +2255,7 @@ MonoBehaviour:
   FileSizes:
   - Name: Desktop
     Value: 622464
-  Exists: 1
+  Exists: 0
 --- !u!114 &114529351070258844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2168,7 +2303,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Character/Voice/Stun/SFX_Dahong_Stun
   guid: 43e19f1500fbb543b2bbed265afa8b36
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2223,7 +2358,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Character/Voice/Attack/Charge/SFX_ShoSho_Charge
   guid: dc064245668b6b4ab715e3f521763ad2
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2278,7 +2413,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Character/Sound/SFX_Foot
   guid: 5e2e0db6c3deb64e99eebe70ca440bee
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2330,7 +2465,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/UI/GameSound/SFX_UnReady
   guid: 3bae3e5cc59d9942aa6146a895b0914a
   Banks:
-  - {fileID: 114088622354331190}
+  - {fileID: 114026089195745004}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2352,7 +2487,7 @@ MonoBehaviour:
   Path: event:/BGM/Title/BGM_Title
   guid: 2ac109b65230f1459665ee2a1ac7c90d
   Banks:
-  - {fileID: 114747575922090586}
+  - {fileID: 114500449440300648}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -2392,7 +2527,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Character/Voice/Attack/Charge/SFX_Dahong_Charge
   guid: 3c95923c1da4c74da0018ad13a3e1496
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2414,7 +2549,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Character/Voice/Win/SFX_Dahong_Win
   guid: bcaa57337e0fb9469d52ea987e8b15cb
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2454,7 +2589,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage2/Trigger/SFX_PumpkinL_Boom
   guid: 0b3eb4d11322d54c93fdb63fc3f574a0
   Banks:
-  - {fileID: 114243498765681294}
+  - {fileID: 114454126382209186}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2476,7 +2611,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Character/Voice/Attack/Party/SFX_ShoSho_Party
   guid: e47d362eafb0994baf39543ce7d173fa
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2568,7 +2703,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Character/Voice/Attack/Romang, Butter/SFX_Cuchen_Attack
   guid: 933d2cf2136dde469849d2e479747c3c
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2620,7 +2755,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Character/Voice/Attack/Fountain/SFX_ShoSho_Fountain
   guid: 670d4e63b8ad474cb71ec3c112f8db8a
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2642,7 +2777,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Character/Voice/Attack/Party/SFX_Cuchen_Party
   guid: 0bd36c4d73295042b9811542a35e1f83
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2679,7 +2814,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Character/Voice/Attack/Charge/SFX_MinMin_Charge
   guid: 8a9c6c5cd7e03b4bb70f0f59e21b0e5b
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2812,7 +2947,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Character/Voice/Attack/Rocket/SFX_ShoSho_Rocket
   guid: 89b51c3c12e3a540ad949ea44b625e63
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2852,7 +2987,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Weapon/Shoot/SFX_ButterShot
   guid: 885d5ad7f82b894da7bc6e7cb4fe2446
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2907,7 +3042,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Character/Voice/Hit/SFX_Dahong_Hit
   guid: f2af5416e27fa1468f0714352f725829
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2927,7 +3062,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: HeyParty_FMOD\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636778087561095671
+  lastModified: 636771267052928945
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -2995,7 +3130,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Weapon/Hit/SFX_FountainHit
   guid: fe73ab25e4b512479776b5fd9a4a61d1
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -3035,7 +3170,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/UI/GameSound/SFX_Ready
   guid: 181db7cecb54dc4aa7e8dc8442700c62
   Banks:
-  - {fileID: 114088622354331190}
+  - {fileID: 114026089195745004}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -3060,7 +3195,7 @@ MonoBehaviour:
   FileSizes:
   - Name: Desktop
     Value: 3339488
-  Exists: 1
+  Exists: 0
 --- !u!114 &114748212602762744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3075,7 +3210,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Character/Voice/Attack/Romang, Butter/SFX_ShoSho_Attack
   guid: a4002875e53e554992d3c16ed6ac943b
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -3097,7 +3232,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Character/Voice/Attack/Romang, Butter/SFX_MinMin_Attack
   guid: 25d108764737e948a7be89bed198cfa5
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -3137,7 +3272,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Character/Voice/Hit/SFX_Cuchen_Hit
   guid: 605c53de1157044ba3e2cf685968f7db
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -3159,7 +3294,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Weapon/Hit/SFX_PunchHit
   guid: e6189a3e05743e478d24f63a25fed2b4
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -3181,12 +3316,12 @@ MonoBehaviour:
   Path: event:/BGM/InGame/BGM_Stage1
   guid: d11b789e9068614d9073a3612e1673fc
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114353192438757290}
+  - {fileID: 114049799545807988}
   MinDistance: 0
   MaxDistance: 0
   Length: 85368
@@ -3204,7 +3339,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Character/Voice/Attack/Fountain/SFX_Cuchen_Fountain
   guid: 383ca5b8eee8b445bb348b4e27dbd0b2
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -3226,7 +3361,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Character/Voice/Attack/Fountain/SFX_Dahong_Fountain
   guid: b86d1c7c0ae17446b8dc6e96367aaa2b
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -3248,7 +3383,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Character/Voice/Attack/Party/SFX_MinMin_Party
   guid: 7d6a568df375e741be2a646b01f95c8d
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -3270,12 +3405,12 @@ MonoBehaviour:
   Path: event:/BGM/InGame/BGM_Stage2
   guid: adbdb19aeeeba9418db732acfc405846
   Banks:
-  - {fileID: 114243498765681294}
+  - {fileID: 114454126382209186}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114659021564094408}
+  - {fileID: 114245573204699324}
   MinDistance: 0
   MaxDistance: 0
   Length: 97880
@@ -3308,7 +3443,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Item/Food/Jelly/SFX_Jelly
   guid: baaa3dad5d75d84f9bbc731704894fea
   Banks:
-  - {fileID: 114525308257646830}
+  - {fileID: 114841210522853372}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -3349,7 +3484,7 @@ MonoBehaviour:
   FileSizes:
   - Name: Desktop
     Value: 26592
-  Exists: 1
+  Exists: 0
 --- !u!114 &114823946850876934
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3364,7 +3499,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Character/Voice/Attack/Romang, Butter/SFX_Dahong_Attack
   guid: cedebd018020e24c8bc5e2bffb99251b
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -3404,7 +3539,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Character/Voice/Stun/SFX_MinMin_Stun
   guid: 02a8aab7d2d0804eb9a5cd61ed958c40
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -3412,6 +3547,39 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 804
+--- !u!114 &114841210522853372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: D:\document\UnityProject\Coelacanth\HeyParty_FMOD\Build\Desktop\Item.bank
+  lastModified: 636771267054095824
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 622464
+  Exists: 1
+--- !u!114 &114841345414639816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Volume
+  Min: 0
+  Max: 100
+  Default: 100
 --- !u!114 &114843492910081428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3426,7 +3594,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Item/Food/StarFruit/SFX_StarEffect
   guid: 60786df89ab298468406de3bac5d7e7c
   Banks:
-  - {fileID: 114525308257646830}
+  - {fileID: 114841210522853372}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -3490,7 +3658,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage2/Tile/SFX_TileShake
   guid: b8a92390c0a3ac469951ee7280c3fa2b
   Banks:
-  - {fileID: 114243498765681294}
+  - {fileID: 114454126382209186}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -3512,7 +3680,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Object/Trigger/SFX_BridgePipeQuake
   guid: 32f60d835705ff44909480eafe548443
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -3534,7 +3702,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Object/Trigger/SFX_PipeBreak
   guid: 46d15acb170fa84ead225a935cf6490d
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -3556,7 +3724,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Item/WeaponBox/SFX_Boombox
   guid: 593677cdedcd8e41b1effa99f40881ab
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -3578,7 +3746,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage2/Trigger/SFX_PumpkinL_Wait
   guid: 2420522e36805a4c8a7107208da7e750
   Banks:
-  - {fileID: 114243498765681294}
+  - {fileID: 114454126382209186}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -3600,7 +3768,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Item/Food/Cake/SFX_EatCake
   guid: b2df0858a15ae743bbaaa628076b236d
   Banks:
-  - {fileID: 114525308257646830}
+  - {fileID: 114841210522853372}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -3625,7 +3793,7 @@ MonoBehaviour:
   FileSizes:
   - Name: Desktop
     Value: 4793408
-  Exists: 1
+  Exists: 0
 --- !u!114 &114879611868319350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3704,7 +3872,7 @@ MonoBehaviour:
   Path: event:/Ambient/Title/AMT_TitleElec
   guid: 5e99bf5fb150b147a4ba0da86e9c3376
   Banks:
-  - {fileID: 114747575922090586}
+  - {fileID: 114500449440300648}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -3726,7 +3894,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Object/Trigger/TaSang/SFX_TaSangExplosion
   guid: b7db5f404a33c946bf4e0a74e33bead0
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -3781,7 +3949,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Item/Food/Drink/SFX_Drink
   guid: 2f4c343070e2bc43bc5c0cd8802694f8
   Banks:
-  - {fileID: 114525308257646830}
+  - {fileID: 114841210522853372}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -3854,7 +4022,7 @@ MonoBehaviour:
   Path: event:/SFX_Stage1/Character/Voice/Stun/SFX_ShoSho_Stun
   guid: fcc98c22bb2256448485d56994c34ac2
   Banks:
-  - {fileID: 114873654742773684}
+  - {fileID: 114346525136709506}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1

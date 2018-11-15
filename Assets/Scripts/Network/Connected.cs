@@ -33,14 +33,25 @@ public class Connected : MonoBehaviour
         // server_ip:192.168.0.10
         // Local
         // server_ip:127.0.0.1
-        string ip = ConfigManager.ReadValue(0);
+        string ip;
+        string stringPort;
+        int port;
+        ConfigManager.ReadValue("server_ip", out ip);
+        ConfigManager.ReadValue("server_port", out stringPort);
 
-        if(ip == null)
+        if (!Int32.TryParse(stringPort, out port))
+        {
+            port = 12800;
+            Debug.LogWarning("Port 정보를 불러올 수 없어 기본 Port로 설정되었습니다.");
+        }
+
+        if (ip == null)
         {
             // default IP
             ip = "45.112.165.82";
+            Debug.LogWarning("IP 정보를 불러올 수 없어 기본 IP로 설정되었습니다.");
         }
-        StartConnectServer(ip, 12800);
+        StartConnectServer(ip, port);
         //StartConnectServer("192.168.0.15", 12800);
         
     }
