@@ -141,8 +141,6 @@ public class GameManagerPhoton : Photon.PunBehaviour
     /// </summary>
     public GameObject[] backgroundFireworks;
 
-    public GameObject tempStartButton;
-
 
     [HideInInspector]
     public CameraController cameraController;
@@ -316,7 +314,9 @@ public class GameManagerPhoton : Photon.PunBehaviour
     private IEnumerator ReadyProcess()
     {
         bool localPlayerReady = false;
-        
+        bool forceStartEnable = false;
+
+        ConfigManager.ReadBool("allow_direct_start", out forceStartEnable);
         
         while (!isPlaying)
         {
@@ -339,9 +339,10 @@ public class GameManagerPhoton : Photon.PunBehaviour
                 ServerManager.Send(string.Format("READY:{0}:{1}:{2}:{3}", InstanceValue.Nickname, InstanceValue.ID, InstanceValue.Room, localPlayerReady));
                 photonView.RPC("SetPlayerReady", PhotonTargets.All, PhotonNetwork.player.ID, localPlayerReady);
             }
-            if(Input.GetKey(KeyCode.LeftAlt) && Input.GetKeyDown(KeyCode.S))
+            if(forceStartEnable && Input.GetKey(KeyCode.LeftAlt) && Input.GetKeyDown(KeyCode.S))
             {
                 photonView.RPC("GameStartRequest", PhotonTargets.MasterClient, null);
+                break;
             }
             yield return null;
         }
@@ -481,7 +482,6 @@ public class GameManagerPhoton : Photon.PunBehaviour
         isPlaying = true;
         ServerManager.Send(string.Format("START:{0}:{1}", InstanceValue.Room, isPlaying));
         photonView.RPC("RunGameEvent", PhotonTargets.AllBuffered, (int)GameEvent.GameStart);
-        //tempStartButton.SetActive(false);
         return true;
     }
 

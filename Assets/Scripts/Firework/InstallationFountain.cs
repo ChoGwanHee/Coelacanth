@@ -133,19 +133,6 @@ public class InstallationFountain : BaseInstallation
                 {
                     objPhotonView.RPC("Pushed", objPhotonView.owner, (direction * hitForce));
                     objPhotonView.RPC("Damage", objPhotonView.owner, damage, photonView.ownerId);
-
-                    // 점수 처리
-                    if (objPhotonView.ownerId == photonView.ownerId)
-                    {
-                        // 본인 피격
-                        effectedPlayer.AddScore(-20);
-                    }
-                    else
-                    {
-                        // 다른 사람 피격
-                        effectedPlayer.AddScore(-10);
-                        GameManagerPhoton._instance.GetPlayerByOwnerId(photonView.ownerId).AddScore(gainScore);
-                    }
                 }
                 
                 // 피격 이펙트

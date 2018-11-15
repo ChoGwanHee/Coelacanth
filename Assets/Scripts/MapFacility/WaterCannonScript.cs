@@ -84,9 +84,6 @@ public class WaterCannonScript : MonoBehaviour {
                 {
                     PlayerController pc = effectedObjects[i].GetComponent<PlayerController>();
                     pc.Pushed(force * 2);
-
-                    // 플레이어가 피격 되었을 때 점수 감산
-                    pc.Stat.AddScore(-10);
                 }
                 else
                 {
@@ -136,9 +133,6 @@ public class WaterCannonScript : MonoBehaviour {
                     {
                         PlayerController pc = effectedObjects[i].GetComponent<PlayerController>();
                         pc.Pushed(force);
-
-                        // 플레이어가 피격 되었을 때 점수 감산
-                        pc.Stat.AddScore(-10);
                     }
                     else
                     {

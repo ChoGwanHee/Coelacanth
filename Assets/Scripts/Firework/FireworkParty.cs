@@ -69,9 +69,6 @@ public class FireworkParty : Firework {
                         objPhotonView.RPC("Pushed", objPhotonView.owner, finalForce);
                         objPhotonView.RPC("DamageShake", objPhotonView.owner, Mathf.RoundToInt(damage * executer.damageFactor), 5, executer.photonView.ownerId);
 
-                        // 점수 처리
-                        effectedPlayer.AddScore(-10);
-                        executer.Stat.AddScore(gainScore);
                     }
                         
                     // 피격 이펙트

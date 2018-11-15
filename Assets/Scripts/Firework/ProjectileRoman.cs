@@ -50,17 +50,9 @@ public class ProjectileRoman : BaseProjectile
                     objPhotonView.RPC("Pushed", objPhotonView.owner, (direction * hitForce));
                     objPhotonView.RPC("DamageShake", objPhotonView.owner, damage, 1, photonView.ownerId);
 
-                    if (objPhotonView.ownerId == photonView.ownerId)
+                    if (objPhotonView.ownerId != photonView.ownerId)
                     {
-                        // 본인 피격시 점수 처리
-                        effectedPlayer.AddScore(-20);
-                    }
-                    else
-                    {
-                        // 다른 사람 피격시 점수 처리
                         effectedPlayer.PC.Pushed(direction * hitForce * 0.5f);
-                        effectedPlayer.AddScore(-10);
-                        GameManagerPhoton._instance.GetPlayerByOwnerId(photonView.ownerId).AddScore(gainScore);
                     }
                 }
 

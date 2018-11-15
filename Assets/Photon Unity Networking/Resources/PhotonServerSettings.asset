@@ -79,4 +79,5 @@ MonoBehaviour:
   - StartPumpkinBomb
   - SetItemBoxPos
   - GameStartRequest
+  - DisplayScoreChange
   DisableAutoOpenWizard: 1

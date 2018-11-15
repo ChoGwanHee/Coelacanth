@@ -294,7 +294,7 @@ public class PlayerStat : Photon.PunBehaviour
             }
 
             // 사망자 점수 감산
-            AddScore(-30);
+            //AddScore(-30);
 
             killApproval = false;
             lastAttacker = -1;
@@ -303,8 +303,8 @@ public class PlayerStat : Photon.PunBehaviour
         else
         {
             // 사망자 점수 감산
+            //AddScore(-50);
             pc.isUnbeatable = false;
-            AddScore(-50);
         }
     }
 
@@ -322,5 +322,11 @@ public class PlayerStat : Photon.PunBehaviour
             ServerManager.Send(string.Format("SCORE:{0}:{1}:{2}", InstanceValue.Nickname, InstanceValue.ID, score));
             photonView.owner.AddScore(score);
         }
+    }
+
+    [PunRPC]
+    private void DisplayScoreChange()
+    {
+
     }
 }

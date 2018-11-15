@@ -31,10 +31,6 @@ public class FireworkFist : Firework
                     effectedPlayer.PC.Pushed(finalForce * 0.5f);
                     objPhotonView.RPC("Pushed", objPhotonView.owner, finalForce);
                     objPhotonView.RPC("Damage", objPhotonView.owner, Mathf.RoundToInt(damage * executer.damageFactor), executer.photonView.ownerId);
-
-                    // 점수 처리
-                    effectedPlayer.AddScore(-10);
-                    executer.Stat.AddScore(gainScore);
                 }
                 
                 // 피격 이펙트
