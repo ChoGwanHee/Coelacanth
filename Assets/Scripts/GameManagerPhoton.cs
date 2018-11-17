@@ -173,22 +173,22 @@ public class GameManagerPhoton : Photon.PunBehaviour
         playerEnter = new int[(PhotonNetwork.room.MaxPlayers)];
         playerReady = new bool[(PhotonNetwork.room.MaxPlayers)];
 
+        playerEnter[0] = PhotonNetwork.player.ID;
+        for (int i = 1; i < playerEnter.Length; i++)
+        {
+            playerEnter[i] = -1;
+        }
+
+        for (int i = 0; i < playerReady.Length; i++)
+        {
+            playerReady[i] = false;
+        }
+
         PhotonNetwork.isMessageQueueRunning = true;
         
         if(PhotonNetwork.isMasterClient)
         {
             CreatePlayer(0, playerGenPos[0].position);
-            
-            playerEnter[0] = PhotonNetwork.player.ID;
-            for (int i = 1; i < playerEnter.Length; i++)
-            {
-                playerEnter[i] = -1;
-            }
-
-            for(int i=0; i<playerReady.Length; i++)
-            {
-                playerReady[i] = false;
-            }
         }
 
         UIManager._instance.readyInfo.SetActive(true);
@@ -230,6 +230,15 @@ public class GameManagerPhoton : Photon.PunBehaviour
         if (PhotonNetwork.isMasterClient)
         {
             CreateOtherPlayerCharacter(player);
+            for(int i=0; i<playerEnter.Length; i++)
+            {
+                if(playerEnter[i] != -1 && playerReady[i])
+                {
+                    photonView.RPC("SetPlayerReady", player, playerEnter[i], playerReady[i]);
+                    Debug.Log(player + ", " + playerEnter[i] + ", " + playerReady[i]);
+                }
+                
+            }
         }
     }
 
@@ -237,16 +246,13 @@ public class GameManagerPhoton : Photon.PunBehaviour
     {
         Debug.Log("플레이어 접속 종료:" + otherPlayer.NickName);
 
-        if (PhotonNetwork.isMasterClient)
+        for (int i = 0; i < playerEnter.Length; i++)
         {
-            for(int i=0; i<playerEnter.Length; i++)
+            if (playerEnter[i] == otherPlayer.ID)
             {
-                if(playerEnter[i] == otherPlayer.ID)
-                {
-                    playerEnter[i] = -1;
-                    playerReady[i] = false;
-                    break;
-                }
+                playerEnter[i] = -1;
+                playerReady[i] = false;
+                break;
             }
         }
     }
@@ -255,6 +261,18 @@ public class GameManagerPhoton : Photon.PunBehaviour
     {
         Debug.Log("플레이어 퇴장:" + PhotonNetwork.player.NickName);
         
+    }
+
+    public override void OnMasterClientSwitched(PhotonPlayer newMasterClient)
+    {
+        base.OnMasterClientSwitched(newMasterClient);
+
+        if(IsPlaying && newMasterClient == PhotonNetwork.player)
+        {
+            StartCoroutine(GameLoop());
+            MapManager._instance.StartCoroutine(MapManager._instance.LoopMapFacilities());
+            itemManager.active = true;
+        }
     }
 
     public Vector3 GetPlayerRegenPos(int type)
@@ -355,20 +373,20 @@ public class GameManagerPhoton : Photon.PunBehaviour
         player.isReady = isReady;
         player.PC.isUnbeatable = isReady;
 
+        for (int i = 0; i < playerEnter.Length; i++)
+        {
+            if (playerEnter[i] == ownerId)
+            {
+                playerReady[i] = isReady;
+            }
+        }
+
         // ready UI 처리
         player.onReadyChanged(isReady);
 
         if (PhotonNetwork.isMasterClient)
         {
             bool allReady = true;
-
-            for (int i = 0; i < playerEnter.Length; i++)
-            {
-                if (playerEnter[i] == ownerId)
-                {
-                    playerReady[i] = isReady;
-                }
-            }
 
             // 모든 플레이어가 레디 했는지 체크
             for(int i=0; i<playerReady.Length; i++)
@@ -390,6 +408,18 @@ public class GameManagerPhoton : Photon.PunBehaviour
                 Debug.Log(i + ":" + playerEnter[i] + ", " + playerReady[i]);
             }
         }
+    }
+
+    public bool GetPlayerReady(int ownerId)
+    {
+        for (int i = 0; i < playerEnter.Length; i++)
+        {
+            if (playerEnter[i] == ownerId)
+            {
+                return playerReady[i];
+            }
+        }
+        return false;
     }
 
     /// <summary>
@@ -599,6 +629,12 @@ public class GameManagerPhoton : Photon.PunBehaviour
             if (playerList[i].photonView.isMine)
             {
                 playerList[i].IsControlable = active;
+                if (!active)
+                {
+                    playerList[i].PC.InitInput();
+                    playerList[i].PC.SetAnimParam("SubAniNum", 0);
+                }
+                
                 break;
             }
         }

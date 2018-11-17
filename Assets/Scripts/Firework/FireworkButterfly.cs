@@ -46,8 +46,11 @@ public class FireworkButterfly : Firework
 
     public override void Execute(FireworkExecuter executer)
     {
-        executer.charging = true;
-        executer.StartCoroutine(Charging(executer));
+        if(executer.Stat.PC.State == PlayerAniState.Attack)
+        {
+            executer.charging = true;
+            executer.StartCoroutine(Charging(executer));
+        }
     }
 
     /// <summary>

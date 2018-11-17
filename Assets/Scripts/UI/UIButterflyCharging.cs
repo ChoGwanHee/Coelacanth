@@ -54,5 +54,6 @@ public class UIButterflyCharging : MonoBehaviour {
         
 
         gameObject.SetActive(active);
+        Debug.Log(gameObject + ", " + active);
     }
 }

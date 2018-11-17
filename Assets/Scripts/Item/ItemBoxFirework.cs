@@ -8,12 +8,12 @@ public class ItemBoxFirework : BaseItemBox
     protected override void Start()
     {
         base.Start();
-        isMaster = PhotonNetwork.isMasterClient;
+        //isMaster = PhotonNetwork.isMasterClient;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!isMaster) return;
+        if (!PhotonNetwork.isMasterClient) return;
 
         if (other.CompareTag("Player"))
         {

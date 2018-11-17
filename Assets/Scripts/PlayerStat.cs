@@ -153,7 +153,6 @@ public class PlayerStat : Photon.PunBehaviour
 
         // 닉네임 받아오기
         nickname = photonView.owner.NickName;
-        
 
         if (photonView.isMine)
         {
@@ -173,7 +172,8 @@ public class PlayerStat : Photon.PunBehaviour
                 }
             }
         }
-        
+
+        onReadyChanged(GameManagerPhoton._instance.GetPlayerReady(photonView.ownerId));
     }
 
     private void Update()
@@ -292,20 +292,17 @@ public class PlayerStat : Photon.PunBehaviour
                     break;
                 }
             }
-
-            // 사망자 점수 감산
-            //AddScore(-30);
-
             killApproval = false;
             lastAttacker = -1;
         }
         // 스스로 킬
         else
         {
-            // 사망자 점수 감산
-            //AddScore(-50);
             pc.isUnbeatable = false;
         }
+
+        //사망자 점수 감산
+        AddScore(-10);
     }
 
     public void AddScore(int score)

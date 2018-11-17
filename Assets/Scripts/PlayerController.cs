@@ -590,6 +590,8 @@ public class PlayerController : Photon.PunBehaviour
             respawnWaitCoroutine = StartCoroutine(WaitRespawn(respawnTime));
         }
 
+        executer.ChangeFirework(0, 0);
+
         Vector3 genPos = transform.position;
         GameObject.Instantiate(deadEfx_ref, genPos, Quaternion.identity);
         PublicPlayVoiceSound("Falling");
@@ -606,6 +608,10 @@ public class PlayerController : Photon.PunBehaviour
     /// </summary>
     private void StandBy()
     {
+        if (photonView.isMine)
+        {
+            UIManager._instance.respawnInfoTextUI.SetActive(true);
+        }
         rb.useGravity = false;
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
@@ -627,8 +633,9 @@ public class PlayerController : Photon.PunBehaviour
         {
             ServerManager.Send(string.Format("RESPAWN:{0}:{1}:{2}", InstanceValue.Nickname, InstanceValue.ID, respawnPosition)); 
             transform.position = respawnPosition;
+            UIManager._instance.respawnInfoTextUI.SetActive(false);
         }
-        executer.ChangeFirework(0, 0);
+        
         stat.HPReset();
         stat.onStage = true;
         if (applyUnbeatable)
@@ -796,6 +803,7 @@ public class PlayerController : Photon.PunBehaviour
         inputAxis = Vector2.zero;
         anim.SetFloat("MoveX", 0);
         //anim.SetFloat("MoveY", 0);
+        SetCharacterColor(new Color(1f, 1f, 1f));
 
         TurnToScreen();
         ChangeState(PlayerAniState.Finish);

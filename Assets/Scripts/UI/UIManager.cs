@@ -41,6 +41,7 @@ public class UIManager : MonoBehaviour {
     public GameObject escUI;
     public GameObject mouseHoldUI;
     public GameObject controlKeyInfoUI;
+    public GameObject respawnInfoTextUI;
 
     // Result
     public GameObject resultCanvas;

@@ -54,7 +54,7 @@ public class MapManager : Photon.PunBehaviour
     /// 주기적으로 작동하는 맵 시설의 시간을 확인합니다.
     /// </summary>
     /// <returns></returns>
-    private IEnumerator LoopMapFacilities()
+    public IEnumerator LoopMapFacilities()
     {
         while (true)
         {
