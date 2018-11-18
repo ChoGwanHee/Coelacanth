@@ -370,6 +370,9 @@ public class GameManagerPhoton : Photon.PunBehaviour
     private void SetPlayerReady(int ownerId, bool isReady)
     {
         PlayerStat player = GetPlayerByOwnerId(ownerId);
+
+        if (player == null) return;
+
         player.isReady = isReady;
         player.PC.isUnbeatable = isReady;
 
