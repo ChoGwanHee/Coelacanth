@@ -48,7 +48,7 @@ public class Connected : MonoBehaviour
         if (ip == null)
         {
             // default IP
-            ip = "45.112.165.82";
+            ip = "14.47.226.250";
             Debug.LogWarning("IP 정보를 불러올 수 없어 기본 IP로 설정되었습니다.");
         }
         StartConnectServer(ip, port);
