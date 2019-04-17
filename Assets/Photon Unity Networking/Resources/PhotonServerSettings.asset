@@ -80,4 +80,8 @@ MonoBehaviour:
   - SetItemBoxPos
   - GameStartRequest
   - DisplayScoreChange
+  - DisplayKillIndicator
+  - EnterPlayer
+  - SetPlayerEnter
+  - SetPlayerEnterConcurrently
   DisableAutoOpenWizard: 1

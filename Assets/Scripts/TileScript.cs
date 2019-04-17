@@ -6,6 +6,12 @@ public class TileScript : MonoBehaviour {
 
     private Rigidbody rb;
     private Collider col;
+
+    private bool spawnable = true;
+    public bool Spawnable
+    {
+        get { return spawnable; }
+    }
     
 
 	void Awake () {
@@ -15,6 +21,7 @@ public class TileScript : MonoBehaviour {
 
     public void TileShake()
     {
+        spawnable = false;
         StartCoroutine(TileShakeProcess(2.0f));
     }
 

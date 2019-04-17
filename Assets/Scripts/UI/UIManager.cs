@@ -35,6 +35,7 @@ public class UIManager : MonoBehaviour {
     public UIBuffInfo buffInfoUI;
     public UIItemUsingGauge itemUsingGauge;
     public UICount3Script count3;
+    public UIKillIndicator killIndicator;
 
     public GameObject objectiveText;
 

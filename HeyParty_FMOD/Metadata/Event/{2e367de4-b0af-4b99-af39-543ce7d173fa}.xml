@@ -96,13 +96,13 @@
             <value>true</value>
         </property>
         <property name="triggerProbability">
-            <value>84</value>
+            <value>70</value>
         </property>
         <property name="length">
             <value>0.43458049886621314</value>
         </property>
         <property name="volume">
-            <value>3</value>
+            <value>0.5</value>
         </property>
         <relationship name="fadeInCurve">
             <destination>{c1f2a56a-f848-4a99-b5b5-e7301ecb0a69}</destination>

@@ -288,7 +288,9 @@ public class PlayerStat : Photon.PunBehaviour
             {
                 if(GameManagerPhoton._instance.playerList[i].photonView.ownerId == lastAttacker)
                 {
-                    GameManagerPhoton._instance.playerList[i].AddScore(100);
+                    PlayerStat attacker = GameManagerPhoton._instance.playerList[i];
+                    attacker.AddScore(100);
+                    attacker.photonView.RPC("DisplayKillIndicator", attacker.photonView.owner, pc.characterNum);
                     break;
                 }
             }
@@ -322,8 +324,8 @@ public class PlayerStat : Photon.PunBehaviour
     }
 
     [PunRPC]
-    private void DisplayScoreChange()
+    private void DisplayKillIndicator(int characterNum)
     {
-
+        UIManager._instance.killIndicator.SetIndicator(characterNum);
     }
 }

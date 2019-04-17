@@ -37,8 +37,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
     /// 플레이어가 생성되는 위치 배열
     /// </summary>
     public Transform[] playerGenPos = null;
-
-    private bool[] playerReady = null;
+    
 
     /// <summary>
     /// 커서 이미지
@@ -135,6 +134,7 @@ public class GameManagerPhoton : Photon.PunBehaviour
     public List<PlayerStat> playerList = new List<PlayerStat>();
 
     private int[] playerEnter;
+    private bool[] playerReady = null;
 
     /// <summary>
     /// 캐릭터 정면뷰로 확대시 배경에서 터지는 폭죽 이펙트
@@ -172,22 +172,17 @@ public class GameManagerPhoton : Photon.PunBehaviour
 
         playerEnter = new int[(PhotonNetwork.room.MaxPlayers)];
         playerReady = new bool[(PhotonNetwork.room.MaxPlayers)];
-
-        playerEnter[0] = PhotonNetwork.player.ID;
-        for (int i = 1; i < playerEnter.Length; i++)
+        
+        for (int i = 0; i < playerEnter.Length; i++)
         {
             playerEnter[i] = -1;
-        }
-
-        for (int i = 0; i < playerReady.Length; i++)
-        {
-            playerReady[i] = false;
         }
 
         PhotonNetwork.isMessageQueueRunning = true;
         
         if(PhotonNetwork.isMasterClient)
         {
+            playerEnter[0] = PhotonNetwork.player.ID;
             CreatePlayer(0, playerGenPos[0].position);
         }
 
@@ -212,13 +207,11 @@ public class GameManagerPhoton : Photon.PunBehaviour
         {
             stream.SendNext(remainGameTime);
             stream.SendNext(isPlaying);
-            stream.SendNext(playerEnter);
         }
         else
         {
             this.remainGameTime = (float)stream.ReceiveNext();
             this.isPlaying = (bool)stream.ReceiveNext();
-            this.playerEnter = (int[])stream.ReceiveNext();
         }
     }
 
@@ -230,15 +223,8 @@ public class GameManagerPhoton : Photon.PunBehaviour
         if (PhotonNetwork.isMasterClient)
         {
             CreateOtherPlayerCharacter(player);
-            for(int i=0; i<playerEnter.Length; i++)
-            {
-                if(playerEnter[i] != -1 && playerReady[i])
-                {
-                    photonView.RPC("SetPlayerReady", player, playerEnter[i], playerReady[i]);
-                    Debug.Log(player + ", " + playerEnter[i] + ", " + playerReady[i]);
-                }
-                
-            }
+
+            photonView.RPC("SetPlayerEnterConcurrently", PhotonTargets.Others, playerEnter[0], playerReady[0], playerEnter[1], playerReady[1], playerEnter[2], playerReady[2], playerEnter[3], playerReady[3]);
         }
     }
 
@@ -367,22 +353,49 @@ public class GameManagerPhoton : Photon.PunBehaviour
     }
 
     [PunRPC]
+    private void SetPlayerEnter(int index, int ownerId, bool isReady)
+    {
+        Debug.Log("SetPlayerEnter [" + index + "] " + ownerId + ":" + isReady);
+
+        playerEnter[index] = ownerId;
+        playerReady[index] = isReady;
+    }
+
+    [PunRPC]
+    private void SetPlayerEnterConcurrently(int ownerId1, bool isReady1, int ownerId2, bool isReady2, int ownerId3, bool isReady3, int ownerId4, bool isReady4)
+    {
+        playerEnter[0] = ownerId1;
+        playerReady[0] = isReady1;
+
+        playerEnter[1] = ownerId2;
+        playerReady[1] = isReady2;
+
+        playerEnter[2] = ownerId3;
+        playerReady[2] = isReady3;
+
+        playerEnter[3] = ownerId4;
+        playerReady[3] = isReady4;
+    }
+
+    [PunRPC]
     private void SetPlayerReady(int ownerId, bool isReady)
     {
+        for(int i = 0; i < playerEnter.Length; i++)
+        {
+            if(playerEnter[i] == ownerId)
+            {
+                playerReady[i] = isReady;
+                Debug.Log("SetPlayerReady " + ownerId + ":" + isReady);
+                break;
+            }
+        }
+
         PlayerStat player = GetPlayerByOwnerId(ownerId);
 
         if (player == null) return;
 
         player.isReady = isReady;
         player.PC.isUnbeatable = isReady;
-
-        for (int i = 0; i < playerEnter.Length; i++)
-        {
-            if (playerEnter[i] == ownerId)
-            {
-                playerReady[i] = isReady;
-            }
-        }
 
         // ready UI 처리
         player.onReadyChanged(isReady);
@@ -404,11 +417,6 @@ public class GameManagerPhoton : Photon.PunBehaviour
             {
                 // 자동시작
                 GameStartRequest();
-            }
-
-            for(int i=0;i < playerReady.Length; i++)
-            {       
-                Debug.Log(i + ":" + playerEnter[i] + ", " + playerReady[i]);
             }
         }
     }
@@ -798,5 +806,13 @@ public class GameManagerPhoton : Photon.PunBehaviour
         AsyncOperation oper = SceneManager.LoadSceneAsync(0);
 
         yield return oper; // 로딩이 완료될때까지 대기 한다
+    }
+
+    public void Test()
+    {
+        for (int i = 0; i < playerReady.Length; i++)
+        {
+            Debug.Log(i + ":" + playerEnter[i] + ", " + playerReady[i]);
+        }
     }
 }

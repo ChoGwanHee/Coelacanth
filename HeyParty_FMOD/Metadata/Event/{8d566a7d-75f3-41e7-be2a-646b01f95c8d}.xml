@@ -96,7 +96,7 @@
             <value>true</value>
         </property>
         <property name="triggerProbability">
-            <value>83</value>
+            <value>69.5</value>
         </property>
         <property name="length">
             <value>0.73229024943310661</value>
@@ -113,7 +113,7 @@
     </object>
     <object class="EventMixerGroup" id="{31e453f7-006f-4a5c-8784-e542d17e1d16}">
         <property name="volume">
-            <value>6</value>
+            <value>3</value>
         </property>
         <property name="name">
             <value>Audio 1</value>

@@ -8,6 +8,8 @@ public class ItemManager : Photon.PunBehaviour
 {
     public bool active = false;
 
+    public bool isHalloween = false;
+
     public ItemTable[] itemTables;
     public BaseItemBox[][] itemBoxPool;
     private int[] lastIndex;
@@ -416,6 +418,15 @@ public class ItemManager : Photon.PunBehaviour
                     regenPos.y += 6.0f;
 
                     retry1 = Physics.Raycast(regenPos, Vector3.down, out hit1, 6.1f, LayerMask.GetMask("Ground"), QueryTriggerInteraction.Ignore);
+
+                    if(retry1 && isHalloween)
+                    {
+                        TileScript tile = hit1.collider.GetComponent<TileScript>();
+                        if (tile != null && !tile.Spawnable)
+                        {
+                            retry1 = false;
+                        }
+                    }
 
                     if (++count > 10000)
                     {

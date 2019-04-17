@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Name: New Item Cake
   m_EditorClassIdentifier: 
   delayTime: 3
-  usingSound: event:/SFX_Stage1/Item/Food/Cake/SFX_EatCake
-  useSound: event:/SFX_Stage1/Item/Food/Same/SFX_EatEnd123
+  usingSound: event:/SFX_Stage1/Item/Food/SFX_EatCake
+  useSound: event:/SFX_Stage1/Item/Food/SFX_DrinkEffect
   gainScore: 150

@@ -8,7 +8,7 @@ public enum CameraMode
     TotalView,
     PersonalView,
     FrontView,
-    PersonalView2
+    PointView
 }
 
 public class CameraController : Photon.PunBehaviour {
@@ -68,6 +68,7 @@ public class CameraController : Photon.PunBehaviour {
 
     private PlayerStat targetStat;
 
+    private bool isPPBChanged = false;
     private PostProcessingBehaviour ppb;
 
     private Vector3 defaultMinMax = new Vector3(50f, 0f, 50f);
@@ -87,7 +88,7 @@ public class CameraController : Photon.PunBehaviour {
         targetXAngle = originXAngle;
 
         halfScreenSize = new Vector3(Screen.width * 0.5f, Screen.height * 0.5f);
-        ChangeMode(CameraMode.PersonalView2);
+        ChangeMode(CameraMode.PersonalView);
     }
 
     private void OnDisable()
@@ -107,9 +108,7 @@ public class CameraController : Photon.PunBehaviour {
                 SmoothZoom();
                 break;
             case CameraMode.PersonalView:
-                SingleCalculateMinMax();
-                FollowTargetFocusCenter();
-                AutoZoom();
+                CalculateCenter3();
                 SmoothMovement();
                 SmoothZoom();
                 break;
@@ -119,8 +118,7 @@ public class CameraController : Photon.PunBehaviour {
                 SmoothZoom();
                 SmoothRotation();
                 break;
-            case CameraMode.PersonalView2:
-                CalculateCenter3();
+            case CameraMode.PointView:
                 SmoothMovement();
                 SmoothZoom();
                 break;
@@ -134,6 +132,12 @@ public class CameraController : Photon.PunBehaviour {
         targetStat = target.GetComponent<PlayerStat>();
     }
 
+    // 타겟 포인트 설정
+    public void SetPoint(Vector3 targetPoint)
+    {
+        targetPosition = targetPoint;
+    }
+
     // 모드 변경
     public void ChangeMode(CameraMode newMode)
     {
@@ -141,17 +145,21 @@ public class CameraController : Photon.PunBehaviour {
         {
             case CameraMode.TotalView:
                 break;
+
             case CameraMode.PersonalView:
+                if(isPPBChanged)
+                {
+                    targetXAngle = originXAngle;
+                    ppb.profile = originProfile;
+                    isPPBChanged = false;
+                }
                 break;
+
             case CameraMode.FrontView:
                 targetXAngle = 3.0f;
                 targetZoomDistance = -4.0f;
                 ppb.profile = zoomProfile;
-                break;
-            case CameraMode.PersonalView2:
-                targetXAngle = originXAngle;
-                
-                ppb.profile = originProfile;
+                isPPBChanged = true;
                 break;
         }
 

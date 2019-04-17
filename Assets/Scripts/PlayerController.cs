@@ -631,6 +631,7 @@ public class PlayerController : Photon.PunBehaviour
     {
         if (photonView.isMine)
         {
+            LastRespawnPositionCheck();
             ServerManager.Send(string.Format("RESPAWN:{0}:{1}:{2}", InstanceValue.Nickname, InstanceValue.ID, respawnPosition)); 
             transform.position = respawnPosition;
             UIManager._instance.respawnInfoTextUI.SetActive(false);
@@ -674,11 +675,11 @@ public class PlayerController : Photon.PunBehaviour
         bool otherVisible = false;
         bool rocketSpawn = false;
 
-        while(remainTime > 0)
+        while (remainTime > 0)
         {
             remainTime -= Time.deltaTime;
 
-            if(!otherVisible && remainTime <= 3f)
+            if (!otherVisible && remainTime <= 3f)
             {
                 otherVisible = true;
                 photonView.RPC("DisplayRespawn", PhotonTargets.Others, remainTime, respawnPosition, characterNum, false);
@@ -687,11 +688,22 @@ public class PlayerController : Photon.PunBehaviour
             {
                 rocketSpawn = true;
                 photonView.RPC("SpawnRespawnRocket", PhotonTargets.All, respawnPosition);
+
+                // 카메라 설정
+                if (GameManagerPhoton._instance.currentState != GameState.Result)
+                {
+                    GameManagerPhoton._instance.cameraController.ChangeMode(CameraMode.PointView);
+                    GameManagerPhoton._instance.cameraController.SetPoint(respawnPosition);
+                }
             }
 
             yield return null;
         }
         photonView.RPC("Respawn", PhotonTargets.All, true);
+
+        // 카메라
+        if (GameManagerPhoton._instance.currentState != GameState.Result)
+            GameManagerPhoton._instance.cameraController.ChangeMode(CameraMode.PersonalView);
     }
 
     [PunRPC]
@@ -738,6 +750,58 @@ public class PlayerController : Photon.PunBehaviour
 
         SetCharacterColor(defaultColor);
         isUnbeatable = false;
+    }
+
+    private void LastRespawnPositionCheck()
+    {
+        Vector3 searchPos = respawnPosition;
+        RaycastHit hit;
+
+        searchPos.y += 6.0f;
+
+        if(Physics.Raycast(searchPos, Vector3.down, out hit, 6.1f, LayerMask.GetMask("Ground"), QueryTriggerInteraction.Ignore))
+        {
+
+        }
+        else
+        {
+            float addDistance = 0.62f;
+            float distance = 0.5f;
+            float addRad = 30.0f * Mathf.Deg2Rad;
+            float currentRad = 0.0f;
+            
+            Vector3 direction = new Vector3();
+            bool findPos = false;
+
+
+            for (int i = 1; i <= 10; i++)
+            {
+                distance = addDistance * i;
+
+                for (int j = 0; j < 12; j++)
+                {
+                    currentRad = addRad * j;
+                    direction.x = Mathf.Cos(currentRad);
+                    direction.z = Mathf.Sin(currentRad);
+
+                    if (Physics.Raycast(searchPos + (direction * distance), Vector3.down, out hit, 6.1f, LayerMask.GetMask("Ground"), QueryTriggerInteraction.Ignore))
+                    {
+                        searchPos = searchPos + (direction * distance);
+                        findPos = true;
+                        break;
+                    }
+                }
+
+                if (findPos)
+                    break;
+            }
+
+        }
+
+        Physics.SphereCast(searchPos, 0.4f, Vector3.down, out hit, 6.1f, LayerMask.GetMask("Ground", "DynamicObject", "StaticObject", "Item"));
+
+        respawnPosition = hit.point;
+        
     }
 
     /// <summary>
@@ -1152,9 +1216,10 @@ public class PlayerController : Photon.PunBehaviour
         for(int i=0; i<cols.Length; i++)
         {
             IInteractable obj = cols[i].GetComponent<IInteractable>();
-            ServerManager.Send(string.Format("ITEMBOX:{0}:{1}:{2}", InstanceValue.Nickname, InstanceValue.ID, obj.ToString()));
+            
             if (obj != null && obj.IsInteractable())
             {
+                ServerManager.Send(string.Format("ITEMBOX:{0}:{1}:{2}", InstanceValue.Nickname, InstanceValue.ID, obj.ToString()));
                 float curSqrmag = (cols[i].transform.position - transform.position).sqrMagnitude;
                 if (closestSqrmag > curSqrmag)
                 {

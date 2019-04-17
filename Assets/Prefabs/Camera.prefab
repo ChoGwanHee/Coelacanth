@@ -217,7 +217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  mode: 3
+  mode: 1
   smoothMoveTime: 0.5
   fastSmoothMoveTime: 0.2
   fastMoveDistance: 5

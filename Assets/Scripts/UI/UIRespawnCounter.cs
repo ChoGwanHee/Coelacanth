@@ -22,7 +22,8 @@ public class UIRespawnCounter : MonoBehaviour {
         transform.position = pos;
         counterBg.sprite = chrSprites[chrNum];
 
-        StartCoroutine(Count(remainTime));
+        if(gameObject.activeSelf)
+            StartCoroutine(Count(remainTime));
     }
 
     public void Disable()

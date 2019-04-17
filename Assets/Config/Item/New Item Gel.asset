@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delayTime: 0.6
   usingSound: 
-  useSound: event:/SFX_Stage1/Item/Food/Jelly/SFX_JellySet
+  useSound: event:/SFX_Stage1/Item/Food/SFX_JellySet
   duration: 3
   lifetime: 30
   startDelay: 1

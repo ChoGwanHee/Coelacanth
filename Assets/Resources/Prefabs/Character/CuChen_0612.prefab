@@ -3378,9 +3378,9 @@ MonoBehaviour:
   debuffEfx: {fileID: 198742503065129206}
   hotSauceBoomEfx_ref: {fileID: 1194225743401336, guid: 84826e82a7bf13743818a589a1edcaf2,
     type: 2}
-  hotSauceCountSound: event:/SFX_Stage1/Item/Food/HotSauce/SFX_HotSauceCount
-  hotSauceBoomSound: event:/SFX_Stage1/Item/Food/HotSauce/SFX_HotSauceBoom
-  starfruitSound: event:/SFX_Stage1/Item/Food/StarFruit/SFX_StarEffect
+  hotSauceCountSound: event:/SFX_Stage1/Item/Food/SFX_HotSauceCount
+  hotSauceBoomSound: event:/SFX_Stage1/Item/Food/SFX_DrinkEffect
+  starfruitSound: event:/SFX_Stage1/Item/Food/SFX_StarEffect
 --- !u!114 &114376222596722528
 MonoBehaviour:
   m_ObjectHideFlags: 1
