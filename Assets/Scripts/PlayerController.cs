@@ -870,7 +870,6 @@ public class PlayerController : Photon.PunBehaviour
         SetCharacterColor(new Color(1f, 1f, 1f));
 
         TurnToScreen();
-        ChangeState(PlayerAniState.Finish);
     }
 
     /// <summary>

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delayTime: 2
   usingSound: event:/SFX_Stage1/Item/Food/SFX_EatStar
-  useSound: event:/SFX_Stage1/Item/Food/SFX_DrinkEffect
+  useSound: event:/SFX_Stage1/Item/Food/SFX_EatEnd123
   duration: 5

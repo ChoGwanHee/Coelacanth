@@ -10813,7 +10813,7 @@ MonoBehaviour:
   hitRange:
   - {fileID: 864834282}
   - {fileID: 659750664}
-  bigBoomSound: 
+  bigBoomSound: event:/SFX_Stage1/Object/Trigger/TaSang/SFX_TaSangBoom
   directional: {fileID: 1192864540}
 --- !u!114 &268154938
 MonoBehaviour:
@@ -19919,7 +19919,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 7, y: 80}
+  m_SizeDelta: {x: 10, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &470577316
 MonoBehaviour:
@@ -34439,7 +34439,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -170}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1406551309
 MonoBehaviour:
@@ -36102,8 +36102,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1211862345}
   m_HandleRect: {fileID: 1211862344}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 0.99999964
+  m_Value: 0.6666667
+  m_Size: 0.99999976
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -37501,7 +37501,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 7, y: 80}
+  m_SizeDelta: {x: 10, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1619708283
 MonoBehaviour:
@@ -39644,7 +39644,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 50, y: 50}
+  m_SizeDelta: {x: 75, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1813704227
 MonoBehaviour:
@@ -41603,7 +41603,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.00001657672}
+  m_AnchoredPosition: {x: 0, y: 0.000020688338}
   m_SizeDelta: {x: 0, y: 200}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2015519960

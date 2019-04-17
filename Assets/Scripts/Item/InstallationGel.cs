@@ -29,7 +29,7 @@ public class InstallationGel : BaseInstallation
         {
             BuffController bc = other.GetComponent<BuffController>();
             bc.photonView.RPC("ApplyBuff", PhotonTargets.All, (int)BuffType.Slow);
-            photonView.RPC("PlayStepSound", PhotonTargets.All, null);
+            photonView.RPC("PlayStepSound", bc.photonView.owner, null);
             UIManager._instance.buffInfoUI.DisplayBuffInfo(2, bc.transform);
             PhotonNetwork.Destroy(gameObject);
         }

@@ -767,7 +767,17 @@ public class GameManagerPhoton : Photon.PunBehaviour
         // 배경음악 재생
         SoundManager._instance.SetBGM(resultBGM);
 
-        // 캐릭터 승리대사 재생
+        // 일정 시간 뒤 캐릭터 모션
+        StartCoroutine(LateSpotLight(focusedPlayer));
+    }
+    
+    private IEnumerator LateSpotLight(PlayerController focusedPlayer)
+    {
+        yield return new WaitForSeconds(0.6f);
+
+        // 캐릭터 승리 모션
+        focusedPlayer.ChangeState(PlayerAniState.Finish);
+        // 캐릭터 승리 대사 재생
         focusedPlayer.PublicPlayVoiceSound("Victory");
     }
 

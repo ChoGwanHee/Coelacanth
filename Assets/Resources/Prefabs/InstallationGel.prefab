@@ -434,7 +434,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifetime: 0
-  stepSound: event:/SFX_Stage1/Item/Food/Jelly/SFX_Jelly
+  stepSound: event:/SFX_Stage1/Item/Food/SFX_Jelly
 --- !u!137 &137471963295529468
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

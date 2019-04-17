@@ -98,15 +98,20 @@ MonoBehaviour:
   - {fileID: 114668631324141374}
   - {fileID: 114416776077380588}
   - {fileID: 114500320303373870}
-  - {fileID: 114512090613655020}
   - {fileID: 114221224819139634}
   - {fileID: 114985693975627848}
   - {fileID: 114482311490423242}
-  - {fileID: 114308594466535458}
-  - {fileID: 114013003607839434}
+  - {fileID: 114443454768134214}
+  - {fileID: 114506374332821038}
+  - {fileID: 114049195896818112}
+  - {fileID: 114321147135938618}
+  - {fileID: 114746032859004362}
+  - {fileID: 114488275494782316}
+  - {fileID: 114933791817374084}
+  - {fileID: 114086920710492060}
   MasterBankRef: {fileID: 114103651130714194}
   StringsBankRef: {fileID: 114714423258559060}
-  stringsBankWriteTime: 636910660140000000
+  stringsBankWriteTime: 636911018020000000
   cacheVersion: 2
 --- !u!114 &114005138640717492
 MonoBehaviour:
@@ -400,6 +405,28 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 1955
+--- !u!114 &114049195896818112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/SFX_Stage1/Object/Trigger/TaSang/SFX_TaSangBoom
+  guid: 9663848704d71e4d81ac8aac5ae815d3
+  Banks:
+  - {fileID: 114476644818757914}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 702
 --- !u!114 &114049799545807988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -496,6 +523,28 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 10000
+--- !u!114 &114086920710492060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/SFX_Stage2/Trigger/SFX_PumpkinGrow
+  guid: c9ffcbd6450cc0419f049209295ae319
+  Banks:
+  - {fileID: 114190303430667630}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 600
 --- !u!114 &114087569373585822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -600,7 +649,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: D:\document\UnityProject\Coelacanth\HeyParty_FMOD\Build\Desktop\Master Bank.bank
-  lastModified: 636910660140000000
+  lastModified: 636911018020000000
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -698,7 +747,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: 114566915025935502}
+  - {fileID: 114327560940080942}
   MinDistance: 0
   MaxDistance: 0
   Length: 4623
@@ -1061,11 +1110,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: D:\document\UnityProject\Coelacanth\HeyParty_FMOD\Build\Desktop\Stage_2.bank
-  lastModified: 636910660160000000
+  lastModified: 636911018040000000
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 1340128
+    Value: 1906176
   Exists: 1
 --- !u!114 &114202116837921898
 MonoBehaviour:
@@ -1169,7 +1218,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 0
   MaxDistance: 0
-  Length: 895
+  Length: 2851
 --- !u!114 &114222623725539490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1484,11 +1533,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: D:\document\UnityProject\Coelacanth\HeyParty_FMOD\Build\Desktop\Item.bank
-  lastModified: 636910660140000000
+  lastModified: 636911018020000000
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 499840
+    Value: 622464
   Exists: 1
 --- !u!114 &114275331533146258
 MonoBehaviour:
@@ -1553,7 +1602,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114954803595744228}
+  - {fileID: 114847973289908290}
   MinDistance: 0
   MaxDistance: 0
   Length: 1600
@@ -1844,6 +1893,28 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 1000
+--- !u!114 &114321147135938618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/SFX_Stage2/Trigger/SFX_PumpkinL_Boom
+  guid: 0b3eb4d11322d54c93fdb63fc3f574a0
+  Banks:
+  - {fileID: 114190303430667630}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 1650
 --- !u!114 &114323437038809456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1884,6 +1955,21 @@ MonoBehaviour:
   - Name: Desktop
     Value: 4793408
   Exists: 1
+--- !u!114 &114327560940080942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Volume
+  Min: 0
+  Max: 100
+  Default: 100
 --- !u!114 &114330739354683550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2247,7 +2333,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 0
   MaxDistance: 0
-  Length: 980
+  Length: 3020
 --- !u!114 &114424171606458614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2285,6 +2371,28 @@ MonoBehaviour:
   Min: 0
   Max: 100
   Default: 100
+--- !u!114 &114443454768134214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/SFX_Stage1/Item/Food/SFX_HotSauceBoom
+  guid: 54ded65b1f22f24aa8d0512ee9c9d8c0
+  Banks:
+  - {fileID: 114260266863488438}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 1880
 --- !u!114 &114449705645934096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2393,11 +2501,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: D:\document\UnityProject\Coelacanth\HeyParty_FMOD\Build\Desktop\Stage_1.bank
-  lastModified: 636910660160000000
+  lastModified: 636911018020000000
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 4430400
+    Value: 4802368
   Exists: 1
 --- !u!114 &114479069356429420
 MonoBehaviour:
@@ -2426,7 +2534,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: event:/SFX_Stage1/UI/GameSound/SFX_KillLog
-  guid: bbd77be157163e43bc8a4bda87a91fc3
+  guid: fab50d911c9b954b8b8350f97eabf4e7
   Banks:
   - {fileID: 114476644818757914}
   IsStream: 0
@@ -2436,6 +2544,28 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 800
+--- !u!114 &114488275494782316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/SFX_Stage2/Trigger/SFX_PumpkinL_Wait
+  guid: 2420522e36805a4c8a7107208da7e750
+  Banks:
+  - {fileID: 114190303430667630}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 1000
 --- !u!114 &114492265903045788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2542,6 +2672,28 @@ MonoBehaviour:
   - Name: Desktop
     Value: 1791584
   Exists: 1
+--- !u!114 &114506374332821038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/SFX_Stage1/Item/Food/SFX_EatEnd123
+  guid: bef5057881ddea4491909fbc5ffae312
+  Banks:
+  - {fileID: 114260266863488438}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 480
 --- !u!114 &114506671756304662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2754,6 +2906,21 @@ MonoBehaviour:
   - Name: Desktop
     Value: 622464
   Exists: 1
+--- !u!114 &114537782427184478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Volume
+  Min: 0
+  Max: 100
+  Default: 100
 --- !u!114 &114557590802903950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2913,11 +3080,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: D:\document\UnityProject\Coelacanth\HeyParty_FMOD\Build\Desktop\Lobby.bank
-  lastModified: 636910660140000000
+  lastModified: 636911018020000000
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 1268576
+    Value: 23776
   Exists: 1
 --- !u!114 &114594525727444632
 MonoBehaviour:
@@ -2940,7 +3107,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 0
   MaxDistance: 0
-  Length: 680
+  Length: 2530
 --- !u!114 &114595545074847936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3649,11 +3816,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: HeyParty_FMOD\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636910660140000000
+  lastModified: 636911018020000000
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 5248
+    Value: 5494
   Exists: 1
 --- !u!114 &114718600108428268
 MonoBehaviour:
@@ -3765,6 +3932,28 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 623
+--- !u!114 &114746032859004362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/SFX_Stage2/Trigger/SFX_PumpkinS_Boom
+  guid: 1d1490dfda8b0e4787a9207c8d9b2588
+  Banks:
+  - {fileID: 114190303430667630}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 640
 --- !u!114 &114747575922090586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3901,7 +4090,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: D:\document\UnityProject\Coelacanth\HeyParty_FMOD\Build\Desktop\Title.bank
-  lastModified: 636910660240000000
+  lastModified: 636911018100000000
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -3926,7 +4115,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114955847760513912}
+  - {fileID: 114923146594691862}
   MinDistance: 0
   MaxDistance: 0
   Length: 85368
@@ -4015,7 +4204,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114982406886861822}
+  - {fileID: 114537782427184478}
   MinDistance: 0
   MaxDistance: 0
   Length: 97880
@@ -4111,7 +4300,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 0
   MaxDistance: 0
-  Length: 228
+  Length: 232
 --- !u!114 &114832566911549946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4225,6 +4414,21 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 5000
+--- !u!114 &114847973289908290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Volume
+  Min: 0
+  Max: 100
+  Default: 100
 --- !u!114 &114850461201250480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4554,6 +4758,21 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 500
+--- !u!114 &114923146594691862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Volume
+  Min: 0
+  Max: 100
+  Default: 100
 --- !u!114 &114923725009501386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4575,7 +4794,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 0
   MaxDistance: 0
-  Length: 1300
+  Length: 1153
 --- !u!114 &114927666484227280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4609,6 +4828,28 @@ MonoBehaviour:
   - Name: Desktop
     Value: 26592
   Exists: 0
+--- !u!114 &114933791817374084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/SFX_Stage2/Tile/SFX_TileShake
+  guid: b8a92390c0a3ac469951ee7280c3fa2b
+  Banks:
+  - {fileID: 114190303430667630}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 2000
 --- !u!114 &114935148117953196
 MonoBehaviour:
   m_ObjectHideFlags: 0

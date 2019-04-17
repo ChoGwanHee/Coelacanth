@@ -243,7 +243,8 @@ public class ItemManager : Photon.PunBehaviour
 
         itemBox.transform.position = movePos;
         itemBox.Activate();
-        FMODUnity.RuntimeManager.PlayOneShot(itemBox.spawnSound);
+        if(itemBox.spawnSound.Length > 1)
+            FMODUnity.RuntimeManager.PlayOneShot(itemBox.spawnSound);
     }
 
     [PunRPC]
